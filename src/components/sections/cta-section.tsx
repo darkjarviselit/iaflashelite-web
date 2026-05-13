@@ -2,13 +2,14 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { FlashMascot } from "@/components/brand/flash-mascot";
 import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 
 export function CTASection() {
     return (
         <section className="relative py-24 bg-onyx">
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="max-w-[1200px] mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -25,7 +26,16 @@ export function CTASection() {
                         }}
                         aria-hidden
                     />
-                    <div className="relative flex flex-col items-center text-center gap-8 max-w-3xl mx-auto">
+
+                    <motion.div
+                        animate={{ y: [-6, 6, -6], rotate: [-2, 2, -2] }}
+                        transition={{ duration: 5, ease: "easeInOut", repeat: Infinity }}
+                        className="absolute top-4 right-4 sm:top-6 sm:right-10 pointer-events-none hidden sm:block"
+                    >
+                        <FlashMascot pose="thinking" size={110} />
+                    </motion.div>
+
+                    <div className="relative flex flex-col items-center text-center gap-7 max-w-3xl mx-auto">
                         <h2 className="text-4xl sm:text-6xl font-bold tracking-[-0.02em] leading-[1.05] text-paper">
                             ¿Listo para automatizar?
                         </h2>

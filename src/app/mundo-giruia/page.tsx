@@ -1,31 +1,51 @@
 import { ArrowRight, Bot, Brain, ShieldCheck, Sparkles } from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SectionLabel } from "@/components/ui/section-label";
 
-const AGENTS = [
+interface AgentCard {
+    name: string;
+    role: string;
+    description: string;
+    icon: ComponentType<SVGProps<SVGSVGElement>>;
+    color: string;
+    bgColor: string;
+    borderColor: string;
+}
+
+const AGENTS: AgentCard[] = [
     {
         name: "Giris",
         role: "Orquestadora",
         description:
-            "Es quien habla contigo. Entiende lo que necesitas, delega la investigación a sus subordinados y devuelve la respuesta lista para usar.",
+            "La mente central. Coordina los agentes, lee contexto y decide qué automatizar. Primera en responder, última en equivocarse.",
         icon: Sparkles,
+        color: "#00E5FF",
+        bgColor: "rgba(0,229,255,0.10)",
+        borderColor: "rgba(0,229,255,0.25)",
     },
     {
         name: "Giru",
-        role: "Cerebro técnico",
+        role: "Aprendiz Autónomo",
         description:
-            "Construye, refactoriza y mantiene el código. Tiene memoria propia y un sistema de misiones que mejora con cada proyecto.",
+            "Aprende observando sesiones de código real. Construye memoria persistente y mejora con cada proyecto entregado.",
         icon: Brain,
+        color: "#FFD700",
+        bgColor: "rgba(255,215,0,0.10)",
+        borderColor: "rgba(255,215,0,0.25)",
     },
     {
         name: "Venom",
-        role: "Vigilante",
+        role: "Evaluador",
         description:
-            "Supervisa el ecosistema 24/7, detecta caídas y aprueba las reparaciones críticas antes de que tú las notes.",
+            "Analiza el ecosistema, detecta fallos y propone mejoras. El control de calidad que nunca duerme.",
         icon: ShieldCheck,
+        color: "#A855F7",
+        bgColor: "rgba(168,85,247,0.10)",
+        borderColor: "rgba(168,85,247,0.25)",
     },
 ];
 
@@ -51,7 +71,7 @@ export default function MundoGiruIA() {
             <main className="pt-32 pb-24 bg-onyx min-h-screen">
                 <section className="relative">
                     <div className="absolute inset-0 bg-dot-grid opacity-50" aria-hidden />
-                    <div className="relative max-w-5xl mx-auto px-6 lg:px-8 flex flex-col gap-8 pb-20">
+                    <div className="relative max-w-[1200px] mx-auto px-6 flex flex-col gap-8 pb-20">
                         <Badge>● El motor por dentro</Badge>
                         <h1 className="text-4xl sm:text-6xl font-bold tracking-[-0.025em] leading-[1.05] text-paper max-w-3xl">
                             Mundo GiruIA. Cómo trabajamos por dentro.
@@ -63,7 +83,7 @@ export default function MundoGiruIA() {
                 </section>
 
                 <section className="relative py-20 border-t border-border-dark bg-surface">
-                    <div className="max-w-5xl mx-auto px-6 lg:px-8">
+                    <div className="max-w-[1200px] mx-auto px-6">
                         <div className="flex flex-col gap-6 mb-12 max-w-2xl">
                             <SectionLabel>Los tres agentes</SectionLabel>
                             <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.02em] text-paper">
@@ -76,15 +96,26 @@ export default function MundoGiruIA() {
                                 return (
                                     <article
                                         key={agent.name}
-                                        className="group p-8 rounded-2xl bg-onyx border border-border-dark hover:border-flash/40 transition-colors duration-300"
+                                        className="group p-8 rounded-2xl bg-onyx border transition-colors duration-300"
+                                        style={{ borderColor: agent.borderColor }}
                                     >
-                                        <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-flash/10 text-flash mb-6">
-                                            <Icon size={20} />
+                                        <span
+                                            className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-6"
+                                            style={{
+                                                background: agent.bgColor,
+                                                color: agent.color,
+                                                border: `1px solid ${agent.borderColor}`,
+                                            }}
+                                        >
+                                            <Icon className="w-5 h-5" />
                                         </span>
                                         <h3 className="text-2xl font-semibold text-paper mb-1 tracking-tight">
                                             {agent.name}
                                         </h3>
-                                        <span className="text-[11px] tracking-[0.18em] uppercase text-flash mb-4 inline-block">
+                                        <span
+                                            className="text-[11px] tracking-[0.18em] uppercase mb-4 inline-block font-medium"
+                                            style={{ color: agent.color }}
+                                        >
                                             {agent.role}
                                         </span>
                                         <p className="text-sm text-text-secondary leading-relaxed">
@@ -98,7 +129,7 @@ export default function MundoGiruIA() {
                 </section>
 
                 <section className="relative py-20 border-t border-border-dark">
-                    <div className="max-w-5xl mx-auto px-6 lg:px-8">
+                    <div className="max-w-[1200px] mx-auto px-6">
                         <div className="flex flex-col gap-6 mb-12 max-w-2xl">
                             <SectionLabel>El flujo</SectionLabel>
                             <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.02em] text-paper">
@@ -121,7 +152,7 @@ export default function MundoGiruIA() {
                 </section>
 
                 <section className="relative py-20 border-t border-border-dark bg-surface">
-                    <div className="max-w-5xl mx-auto px-6 lg:px-8">
+                    <div className="max-w-[1200px] mx-auto px-6">
                         <div className="flex flex-col gap-6 mb-12 max-w-2xl">
                             <SectionLabel>Stack técnico</SectionLabel>
                             <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.02em] text-paper">

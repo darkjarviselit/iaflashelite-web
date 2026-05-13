@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { LogoFull } from "@/components/brand/logo-full";
 import { BRAND } from "@/lib/constants";
-import { Logo } from "./logo";
 
 const FOOTER_NAV = {
     services: [
@@ -10,8 +10,9 @@ const FOOTER_NAV = {
         { label: "Scripts personalizados", href: "/#servicios" },
     ],
     company: [
-        { label: "Mundo GiruIA", href: "/mundo-giruia" },
+        { label: "Proceso", href: "/#proceso" },
         { label: "Casos", href: "/casos" },
+        { label: "Mundo GiruIA", href: "/mundo-giruia" },
         { label: "Contacto", href: "/contacto" },
     ],
     social: [
@@ -24,16 +25,16 @@ const FOOTER_NAV = {
 export function Footer() {
     return (
         <footer className="bg-onyx border-t border-border-dark mt-32">
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-20 pb-10">
+            <div className="max-w-[1200px] mx-auto px-6 pt-20 pb-10">
                 <div className="grid md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-12 lg:gap-16">
                     <div className="space-y-5">
-                        <Logo />
+                        <LogoFull size="md" />
                         <p className="text-sm text-text-secondary max-w-xs leading-relaxed">
                             {BRAND.description}
                         </p>
                         <a
                             href={`mailto:${BRAND.email}`}
-                            className="inline-block text-sm text-paper hover:text-flash transition-colors"
+                            className="inline-block text-sm text-flash hover:underline transition-colors"
                         >
                             {BRAND.email} →
                         </a>
@@ -45,10 +46,10 @@ export function Footer() {
 
                 <div className="mt-20 pt-8 border-t border-border-dark flex flex-col sm:flex-row items-center justify-between gap-4">
                     <p className="text-[11px] tracking-[0.18em] uppercase text-text-muted">
-                        © {new Date().getFullYear()} {BRAND.name}
+                        © {new Date().getFullYear()} {BRAND.name}. Hecho con IA propia.
                     </p>
                     <p className="text-[11px] tracking-[0.18em] uppercase text-text-muted">
-                        Hecho con IA propia
+                        {BRAND.tagline}
                     </p>
                 </div>
             </div>

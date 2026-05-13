@@ -6,8 +6,8 @@ import { PROCESS_STEPS } from "@/lib/constants";
 
 export function HowItWorksSection() {
     return (
-        <section id="proceso" className="relative py-32 bg-onyx">
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <section id="proceso" className="relative py-28 lg:py-32 bg-onyx">
+            <div className="max-w-[1200px] mx-auto px-6">
                 <div className="flex flex-col gap-6 mb-16 max-w-2xl">
                     <SectionLabel>Cómo funciona</SectionLabel>
                     <h2 className="text-4xl sm:text-5xl font-bold tracking-[-0.02em] leading-[1.05] text-paper">
@@ -16,7 +16,7 @@ export function HowItWorksSection() {
                 </div>
                 <div className="grid md:grid-cols-3 gap-5">
                     {PROCESS_STEPS.map((step, i) => (
-                        <motion.div
+                        <motion.article
                             key={step.number}
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -26,18 +26,24 @@ export function HowItWorksSection() {
                                 delay: i * 0.12,
                                 ease: [0.22, 1, 0.36, 1],
                             }}
-                            className="group p-8 rounded-2xl bg-surface border border-border-dark hover:border-flash/40 transition-all duration-300 hover:-translate-y-1"
+                            className="group relative p-8 rounded-xl bg-surface border border-border-dark hover:border-flash/40 transition-all duration-300 hover:-translate-y-1 overflow-hidden"
                         >
-                            <div className="text-6xl font-bold text-flash mb-8 tracking-[-0.04em]">
+                            <span
+                                aria-hidden
+                                className="absolute -top-2 right-4 text-[120px] font-black text-flash/10 leading-none select-none pointer-events-none"
+                            >
                                 {step.number}
-                            </div>
-                            <h3 className="text-2xl font-semibold text-paper mb-4 tracking-tight">
+                            </span>
+                            <span className="relative inline-block text-[11px] font-mono tracking-[0.18em] text-flash mb-6">
+                                / {step.number}
+                            </span>
+                            <h3 className="relative text-xl font-semibold text-paper mb-3 tracking-tight">
                                 {step.title}
                             </h3>
-                            <p className="text-sm text-text-secondary leading-relaxed">
+                            <p className="relative text-sm text-text-secondary leading-relaxed">
                                 {step.description}
                             </p>
-                        </motion.div>
+                        </motion.article>
                     ))}
                 </div>
             </div>
