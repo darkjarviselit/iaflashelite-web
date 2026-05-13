@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+:root {
+    --flash-cyan: #00e5ff;
+    --voltage: #00b8d4;
+    --onyx: #0a0a0a;
+    --paper: #ffffff;
+    --mist: #f5f5f5;
+    --surface: #111111;
+    --border: #1f1f1f;
+    --text-primary: #ffffff;
+    --text-secondary: #888888;
+    --text-muted: #555555;
+}
+
+@theme inline {
+    --color-onyx: #0a0a0a;
+    --color-paper: #ffffff;
+    --color-mist: #f5f5f5;
+    --color-surface: #111111;
+    --color-border-dark: #1f1f1f;
+    --color-flash: #00e5ff;
+    --color-voltage: #00b8d4;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #888888;
+    --color-text-muted: #555555;
+    --font-sans: var(--font-inter), system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    background: #0a0a0a;
+    color: #ffffff;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+::selection {
+    background: #00e5ff;
+    color: #0a0a0a;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+    background: #1f1f1f;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #2a2a2a;
+}
+
+.bg-dot-grid {
+    background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+.text-gradient-flash {
+    background: linear-gradient(135deg, #00e5ff 0%, #00b8d4 50%, #ffffff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.glow-flash {
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.25);
+}
+
+@keyframes pulse-cyan {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+.animate-pulse-cyan {
+    animation: pulse-cyan 2s ease-in-out infinite;
+}
