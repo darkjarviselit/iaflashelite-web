@@ -22,6 +22,7 @@ export const SERVICES = [
             "Panel de control",
         ],
         priceFrom: 150,
+        priceTo: 400,
         deliveryDays: 48,
         icon: "MessageCircle",
     },
@@ -39,6 +40,7 @@ export const SERVICES = [
             "Automatización de operaciones",
         ],
         priceFrom: 200,
+        priceTo: 600,
         deliveryDays: 48,
         icon: "Workflow",
     },
@@ -56,6 +58,7 @@ export const SERVICES = [
             "Análisis de conversaciones",
         ],
         priceFrom: 300,
+        priceTo: 800,
         deliveryDays: 48,
         icon: "Bot",
     },
@@ -73,6 +76,7 @@ export const SERVICES = [
             "Soporte post-entrega",
         ],
         priceFrom: 100,
+        priceTo: 300,
         deliveryDays: 48,
         icon: "Code2",
     },
@@ -124,7 +128,7 @@ export const FAQS = [
     },
     {
         q: "¿Cuánto cuesta?",
-        a: "Desde 100€ para scripts simples hasta 800€ para chatbots IA completos. Cada proyecto tiene su presupuesto personalizado — cuéntanos qué necesitas.",
+        a: "Desde 100€ para scripts simples hasta 800€ para chatbots IA completos. Bots y automatizaciones se sitúan en el rango intermedio (150-600€). Cada proyecto tiene su presupuesto personalizado según el alcance — cuéntanos qué necesitas.",
     },
 ] as const;
 

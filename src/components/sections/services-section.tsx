@@ -73,10 +73,10 @@ export function ServicesSection() {
                                 <div className="mt-auto flex items-end justify-between pt-4 border-t border-border-dark">
                                     <div className="flex flex-col">
                                         <span className="text-[10px] tracking-[0.18em] uppercase text-text-muted">
-                                            Desde
+                                            Rango
                                         </span>
                                         <span className="text-2xl font-bold text-flash tracking-tight">
-                                            {service.priceFrom}€
+                                            {service.priceFrom}–{service.priceTo}€
                                         </span>
                                     </div>
                                     <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium tracking-wide rounded-full bg-flash/10 text-flash border border-flash/20">
