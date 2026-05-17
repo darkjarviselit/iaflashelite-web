@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# iaflashelite.com — Landing Page
 
-## Getting Started
+Landing oficial de **IA Flash Elite**. Captación de leads + presentación del ecosistema GiruIA (Giris, Giru, Venom).
 
-First, run the development server:
+## Stack
+
+Next.js 16 (App Router + Turbopack) · React 19 · TypeScript 5 · Tailwind v4 · shadcn (`base-nova`) · framer-motion · Biome
+
+## Desarrollo
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre <http://localhost:3000>.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Variables de entorno
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `GIRIS_AGENT_URL` — endpoint público de `giris-agent` (recibe leads vía `POST /leads`). Fallback en dev: `http://localhost:5318`.
 
-## Learn More
+Copia `.env.example` a `.env.local` y rellena.
 
-To learn more about Next.js, take a look at the following resources:
+## Estructura
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── app/                   App Router pages + /api/contact endpoint + not-found
+├── components/
+│   ├── brand/             Logo + mascota Flash
+│   ├── layout/            Header, Footer
+│   ├── sections/          Secciones de la home (hero, services, faq, etc.)
+│   └── ui/                Primitivos (button, badge, section-label)
+└── lib/                   constants (SERVICES, FAQS, NAV…) + utils
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Endpoints
 
-## Deploy on Vercel
+- `POST /api/contact` — recibe el formulario de `/contacto`. Aplica honeypot + rate-limit (5 req / 10 min / IP) y reenvía al backend Giris. Si Giris cae, el lead se pierde silenciosamente (mejora pendiente).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Vercel — push a `main` dispara deploy a producción automáticamente. Ver [`DEPLOY.md`](./DEPLOY.md) para configuración inicial, DNS y variables.
+
+## Notas
+
+- Next.js 16 introduce breaking changes; antes de tocar APIs ver `node_modules/next/dist/docs/` (ver `AGENTS.md`).
+- Formato y lint con Biome: `npx biome check src/`.
