@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 
 const HERO_STATS = [
     { value: "48h", label: "Entrega garantizada" },
-    { value: "+10", label: "Proyectos entregados" },
-    { value: "100%", label: "Satisfacción" },
+    { value: "IA", label: "Stack propio" },
+    { value: "1:1", label: "Trato directo" },
 ];
 
 const fadeUp = {
