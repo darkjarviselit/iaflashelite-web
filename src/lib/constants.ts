@@ -134,9 +134,9 @@ export const FAQS = [
 
 export const STATS = [
     { value: "48h", label: "Tiempo máximo de entrega" },
-    { value: "100%", label: "Proyectos funcionales" },
     { value: "4", label: "Servicios especializados" },
-    { value: "0", label: "Código reutilizado de plantillas" },
+    { value: "1:1", label: "Comunicación directa, sin account managers" },
+    { value: "Código", label: "A medida, no plantillas no-code" },
 ] as const;
 
 export const COMPARISON = [
