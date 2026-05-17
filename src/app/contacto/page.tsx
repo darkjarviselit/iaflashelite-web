@@ -36,6 +36,7 @@ export default function ContactPage() {
             urgency: String(fd.get("urgency") ?? ""),
             budget: String(fd.get("budget") ?? ""),
             message: String(fd.get("message") ?? ""),
+            website: String(fd.get("website") ?? ""),
         };
         setSending(true);
         try {
@@ -100,6 +101,28 @@ export default function ContactPage() {
                             onSubmit={handleSubmit}
                             className="grid sm:grid-cols-2 gap-5 p-8 sm:p-10 rounded-3xl border border-border-dark bg-surface"
                         >
+                            <div
+                                aria-hidden="true"
+                                style={{
+                                    position: "absolute",
+                                    left: "-9999px",
+                                    width: "1px",
+                                    height: "1px",
+                                    overflow: "hidden",
+                                }}
+                            >
+                                <label htmlFor="website">
+                                    No rellenar este campo
+                                    <input
+                                        id="website"
+                                        type="text"
+                                        name="website"
+                                        tabIndex={-1}
+                                        autoComplete="off"
+                                        defaultValue=""
+                                    />
+                                </label>
+                            </div>
                             <Field label="Nombre *" required>
                                 <input
                                     name="name"
@@ -193,7 +216,6 @@ const inputClass =
 
 function Field({
     label,
-    required,
     className = "",
     children,
 }: {
@@ -202,7 +224,6 @@ function Field({
     className?: string;
     children: React.ReactNode;
 }) {
-    void required;
     return (
         <label className={`flex flex-col gap-2 ${className}`}>
             <span className="text-[11px] tracking-[0.18em] uppercase text-text-muted font-medium">

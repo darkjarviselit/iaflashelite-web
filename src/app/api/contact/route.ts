@@ -8,10 +8,38 @@ interface ContactPayload {
     message?: string;
     urgency?: string;
     budget?: string;
+    website?: string;
 }
 
 const GIRIS_URL = process.env.GIRIS_AGENT_URL ?? "http://localhost:5318";
 const FORWARD_TIMEOUT_MS = 5000;
+
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_MAX_REQUESTS = 5;
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(ip: string): boolean {
+    const now = Date.now();
+    const entry = rateLimitMap.get(ip);
+    if (!entry || entry.resetAt < now) {
+        rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS });
+        return true;
+    }
+    if (entry.count >= RATE_MAX_REQUESTS) return false;
+    entry.count++;
+    return true;
+}
+
+function getClientIp(request: Request): string {
+    const forwarded = request.headers.get("x-forwarded-for");
+    if (forwarded) {
+        const first = forwarded.split(",")[0]?.trim();
+        if (first) return first;
+    }
+    const realIp = request.headers.get("x-real-ip");
+    if (realIp) return realIp.trim();
+    return "unknown";
+}
 
 function bad(reason: string) {
     return NextResponse.json({ ok: false, error: reason }, { status: 400 });
@@ -46,12 +74,25 @@ async function forwardLeadToGiris(lead: {
 }
 
 export async function POST(request: Request) {
+    const ip = getClientIp(request);
+    if (!checkRateLimit(ip)) {
+        return NextResponse.json(
+            { ok: false, error: "too_many_requests" },
+            { status: 429 },
+        );
+    }
+
     let payload: ContactPayload;
     try {
         payload = (await request.json()) as ContactPayload;
     } catch {
         return bad("invalid_json");
     }
+
+    if (payload.website && payload.website.trim().length > 0) {
+        return NextResponse.json({ ok: true });
+    }
+
     const name = (payload.name ?? "").trim();
     const email = (payload.email ?? "").trim();
     const message = (payload.message ?? "").trim();
