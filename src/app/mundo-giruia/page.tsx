@@ -53,15 +53,17 @@ const STACK = [
     "Node.js 20",
     "TypeScript",
     "Python 3.11",
-    "Fastify",
     "better-sqlite3",
     "Next.js 16",
     "React 19",
     "Tailwind v4",
+    "Vite",
     "Tauri",
-    "Docker",
-    "OpenCode Go",
+    "OpenCode (Go)",
     "MiniMax M2.7",
+    "Kimi K2",
+    "Pipecat",
+    "LiveKit",
 ];
 
 export default function MundoGiruIA() {
