@@ -16,8 +16,6 @@ const FOOTER_NAV = {
         { label: "Contacto", href: "/contacto" },
     ],
     social: [
-        { label: "Twitter / X", href: "https://x.com" },
-        { label: "LinkedIn", href: "https://linkedin.com" },
         { label: `Email · ${BRAND.email}`, href: `mailto:${BRAND.email}` },
     ],
 };
