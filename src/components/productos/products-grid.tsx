@@ -29,6 +29,7 @@ import type {
 interface ProductsGridProps {
     products: Product[];
     initialAudience?: Audience;
+    hideFilters?: boolean;
 }
 
 const PRODUCT_ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
@@ -40,7 +41,7 @@ const PRODUCT_ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
     sparkles: Sparkles,
 };
 
-export function ProductsGrid({ products, initialAudience }: ProductsGridProps) {
+export function ProductsGrid({ products, initialAudience, hideFilters = false }: ProductsGridProps) {
     const [audiences, setAudiences] = useState<Audience[]>(
         initialAudience ? [initialAudience] : [],
     );
@@ -90,31 +91,37 @@ export function ProductsGrid({ products, initialAudience }: ProductsGridProps) {
 
     return (
         <>
-            <div className="flex items-center justify-between mb-5 lg:hidden">
-                <button
-                    type="button"
-                    onClick={() => setDrawerOpen(true)}
-                    className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm text-gray-900 shadow-sm"
-                >
-                    <SlidersHorizontal className="w-4 h-4" />
-                    Filtros
-                </button>
-                <span className="text-xs text-gray-500">
-                    {filtered.length} de {products.length}
-                </span>
-            </div>
+            {!hideFilters && (
+                <div className="flex items-center justify-between mb-5 lg:hidden">
+                    <button
+                        type="button"
+                        onClick={() => setDrawerOpen(true)}
+                        className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm text-gray-900 shadow-sm"
+                    >
+                        <SlidersHorizontal className="w-4 h-4" />
+                        Filtros
+                    </button>
+                    <span className="text-xs text-gray-500">
+                        {filtered.length} de {products.length}
+                    </span>
+                </div>
+            )}
 
-            <div className="grid lg:grid-cols-[260px_1fr] gap-8">
-                <div className="hidden lg:block">{filtersNode}</div>
+            <div className={hideFilters ? "" : "grid lg:grid-cols-[260px_1fr] gap-8"}>
+                {!hideFilters && (
+                    <div className="hidden lg:block">{filtersNode}</div>
+                )}
 
                 <div className="flex flex-col gap-5">
-                    <p className="hidden lg:block text-sm text-gray-500">
-                        Mostrando{" "}
-                        <span className="text-gray-900 font-semibold">
-                            {filtered.length}
-                        </span>{" "}
-                        de {products.length} productos
-                    </p>
+                    {!hideFilters && (
+                        <p className="hidden lg:block text-sm text-gray-500">
+                            Mostrando{" "}
+                            <span className="text-gray-900 font-semibold">
+                                {filtered.length}
+                            </span>{" "}
+                            de {products.length} productos
+                        </p>
+                    )}
 
                     {filtered.length === 0 ? (
                         <div className="rounded-2xl border border-dashed border-gray-300 bg-white p-10 text-center">
