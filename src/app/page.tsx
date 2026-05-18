@@ -1,3 +1,5 @@
+import { Footer } from "@/components/layout/footer";
+import { Header } from "@/components/layout/header";
 import { AudienceSection } from "@/components/sections/audience-section";
 import { CTASection } from "@/components/sections/cta-section";
 import { FAQSection } from "@/components/sections/faq-section";
@@ -10,16 +12,20 @@ import { WhyUsSection } from "@/components/sections/why-us-section";
 
 export default function Home() {
     return (
-        <main>
-            <HeroSection />
-            <AudienceSection />
-            <WhyTrustSection />
-            <HowItWorksSection />
-            <ServicesSection />
-            <WhyUsSection />
-            <StatsSection />
-            <FAQSection />
-            <CTASection />
-        </main>
+        <>
+            <Header />
+            <main>
+                <HeroSection />
+                <AudienceSection />
+                <WhyTrustSection />
+                <HowItWorksSection />
+                <ServicesSection />
+                <WhyUsSection />
+                <StatsSection />
+                <FAQSection />
+                <CTASection />
+            </main>
+            <Footer />
+        </>
     );
 }
