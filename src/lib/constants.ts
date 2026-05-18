@@ -418,34 +418,145 @@ export const PROCESS_STEPS = [
 ] as const;
 
 export const FAQS = [
+    // GENERALES
     {
-        q: "¿Qué hace exactamente IA Flash Elite?",
-        a: "Construimos bots, chatbots y automatizaciones con IA para negocios que quieren eliminar el trabajo manual y atender clientes sin parar.",
+        q: "¿Quién está detrás de iaflashelite?",
+        a: "Oscar P., ingeniero por UPC FIB. Sin equipo, sin oficina. Más info en /sobre.",
     },
     {
-        q: "¿De verdad en 48 horas?",
-        a: "Sí. Para la mayoría de proyectos entregamos una versión funcional en 48h. Proyectos más complejos pueden llevar más, pero siempre con plazos claros desde el principio.",
+        q: "¿Por qué los precios son tan bajos?",
+        a: "Sin oficina, sin inversores, sin equipo de marketing. Lo que ahorro en estructura te lo descuento en el precio. Más info en la sección 'Por qué tan barato' de la home.",
     },
     {
-        q: "¿Qué necesito tener yo para empezar?",
-        a: "Solo contarnos tu problema. Nosotros nos encargamos del resto: análisis, desarrollo, entrega y soporte.",
+        q: "¿Es una empresa real o un experimento?",
+        a: "Persona física registrada en España. Mis datos legales completos están en /legal/aviso-legal. RGPD compliant.",
     },
     {
-        q: "¿Hacéis mantenimiento después de entregar?",
-        a: "Sí. Ofrecemos soporte post-entrega en todos los proyectos y planes de mantenimiento para quienes lo necesiten.",
+        q: "¿Cómo sé que recibiré el producto?",
+        a: "Pagas SOLO tras confirmación personal por email. Garantía 7 días devolución sin preguntas. Sin riesgo.",
     },
     {
-        q: "¿Cuánto cuesta?",
-        a: "Desde 100€ para scripts simples hasta 800€ para chatbots IA completos. Bots y automatizaciones se sitúan en el rango intermedio (150-600€). Cada proyecto tiene su presupuesto personalizado según el alcance — cuéntanos qué necesitas.",
+        q: "¿Y si Oscar desaparece después de pagar?",
+        a: "Las garantías están publicadas y son legalmente exigibles según legislación española. PayPal y Bizum tienen sus propios mecanismos de devolución de pago.",
+    },
+    // PRODUCTOS Y SERVICIOS
+    {
+        q: "¿Qué pasa si no me gusta el resultado?",
+        a: "7 días desde la entrega para pedir devolución 100%. Sin justificaciones.",
+    },
+    {
+        q: "¿Necesito ser técnico para usar los productos?",
+        a: "No. Cada producto incluye manual PDF + prompts pre-hechos para Claude/Codex/ChatGPT que te permiten configurarlo en 30 minutos.",
+    },
+    {
+        q: "¿Qué pasa si tarda más del plazo prometido?",
+        a: "Te aviso ANTES si veo que no llego. Si fallé al plazo CONFIRMADO contigo: devolución 100%.",
+    },
+    {
+        q: "¿Hay límite de pedidos al mes?",
+        a: "Sí. Máximo 6 servicios normales + 2 express al mes para garantizar calidad. La disponibilidad real es visible en /servicios.",
+    },
+    {
+        q: "¿Qué es el modo Express?",
+        a: "+29€ (básica) o +49€ (pro) para entrega en 24h en lugar de 48h y prioridad máxima sobre otros pedidos. Solo 2 huecos express/mes.",
+    },
+    // PAGOS
+    {
+        q: "¿Qué métodos de pago aceptáis?",
+        a: "Bizum, PayPal y transferencia bancaria. Recibirás los datos por email tras confirmar tu pedido.",
+    },
+    {
+        q: "¿Por qué no aceptáis tarjeta automática (Stripe)?",
+        a: "Stripe requiere alta de autónomo y comisiones del 2-3% que se trasladarían a tu precio. Cuando alcance el volumen suficiente, automatizaré. Hasta entonces, prefiero el trato personal.",
+    },
+    {
+        q: "¿Cuándo cobráis?",
+        a: "Tras confirmar tu pedido por email. NUNCA al instante de hacer clic en 'Comprar'.",
+    },
+    {
+        q: "¿Emitís factura?",
+        a: "Si necesitas factura con IVA, indícalo en los comentarios. Te explico mi situación actual (persona física, sin alta autónomo) para que decidas si te encaja.",
+    },
+    // PRIVACIDAD
+    {
+        q: "¿Qué hacéis con mis datos?",
+        a: "Lo mínimo legal para procesar tu pedido (nombre, email). Cero tracking, cero perfiles, cero venta de datos. Detalle completo en /legal/privacidad.",
     },
 ] as const;
 
 export const STATS = [
-    { value: "48h", label: "Tiempo máximo de entrega" },
-    { value: "4", label: "Servicios especializados" },
-    { value: "1:1", label: "Comunicación directa, sin account managers" },
-    { value: "Código", label: "A medida, no plantillas no-code" },
+    { value: "100%", label: "Bootstrapped sin inversores" },
+    { value: "0", label: "Trackers en la web" },
+    { value: "<12h", label: "Tiempo medio de respuesta" },
+    { value: "7 días", label: "Garantía devolución" },
+    { value: "30 días", label: "Soporte incluido" },
+    { value: "2", label: "Universidades top (UPC + UPF)" },
 ] as const;
+
+export const STATS_UPDATED_AT = "Mayo 2026";
+
+export interface SlotsConfig {
+    normal_per_month: number;
+    express_per_month: number;
+    current_month: string;
+    normal_available: number;
+    express_available: number;
+    next_slot_date: string;
+}
+
+// Editado manualmente por Oscar al confirmar pedidos.
+export const SLOTS_CONFIG: SlotsConfig = {
+    normal_per_month: 6,
+    express_per_month: 2,
+    current_month: "Mayo 2026",
+    normal_available: 6,
+    express_available: 2,
+    next_slot_date: "Lunes 19 de Mayo",
+};
+
+export const EXPRESS_SURCHARGE: Record<string, number> = {
+    "landing-page-basica": 29,
+    "landing-page-pro": 49,
+};
+
+export const COMPETITORS: ReadonlyArray<{
+    category: string;
+    ours: { product: string; price: string };
+    competitors: ReadonlyArray<{ name: string; price: string; note: string }>;
+}> = [
+    {
+        category: "Auditor web / Pentest básico",
+        ours: { product: "Auditor Web Rápido", price: "39€ pago único" },
+        competitors: [
+            { name: "Agencia auditoría", price: "800 – 2.500€", note: "1 informe puntual" },
+            { name: "SaaS escáner web", price: "29 – 99€/mes", note: "suscripción perpetua" },
+        ],
+    },
+    {
+        category: "Gestor / generador de contraseñas",
+        ours: { product: "Generador Contraseñas", price: "9 – 29€ pago único" },
+        competitors: [
+            { name: "1Password / Bitwarden Pro", price: "36 – 96€/año", note: "renueva siempre" },
+            { name: "LastPass familias", price: "48€/año", note: "renueva siempre" },
+        ],
+    },
+    {
+        category: "Landing page profesional",
+        ours: { product: "Landing Page Básica / Pro", price: "149 – 249€" },
+        competitors: [
+            { name: "Agencia web España", price: "1.500 – 4.500€", note: "+ mantenimiento" },
+            { name: "Freelance medio", price: "600 – 1.500€", note: "+ revisiones extra" },
+        ],
+    },
+    {
+        category: "Soporte post-venta",
+        ours: { product: "Incluido 30 días", price: "0€ extra" },
+        competitors: [
+            { name: "Agencias", price: "60 – 120€/hora", note: "tras entregar" },
+            { name: "Mantenimiento mensual", price: "80 – 300€/mes", note: "obligatorio" },
+        ],
+    },
+];
 
 export const COMPARISON = [
     {
