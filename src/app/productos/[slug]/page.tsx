@@ -20,7 +20,7 @@ import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { PRODUCTS } from "@/lib/constants";
+import { CATEGORY_LABELS, PRODUCTS } from "@/lib/constants";
 
 export function generateStaticParams() {
     return PRODUCTS.map((p) => ({ slug: p.slug }));
@@ -69,7 +69,7 @@ export default async function ProductDetailPage({
                                 <Badge variant="cyan">Servicio personalizado</Badge>
                             )}
                             <span className="text-[11px] tracking-[0.18em] uppercase text-text-muted">
-                                {product.category}
+                                {CATEGORY_LABELS[product.category] ?? product.category}
                             </span>
                         </div>
                         <h1 className="text-4xl sm:text-6xl font-bold tracking-[-0.025em] leading-[1.05] text-paper">

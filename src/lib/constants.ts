@@ -265,6 +265,20 @@ export const AUDIENCES: ReadonlyArray<{
     },
 ] as const;
 
+export const CATEGORY_LABELS: Record<string, string> = {
+    // Top-level categories (Product.category)
+    seguridad: "Seguridad",
+    automatizacion: "Automatización",
+    ia: "IA",
+    "diseno-web": "Diseño web",
+    // Subcategories (Product.subcategory) — kept in same map for convenience
+    "seguridad-web": "Seguridad web",
+    "privacidad-personal": "Privacidad personal",
+    "backup-recuperacion": "Backup y recuperación",
+    auditoria: "Auditoría y compliance",
+    "diseno-landing": "Diseño de landings",
+};
+
 export const SUBCATEGORIES: ReadonlyArray<{
     id: Subcategory;
     label: string;
