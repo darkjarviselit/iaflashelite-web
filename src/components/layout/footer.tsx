@@ -18,13 +18,18 @@ const FOOTER_NAV = {
     social: [
         { label: `Email · ${BRAND.email}`, href: `mailto:${BRAND.email}` },
     ],
+    legal: [
+        { label: "Aviso legal", href: "/legal/aviso-legal" },
+        { label: "Privacidad", href: "/legal/privacidad" },
+        { label: "Cookies", href: "/legal/cookies" },
+    ],
 };
 
 export function Footer() {
     return (
         <footer className="bg-onyx border-t border-border-dark mt-32">
             <div className="max-w-[1200px] mx-auto px-6 pt-20 pb-10">
-                <div className="grid md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-12 lg:gap-16">
+                <div className="grid md:grid-cols-[1.5fr_1fr_1fr_1fr_1fr] gap-12 lg:gap-12">
                     <div className="space-y-5">
                         <LogoFull size="md" />
                         <p className="text-sm text-text-secondary max-w-xs leading-relaxed">
@@ -40,6 +45,7 @@ export function Footer() {
                     <FooterColumn title="Servicios" items={FOOTER_NAV.services} />
                     <FooterColumn title="Compañía" items={FOOTER_NAV.company} />
                     <FooterColumn title="Conecta" items={FOOTER_NAV.social} />
+                    <FooterColumn title="Legal" items={FOOTER_NAV.legal} />
                 </div>
 
                 <div className="mt-20 pt-8 border-t border-border-dark flex flex-col sm:flex-row items-center justify-between gap-4">
