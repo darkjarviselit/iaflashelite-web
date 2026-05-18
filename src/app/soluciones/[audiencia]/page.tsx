@@ -6,7 +6,6 @@ import {
     Code2,
     User,
 } from "lucide-react";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ComponentType, SVGProps } from "react";
 import { Footer } from "@/components/layout/footer";
@@ -91,8 +90,8 @@ export default async function SolucionesAudienciaPage({
     return (
         <>
             <Header />
-            <main className="bg-onyx min-h-screen pt-32 pb-24">
-                <section className="relative pb-16">
+            <main className="bg-white text-gray-900 min-h-screen pb-24">
+                <section className="relative bg-onyx text-paper pt-32 pb-16">
                     <div className="absolute inset-0 bg-dot-grid opacity-50" aria-hidden />
                     <div className="relative max-w-3xl mx-auto px-6 flex flex-col gap-6">
                         <SectionLabel>Soluciones · {meta.short}</SectionLabel>
@@ -110,11 +109,13 @@ export default async function SolucionesAudienciaPage({
                     </div>
                 </section>
 
-                <section className="relative pb-24 border-t border-border-dark pt-16">
+                <section className="relative py-20 bg-white">
                     <div className="max-w-[1200px] mx-auto px-6">
                         <div className="flex flex-col gap-3 mb-8 max-w-2xl">
-                            <SectionLabel>Productos recomendados</SectionLabel>
-                            <h2 className="text-2xl sm:text-3xl font-bold tracking-[-0.02em] text-paper">
+                            <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
+                                Productos recomendados
+                            </span>
+                            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
                                 Lo que encaja contigo ({matchingProducts.length})
                             </h2>
                         </div>
@@ -125,11 +126,13 @@ export default async function SolucionesAudienciaPage({
                     </div>
                 </section>
 
-                <section className="relative py-20 border-t border-border-dark bg-surface">
+                <section className="relative py-20 bg-gray-50 border-t border-gray-200">
                     <div className="max-w-3xl mx-auto px-6">
                         <div className="flex flex-col gap-6 mb-8">
-                            <SectionLabel>Por qué iaflashelite</SectionLabel>
-                            <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.02em] text-paper">
+                            <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
+                                Por qué iaflashelite
+                            </span>
+                            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
                                 {why.title}
                             </h2>
                         </div>
@@ -137,13 +140,13 @@ export default async function SolucionesAudienciaPage({
                             {why.bullets.map((b) => (
                                 <li
                                     key={b}
-                                    className="flex items-start gap-3 p-4 rounded-xl bg-onyx border border-border-dark"
+                                    className="flex items-start gap-3 p-4 rounded-xl bg-white border border-gray-200"
                                 >
                                     <CheckCircle2
                                         size={18}
-                                        className="text-flash mt-0.5 shrink-0"
+                                        className="text-cyan-600 mt-0.5 shrink-0"
                                     />
-                                    <span className="text-sm text-paper leading-relaxed">
+                                    <span className="text-sm text-gray-800 leading-relaxed">
                                         {b}
                                     </span>
                                 </li>
@@ -152,8 +155,9 @@ export default async function SolucionesAudienciaPage({
                     </div>
                 </section>
 
-                <section className="relative py-20 border-t border-border-dark">
-                    <div className="max-w-3xl mx-auto px-6 text-center flex flex-col items-center gap-6">
+                <section className="relative py-20 bg-onyx text-paper border-t border-border-dark">
+                    <div className="absolute inset-0 bg-dot-grid opacity-50" aria-hidden />
+                    <div className="relative max-w-3xl mx-auto px-6 text-center flex flex-col items-center gap-6">
                         <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.02em] text-paper">
                             ¿No es exactamente lo que necesitas?
                         </h2>
@@ -165,7 +169,7 @@ export default async function SolucionesAudienciaPage({
                             <Button href="/productos" size="lg" variant="secondary">
                                 Ver todos los productos
                             </Button>
-                            <Button href="/contacto" size="lg">
+                            <Button href="/contacto" size="lg" variant="gradient">
                                 Necesito algo custom <ArrowRight size={16} />
                             </Button>
                         </div>

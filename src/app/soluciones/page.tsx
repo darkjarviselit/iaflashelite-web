@@ -24,12 +24,18 @@ const AUDIENCE_ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
     "code-2": Code2,
 };
 
+const AUDIENCE_COLOR: Record<string, { iconBg: string; iconBorder: string; iconText: string }> = {
+    pymes: { iconBg: "bg-blue-50", iconBorder: "border-blue-100", iconText: "text-blue-600" },
+    particulares: { iconBg: "bg-emerald-50", iconBorder: "border-emerald-100", iconText: "text-emerald-600" },
+    desarrolladores: { iconBg: "bg-purple-50", iconBorder: "border-purple-100", iconText: "text-purple-600" },
+};
+
 export default function SolucionesPage() {
     return (
         <>
             <Header />
-            <main className="bg-onyx min-h-screen pt-32 pb-24">
-                <section className="relative pb-16">
+            <main className="bg-white text-gray-900 min-h-screen pb-24">
+                <section className="relative bg-onyx text-paper pt-32 pb-16">
                     <div className="absolute inset-0 bg-dot-grid opacity-50" aria-hidden />
                     <div className="relative max-w-3xl mx-auto px-6 flex flex-col gap-6">
                         <SectionLabel>Soluciones</SectionLabel>
@@ -43,28 +49,29 @@ export default function SolucionesPage() {
                     </div>
                 </section>
 
-                <section className="relative pb-24">
+                <section className="relative py-20 bg-white">
                     <div className="max-w-[1200px] mx-auto px-6 grid md:grid-cols-3 gap-5">
                         {AUDIENCES.map((a) => {
                             const Icon = AUDIENCE_ICONS[a.icon] ?? User;
+                            const c = AUDIENCE_COLOR[a.id] ?? AUDIENCE_COLOR.pymes;
                             return (
                                 <Link
                                     key={a.id}
                                     href={`/soluciones/${a.id}`}
-                                    className="group flex flex-col gap-5 p-7 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-flash/40 hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(0,229,255,0.15)] transition-all duration-200 ease-out"
+                                    className="group flex flex-col gap-5 p-7 rounded-2xl bg-white border border-gray-200 hover:border-cyan-500 hover:-translate-y-1 hover:shadow-xl transition-all duration-200 ease-out"
                                 >
-                                    <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-flash/10 border border-flash/20 text-flash">
-                                        <Icon className="w-5 h-5" />
+                                    <span className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl ${c.iconBg} border ${c.iconBorder} ${c.iconText}`}>
+                                        <Icon className="w-6 h-6" />
                                     </span>
                                     <div>
-                                        <h2 className="text-xl font-semibold text-paper tracking-tight mb-1.5">
+                                        <h2 className="text-xl font-semibold text-gray-900 tracking-tight mb-1.5">
                                             {a.label}
                                         </h2>
-                                        <p className="text-sm text-text-secondary leading-relaxed">
+                                        <p className="text-sm text-gray-600 leading-relaxed">
                                             {a.description}
                                         </p>
                                     </div>
-                                    <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-flash group-hover:gap-2 transition-all">
+                                    <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-cyan-600 group-hover:text-cyan-700 group-hover:gap-2 transition-all">
                                         Ver soluciones <ArrowRight size={14} />
                                     </span>
                                 </Link>
