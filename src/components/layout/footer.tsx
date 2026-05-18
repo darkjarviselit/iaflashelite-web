@@ -3,10 +3,15 @@ import { LogoFull } from "@/components/brand/logo-full";
 import { BRAND } from "@/lib/constants";
 
 const FOOTER_NAV = {
+    soluciones: [
+        { label: "Para PYMES", href: "/soluciones/pymes" },
+        { label: "Para Particulares", href: "/soluciones/particulares" },
+        { label: "Para Desarrolladores", href: "/soluciones/desarrolladores" },
+    ],
     services: [
+        { label: "Productos", href: "/productos" },
         { label: "Bots Telegram/WhatsApp", href: "/#servicios" },
         { label: "Automatización", href: "/#servicios" },
-        { label: "Chatbots IA", href: "/#servicios" },
         { label: "Scripts personalizados", href: "/#servicios" },
     ],
     company: [
@@ -14,9 +19,6 @@ const FOOTER_NAV = {
         { label: "Casos", href: "/casos" },
         { label: "Mundo GiruIA", href: "/mundo-giruia" },
         { label: "Contacto", href: "/contacto" },
-    ],
-    social: [
-        { label: `Email · ${BRAND.email}`, href: `mailto:${BRAND.email}` },
     ],
     legal: [
         { label: "Aviso legal", href: "/legal/aviso-legal" },
@@ -42,9 +44,9 @@ export function Footer() {
                             {BRAND.email} →
                         </a>
                     </div>
+                    <FooterColumn title="Soluciones" items={FOOTER_NAV.soluciones} />
                     <FooterColumn title="Servicios" items={FOOTER_NAV.services} />
                     <FooterColumn title="Compañía" items={FOOTER_NAV.company} />
-                    <FooterColumn title="Conecta" items={FOOTER_NAV.social} />
                     <FooterColumn title="Legal" items={FOOTER_NAV.legal} />
                 </div>
 
