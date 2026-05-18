@@ -4,7 +4,6 @@ import type { ComponentType, SVGProps } from "react";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { ProductsGrid } from "@/components/productos/products-grid";
-import { SectionLabel } from "@/components/ui/section-label";
 import { Button } from "@/components/ui/button";
 import { BRAND_VALUES, PRODUCTS } from "@/lib/constants";
 
@@ -25,15 +24,16 @@ export default function ProductosPage() {
     return (
         <>
             <Header />
-            <main className="bg-onyx min-h-screen pt-32 pb-24">
-                <section className="relative pb-16">
-                    <div className="absolute inset-0 bg-dot-grid opacity-50" aria-hidden />
-                    <div className="relative max-w-3xl mx-auto px-6 flex flex-col gap-7">
-                        <SectionLabel>Catálogo</SectionLabel>
-                        <h1 className="text-4xl sm:text-6xl font-bold tracking-[-0.025em] leading-[1.05] text-paper">
+            <main className="bg-white text-gray-900 min-h-screen pb-24">
+                <section className="relative pt-20 pb-16 bg-white">
+                    <div className="relative max-w-3xl mx-auto px-6 flex flex-col gap-5">
+                        <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
+                            Catálogo
+                        </span>
+                        <h1 className="text-4xl sm:text-6xl font-bold tracking-tight leading-[1.05] text-gray-900">
                             Herramientas listas para usar.
                         </h1>
-                        <p className="text-lg text-text-secondary leading-relaxed max-w-2xl">
+                        <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
                             Productos descargables creados con privacidad por defecto.
                             Pagas una vez, descargas el ZIP, funciona en tu equipo. Sin
                             suscripciones, sin nube, sin trackers.
@@ -47,11 +47,13 @@ export default function ProductosPage() {
                     </div>
                 </section>
 
-                <section className="relative py-24 border-t border-border-dark bg-surface">
+                <section className="relative py-24 border-t border-gray-200 bg-gray-50">
                     <div className="max-w-[1200px] mx-auto px-6">
-                        <div className="flex flex-col gap-6 mb-12 max-w-2xl">
-                            <SectionLabel>Nuestros pilares</SectionLabel>
-                            <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.02em] text-paper">
+                        <div className="flex flex-col gap-4 mb-12 max-w-2xl">
+                            <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
+                                Nuestros pilares
+                            </span>
+                            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
                                 Construimos herramientas. No vendemos datos.
                             </h2>
                         </div>
@@ -61,15 +63,15 @@ export default function ProductosPage() {
                                 return (
                                     <article
                                         key={value.title}
-                                        className="p-6 rounded-2xl bg-onyx border border-border-dark"
+                                        className="p-6 rounded-2xl bg-white border border-gray-200"
                                     >
-                                        <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-flash/10 border border-flash/20 text-flash mb-5">
+                                        <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-cyan-50 border border-cyan-100 text-cyan-600 mb-5">
                                             <Icon className="w-5 h-5" />
                                         </span>
-                                        <h3 className="text-lg font-semibold text-paper mb-1 tracking-tight">
+                                        <h3 className="text-lg font-semibold text-gray-900 mb-1 tracking-tight">
                                             {value.title}
                                         </h3>
-                                        <p className="text-sm text-text-secondary leading-relaxed">
+                                        <p className="text-sm text-gray-600 leading-relaxed">
                                             {value.description}
                                         </p>
                                     </article>
@@ -79,45 +81,47 @@ export default function ProductosPage() {
                     </div>
                 </section>
 
-                <section className="relative py-24 border-t border-border-dark">
-                    <div className="max-w-3xl mx-auto px-6 flex flex-col gap-6">
-                        <SectionLabel>Por qué confiar</SectionLabel>
-                        <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.02em] text-paper">
+                <section className="relative py-24 border-t border-gray-200 bg-white">
+                    <div className="max-w-3xl mx-auto px-6 flex flex-col gap-4">
+                        <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
+                            Por qué confiar
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
                             Garantías reales, no letra pequeña.
                         </h2>
-                        <ul className="grid sm:grid-cols-2 gap-4 mt-2">
-                            <li className="p-5 rounded-2xl bg-surface border border-border-dark">
-                                <span className="text-sm font-semibold text-paper block mb-1">
+                        <ul className="grid sm:grid-cols-2 gap-4 mt-4">
+                            <li className="p-5 rounded-2xl bg-gray-50 border border-gray-200">
+                                <span className="text-sm font-semibold text-gray-900 block mb-1">
                                     7 días devolución sin preguntas
                                 </span>
-                                <span className="text-sm text-text-secondary leading-relaxed">
+                                <span className="text-sm text-gray-600 leading-relaxed">
                                     Si no te gusta, te devolvemos el 100% en menos de 48h
                                     laborables.
                                 </span>
                             </li>
-                            <li className="p-5 rounded-2xl bg-surface border border-border-dark">
-                                <span className="text-sm font-semibold text-paper block mb-1">
+                            <li className="p-5 rounded-2xl bg-gray-50 border border-gray-200">
+                                <span className="text-sm font-semibold text-gray-900 block mb-1">
                                     30 días de soporte incluidos
                                 </span>
-                                <span className="text-sm text-text-secondary leading-relaxed">
+                                <span className="text-sm text-gray-600 leading-relaxed">
                                     Te ayudamos a instalar, ejecutar y personalizar. Respuesta
                                     en menos de 24h L–V.
                                 </span>
                             </li>
-                            <li className="p-5 rounded-2xl bg-surface border border-border-dark">
-                                <span className="text-sm font-semibold text-paper block mb-1">
+                            <li className="p-5 rounded-2xl bg-gray-50 border border-gray-200">
+                                <span className="text-sm font-semibold text-gray-900 block mb-1">
                                     Tus datos nunca salen de tu equipo
                                 </span>
-                                <span className="text-sm text-text-secondary leading-relaxed">
+                                <span className="text-sm text-gray-600 leading-relaxed">
                                     Todos los productos funcionan en local. Sin nube
                                     obligatoria, sin telemetría, sin trackers.
                                 </span>
                             </li>
-                            <li className="p-5 rounded-2xl bg-surface border border-border-dark">
-                                <span className="text-sm font-semibold text-paper block mb-1">
+                            <li className="p-5 rounded-2xl bg-gray-50 border border-gray-200">
+                                <span className="text-sm font-semibold text-gray-900 block mb-1">
                                     Código y prompts incluidos
                                 </span>
-                                <span className="text-sm text-text-secondary leading-relaxed">
+                                <span className="text-sm text-gray-600 leading-relaxed">
                                     Recibes el código, los manuales y prompts Claude/Codex
                                     para personalizarlo aunque no sepas programar.
                                 </span>
@@ -126,16 +130,17 @@ export default function ProductosPage() {
                     </div>
                 </section>
 
-                <section className="relative py-24 border-t border-border-dark bg-surface">
-                    <div className="max-w-3xl mx-auto px-6 text-center flex flex-col items-center gap-6">
-                        <h2 className="text-3xl sm:text-5xl font-bold tracking-[-0.02em] leading-[1.05] text-paper">
+                <section className="relative py-24 bg-onyx text-white">
+                    <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 60% at 50% 50%, rgba(6,182,212,0.18) 0%, transparent 70%)" }} aria-hidden />
+                    <div className="relative max-w-3xl mx-auto px-6 text-center flex flex-col items-center gap-6">
+                        <h2 className="text-3xl sm:text-5xl font-bold tracking-tight leading-[1.05] text-white">
                             ¿No encuentras lo que buscas?
                         </h2>
-                        <p className="text-text-secondary text-base leading-relaxed max-w-xl">
+                        <p className="text-gray-300 text-base leading-relaxed max-w-xl">
                             Si tu caso necesita algo a medida, lo desarrollamos. Bots,
                             chatbots y automatizaciones con IA en 48h.
                         </p>
-                        <Button href="/contacto" size="lg">
+                        <Button href="/contacto" size="lg" variant="gradient">
                             Servicios custom <ArrowRight size={16} />
                         </Button>
                     </div>
