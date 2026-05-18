@@ -62,11 +62,19 @@ export const PRODUCTS: Product[] = [
         tagline:
             "Escanea tu web en 5 minutos. Reporte PDF con prioridades y soluciones.",
         description:
-            "Script que analiza tu web (rate limits, headers seguridad, formularios vulnerables, mixed content, SSL) y genera un PDF con prioridades + cómo arreglar cada problema.",
+            "Auditor descargable que analiza tu web (cabeceras HTTP, certificado SSL/TLS, cookies, formularios, exposición de información, rendimiento) y genera un PDF profesional con score A-F, prioridades y configuración exacta de los fixes según tu stack. Funciona en local; tus datos nunca salen de tu equipo.",
         price: 39,
-        status: "coming_soon",
+        status: "available",
         category: "seguridad",
-        includes: ["Próximamente."],
+        includes: [
+            "Script Python CLI con 6 scanners (headers, SSL/TLS, cookies, forms, exposure, performance)",
+            "Generador de PDF profesional con score A-F",
+            "Web GUI HTML single-file para visualizar reportes",
+            "4 manuales (instalación, completo, interpretar PDF, ejemplos)",
+            "4 prompts Claude/Codex pre-hechos para personalización",
+            "PDF demo IANA incluido en el ZIP",
+            "Soporte 30 días por email",
+        ],
         guarantee_days: 7,
         support_days: 30,
     },
