@@ -97,7 +97,12 @@ export async function POST(request: Request) {
         return bad("missing_required_fields");
     }
     if (!/.+@.+\..+/.test(email)) return bad("invalid_email");
-    if (!["bizum", "transferencia", "otro"].includes(paymentMethod)) {
+    const PAYMENT_METHOD_LABELS: Record<string, string> = {
+        bizum: "Bizum",
+        paypal: "PayPal",
+        transferencia: "Transferencia bancaria",
+    };
+    if (!Object.prototype.hasOwnProperty.call(PAYMENT_METHOD_LABELS, paymentMethod)) {
         return bad("invalid_payment_method");
     }
 
@@ -112,6 +117,7 @@ export async function POST(request: Request) {
         price: product.price,
         customer: { name, email },
         payment_method: paymentMethod,
+        payment_method_label: PAYMENT_METHOD_LABELS[paymentMethod],
         comments: (payload.comments ?? "").trim(),
         accepted_privacy: true,
         accepted_at: new Date().toISOString(),
