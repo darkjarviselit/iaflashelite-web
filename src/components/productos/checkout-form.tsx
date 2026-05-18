@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Check, CheckCircle2, ClipboardList, Landmark, Smartphone, Wallet } from "lucide-react";
+import { ArrowRight, Check, CheckCircle2, ClipboardList, Landmark, Smartphone, Wallet, Zap } from "lucide-react";
 import { useState, type ComponentType, type FormEvent, type SVGProps } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import type { ProductType } from "@/lib/constants";
+import { EXPRESS_SURCHARGE, SLOTS_CONFIG, type ProductType } from "@/lib/constants";
 
 interface CheckoutFormProps {
     slug: string;
@@ -63,6 +63,9 @@ const inputClass =
 
 export function CheckoutForm({ slug, name, price, type = "download" }: CheckoutFormProps) {
     const isService = type === "service";
+    const expressSurcharge = isService ? (EXPRESS_SURCHARGE[slug] ?? 0) : 0;
+    const expressOffered = isService && expressSurcharge > 0;
+    const expressDisabled = SLOTS_CONFIG.express_available === 0;
     const [sending, setSending] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -70,6 +73,10 @@ export function CheckoutForm({ slug, name, price, type = "download" }: CheckoutF
     const [customerName, setCustomerName] = useState("");
     const [customerEmail, setCustomerEmail] = useState("");
     const [paymentMethod, setPaymentMethod] = useState<PaymentMethodValue | "">("");
+    const [isExpress, setIsExpress] = useState(false);
+
+    const effectiveExpress = expressOffered && !expressDisabled && isExpress;
+    const totalPrice = price + (effectiveExpress ? expressSurcharge : 0);
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -87,6 +94,7 @@ export function CheckoutForm({ slug, name, price, type = "download" }: CheckoutF
             comments: String(fd.get("comments") ?? ""),
             website: String(fd.get("website") ?? ""),
             acceptedPrivacy,
+            isExpress: effectiveExpress,
         };
         setSending(true);
         try {
@@ -127,7 +135,13 @@ export function CheckoutForm({ slug, name, price, type = "download" }: CheckoutF
                     <p>
                         Hemos recibido tu {isService ? "solicitud" : "pedido"} de{" "}
                         <span className="font-semibold">{name}</span>{" "}
-                        (<span className="font-semibold">{price}€</span>).
+                        (<span className="font-semibold">{totalPrice}€</span>
+                        {effectiveExpress && (
+                            <>
+                                {" "}— incluye <span className="font-semibold">Express +{expressSurcharge}€</span>
+                            </>
+                        )}
+                        ).
                     </p>
                     {isService ? (
                         <p>
@@ -231,16 +245,63 @@ export function CheckoutForm({ slug, name, price, type = "download" }: CheckoutF
                 <div className="flex flex-col">
                     <Badge variant="cyan">{isService ? "Servicio" : "Producto"}</Badge>
                     <span className="mt-2 text-base font-semibold text-gray-900">{name}</span>
+                    {effectiveExpress && (
+                        <span className="mt-1 inline-flex items-center gap-1 text-[11px] font-medium text-cyan-700">
+                            <Zap className="w-3 h-3" /> Express activado · entrega 24h
+                        </span>
+                    )}
                 </div>
                 <div className="text-right">
                     <span className="text-[10px] tracking-[0.18em] uppercase text-gray-500 block">
-                        Precio
+                        {effectiveExpress ? "Total" : "Precio"}
                     </span>
                     <span className="text-3xl font-bold text-cyan-600 tracking-tight leading-none">
-                        {price}€
+                        {totalPrice}€
                     </span>
+                    {effectiveExpress && (
+                        <span className="block text-[11px] text-gray-500 mt-1">
+                            {price}€ + {expressSurcharge}€ express
+                        </span>
+                    )}
                 </div>
             </div>
+
+            {expressOffered && (
+                <label
+                    className={`sm:col-span-2 flex items-start gap-3 p-5 rounded-2xl border-2 transition-all ${
+                        expressDisabled
+                            ? "border-gray-200 bg-gray-50 cursor-not-allowed opacity-70"
+                            : effectiveExpress
+                                ? "border-cyan-500 bg-cyan-50 cursor-pointer"
+                                : "border-gray-200 bg-white hover:border-cyan-300 cursor-pointer"
+                    }`}
+                >
+                    <input
+                        type="checkbox"
+                        name="isExpress"
+                        checked={effectiveExpress}
+                        onChange={(e) => setIsExpress(e.target.checked)}
+                        disabled={expressDisabled}
+                        className="mt-1 h-4 w-4 rounded border-gray-300 bg-white accent-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/40 disabled:cursor-not-allowed"
+                    />
+                    <div className="flex flex-col gap-1">
+                        <span className="flex items-center gap-2 text-sm font-semibold text-gray-900">
+                            <Zap className="w-4 h-4 text-cyan-600" />
+                            ¿Necesitas entrega Express?
+                            {!expressDisabled && (
+                                <span className="text-cyan-700">
+                                    +{expressSurcharge}€
+                                </span>
+                            )}
+                        </span>
+                        <span className="text-xs text-gray-600 leading-relaxed">
+                            {expressDisabled
+                                ? "Express agotado este mes — solo modo normal disponible."
+                                : "Tu landing en 24h en lugar de 48h. Prioridad máxima. Solo disponible si quedan huecos express este mes."}
+                        </span>
+                    </div>
+                </label>
+            )}
 
             <Field label="Nombre completo *">
                 <input
