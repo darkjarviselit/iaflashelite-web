@@ -45,16 +45,16 @@ export function ProductFilters({
         selectedStatuses.length > 0;
 
     return (
-        <aside className="rounded-2xl border border-border-dark bg-surface p-5 flex flex-col gap-6">
+        <aside className="rounded-2xl border border-gray-200 bg-gray-50 p-5 flex flex-col gap-6">
             <header className="flex items-center justify-between">
-                <h3 className="text-sm font-semibold text-paper tracking-tight">
+                <h3 className="text-sm font-semibold text-gray-900 tracking-tight">
                     Filtros
                 </h3>
                 {hasFilters && (
                     <button
                         type="button"
                         onClick={onReset}
-                        className="inline-flex items-center gap-1.5 text-xs text-text-secondary hover:text-flash transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs text-gray-600 hover:text-cyan-600 transition-colors"
                     >
                         <RotateCcw className="w-3 h-3" /> Limpiar
                     </button>
@@ -112,7 +112,7 @@ function FilterGroup({
 }) {
     return (
         <div className="flex flex-col gap-2.5">
-            <span className="text-[10px] tracking-[0.18em] uppercase text-text-muted font-medium">
+            <span className="text-[10px] tracking-[0.18em] uppercase text-gray-500 font-medium">
                 {label}
             </span>
             <div className="flex flex-col gap-2">{children}</div>
@@ -135,13 +135,13 @@ function FilterCheckbox({
                 type="checkbox"
                 checked={checked}
                 onChange={onChange}
-                className="h-4 w-4 rounded border-border-dark bg-onyx accent-flash focus:outline-none focus:ring-2 focus:ring-flash/40"
+                className="h-4 w-4 rounded border-gray-300 bg-white accent-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500/40"
             />
             <span
                 className={`transition-colors ${
                     checked
-                        ? "text-paper"
-                        : "text-text-secondary group-hover:text-paper"
+                        ? "text-gray-900 font-medium"
+                        : "text-gray-700 group-hover:text-gray-900"
                 }`}
             >
                 {label}
