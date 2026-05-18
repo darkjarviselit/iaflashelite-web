@@ -7,9 +7,11 @@ import {
     Clock,
     DatabaseBackup,
     KeyRound,
+    MonitorSmartphone,
     ScanSearch,
     ShieldCheck,
     SlidersHorizontal,
+    Sparkles,
     X,
 } from "lucide-react";
 import Link from "next/link";
@@ -34,6 +36,8 @@ const PRODUCT_ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
     "shield-check": ShieldCheck,
     "scan-search": ScanSearch,
     "database-backup": DatabaseBackup,
+    "monitor-smartphone": MonitorSmartphone,
+    sparkles: Sparkles,
 };
 
 export function ProductsGrid({ products, initialAudience }: ProductsGridProps) {
@@ -141,6 +145,7 @@ export function ProductsGrid({ products, initialAudience }: ProductsGridProps) {
                         <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
                             {filtered.map((product, idx) => {
                                 const available = product.status === "available";
+                                const isService = product.type === "service";
                                 const Icon =
                                     PRODUCT_ICONS[product.icon] ?? KeyRound;
                                 return (
@@ -160,15 +165,22 @@ export function ProductsGrid({ products, initialAudience }: ProductsGridProps) {
                                             <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-cyan-50 border border-cyan-100 text-cyan-600">
                                                 <Icon className="w-5 h-5" />
                                             </span>
-                                            <span
-                                                className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide border ${
-                                                    available
-                                                        ? "bg-emerald-50 border-emerald-200 text-emerald-700"
-                                                        : "bg-gray-100 border-gray-300 text-gray-700"
-                                                }`}
-                                            >
-                                                {available ? "Disponible" : "Próximamente"}
-                                            </span>
+                                            <div className="flex flex-wrap items-center justify-end gap-1.5">
+                                                {isService && (
+                                                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide border bg-cyan-50 border-cyan-200 text-cyan-700">
+                                                        Servicio
+                                                    </span>
+                                                )}
+                                                <span
+                                                    className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide border ${
+                                                        available
+                                                            ? "bg-emerald-50 border-emerald-200 text-emerald-700"
+                                                            : "bg-gray-100 border-gray-300 text-gray-700"
+                                                    }`}
+                                                >
+                                                    {available ? "Disponible" : "Próximamente"}
+                                                </span>
+                                            </div>
                                         </div>
 
                                         <div className="flex flex-wrap gap-1.5">
@@ -188,8 +200,10 @@ export function ProductsGrid({ products, initialAudience }: ProductsGridProps) {
 
                                         <div className="flex items-center gap-3 text-xs text-gray-500">
                                             <span className="inline-flex items-center gap-1">
-                                                <Clock className="w-3 h-3 text-cyan-600" />~
-                                                {product.estimated_install_minutes} min instalación
+                                                <Clock className="w-3 h-3 text-cyan-600" />
+                                                {isService
+                                                    ? `Entrega ${product.delivery_time ?? "48h"}`
+                                                    : `~${product.estimated_install_minutes} min instalación`}
                                             </span>
                                         </div>
 
