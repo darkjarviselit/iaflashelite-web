@@ -1,16 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Check, CheckCircle2, Landmark, Smartphone, Wallet } from "lucide-react";
+import { ArrowRight, Check, CheckCircle2, ClipboardList, Landmark, Smartphone, Wallet } from "lucide-react";
 import { useState, type ComponentType, type FormEvent, type SVGProps } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import type { ProductType } from "@/lib/constants";
 
 interface CheckoutFormProps {
     slug: string;
     name: string;
     price: number;
+    type?: ProductType;
 }
+
+const SERVICE_QUESTIONS = [
+    "Nombre de tu negocio",
+    "Sector y público objetivo",
+    "Referencias visuales (webs que te gustan)",
+    "Textos y logo (si los tienes)",
+    "Dominio donde la quieres alojar",
+];
 
 type PaymentMethodValue = "bizum" | "paypal" | "transferencia";
 
@@ -51,7 +61,8 @@ const METHOD_LABELS: Record<PaymentMethodValue, string> = {
 const inputClass =
     "w-full h-12 px-4 rounded-xl bg-white border border-gray-300 text-gray-900 placeholder:text-gray-400 text-sm focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-colors";
 
-export function CheckoutForm({ slug, name, price }: CheckoutFormProps) {
+export function CheckoutForm({ slug, name, price, type = "download" }: CheckoutFormProps) {
+    const isService = type === "service";
     const [sending, setSending] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -114,24 +125,42 @@ export function CheckoutForm({ slug, name, price }: CheckoutFormProps) {
                 </h2>
                 <div className="flex flex-col gap-3 max-w-md text-emerald-800 leading-relaxed">
                     <p>
-                        Hemos recibido tu pedido de{" "}
+                        Hemos recibido tu {isService ? "solicitud" : "pedido"} de{" "}
                         <span className="font-semibold">{name}</span>{" "}
                         (<span className="font-semibold">{price}€</span>).
                     </p>
-                    <p>
-                        📧 En menos de 12 horas te enviaremos un email
-                        {customerEmail ? (
-                            <>
-                                {" "}a <span className="font-semibold">{customerEmail}</span>
-                            </>
-                        ) : null}{" "}
-                        con los datos de pago según el método elegido
-                        (<span className="font-semibold">{methodLabel}</span>).
-                    </p>
-                    <p>
-                        Una vez recibamos el pago, te enviaremos el producto
-                        directamente a tu email.
-                    </p>
+                    {isService ? (
+                        <p>
+                            📧 Te contactaremos en menos de 12h
+                            {customerEmail ? (
+                                <>
+                                    {" "}a <span className="font-semibold">{customerEmail}</span>
+                                </>
+                            ) : null}{" "}
+                            con los datos de pago ({" "}
+                            <span className="font-semibold">{methodLabel}</span>) y el
+                            cuestionario inicial para empezar tu landing.
+                            La entrega es <span className="font-semibold">48h</span> desde
+                            que recibimos pago + cuestionario.
+                        </p>
+                    ) : (
+                        <>
+                            <p>
+                                📧 En menos de 12 horas te enviaremos un email
+                                {customerEmail ? (
+                                    <>
+                                        {" "}a <span className="font-semibold">{customerEmail}</span>
+                                    </>
+                                ) : null}{" "}
+                                con los datos de pago según el método elegido
+                                (<span className="font-semibold">{methodLabel}</span>).
+                            </p>
+                            <p>
+                                Una vez recibamos el pago, te enviaremos el producto
+                                directamente a tu email.
+                            </p>
+                        </>
+                    )}
                 </div>
                 <p className="text-sm text-emerald-700">
                     ¿Dudas? Responde a ese email o escribe a{" "}
@@ -177,9 +206,30 @@ export function CheckoutForm({ slug, name, price }: CheckoutFormProps) {
                 </label>
             </div>
 
+            {isService && (
+                <div className="sm:col-span-2 flex flex-col gap-3 p-5 rounded-2xl border border-cyan-200 bg-cyan-50">
+                    <div className="flex items-center gap-2 text-sm font-semibold text-cyan-900">
+                        <ClipboardList className="w-4 h-4" />
+                        Tras tu pedido te pediremos por email:
+                    </div>
+                    <ul className="grid sm:grid-cols-2 gap-2">
+                        {SERVICE_QUESTIONS.map((q) => (
+                            <li key={q} className="flex items-start gap-2 text-sm text-cyan-900">
+                                <Check size={14} className="text-cyan-600 mt-0.5 shrink-0" />
+                                <span>{q}</span>
+                            </li>
+                        ))}
+                    </ul>
+                    <p className="text-xs text-cyan-800 leading-relaxed">
+                        Te entregamos la landing en 48h desde que recibimos estos datos y
+                        confirmemos el pago.
+                    </p>
+                </div>
+            )}
+
             <div className="sm:col-span-2 flex items-center justify-between p-4 rounded-xl border border-cyan-200 bg-cyan-50">
                 <div className="flex flex-col">
-                    <Badge variant="cyan">Producto</Badge>
+                    <Badge variant="cyan">{isService ? "Servicio" : "Producto"}</Badge>
                     <span className="mt-2 text-base font-semibold text-gray-900">{name}</span>
                 </div>
                 <div className="text-right">
@@ -272,11 +322,15 @@ export function CheckoutForm({ slug, name, price }: CheckoutFormProps) {
                 </div>
             </fieldset>
 
-            <Field label="Comentarios (opcional)" className="sm:col-span-2">
+            <Field label={isService ? "Cuéntanos algo inicial (opcional)" : "Comentarios (opcional)"} className="sm:col-span-2">
                 <textarea
                     name="comments"
                     rows={4}
-                    placeholder="¿Algo que debamos saber antes de procesar tu pedido?"
+                    placeholder={
+                        isService
+                            ? "Si quieres adelantarnos el nombre de tu negocio, sector o webs de referencia, escríbelo aquí. (No es obligatorio, te lo pediremos por email igualmente.)"
+                            : "¿Algo que debamos saber antes de procesar tu pedido?"
+                    }
                     className={`${inputClass} resize-none h-auto py-3`}
                 />
             </Field>
@@ -317,7 +371,7 @@ export function CheckoutForm({ slug, name, price }: CheckoutFormProps) {
                         variant="gradient"
                         disabled={sending || !acceptedPrivacy || !paymentMethod}
                     >
-                        {sending ? "Enviando…" : "Confirmar pedido"} <ArrowRight size={16} />
+                        {sending ? "Enviando…" : isService ? "Solicitar landing" : "Confirmar pedido"} <ArrowRight size={16} />
                     </Button>
                 </div>
             </div>
