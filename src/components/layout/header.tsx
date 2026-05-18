@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { NAV } from "@/lib/constants";
 
 const FULL_NAV = [
+    { label: "Productos", href: "/productos" },
     ...NAV.filter((n) => !n.href.startsWith("/")),
     { label: "Casos", href: "/casos" },
     { label: "Mundo GiruIA", href: "/mundo-giruia" },
@@ -53,7 +54,10 @@ export function Header() {
     }, [open]);
 
     const isActive = (href: string): boolean => {
-        if (href.startsWith("/")) return pathname === href;
+        if (href.startsWith("/")) {
+            if (href === "/") return pathname === "/";
+            return pathname === href || pathname.startsWith(`${href}/`);
+        }
         if (pathname === "/" && href.startsWith("#")) return activeHash === href;
         return false;
     };

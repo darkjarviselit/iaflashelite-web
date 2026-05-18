@@ -7,6 +7,108 @@ export const BRAND = {
     domain: "iaflashelite.com",
 } as const;
 
+export type ProductStatus = "available" | "coming_soon";
+
+export interface Product {
+    slug: string;
+    name: string;
+    tagline: string;
+    description: string;
+    price: number;
+    status: ProductStatus;
+    category: "seguridad" | "automatizacion" | "ia";
+    includes: string[];
+    guarantee_days: number;
+    support_days: number;
+}
+
+export const PRODUCTS: Product[] = [
+    {
+        slug: "generador-contrasenas-basico",
+        name: "Generador de Contraseñas Básico",
+        tagline: "Genera contraseñas seguras en local. Sin nube, sin trackers.",
+        description:
+            "Producto descargable con CLI Python y Web GUI HTML local. Genera contraseñas aleatorias, pronunciables, frases o PIN. Funciona sin internet. Tus datos nunca salen de tu equipo.",
+        price: 9,
+        status: "available",
+        category: "seguridad",
+        includes: [
+            "Script Python CLI con argparse en español",
+            "Web GUI HTML single-file (sin servidor)",
+            "3 prompts Claude/Codex pre-hechos para personalizar",
+            "Manuales de instalación y uso",
+            "Soporte 30 días por email",
+        ],
+        guarantee_days: 7,
+        support_days: 30,
+    },
+    {
+        slug: "generador-contrasenas-pro",
+        name: "Generador de Contraseñas Pro",
+        tagline:
+            "Vault local cifrado + auditor de filtraciones. Tus contraseñas, tu equipo.",
+        description:
+            "Versión Pro con vault SQLite cifrado AES-256, gestor completo, auditor de filtraciones (Have I Been Pwned), exportación a múltiples formatos. Sin servidor, sin nube.",
+        price: 29,
+        status: "coming_soon",
+        category: "seguridad",
+        includes: ["Próximamente. Lanzamiento esta semana."],
+        guarantee_days: 7,
+        support_days: 30,
+    },
+    {
+        slug: "auditor-web",
+        name: "Auditor Web Rápido",
+        tagline:
+            "Escanea tu web en 5 minutos. Reporte PDF con prioridades y soluciones.",
+        description:
+            "Script que analiza tu web (rate limits, headers seguridad, formularios vulnerables, mixed content, SSL) y genera un PDF con prioridades + cómo arreglar cada problema.",
+        price: 39,
+        status: "coming_soon",
+        category: "seguridad",
+        includes: ["Próximamente."],
+        guarantee_days: 7,
+        support_days: 30,
+    },
+    {
+        slug: "backup-cifrado",
+        name: "Backup Automático Cifrado",
+        tagline:
+            "Tu BD y archivos cifrados a Drive/Dropbox/S3. Sin perder datos jamás.",
+        description:
+            "Script de backup automático cifrado AES-256. Compatible con bases de datos MySQL/PostgreSQL/SQLite y carpetas de archivos. Subida programada a tu Drive, Dropbox o S3.",
+        price: 49,
+        status: "coming_soon",
+        category: "seguridad",
+        includes: ["Próximamente."],
+        guarantee_days: 7,
+        support_days: 30,
+    },
+];
+
+export const BRAND_VALUES = [
+    {
+        icon: "shield",
+        title: "Privacidad",
+        description: "Tus datos son tuyos. Nada más.",
+    },
+    {
+        icon: "gem",
+        title: "Transparencia",
+        description: "Sabes qué pagas y qué recibes. Siempre.",
+    },
+    {
+        icon: "handshake",
+        title: "Confianza",
+        description: "Garantías reales, no letra pequeña.",
+    },
+    {
+        icon: "zap",
+        title: "Valor",
+        description: "Solo creamos para ayudar, no para extraer.",
+    },
+] as const;
+
 export const SERVICES = [
     {
         id: "telegram-bot",
