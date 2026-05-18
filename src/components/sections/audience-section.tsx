@@ -41,7 +41,7 @@ export function AudienceSection() {
                             >
                                 <Link
                                     href={`/soluciones/${a.id}`}
-                                    className="group h-full flex flex-col gap-5 p-7 rounded-2xl bg-surface border border-border-dark hover:border-flash/40 transition-all duration-300"
+                                    className="group h-full flex flex-col gap-5 p-7 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-flash/40 hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(0,229,255,0.15)] transition-all duration-200 ease-out"
                                 >
                                     <span className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-flash/10 border border-flash/20 text-flash">
                                         <Icon className="w-6 h-6" />

@@ -152,7 +152,7 @@ export function ProductsGrid({ products, initialAudience }: ProductsGridProps) {
                                             delay: idx * 0.05,
                                             ease: [0.22, 1, 0.36, 1],
                                         }}
-                                        className="group relative h-full flex flex-col gap-4 p-6 rounded-2xl bg-surface border border-border-dark hover:border-flash/40 transition-all duration-300"
+                                        className="group relative h-full flex flex-col gap-4 p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-flash/40 hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(0,229,255,0.15)] transition-all duration-200 ease-out"
                                     >
                                         <div className="flex items-start justify-between gap-3">
                                             <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-flash/10 border border-flash/20 text-flash">
