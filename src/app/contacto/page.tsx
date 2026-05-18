@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Badge } from "@/components/ui/badge";
@@ -23,6 +23,17 @@ export default function ContactPage() {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
+    const [message, setMessage] = useState("");
+    const [headline, setHeadline] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        const asunto = new URLSearchParams(window.location.search).get("asunto");
+        if (asunto) {
+            setHeadline(asunto);
+            setMessage(`Asunto: ${asunto}\n\nDescribe tu caso aquí: `);
+        }
+    }, []);
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -79,6 +90,14 @@ export default function ContactPage() {
                         <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
                             Responderemos en menos de 24h con una propuesta concreta y plazo cerrado.
                         </p>
+                        {headline && (
+                            <div className="inline-flex items-center gap-2 self-start px-3 py-2 rounded-full bg-cyan-50 border border-cyan-200 text-sm text-cyan-800">
+                                <span className="text-[11px] font-mono tracking-[0.18em] uppercase text-cyan-700">
+                                    Asunto
+                                </span>
+                                <span className="font-medium">{headline}</span>
+                            </div>
+                        )}
                     </motion.div>
 
                     {success ? (
@@ -190,6 +209,8 @@ export default function ContactPage() {
                                     name="message"
                                     required
                                     rows={5}
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
                                     placeholder="Describe brevemente qué quieres automatizar, qué herramientas usas y cualquier detalle relevante."
                                     className={`${inputClass} resize-none`}
                                 />

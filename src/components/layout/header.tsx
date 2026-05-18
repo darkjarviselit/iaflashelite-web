@@ -6,12 +6,13 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LogoFull } from "@/components/brand/logo-full";
 import { Button } from "@/components/ui/button";
-import { NAV } from "@/lib/constants";
 
 const FULL_NAV = [
     { label: "Soluciones", href: "/soluciones" },
     { label: "Productos", href: "/productos" },
-    ...NAV.filter((n) => !n.href.startsWith("/")),
+    { label: "Servicios", href: "/servicios" },
+    { label: "Proceso", href: "#proceso" },
+    { label: "FAQ", href: "#faq" },
     { label: "Casos", href: "/casos" },
     { label: "Mundo GiruIA", href: "/mundo-giruia" },
 ] as ReadonlyArray<{ label: string; href: string }>;

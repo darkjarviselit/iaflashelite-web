@@ -10,7 +10,7 @@ import { BRAND_VALUES, PRODUCTS } from "@/lib/constants";
 export const metadata: Metadata = {
     title: "Productos — iaflashelite.com",
     description:
-        "Herramientas digitales para automatización y seguridad. Productos descargables con privacidad por defecto. Garantía 7 días.",
+        "Catálogo completo: herramientas descargables y servicios personalizados. Filtra por audiencia o categoría. Garantía 7 días.",
 };
 
 const VALUE_ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
@@ -31,12 +31,12 @@ export default function ProductosPage() {
                             Catálogo
                         </span>
                         <h1 className="text-4xl sm:text-6xl font-bold tracking-tight leading-[1.05] text-gray-900">
-                            Herramientas listas para usar.
+                            Catálogo completo.
                         </h1>
                         <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
-                            Productos descargables creados con privacidad por defecto.
-                            Pagas una vez, descargas el ZIP, funciona en tu equipo. Sin
-                            suscripciones, sin nube, sin trackers.
+                            Herramientas descargables y servicios personalizados. Pagas
+                            una vez, lo tienes listo. Sin suscripciones, sin trackers,
+                            sin letra pequeña.
                         </p>
                     </div>
                 </section>
