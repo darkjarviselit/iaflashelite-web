@@ -1,6 +1,13 @@
+import { Landmark, Smartphone, Wallet } from "lucide-react";
 import Link from "next/link";
 import { LogoFull } from "@/components/brand/logo-full";
 import { BRAND } from "@/lib/constants";
+
+const PAYMENT_METHODS = [
+    { label: "Bizum", icon: Smartphone },
+    { label: "PayPal", icon: Wallet },
+    { label: "Transferencia", icon: Landmark },
+] as const;
 
 const FOOTER_NAV = {
     soluciones: [
@@ -50,7 +57,33 @@ export function Footer() {
                     <FooterColumn title="Legal" items={FOOTER_NAV.legal} />
                 </div>
 
-                <div className="mt-20 pt-8 border-t border-border-dark flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="mt-16 pt-8 border-t border-border-dark flex flex-col gap-5">
+                    <span className="text-[11px] tracking-[0.18em] uppercase text-text-muted font-medium">
+                        Métodos de pago aceptados
+                    </span>
+                    <div className="flex flex-wrap items-center gap-3">
+                        {PAYMENT_METHODS.map((m) => {
+                            const Icon = m.icon;
+                            return (
+                                <span
+                                    key={m.label}
+                                    className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-surface border border-border-dark"
+                                >
+                                    <Icon className="w-4 h-4 text-flash" />
+                                    <span className="text-xs font-medium text-paper">
+                                        {m.label}
+                                    </span>
+                                </span>
+                            );
+                        })}
+                    </div>
+                    <p className="text-xs text-text-secondary leading-relaxed max-w-2xl">
+                        Pago manual con confirmación por email. Tu producto se entrega en
+                        cuanto se confirma el pago.
+                    </p>
+                </div>
+
+                <div className="mt-10 pt-8 border-t border-border-dark flex flex-col sm:flex-row items-center justify-between gap-4">
                     <p className="text-[11px] tracking-[0.18em] uppercase text-text-muted">
                         © {new Date().getFullYear()} {BRAND.name}. Hecho con IA propia.
                     </p>
