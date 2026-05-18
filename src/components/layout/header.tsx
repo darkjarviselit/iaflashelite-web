@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { NAV } from "@/lib/constants";
 
 const FULL_NAV = [
+    { label: "Soluciones", href: "/soluciones" },
     { label: "Productos", href: "/productos" },
     ...NAV.filter((n) => !n.href.startsWith("/")),
     { label: "Casos", href: "/casos" },
