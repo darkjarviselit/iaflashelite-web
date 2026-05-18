@@ -2,7 +2,7 @@ import Link from "next/link";
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "secondary" | "ghost";
+type Variant = "primary" | "secondary" | "ghost" | "gradient";
 type Size = "sm" | "md" | "lg";
 
 interface BaseProps {
@@ -37,6 +37,8 @@ const variantClasses: Record<Variant, string> = {
     secondary:
         "bg-transparent text-paper border border-border-dark hover:bg-surface hover:border-flash/40",
     ghost: "bg-transparent text-text-secondary hover:text-paper",
+    gradient:
+        "text-onyx font-semibold bg-[linear-gradient(135deg,#00e5ff_0%,#00b8d4_100%)] hover:scale-[1.02] hover:shadow-[0_0_36px_rgba(0,229,255,0.4)]",
 };
 
 const base =
