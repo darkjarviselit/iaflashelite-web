@@ -110,10 +110,12 @@ export async function POST(request: Request) {
     if (!product) return bad("product_not_found");
     if (product.status !== "available") return bad("product_not_available");
 
+    const productType = product.type ?? "download";
     const forwardPayload = {
         type: "order",
         product: product.slug,
         product_name: product.name,
+        product_type: productType,
         price: product.price,
         customer: { name, email },
         payment_method: paymentMethod,
@@ -125,7 +127,8 @@ export async function POST(request: Request) {
         user_agent: request.headers.get("user-agent") ?? "",
     };
 
-    console.log("[orders] new order:", JSON.stringify(forwardPayload));
+    const logTag = productType === "service" ? "[SERVICE_ORDER]" : "[DOWNLOAD_ORDER]";
+    console.log(`${logTag} new order:`, JSON.stringify(forwardPayload));
     await forwardOrder(forwardPayload);
 
     return NextResponse.json({ ok: true });
