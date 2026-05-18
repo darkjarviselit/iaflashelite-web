@@ -17,17 +17,9 @@ const FULL_NAV = [
 ] as ReadonlyArray<{ label: string; href: string }>;
 
 export function Header() {
-    const [scrolled, setScrolled] = useState(false);
     const [open, setOpen] = useState(false);
     const [activeHash, setActiveHash] = useState("");
     const pathname = usePathname();
-
-    useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 16);
-        onScroll();
-        window.addEventListener("scroll", onScroll, { passive: true });
-        return () => window.removeEventListener("scroll", onScroll);
-    }, []);
 
     useEffect(() => {
         if (pathname !== "/") return;
@@ -68,11 +60,7 @@ export function Header() {
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.05, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-                scrolled
-                    ? "bg-onyx/85 backdrop-blur-md border-b border-border-dark"
-                    : "bg-transparent"
-            }`}
+            className="sticky top-0 z-50 bg-onyx/70 backdrop-blur-xl border-b border-white/5"
         >
             <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
                 <LogoFull size="md" />
