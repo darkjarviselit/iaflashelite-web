@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowRight, Bell, Check, Download, Mail, ShieldCheck } from "lucide-react";
+import { ArrowRight, Bell, Check, Download, Landmark, Mail, ShieldCheck, Smartphone, Wallet } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductAvailability } from "@/components/productos/product-availability";
@@ -181,7 +181,7 @@ export default async function ProductDetailPage({
                                 </span>
                                 <p className="text-sm text-gray-700 leading-relaxed">
                                     Rellenas el formulario con tu nombre, email y método de
-                                    pago preferido (Bizum o transferencia).
+                                    pago preferido (Bizum, PayPal o transferencia).
                                 </p>
                             </li>
                             <li className="flex items-start gap-4">
@@ -203,6 +203,45 @@ export default async function ProductDetailPage({
                                 </p>
                             </li>
                         </ol>
+
+                        <div className="mt-12 p-6 rounded-2xl bg-white border border-gray-200">
+                            <h3 className="text-sm font-semibold text-gray-900 mb-4">
+                                Aceptamos:
+                            </h3>
+                            <ul className="grid sm:grid-cols-3 gap-3 mb-4">
+                                <li className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-200">
+                                    <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-cyan-50 border border-cyan-100 text-cyan-600 shrink-0">
+                                        <Smartphone className="w-4 h-4" />
+                                    </span>
+                                    <div className="flex flex-col">
+                                        <span className="text-sm font-medium text-gray-900">Bizum</span>
+                                        <span className="text-[11px] text-gray-500">Instantáneo</span>
+                                    </div>
+                                </li>
+                                <li className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-200">
+                                    <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-cyan-50 border border-cyan-100 text-cyan-600 shrink-0">
+                                        <Wallet className="w-4 h-4" />
+                                    </span>
+                                    <div className="flex flex-col">
+                                        <span className="text-sm font-medium text-gray-900">PayPal</span>
+                                        <span className="text-[11px] text-gray-500">Cuenta o tarjeta</span>
+                                    </div>
+                                </li>
+                                <li className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-200">
+                                    <span className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-cyan-50 border border-cyan-100 text-cyan-600 shrink-0">
+                                        <Landmark className="w-4 h-4" />
+                                    </span>
+                                    <div className="flex flex-col">
+                                        <span className="text-sm font-medium text-gray-900">Transferencia</span>
+                                        <span className="text-[11px] text-gray-500">IBAN por email</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <p className="text-xs text-gray-500 leading-relaxed">
+                                Tras tu pedido, te enviaremos los datos de pago por email en menos de 12 horas.
+                                Cuando recibamos el pago, recibirás el producto en tu correo.
+                            </p>
+                        </div>
                     </div>
                 </section>
 

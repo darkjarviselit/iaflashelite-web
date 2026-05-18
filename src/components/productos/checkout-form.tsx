@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { useState, type FormEvent } from "react";
+import { ArrowRight, Check, CheckCircle2, Landmark, Smartphone, Wallet } from "lucide-react";
+import { useState, type ComponentType, type FormEvent, type SVGProps } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -12,11 +12,41 @@ interface CheckoutFormProps {
     price: number;
 }
 
-const PAYMENT_METHODS = [
-    { value: "bizum", label: "Bizum" },
-    { value: "transferencia", label: "Transferencia bancaria" },
-    { value: "otro", label: "Otra (te lo aclaramos por email)" },
+type PaymentMethodValue = "bizum" | "paypal" | "transferencia";
+
+interface PaymentMethodOption {
+    value: PaymentMethodValue;
+    label: string;
+    description: string;
+    icon: ComponentType<SVGProps<SVGSVGElement>>;
+}
+
+const PAYMENT_METHODS: PaymentMethodOption[] = [
+    {
+        value: "bizum",
+        label: "Bizum",
+        description: "Pago instantáneo desde tu móvil. Solo necesitas tu app del banco.",
+        icon: Smartphone,
+    },
+    {
+        value: "paypal",
+        label: "PayPal",
+        description: "Paga con tu cuenta PayPal o tarjeta. Sin compartir tus datos bancarios.",
+        icon: Wallet,
+    },
+    {
+        value: "transferencia",
+        label: "Transferencia bancaria",
+        description: "Pago tradicional por transferencia. Recibirás el IBAN por email.",
+        icon: Landmark,
+    },
 ];
+
+const METHOD_LABELS: Record<PaymentMethodValue, string> = {
+    bizum: "Bizum",
+    paypal: "PayPal",
+    transferencia: "Transferencia bancaria",
+};
 
 const inputClass =
     "w-full h-12 px-4 rounded-xl bg-white border border-gray-300 text-gray-900 placeholder:text-gray-400 text-sm focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-colors";
@@ -27,16 +57,22 @@ export function CheckoutForm({ slug, name, price }: CheckoutFormProps) {
     const [error, setError] = useState<string | null>(null);
     const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
     const [customerName, setCustomerName] = useState("");
+    const [customerEmail, setCustomerEmail] = useState("");
+    const [paymentMethod, setPaymentMethod] = useState<PaymentMethodValue | "">("");
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         setError(null);
+        if (!paymentMethod) {
+            setError("missing_payment_method");
+            return;
+        }
         const fd = new FormData(event.currentTarget);
         const payload = {
             productSlug: slug,
             name: String(fd.get("name") ?? ""),
             email: String(fd.get("email") ?? ""),
-            paymentMethod: String(fd.get("paymentMethod") ?? ""),
+            paymentMethod,
             comments: String(fd.get("comments") ?? ""),
             website: String(fd.get("website") ?? ""),
             acceptedPrivacy,
@@ -62,6 +98,7 @@ export function CheckoutForm({ slug, name, price }: CheckoutFormProps) {
     }
 
     if (success) {
+        const methodLabel = paymentMethod ? METHOD_LABELS[paymentMethod] : "—";
         return (
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -75,13 +112,29 @@ export function CheckoutForm({ slug, name, price }: CheckoutFormProps) {
                 <h2 className="text-2xl font-semibold text-emerald-900">
                     Gracias{customerName ? `, ${customerName}` : ""}.
                 </h2>
-                <p className="text-emerald-800 max-w-md leading-relaxed">
-                    Hemos recibido tu pedido para <span className="font-semibold">{name}</span>.
-                    Te enviaremos un email con instrucciones de pago en menos de 12h
-                    (revisa también tu spam).
-                </p>
+                <div className="flex flex-col gap-3 max-w-md text-emerald-800 leading-relaxed">
+                    <p>
+                        Hemos recibido tu pedido de{" "}
+                        <span className="font-semibold">{name}</span>{" "}
+                        (<span className="font-semibold">{price}€</span>).
+                    </p>
+                    <p>
+                        📧 En menos de 12 horas te enviaremos un email
+                        {customerEmail ? (
+                            <>
+                                {" "}a <span className="font-semibold">{customerEmail}</span>
+                            </>
+                        ) : null}{" "}
+                        con los datos de pago según el método elegido
+                        (<span className="font-semibold">{methodLabel}</span>).
+                    </p>
+                    <p>
+                        Una vez recibamos el pago, te enviaremos el producto
+                        directamente a tu email.
+                    </p>
+                </div>
                 <p className="text-sm text-emerald-700">
-                    ¿Dudas? Escribe a{" "}
+                    ¿Dudas? Responde a ese email o escribe a{" "}
                     <a
                         href="mailto:iaflashelite@gmail.com"
                         className="text-cyan-700 underline hover:no-underline"
@@ -157,21 +210,68 @@ export function CheckoutForm({ slug, name, price }: CheckoutFormProps) {
                     required
                     placeholder="tu@email.com"
                     autoComplete="email"
+                    onChange={(e) => setCustomerEmail(e.target.value)}
                     className={inputClass}
                 />
             </Field>
-            <Field label="Método de pago *" className="sm:col-span-2">
-                <select name="paymentMethod" required defaultValue="" className={inputClass}>
-                    <option value="" disabled>
-                        — Selecciona —
-                    </option>
-                    {PAYMENT_METHODS.map((m) => (
-                        <option key={m.value} value={m.value}>
-                            {m.label}
-                        </option>
-                    ))}
-                </select>
-            </Field>
+
+            <fieldset className="sm:col-span-2 flex flex-col gap-3">
+                <legend className="text-[11px] tracking-[0.18em] uppercase text-gray-500 font-medium mb-1">
+                    Método de pago *
+                </legend>
+                <div className="grid sm:grid-cols-3 gap-3">
+                    {PAYMENT_METHODS.map((m) => {
+                        const Icon = m.icon;
+                        const selected = paymentMethod === m.value;
+                        return (
+                            <label
+                                key={m.value}
+                                className={`relative flex flex-col gap-3 p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 ease-out ${
+                                    selected
+                                        ? "border-cyan-500 bg-cyan-50 shadow-md"
+                                        : "border-gray-200 bg-white hover:border-cyan-300 hover:-translate-y-0.5 hover:shadow-sm"
+                                }`}
+                            >
+                                <input
+                                    type="radio"
+                                    name="paymentMethod"
+                                    value={m.value}
+                                    checked={selected}
+                                    onChange={() => setPaymentMethod(m.value)}
+                                    required
+                                    className="sr-only"
+                                />
+                                <span
+                                    className={`absolute top-3 right-3 inline-flex items-center justify-center w-5 h-5 rounded-full border-2 transition-colors ${
+                                        selected
+                                            ? "bg-cyan-500 border-cyan-500 text-white"
+                                            : "bg-white border-gray-300 text-transparent"
+                                    }`}
+                                    aria-hidden
+                                >
+                                    <Check size={12} strokeWidth={3} />
+                                </span>
+                                <span
+                                    className={`inline-flex items-center justify-center w-10 h-10 rounded-xl border ${
+                                        selected
+                                            ? "bg-white border-cyan-200 text-cyan-600"
+                                            : "bg-cyan-50 border-cyan-100 text-cyan-600"
+                                    }`}
+                                >
+                                    <Icon className="w-5 h-5" />
+                                </span>
+                                <span className="text-sm font-semibold text-gray-900">
+                                    {m.label}
+                                </span>
+                                <span className="text-xs text-gray-600 leading-relaxed">
+                                    {m.description}
+                                </span>
+                            </label>
+                        );
+                    })}
+                </div>
+            </fieldset>
+
             <Field label="Comentarios (opcional)" className="sm:col-span-2">
                 <textarea
                     name="comments"
@@ -215,7 +315,7 @@ export function CheckoutForm({ slug, name, price }: CheckoutFormProps) {
                         size="lg"
                         type="submit"
                         variant="gradient"
-                        disabled={sending || !acceptedPrivacy}
+                        disabled={sending || !acceptedPrivacy || !paymentMethod}
                     >
                         {sending ? "Enviando…" : "Confirmar pedido"} <ArrowRight size={16} />
                     </Button>
