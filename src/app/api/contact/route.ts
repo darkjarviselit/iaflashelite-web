@@ -9,6 +9,7 @@ interface ContactPayload {
     urgency?: string;
     budget?: string;
     website?: string;
+    acceptedPrivacy?: boolean;
 }
 
 const GIRIS_URL = process.env.GIRIS_AGENT_URL ?? "http://localhost:5318";
@@ -92,6 +93,8 @@ export async function POST(request: Request) {
     if (payload.website && payload.website.trim().length > 0) {
         return NextResponse.json({ ok: true });
     }
+
+    if (payload.acceptedPrivacy !== true) return bad("privacy_not_accepted");
 
     const name = (payload.name ?? "").trim();
     const email = (payload.email ?? "").trim();

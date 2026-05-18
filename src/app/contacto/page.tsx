@@ -23,6 +23,7 @@ export default function ContactPage() {
     const [sending, setSending] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -37,6 +38,7 @@ export default function ContactPage() {
             budget: String(fd.get("budget") ?? ""),
             message: String(fd.get("message") ?? ""),
             website: String(fd.get("website") ?? ""),
+            acceptedPrivacy,
         };
         setSending(true);
         try {
@@ -192,12 +194,43 @@ export default function ContactPage() {
                                 />
                             </Field>
 
+                            <div className="sm:col-span-2 flex items-start gap-3 pt-2">
+                                <input
+                                    type="checkbox"
+                                    id="acceptedPrivacy"
+                                    name="acceptedPrivacy"
+                                    checked={acceptedPrivacy}
+                                    onChange={(e) => setAcceptedPrivacy(e.target.checked)}
+                                    required
+                                    className="mt-1 h-4 w-4 rounded border-border-dark bg-onyx accent-flash focus:outline-none focus:ring-2 focus:ring-flash/40"
+                                />
+                                <label
+                                    htmlFor="acceptedPrivacy"
+                                    className="text-sm text-text-secondary leading-relaxed"
+                                >
+                                    He leído y acepto la{" "}
+                                    <a
+                                        href="/legal/privacidad"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-flash underline hover:no-underline"
+                                    >
+                                        política de privacidad
+                                    </a>{" "}
+                                    y consiento el tratamiento de mis datos para responder a esta consulta.
+                                </label>
+                            </div>
+
                             <div className="sm:col-span-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
                                 {error && (
                                     <Badge variant="muted">⚠️ {error}</Badge>
                                 )}
                                 <div className="ml-auto">
-                                    <Button size="lg" type="submit" disabled={sending}>
+                                    <Button
+                                        size="lg"
+                                        type="submit"
+                                        disabled={sending || !acceptedPrivacy}
+                                    >
                                         {sending ? "Enviando…" : "Enviar proyecto"} <ArrowRight size={16} />
                                     </Button>
                                 </div>
