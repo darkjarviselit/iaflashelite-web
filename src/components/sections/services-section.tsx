@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Bot, Code2, MessageCircle, Workflow } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
-import { SectionLabel } from "@/components/ui/section-label";
 import { SERVICES } from "@/lib/constants";
 
 const ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
@@ -15,11 +14,16 @@ const ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
 
 export function ServicesSection() {
     return (
-        <section id="servicios" className="relative py-28 lg:py-32 bg-onyx">
+        <section
+            id="servicios"
+            className="relative py-24 lg:py-32 bg-white text-gray-900"
+        >
             <div className="max-w-[1200px] mx-auto px-6">
-                <div className="flex flex-col gap-6 mb-16 max-w-2xl">
-                    <SectionLabel>Servicios</SectionLabel>
-                    <h2 className="text-4xl sm:text-5xl font-bold tracking-[-0.02em] leading-[1.05] text-paper">
+                <div className="flex flex-col gap-4 mb-16 max-w-2xl">
+                    <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
+                        Servicios
+                    </span>
+                    <h2 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.05] text-gray-900">
                         Construido para simplificar tu negocio.
                     </h2>
                 </div>
@@ -38,22 +42,22 @@ export function ServicesSection() {
                                     delay: idx * 0.08,
                                     ease: [0.22, 1, 0.36, 1],
                                 }}
-                                className="group relative h-full flex flex-col gap-5 p-8 rounded-xl bg-surface border border-border-dark hover:border-flash/40 hover:-translate-y-1 transition-all duration-300"
+                                className="group relative h-full flex flex-col gap-5 p-8 rounded-2xl bg-white border border-gray-200 hover:border-cyan-500 hover:-translate-y-1 hover:shadow-xl transition-all duration-200 ease-out"
                             >
                                 <div className="flex items-start justify-between">
-                                    <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-flash/10 border border-flash/20 text-flash">
+                                    <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-cyan-50 border border-cyan-100 text-cyan-600">
                                         <Icon className="w-5 h-5" />
                                     </span>
-                                    <span className="text-[11px] font-mono tracking-[0.18em] text-text-muted">
+                                    <span className="text-[11px] font-mono tracking-[0.18em] text-gray-400">
                                         / {service.number}
                                     </span>
                                 </div>
 
                                 <div>
-                                    <h3 className="text-xl font-semibold text-paper tracking-tight mb-2">
+                                    <h3 className="text-xl font-semibold text-gray-900 tracking-tight mb-2">
                                         {service.title}
                                     </h3>
-                                    <p className="text-sm text-text-secondary leading-relaxed">
+                                    <p className="text-sm text-gray-600 leading-relaxed">
                                         {service.description}
                                     </p>
                                 </div>
@@ -62,24 +66,27 @@ export function ServicesSection() {
                                     {service.features.map((f) => (
                                         <li
                                             key={f}
-                                            className="flex items-start gap-2 text-[13px] text-paper/85"
+                                            className="flex items-start gap-2 text-[13px] text-gray-700"
                                         >
-                                            <ArrowRight size={12} className="text-flash mt-1 shrink-0" />
+                                            <ArrowRight
+                                                size={12}
+                                                className="text-cyan-600 mt-1 shrink-0"
+                                            />
                                             <span>{f}</span>
                                         </li>
                                     ))}
                                 </ul>
 
-                                <div className="mt-auto flex items-end justify-between pt-4 border-t border-border-dark">
+                                <div className="mt-auto flex items-end justify-between pt-4 border-t border-gray-200">
                                     <div className="flex flex-col">
-                                        <span className="text-[10px] tracking-[0.18em] uppercase text-text-muted">
+                                        <span className="text-[10px] tracking-[0.18em] uppercase text-gray-500">
                                             Rango
                                         </span>
-                                        <span className="text-2xl font-bold text-flash tracking-tight">
+                                        <span className="text-2xl font-bold text-cyan-600 tracking-tight">
                                             {service.priceFrom}–{service.priceTo}€
                                         </span>
                                     </div>
-                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium tracking-wide rounded-full bg-flash/10 text-flash border border-flash/20">
+                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium tracking-wide rounded-full bg-cyan-50 text-cyan-700 border border-cyan-200">
                                         ⚡ 48h
                                     </span>
                                 </div>

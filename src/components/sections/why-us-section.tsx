@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Check, X } from "lucide-react";
-import { SectionLabel } from "@/components/ui/section-label";
 import { COMPARISON } from "@/lib/constants";
 
 const COLUMNS = [
@@ -20,11 +19,13 @@ function isPositive(value: string): boolean {
 
 export function WhyUsSection() {
     return (
-        <section className="relative py-32 bg-surface border-y border-border-dark">
+        <section className="relative py-24 lg:py-32 bg-gray-50 text-gray-900 border-y border-gray-200">
             <div className="max-w-6xl mx-auto px-6 lg:px-8">
-                <div className="flex flex-col gap-6 mb-16 max-w-2xl">
-                    <SectionLabel>Por qué nosotros</SectionLabel>
-                    <h2 className="text-4xl sm:text-5xl font-bold tracking-[-0.02em] leading-[1.05] text-paper">
+                <div className="flex flex-col gap-4 mb-16 max-w-2xl">
+                    <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
+                        Por qué nosotros
+                    </span>
+                    <h2 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.05] text-gray-900">
                         Construido para resultados reales.
                     </h2>
                 </div>
@@ -34,18 +35,20 @@ export function WhyUsSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-80px" }}
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    className="overflow-x-auto rounded-2xl border border-border-dark bg-onyx"
+                    className="overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-sm"
                 >
                     <table className="w-full min-w-[640px]">
                         <thead>
-                            <tr className="border-b border-border-dark">
-                                <th className="text-left text-[11px] tracking-[0.18em] uppercase text-text-muted font-medium px-6 py-5">
+                            <tr className="border-b border-gray-200 bg-gray-50">
+                                <th className="text-left text-[11px] tracking-[0.18em] uppercase text-gray-500 font-medium px-6 py-5">
                                     Característica
                                 </th>
                                 {COLUMNS.map((col) => (
                                     <th
                                         key={col.key}
-                                        className={`text-left text-[11px] tracking-[0.18em] uppercase font-medium px-6 py-5 ${col.highlight ? "text-flash" : "text-text-secondary"}`}
+                                        className={`text-left text-[11px] tracking-[0.18em] uppercase font-medium px-6 py-5 ${
+                                            col.highlight ? "text-cyan-700" : "text-gray-600"
+                                        }`}
                                     >
                                         {col.label}
                                     </th>
@@ -56,9 +59,9 @@ export function WhyUsSection() {
                             {COMPARISON.map((row) => (
                                 <tr
                                     key={row.feature}
-                                    className="border-b border-border-dark last:border-b-0"
+                                    className="border-b border-gray-200 last:border-b-0"
                                 >
-                                    <td className="px-6 py-5 text-sm text-paper font-medium">
+                                    <td className="px-6 py-5 text-sm text-gray-900 font-medium">
                                         {row.feature}
                                     </td>
                                     {COLUMNS.map((col) => {
@@ -67,13 +70,25 @@ export function WhyUsSection() {
                                         return (
                                             <td
                                                 key={col.key}
-                                                className={`px-6 py-5 text-sm ${col.highlight ? "text-flash" : positive ? "text-paper" : "text-text-secondary"}`}
+                                                className={`px-6 py-5 text-sm ${
+                                                    col.highlight
+                                                        ? "text-cyan-700 font-medium"
+                                                        : positive
+                                                          ? "text-gray-900"
+                                                          : "text-gray-500"
+                                                }`}
                                             >
                                                 <span className="inline-flex items-center gap-2">
                                                     {col.highlight ? (
-                                                        <Check size={14} className="shrink-0 text-flash" />
+                                                        <Check
+                                                            size={14}
+                                                            className="shrink-0 text-cyan-600"
+                                                        />
                                                     ) : !positive && value === "Limitada" ? (
-                                                        <X size={14} className="shrink-0 text-text-muted" />
+                                                        <X
+                                                            size={14}
+                                                            className="shrink-0 text-gray-400"
+                                                        />
                                                     ) : null}
                                                     {value}
                                                 </span>
