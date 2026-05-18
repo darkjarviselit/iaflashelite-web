@@ -11,12 +11,15 @@ export type ProductStatus = "available" | "coming_soon";
 
 export type Audience = "pymes" | "particulares" | "desarrolladores";
 
+export type ProductType = "download" | "service";
+
 export type Subcategory =
     | "seguridad-web"
     | "privacidad-personal"
     | "backup-recuperacion"
     | "automatizacion"
-    | "auditoria";
+    | "auditoria"
+    | "diseno-landing";
 
 export interface Product {
     slug: string;
@@ -25,7 +28,7 @@ export interface Product {
     description: string;
     price: number;
     status: ProductStatus;
-    category: "seguridad" | "automatizacion" | "ia";
+    category: "seguridad" | "automatizacion" | "ia" | "diseno-web";
     audience: Audience[];
     subcategory: Subcategory;
     icon: string;
@@ -33,6 +36,13 @@ export interface Product {
     includes: string[];
     guarantee_days: number;
     support_days: number;
+    // Service-specific fields (optional, default to download semantics)
+    type?: ProductType;
+    delivery_time?: string;
+    revisions?: number;
+    what_you_get?: string[];
+    not_technical_friendly?: boolean;
+    recommended_tools?: string[];
 }
 
 export const PRODUCTS: Product[] = [
@@ -121,6 +131,101 @@ export const PRODUCTS: Product[] = [
         guarantee_days: 7,
         support_days: 30,
     },
+    {
+        slug: "landing-page-basica",
+        name: "Landing Page Básica",
+        tagline:
+            "Tu landing page profesional lista en 48h. Diseño moderno estilo Make.com adaptado a tu negocio.",
+        description:
+            "Landing page de alta conversión hecha a medida para tu negocio. Estilo profesional moderno (referencia: make.com, vercel.com, linear.app). Entregada en 48h con manual de instalación y prompts para Claude/Codex que te permiten desplegarla sin saber programar.",
+        price: 149,
+        status: "available",
+        category: "diseno-web",
+        audience: ["pymes", "particulares"],
+        subcategory: "diseno-landing",
+        icon: "monitor-smartphone",
+        estimated_install_minutes: 30,
+        includes: [
+            "Diseño profesional moderno (estilo Make.com)",
+            "1 hero impactante + 3 secciones de contenido",
+            "Tema oscuro o claro (tú eliges)",
+            "1 idioma (español o inglés)",
+            "Responsive móvil + tablet + ordenador",
+            "Optimizada para velocidad y SEO básico",
+            "Formulario de contacto funcional",
+            "1 revisión incluida",
+            "Manual PDF de instalación paso a paso",
+            "Prompts pre-hechos para Claude/Codex (despliegue rápido)",
+            "Audio explicativo descargable",
+            "Soporte por email 30 días",
+            "Garantía 7 días devolución sin preguntas",
+        ],
+        guarantee_days: 7,
+        support_days: 30,
+        type: "service",
+        delivery_time: "48 horas",
+        revisions: 1,
+        what_you_get: [
+            "ZIP con código completo (HTML/CSS/JS)",
+            "Manual PDF instalación (15 páginas)",
+            "Prompts Claude/Codex para despliegue",
+            "Audio explicativo (15-20 min)",
+            "Soporte email 30 días",
+        ],
+        not_technical_friendly: true,
+        recommended_tools: [
+            "Claude Pro (20€/mes)",
+            "Codex CLI (gratis)",
+            "ChatGPT Plus (20€/mes)",
+        ],
+    },
+    {
+        slug: "landing-page-pro",
+        name: "Landing Page Pro",
+        tagline:
+            "Landing page premium estilo Make.com. Tema híbrido, animaciones, 2 idiomas, 2 revisiones.",
+        description:
+            "Landing page premium con todas las funcionalidades de la Básica más: tema híbrido claro/oscuro alternado por secciones (estilo make.com), 6 secciones de contenido, 2 idiomas configurables, animaciones sutiles con framer-motion, formulario de contacto con validación, y 2 revisiones incluidas. Ideal para PYMES que quieren un nivel verdaderamente profesional.",
+        price: 249,
+        status: "available",
+        category: "diseno-web",
+        audience: ["pymes", "desarrolladores"],
+        subcategory: "diseno-landing",
+        icon: "sparkles",
+        estimated_install_minutes: 30,
+        includes: [
+            "Todo lo de Landing Básica más:",
+            "6 secciones de contenido (vs 3)",
+            "Tema híbrido claro/oscuro por secciones (estilo Make.com)",
+            "2 idiomas configurables (español + inglés u otros)",
+            "Animaciones sutiles con framer-motion",
+            "Formulario contacto con validación",
+            "2 revisiones incluidas",
+            "Audio NotebookLM extendido (30+ min)",
+            "Video-guía paso a paso de configuración",
+            "Plantillas de prompts adicionales por sector",
+            "Soporte preferente por email 30 días",
+        ],
+        guarantee_days: 7,
+        support_days: 30,
+        type: "service",
+        delivery_time: "48 horas",
+        revisions: 2,
+        what_you_get: [
+            "Todo lo de la Básica más:",
+            "Versión multiidioma del código",
+            "Audio NotebookLM extendido",
+            "Video-guía de configuración",
+            "Plantillas extra de prompts por sector",
+            "Soporte preferente 30 días",
+        ],
+        not_technical_friendly: true,
+        recommended_tools: [
+            "Claude Pro (20€/mes)",
+            "Codex CLI (gratis)",
+            "ChatGPT Plus (20€/mes)",
+        ],
+    },
 ];
 
 export const AUDIENCES: ReadonlyArray<{
@@ -170,6 +275,7 @@ export const SUBCATEGORIES: ReadonlyArray<{
     { id: "backup-recuperacion", label: "Backup y recuperación", icon: "database" },
     { id: "automatizacion", label: "Automatización", icon: "zap" },
     { id: "auditoria", label: "Auditoría y compliance", icon: "search-check" },
+    { id: "diseno-landing", label: "Diseño de landings", icon: "monitor-smartphone" },
 ] as const;
 
 export const BRAND_VALUES = [
