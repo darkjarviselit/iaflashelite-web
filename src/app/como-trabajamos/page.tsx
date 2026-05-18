@@ -1,0 +1,321 @@
+"use client";
+
+import { AnimatePresence, motion } from "framer-motion";
+import {
+    ClipboardEdit,
+    CreditCard,
+    Eye,
+    Landmark,
+    LifeBuoy,
+    PackageCheck,
+    Plus,
+    Rocket,
+    Smartphone,
+    Wallet,
+} from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
+import { useState } from "react";
+import { Footer } from "@/components/layout/footer";
+import { Header } from "@/components/layout/header";
+
+const STEPS: ReadonlyArray<{
+    num: string;
+    icon: ComponentType<SVGProps<SVGSVGElement>>;
+    title: string;
+    description: string;
+}> = [
+    {
+        num: "01",
+        icon: ClipboardEdit,
+        title: "Solicitud",
+        description:
+            "Eliges producto o servicio en la web. Rellenas un formulario con tus datos (nombre, email, comentarios). NO pagas todavía.",
+    },
+    {
+        num: "02",
+        icon: Eye,
+        title: "Revisión personal",
+        description:
+            "Reviso tu pedido en menos de 12 horas. Confirmo que puedo cumplir el plazo y la calidad. Si por algún motivo no puedo, te aviso sin compromiso.",
+    },
+    {
+        num: "03",
+        icon: CreditCard,
+        title: "Pago tras confirmación",
+        description:
+            "Te respondo por email con los datos de pago (Bizum, PayPal o transferencia). Pagas solo cuando aceptas el plazo confirmado.",
+    },
+    {
+        num: "04",
+        icon: Rocket,
+        title: "Trabajo inicia",
+        description:
+            "Empiezo tu pedido. Para servicios, en este punto recibes el cuestionario detallado para personalizar tu landing.",
+    },
+    {
+        num: "05",
+        icon: PackageCheck,
+        title: "Entrega",
+        description:
+            "Te envío todo por email: archivos, manuales, prompts pre-hechos, audio explicativo si aplica.",
+    },
+    {
+        num: "06",
+        icon: LifeBuoy,
+        title: "Soporte 30 días",
+        description:
+            "Durante 30 días resuelvo dudas, ajusto detalles y te ayudo a configurar todo. Sin coste adicional.",
+    },
+];
+
+const PAYMENT_METHODS: ReadonlyArray<{
+    icon: ComponentType<SVGProps<SVGSVGElement>>;
+    label: string;
+    description: string;
+}> = [
+    {
+        icon: Smartphone,
+        label: "Bizum",
+        description: "Pago instantáneo desde tu móvil. El más rápido en España.",
+    },
+    {
+        icon: Wallet,
+        label: "PayPal",
+        description:
+            "Internacional. Pago con tu cuenta o tarjeta sin compartir datos bancarios.",
+    },
+    {
+        icon: Landmark,
+        label: "Transferencia",
+        description:
+            "Tradicional. Útil para empresas que necesitan justificante.",
+    },
+];
+
+const CASES: ReadonlyArray<{ q: string; a: string }> = [
+    {
+        q: "¿Qué pasa si no me gusta el resultado?",
+        a: "Garantía 7 días: devolución 100% sin preguntas.",
+    },
+    {
+        q: "¿Qué pasa si tardas más del plazo?",
+        a: "Te aviso ANTES si veo que no llego. Si fallé al plazo confirmado: devolución 100%.",
+    },
+    {
+        q: "¿Qué pasa si soy no-técnico?",
+        a: "Recibes manual PDF + prompts pre-hechos para Claude/Codex. Tu landing online en 30 min sin saber programar.",
+    },
+    {
+        q: "¿Qué pasa si tienes muchos pedidos a la vez?",
+        a: "Limito 6 servicios al mes + 2 express. La web muestra disponibilidad real en /servicios.",
+    },
+    {
+        q: "¿Qué pasa si Oscar desaparece?",
+        a: "Soy persona física real, ingeniero registrado UPC. Mis datos legales están en /legal/aviso-legal. RGPD compliant.",
+    },
+];
+
+export default function ComoTrabajamosPage() {
+    const [openIdx, setOpenIdx] = useState<number | null>(0);
+
+    return (
+        <>
+            <Header />
+            <main className="bg-white text-gray-900 min-h-screen pb-24">
+                <section className="relative bg-onyx text-paper pt-32 pb-20">
+                    <div className="absolute inset-0 bg-dot-grid opacity-50" aria-hidden />
+                    <div className="relative max-w-3xl mx-auto px-6 flex flex-col gap-6">
+                        <span className="text-[11px] tracking-[0.18em] uppercase text-flash font-semibold">
+                            Proceso transparente
+                        </span>
+                        <h1 className="text-4xl sm:text-6xl font-bold tracking-[-0.025em] leading-[1.05] text-paper">
+                            Así trabajamos. Sin secretos.
+                        </h1>
+                        <p className="text-lg text-text-secondary leading-relaxed max-w-2xl">
+                            Cada paso del proceso, explicado. Para que sepas exactamente
+                            qué esperar.
+                        </p>
+                    </div>
+                </section>
+
+                <section className="relative py-24 bg-white">
+                    <div className="max-w-[1200px] mx-auto px-6 flex flex-col gap-12">
+                        <div className="flex flex-col gap-4 max-w-2xl">
+                            <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
+                                El proceso
+                            </span>
+                            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
+                                El proceso paso a paso.
+                            </h2>
+                        </div>
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                            {STEPS.map((step) => {
+                                const Icon = step.icon;
+                                return (
+                                    <article
+                                        key={step.num}
+                                        className="flex flex-col gap-4 p-6 rounded-2xl bg-white border border-gray-200 hover:border-cyan-500 hover:-translate-y-1 hover:shadow-xl transition-all duration-200 ease-out"
+                                    >
+                                        <div className="flex items-start justify-between gap-3">
+                                            <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-cyan-50 border border-cyan-100 text-cyan-600">
+                                                <Icon className="w-5 h-5" />
+                                            </span>
+                                            <span className="text-[11px] font-mono tracking-[0.18em] text-gray-400">
+                                                / {step.num}
+                                            </span>
+                                        </div>
+                                        <h3 className="text-lg font-semibold text-gray-900 tracking-tight">
+                                            {step.title}
+                                        </h3>
+                                        <p className="text-sm text-gray-600 leading-relaxed">
+                                            {step.description}
+                                        </p>
+                                    </article>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </section>
+
+                <section className="relative py-24 bg-gray-50 border-t border-gray-200">
+                    <div className="max-w-3xl mx-auto px-6 flex flex-col gap-6">
+                        <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
+                            Pago manual
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
+                            Por qué cobro manual y no automático.
+                        </h2>
+                        <div className="flex flex-col gap-5 text-gray-700 leading-relaxed">
+                            <p>
+                                Muchas webs usan Stripe o pasarelas automatizadas que
+                                cobran al instante. Yo NO.
+                            </p>
+                            <p className="font-semibold text-gray-900">
+                                Cobro manual por dos razones:
+                            </p>
+                            <ol className="list-decimal pl-5 space-y-3">
+                                <li>
+                                    Quiero revisar tu pedido antes de aceptarlo. Si veo
+                                    que necesitas algo que se sale de lo prometido,
+                                    prefiero avisarte ANTES de cobrarte.
+                                </li>
+                                <li>
+                                    Stripe y similares requieren alta de autónomo (que aún
+                                    no tengo) y comisiones del 2-3% que se trasladarían a
+                                    tu precio.
+                                </li>
+                            </ol>
+                            <p>
+                                <span className="font-semibold text-gray-900">¿La desventaja?</span>{" "}
+                                Tardas unas horas en recibir los datos de pago.
+                            </p>
+                            <p>
+                                <span className="font-semibold text-gray-900">¿La ventaja?</span>{" "}
+                                Trato personal, precios honestos y cero sorpresas.
+                            </p>
+                            <p>
+                                Cuando alcance el volumen suficiente, automatizaré con
+                                Stripe. Hasta entonces, prefiero la transparencia.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="relative py-24 bg-white border-t border-gray-200">
+                    <div className="max-w-[1200px] mx-auto px-6 flex flex-col gap-10">
+                        <div className="flex flex-col gap-4 max-w-2xl">
+                            <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
+                                Métodos de pago
+                            </span>
+                            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
+                                Métodos de pago aceptados.
+                            </h2>
+                        </div>
+                        <div className="grid md:grid-cols-3 gap-5">
+                            {PAYMENT_METHODS.map((m) => {
+                                const Icon = m.icon;
+                                return (
+                                    <article
+                                        key={m.label}
+                                        className="flex flex-col gap-4 p-6 rounded-2xl bg-white border border-gray-200"
+                                    >
+                                        <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-cyan-50 border border-cyan-100 text-cyan-600">
+                                            <Icon className="w-5 h-5" />
+                                        </span>
+                                        <h3 className="text-lg font-semibold text-gray-900 tracking-tight">
+                                            {m.label}
+                                        </h3>
+                                        <p className="text-sm text-gray-600 leading-relaxed">
+                                            {m.description}
+                                        </p>
+                                    </article>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </section>
+
+                <section className="relative py-24 bg-onyx text-paper border-t border-border-dark">
+                    <div className="absolute inset-0 bg-dot-grid opacity-50" aria-hidden />
+                    <div className="relative max-w-3xl mx-auto px-6 flex flex-col gap-10">
+                        <div className="flex flex-col gap-4 max-w-2xl">
+                            <span className="text-[11px] tracking-[0.18em] uppercase text-flash font-semibold">
+                                Casos comunes
+                            </span>
+                            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-paper">
+                                ¿Qué pasa si…?
+                            </h2>
+                        </div>
+                        <div className="flex flex-col">
+                            {CASES.map((c, idx) => {
+                                const isOpen = openIdx === idx;
+                                return (
+                                    <div
+                                        key={c.q}
+                                        className="border-b border-border-dark"
+                                    >
+                                        <button
+                                            type="button"
+                                            onClick={() => setOpenIdx(isOpen ? null : idx)}
+                                            className="w-full flex items-center justify-between gap-6 py-5 text-left group"
+                                            aria-expanded={isOpen}
+                                        >
+                                            <span className="text-base sm:text-lg font-semibold text-paper tracking-tight group-hover:text-flash transition-colors duration-200">
+                                                {c.q}
+                                            </span>
+                                            <span
+                                                className={`shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full border border-border-dark text-text-secondary transition-all duration-300 ${
+                                                    isOpen
+                                                        ? "rotate-45 border-flash text-flash bg-flash/10"
+                                                        : "group-hover:border-flash/40"
+                                                }`}
+                                            >
+                                                <Plus size={14} />
+                                            </span>
+                                        </button>
+                                        <AnimatePresence initial={false}>
+                                            {isOpen && (
+                                                <motion.div
+                                                    initial={{ height: 0, opacity: 0 }}
+                                                    animate={{ height: "auto", opacity: 1 }}
+                                                    exit={{ height: 0, opacity: 0 }}
+                                                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                                                    className="overflow-hidden"
+                                                >
+                                                    <p className="pb-5 pr-10 text-sm text-text-secondary leading-relaxed">
+                                                        {c.a}
+                                                    </p>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </section>
+            </main>
+            <Footer />
+        </>
+    );
+}
