@@ -9,6 +9,15 @@ export const BRAND = {
 
 export type ProductStatus = "available" | "coming_soon";
 
+export type Audience = "pymes" | "particulares" | "desarrolladores";
+
+export type Subcategory =
+    | "seguridad-web"
+    | "privacidad-personal"
+    | "backup-recuperacion"
+    | "automatizacion"
+    | "auditoria";
+
 export interface Product {
     slug: string;
     name: string;
@@ -17,6 +26,10 @@ export interface Product {
     price: number;
     status: ProductStatus;
     category: "seguridad" | "automatizacion" | "ia";
+    audience: Audience[];
+    subcategory: Subcategory;
+    icon: string;
+    estimated_install_minutes: number;
     includes: string[];
     guarantee_days: number;
     support_days: number;
@@ -32,6 +45,10 @@ export const PRODUCTS: Product[] = [
         price: 9,
         status: "available",
         category: "seguridad",
+        audience: ["particulares", "pymes"],
+        subcategory: "privacidad-personal",
+        icon: "key-round",
+        estimated_install_minutes: 5,
         includes: [
             "Script Python CLI con argparse en español",
             "Web GUI HTML single-file (sin servidor)",
@@ -52,6 +69,10 @@ export const PRODUCTS: Product[] = [
         price: 29,
         status: "coming_soon",
         category: "seguridad",
+        audience: ["particulares", "pymes", "desarrolladores"],
+        subcategory: "privacidad-personal",
+        icon: "shield-check",
+        estimated_install_minutes: 10,
         includes: ["Próximamente. Lanzamiento esta semana."],
         guarantee_days: 7,
         support_days: 30,
@@ -66,6 +87,10 @@ export const PRODUCTS: Product[] = [
         price: 39,
         status: "available",
         category: "seguridad",
+        audience: ["pymes", "desarrolladores"],
+        subcategory: "auditoria",
+        icon: "scan-search",
+        estimated_install_minutes: 10,
         includes: [
             "Script Python CLI con 6 scanners (headers, SSL/TLS, cookies, forms, exposure, performance)",
             "Generador de PDF profesional con score A-F",
@@ -88,11 +113,64 @@ export const PRODUCTS: Product[] = [
         price: 49,
         status: "coming_soon",
         category: "seguridad",
+        audience: ["pymes", "desarrolladores"],
+        subcategory: "backup-recuperacion",
+        icon: "database-backup",
+        estimated_install_minutes: 15,
         includes: ["Próximamente."],
         guarantee_days: 7,
         support_days: 30,
     },
 ];
+
+export const AUDIENCES: ReadonlyArray<{
+    id: Audience;
+    label: string;
+    short: string;
+    description: string;
+    icon: string;
+    color: "blue" | "green" | "purple";
+}> = [
+    {
+        id: "pymes",
+        label: "Para PYMES",
+        short: "PYMES",
+        description:
+            "Herramientas para pequeñas y medianas empresas que necesitan seguridad sin contratar consultores caros.",
+        icon: "building-2",
+        color: "blue",
+    },
+    {
+        id: "particulares",
+        label: "Para Particulares",
+        short: "Personal",
+        description:
+            "Protege tu vida digital. Para ti, tu familia y tus dispositivos personales.",
+        icon: "user",
+        color: "green",
+    },
+    {
+        id: "desarrolladores",
+        label: "Para Desarrolladores",
+        short: "Devs",
+        description:
+            "Herramientas técnicas para devs, MSPs y consultores que necesitan auditoría rápida o automatizar tareas.",
+        icon: "code-2",
+        color: "purple",
+    },
+] as const;
+
+export const SUBCATEGORIES: ReadonlyArray<{
+    id: Subcategory;
+    label: string;
+    icon: string;
+}> = [
+    { id: "seguridad-web", label: "Seguridad web", icon: "shield" },
+    { id: "privacidad-personal", label: "Privacidad personal", icon: "lock" },
+    { id: "backup-recuperacion", label: "Backup y recuperación", icon: "database" },
+    { id: "automatizacion", label: "Automatización", icon: "zap" },
+    { id: "auditoria", label: "Auditoría y compliance", icon: "search-check" },
+] as const;
 
 export const BRAND_VALUES = [
     {
