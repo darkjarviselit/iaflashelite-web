@@ -3,18 +3,22 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import { SectionLabel } from "@/components/ui/section-label";
 import { FAQS } from "@/lib/constants";
 
 export function FAQSection() {
     const [openIdx, setOpenIdx] = useState<number | null>(0);
 
     return (
-        <section id="faq" className="relative py-32 bg-onyx">
+        <section
+            id="faq"
+            className="relative py-24 lg:py-32 bg-white text-gray-900 border-t border-gray-200"
+        >
             <div className="max-w-4xl mx-auto px-6 lg:px-8">
-                <div className="flex flex-col gap-6 mb-16">
-                    <SectionLabel>FAQ</SectionLabel>
-                    <h2 className="text-4xl sm:text-5xl font-bold tracking-[-0.02em] leading-[1.05] text-paper">
+                <div className="flex flex-col gap-4 mb-16">
+                    <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
+                        FAQ
+                    </span>
+                    <h2 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.05] text-gray-900">
                         ¿Tienes dudas?
                     </h2>
                 </div>
@@ -23,18 +27,22 @@ export function FAQSection() {
                     {FAQS.map((faq, idx) => {
                         const isOpen = openIdx === idx;
                         return (
-                            <div key={faq.q} className="border-b border-border-dark">
+                            <div key={faq.q} className="border-b border-gray-200">
                                 <button
                                     type="button"
                                     onClick={() => setOpenIdx(isOpen ? null : idx)}
                                     className="w-full flex items-center justify-between gap-6 py-6 text-left group"
                                     aria-expanded={isOpen}
                                 >
-                                    <span className="text-lg sm:text-xl font-semibold text-paper tracking-tight group-hover:text-flash transition-colors duration-200">
+                                    <span className="text-lg sm:text-xl font-semibold text-gray-900 tracking-tight group-hover:text-cyan-600 transition-colors duration-200">
                                         {faq.q}
                                     </span>
                                     <span
-                                        className={`shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-full border border-border-dark text-paper transition-transform duration-300 ${isOpen ? "rotate-45 border-flash/50 text-flash" : ""}`}
+                                        className={`shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-full border border-gray-300 text-gray-700 transition-all duration-300 ${
+                                            isOpen
+                                                ? "rotate-45 border-cyan-500 text-cyan-600 bg-cyan-50"
+                                                : "group-hover:border-cyan-400"
+                                        }`}
                                     >
                                         <Plus size={16} />
                                     </span>
@@ -48,7 +56,7 @@ export function FAQSection() {
                                             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                                             className="overflow-hidden"
                                         >
-                                            <p className="pb-6 pr-12 text-base text-text-secondary leading-relaxed">
+                                            <p className="pb-6 pr-12 text-base text-gray-600 leading-relaxed">
                                                 {faq.a}
                                             </p>
                                         </motion.div>

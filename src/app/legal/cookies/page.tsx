@@ -9,7 +9,7 @@ export default function CookiesPage() {
     return (
         <>
             <h1>Política de Cookies</h1>
-            <p className="text-[11px] tracking-[0.18em] uppercase text-text-muted">
+            <p className="text-[11px] tracking-[0.18em] uppercase text-gray-500">
                 Última actualización: 18 de mayo de 2026
             </p>
 

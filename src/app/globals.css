@@ -55,6 +55,24 @@ section[id] {
     scroll-margin-top: 80px;
 }
 
+/* Tema híbrido — utility classes para secciones/páginas claras */
+.section-light {
+    background: #ffffff;
+    color: #0a0a0a;
+}
+.section-light-alt {
+    background: #f9fafb;
+    color: #0a0a0a;
+}
+.section-dark {
+    background: #0a0a0a;
+    color: #ffffff;
+}
+.page-light {
+    background: #ffffff;
+    color: #0a0a0a;
+}
+
 ::selection {
     background: #00e5ff;
     color: #0a0a0a;

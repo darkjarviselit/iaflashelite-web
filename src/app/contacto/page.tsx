@@ -7,7 +7,6 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { SectionLabel } from "@/components/ui/section-label";
 
 const SERVICES = [
     "Bot de Telegram / WhatsApp",
@@ -63,7 +62,7 @@ export default function ContactPage() {
     return (
         <>
             <Header />
-            <main className="pt-32 pb-24 bg-onyx min-h-screen">
+            <main className="pt-32 pb-24 bg-white text-gray-900 min-h-screen">
                 <div className="max-w-3xl mx-auto px-6 lg:px-8">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -71,11 +70,13 @@ export default function ContactPage() {
                         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                         className="flex flex-col gap-6 mb-12"
                     >
-                        <SectionLabel>Contacto</SectionLabel>
-                        <h1 className="text-4xl sm:text-6xl font-bold tracking-[-0.025em] leading-[1.05] text-paper">
+                        <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
+                            Contacto
+                        </span>
+                        <h1 className="text-4xl sm:text-6xl font-bold tracking-tight leading-[1.05] text-gray-900">
                             Cuéntanos tu proyecto.
                         </h1>
-                        <p className="text-lg text-text-secondary leading-relaxed max-w-xl">
+                        <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
                             Responderemos en menos de 24h con una propuesta concreta y plazo cerrado.
                         </p>
                     </motion.div>
@@ -85,13 +86,13 @@ export default function ContactPage() {
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.4 }}
-                            className="p-10 rounded-3xl border border-flash/30 bg-surface flex flex-col items-center text-center gap-5"
+                            className="p-10 rounded-3xl border border-emerald-200 bg-emerald-50 flex flex-col items-center text-center gap-5"
                         >
-                            <span className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-flash/10 text-flash">
+                            <span className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 text-emerald-600">
                                 <CheckCircle2 size={28} />
                             </span>
-                            <h2 className="text-2xl font-semibold text-paper">¡Recibido!</h2>
-                            <p className="text-text-secondary max-w-md">
+                            <h2 className="text-2xl font-semibold text-emerald-900">¡Recibido!</h2>
+                            <p className="text-emerald-800 max-w-md">
                                 Giris te contactará en menos de 24h con una propuesta concreta. ⚡
                             </p>
                             <Button href="/" variant="secondary">
@@ -101,7 +102,7 @@ export default function ContactPage() {
                     ) : (
                         <form
                             onSubmit={handleSubmit}
-                            className="grid sm:grid-cols-2 gap-5 p-8 sm:p-10 rounded-3xl border border-border-dark bg-surface"
+                            className="grid sm:grid-cols-2 gap-5 p-8 sm:p-10 rounded-3xl border border-gray-200 bg-white shadow-sm"
                         >
                             <div
                                 aria-hidden="true"
@@ -202,18 +203,18 @@ export default function ContactPage() {
                                     checked={acceptedPrivacy}
                                     onChange={(e) => setAcceptedPrivacy(e.target.checked)}
                                     required
-                                    className="mt-1 h-4 w-4 rounded border-border-dark bg-onyx accent-flash focus:outline-none focus:ring-2 focus:ring-flash/40"
+                                    className="mt-1 h-4 w-4 rounded border-gray-300 bg-white accent-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/40"
                                 />
                                 <label
                                     htmlFor="acceptedPrivacy"
-                                    className="text-sm text-text-secondary leading-relaxed"
+                                    className="text-sm text-gray-600 leading-relaxed"
                                 >
                                     He leído y acepto la{" "}
                                     <a
                                         href="/legal/privacidad"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-flash underline hover:no-underline"
+                                        className="text-cyan-600 underline hover:no-underline"
                                     >
                                         política de privacidad
                                     </a>{" "}
@@ -229,6 +230,7 @@ export default function ContactPage() {
                                     <Button
                                         size="lg"
                                         type="submit"
+                                        variant="gradient"
                                         disabled={sending || !acceptedPrivacy}
                                     >
                                         {sending ? "Enviando…" : "Enviar proyecto"} <ArrowRight size={16} />
@@ -245,7 +247,7 @@ export default function ContactPage() {
 }
 
 const inputClass =
-    "w-full h-12 px-4 rounded-xl bg-onyx border border-border-dark text-paper placeholder:text-text-muted text-sm focus:outline-none focus:border-flash/50 focus:ring-2 focus:ring-flash/20 transition-colors";
+    "w-full h-12 px-4 rounded-xl bg-white border border-gray-300 text-gray-900 placeholder:text-gray-400 text-sm focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-colors";
 
 function Field({
     label,
@@ -259,7 +261,7 @@ function Field({
 }) {
     return (
         <label className={`flex flex-col gap-2 ${className}`}>
-            <span className="text-[11px] tracking-[0.18em] uppercase text-text-muted font-medium">
+            <span className="text-[11px] tracking-[0.18em] uppercase text-gray-500 font-medium">
                 {label}
             </span>
             {children}

@@ -19,19 +19,19 @@ const COLOR_STYLES: Record<
     { bg: string; border: string; text: string }
 > = {
     blue: {
-        bg: "bg-blue-500/10",
-        border: "border-blue-400/30",
-        text: "text-blue-300",
+        bg: "bg-blue-50",
+        border: "border-blue-200",
+        text: "text-blue-700",
     },
     green: {
-        bg: "bg-emerald-500/10",
-        border: "border-emerald-400/30",
-        text: "text-emerald-300",
+        bg: "bg-emerald-50",
+        border: "border-emerald-200",
+        text: "text-emerald-700",
     },
     purple: {
-        bg: "bg-purple-500/10",
-        border: "border-purple-400/30",
-        text: "text-purple-300",
+        bg: "bg-purple-50",
+        border: "border-purple-200",
+        text: "text-purple-700",
     },
 };
 

@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { CheckoutForm } from "@/components/productos/checkout-form";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
-import { SectionLabel } from "@/components/ui/section-label";
 import { PRODUCTS } from "@/lib/constants";
 
 export function generateStaticParams() {
@@ -38,14 +37,16 @@ export default async function ComprarPage({
     return (
         <>
             <Header />
-            <main className="bg-onyx min-h-screen pt-32 pb-24">
+            <main className="bg-white text-gray-900 min-h-screen pt-32 pb-24">
                 <div className="max-w-3xl mx-auto px-6 lg:px-8">
                     <div className="flex flex-col gap-6 mb-10">
-                        <SectionLabel>Pedido</SectionLabel>
-                        <h1 className="text-4xl sm:text-5xl font-bold tracking-[-0.025em] leading-[1.05] text-paper">
+                        <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
+                            Pedido
+                        </span>
+                        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.05] text-gray-900">
                             Confirma tu pedido.
                         </h1>
-                        <p className="text-text-secondary leading-relaxed">
+                        <p className="text-gray-600 leading-relaxed">
                             Te respondemos en menos de 12 h con las instrucciones de pago.
                             Una vez confirmado, recibes el ZIP por email.
                         </p>
