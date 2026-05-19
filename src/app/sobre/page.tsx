@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 export const metadata: Metadata = {
     title: "Sobre — iaflashelite.com",
     description:
-        "Detrás de iaflashelite hay un ingeniero, no una agencia. Oscar P., Ingeniero Informático por UPC FIB y actualmente cursando UPF en multi-agentes IA.",
+        "Un equipo de profesionales + herramientas IA propias. Formación UPC FIB y UPF, especializados en automatización IA y ciberseguridad. Sin oficina física, sin inversores.",
 };
 
 export default function SobrePage() {
@@ -23,11 +23,12 @@ export default function SobrePage() {
                             Sobre nosotros
                         </span>
                         <h1 className="text-4xl sm:text-6xl font-bold tracking-[-0.025em] leading-[1.05] text-paper">
-                            Detrás de iaflashelite hay un ingeniero, no una agencia.
+                            Un equipo de profesionales + herramientas IA propias.
                         </h1>
                         <p className="text-lg text-text-secondary leading-relaxed max-w-2xl">
-                            Sin oficina. Sin inversores. Sin equipo de marketing. Solo
-                            yo + un ecosistema de IA propio.
+                            Sin oficina física. Sin inversores. Sin equipo de marketing.
+                            Equipo técnico + ecosistema IA propio = precios honestos y
+                            entregas rápidas.
                         </p>
                     </div>
                 </section>
@@ -35,34 +36,34 @@ export default function SobrePage() {
                 <section className="relative py-24 bg-white">
                     <div className="max-w-3xl mx-auto px-6 flex flex-col gap-6">
                         <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
-                            Quién está detrás
+                            Quiénes somos
                         </span>
                         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
-                            Soy Oscar P., el ingeniero detrás de iaflashelite.
+                            Quiénes somos.
                         </h2>
                         <div className="flex flex-col gap-5 text-gray-700 leading-relaxed">
                             <p>
-                                <span className="font-semibold text-gray-900">
-                                    Ingeniero Informático por la Facultat d&apos;Informàtica de
-                                    Barcelona (UPC FIB, 2012)
-                                </span>
-                                {" "}— una de las facultades de informática más prestigiosas
-                                de España, acreditada con excelencia por AQU Catalunya.
+                                Somos un equipo de profesionales especializados en
+                                automatización con IA, sistemas multi-agente y
+                                ciberseguridad.
                             </p>
                             <p>
-                                Actualmente terminando un{" "}
+                                Combinamos formación de las mejores universidades
+                                públicas españolas con experiencia práctica construyendo
+                                nuestro propio ecosistema de agentes IA — una{" "}
                                 <span className="font-semibold text-gray-900">
-                                    segundo Grado en Ingeniería Informática en la Universitat
-                                    Pompeu Fabra (UPF)
-                                </span>
-                                , especializándome en sistemas multi-agente y entrenamiento
-                                de agentes de IA. Es decir: lo que construyo aquí no es
-                                teoría, es mi trabajo final académico real.
+                                    herramienta interna
+                                </span>{" "}
+                                que potencia nuestro trabajo y nos permite ofrecer
+                                precios honestos.
                             </p>
                             <p>
-                                Trabajo desde Barcelona. Sin oficina, sin inversores, sin
-                                equipo de marketing. Solo yo + un ecosistema de IA propio
-                                que llevo desarrollando desde 2024.
+                                Trabajamos desde Barcelona. Sin oficina física, sin
+                                inversores, sin equipo de marketing.{" "}
+                                <span className="font-semibold text-gray-900">
+                                    Equipo técnico + herramientas IA propias
+                                </span>{" "}
+                                = entregas rápidas y precios ajustados.
                             </p>
                         </div>
                     </div>
@@ -73,11 +74,20 @@ export default function SobrePage() {
                                 <GraduationCap className="w-5 h-5" />
                             </span>
                             <h3 className="text-lg font-semibold text-gray-900 mb-3 tracking-tight">
-                                Formación
+                                Formación del equipo
                             </h3>
                             <ul className="flex flex-col gap-1.5 text-sm text-gray-700 leading-relaxed">
-                                <li>UPC FIB · Ingeniero Informático (2012)</li>
-                                <li>UPF · Multi-agentes IA (en curso)</li>
+                                <li>
+                                    UPC FIB · Facultat d&apos;Informàtica de Barcelona
+                                    (acreditada con excelencia AQU Catalunya)
+                                </li>
+                                <li>
+                                    UPF · Universitat Pompeu Fabra (especialización en
+                                    sistemas multi-agente IA)
+                                </li>
+                                <li>
+                                    Formación continua en ciberseguridad y automatización
+                                </li>
                             </ul>
                         </article>
                         <article className="p-6 rounded-2xl bg-white border border-gray-200">
@@ -85,12 +95,13 @@ export default function SobrePage() {
                                 <MapPin className="w-5 h-5" />
                             </span>
                             <h3 className="text-lg font-semibold text-gray-900 mb-3 tracking-tight">
-                                Ubicación
+                                Cómo trabajamos
                             </h3>
                             <ul className="flex flex-col gap-1.5 text-sm text-gray-700 leading-relaxed">
                                 <li>Barcelona, España</li>
-                                <li>Trabajo remoto · sin oficina</li>
+                                <li>Trabajo remoto · sin oficina física</li>
                                 <li>Respuesta en &lt;12h</li>
+                                <li>Equipo técnico + ecosistema IA propio</li>
                             </ul>
                         </article>
                     </div>
@@ -99,28 +110,29 @@ export default function SobrePage() {
                 <section className="relative py-24 bg-gray-50 border-t border-gray-200">
                     <div className="max-w-3xl mx-auto px-6 flex flex-col gap-6">
                         <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
-                            Por qué hago esto
+                            Por qué
                         </span>
                         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
-                            Por qué construyo iaflashelite.
+                            Por qué construimos iaflashelite.
                         </h2>
                         <div className="flex flex-col gap-5 text-gray-700 leading-relaxed">
                             <p>
-                                En 2024 empecé a construir mi propio ecosistema de agentes
-                                IA como Trabajo Final de Grado. Cinco agentes que trabajan
-                                juntos: orquestación de proyectos, programación, búsqueda
-                                de clientes, supervisión y seguridad.
+                                Empezamos a construir nuestro propio ecosistema de
+                                agentes IA en 2024 como parte de nuestra investigación
+                                académica y profesional. Cinco agentes que nos ayudan
+                                internamente: orquestación de proyectos, programación,
+                                búsqueda de leads, supervisión y seguridad.
                             </p>
                             <p>
-                                A medida que el ecosistema maduraba, vi una realidad: las
-                                PYMES y particulares pagan miles de euros por herramientas
-                                que en el fondo son sencillas. Pago de suscripciones
-                                perpetuas por un gestor de contraseñas. Cuotas anuales por
-                                un escáner de seguridad. Agencias que cobran 1.500€ por
-                                una landing simple.
+                                A medida que el ecosistema maduraba, vimos una realidad:
+                                PYMES y particulares pagan miles de euros por
+                                herramientas que en el fondo son sencillas.
+                                Suscripciones perpetuas por gestores de contraseñas.
+                                Cuotas anuales por escáneres de seguridad. Agencias que
+                                cobran 1.500€ por una landing simple.
                             </p>
                             <p>
-                                Decidí hacer lo contrario:{" "}
+                                Decidimos hacer lo contrario:{" "}
                                 <span className="font-semibold text-gray-900">
                                     vender lo mismo a precios honestos. Una vez. Sin
                                     suscripciones. Sin nube. Sin trackers. Sin letra
@@ -128,8 +140,13 @@ export default function SobrePage() {
                                 </span>
                             </p>
                             <p>
-                                Si funciona, financio el ecosistema. Si no, sigo
-                                aprendiendo. Es win-win.
+                                Nuestras herramientas IA internas nos permiten ser
+                                eficientes. Por eso podemos cobrar menos sin perder
+                                calidad. Pero{" "}
+                                <span className="font-semibold text-gray-900">
+                                    el trabajo final SIEMPRE pasa por nuestras manos
+                                </span>{" "}
+                                antes de llegarte.
                             </p>
                             <p className="pt-4 border-t border-gray-200">
                                 Y por eso este año (2026) cambia el rumbo:{" "}
@@ -139,14 +156,15 @@ export default function SobrePage() {
                                 </span>{" "}
                                 No solo vendemos herramientas — incluimos material
                                 formativo gratis con cada compra. Cada producto es
-                                auditable. Cada decisión nuestra prioriza tu
-                                privacidad por encima de la rentabilidad rápida.
+                                auditable. Cada decisión nuestra prioriza tu privacidad
+                                por encima de la rentabilidad rápida.
                             </p>
                             <p>
-                                No soy un experto en ciberseguridad de élite. Soy un
-                                ingeniero honesto que conoce los peligros reales y
-                                los explica claros. Si tu caso necesita un
-                                profesional certificado, te lo digo abiertamente.
+                                No somos expertos de élite en ciberseguridad. Somos un
+                                equipo de profesionales en formación continua que
+                                conocemos los peligros reales y los explicamos claros.
+                                Si tu caso necesita un pentester certificado, te lo
+                                decimos abiertamente y te derivamos.
                             </p>
                         </div>
                     </div>
@@ -165,7 +183,7 @@ export default function SobrePage() {
                         </div>
                         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
                             <Pledge icon={<Lock className="w-5 h-5" />} title="No vendemos datos. Nunca." />
-                            <Pledge icon={<Mail className="w-5 h-5" />} title="Respondo personalmente cada email." />
+                            <Pledge icon={<Mail className="w-5 h-5" />} title="Respondemos personalmente cada email." />
                             <Pledge icon={<Wallet className="w-5 h-5" />} title="Sin suscripciones ni cargos ocultos." />
                             <Pledge icon={<ShieldCheck className="w-5 h-5" />} title="Garantía 7 días devolución sin preguntas." />
                         </div>
@@ -179,14 +197,15 @@ export default function SobrePage() {
                                 Conversemos
                             </span>
                             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
-                                ¿Quieres hablar conmigo?
+                                ¿Quieres contactar?
                             </h2>
                             <p className="text-base text-gray-700 leading-relaxed">
-                                Sin filtros, sin formularios infinitos. Email directo a mí.
+                                Sin filtros, sin formularios infinitos. Email directo al
+                                equipo.
                             </p>
                             <div className="flex flex-wrap gap-3 pt-2">
                                 <Button href="mailto:iaflashelite@gmail.com" variant="gradient">
-                                    Escríbeme a iaflashelite@gmail.com
+                                    Escríbenos a iaflashelite@gmail.com
                                 </Button>
                                 <Link
                                     href="/productos"
