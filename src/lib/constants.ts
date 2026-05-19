@@ -495,7 +495,7 @@ export const FAQS = [
     },
     {
         q: "¿Cómo sé que recibiré el producto?",
-        a: "Pagas SOLO tras confirmación personal por email. Garantizamos que el producto funciona: si hay un fallo técnico no resuelto en 48h, devolvemos el 100%. Para servicios, devolución si no entregamos en el plazo acordado. Detalle completo en /legal/garantias.",
+        a: "Productos digitales: pagas directamente con PayPal o tarjeta y recibes el producto por email en menos de 1 hora. Si prefieres Bizum o transferencia, te enviamos las instrucciones en menos de 12h. Servicios: confirmamos plazo primero, luego pagas. Garantía técnica: fallo no resuelto en 48h = devolución 100%. Detalle en /legal/garantias.",
     },
     {
         q: "¿Y si el equipo desaparece después de pagar?",
@@ -529,15 +529,11 @@ export const FAQS = [
     // PAGOS
     {
         q: "¿Qué métodos de pago aceptáis?",
-        a: "Bizum, PayPal y transferencia bancaria. Recibirás los datos por email tras confirmar tu pedido.",
-    },
-    {
-        q: "¿Por qué no aceptáis tarjeta automática (Stripe)?",
-        a: "Stripe requiere alta de autónomo y comisiones del 2-3% que se trasladarían a tu precio. Cuando alcance el volumen suficiente, automatizaré. Hasta entonces, prefiero el trato personal.",
+        a: "Productos digitales: PayPal directo o tarjeta (cobro inmediato), Bizum o transferencia (manual <12h por email). Servicios: Bizum, PayPal o transferencia tras confirmar el encargo.",
     },
     {
         q: "¿Cuándo cobráis?",
-        a: "Tras confirmar tu pedido por email. NUNCA al instante de hacer clic en 'Comprar'.",
+        a: "Productos digitales con PayPal directo: al pulsar 'Pagar' (entrega del producto en <1h). Productos digitales con Bizum/transferencia: tras enviarte las instrucciones de pago. Servicios: tras confirmar el encargo por email. Nunca cobramos antes de confirmar que podemos entregar.",
     },
     {
         q: "¿Emitís factura?",
