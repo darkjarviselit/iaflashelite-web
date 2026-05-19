@@ -114,6 +114,37 @@ export const PRODUCTS: Product[] = [
         support_days: 30,
     },
     {
+        slug: "anti-phishing",
+        name: "Analizador Anti-Phishing de Emails",
+        tagline:
+            "Pega un email sospechoso. Análisis completo en 30 segundos. 100% offline.",
+        description:
+            "Analiza emails sospechosos con 6 motores ponderados: headers (SPF/DKIM/DMARC), análisis del remitente (display-name spoofing), URLs incluidos en el email (typosquat, anchor mismatch, IP literal), contenido (palabras clave de urgencia, premios, peticiones sensibles), attachments (extensiones peligrosas, doble extensión, macros) y reputación del dominio. 100% offline tras descarga. Acepta archivos .eml o texto pegado. Devuelve LEGÍTIMO/SOSPECHOSO/PHISHING con top red flags y recomendaciones específicas.",
+        price: 29,
+        status: "available",
+        category: "seguridad",
+        audience: ["pymes", "particulares"],
+        subcategory: "seguridad-web",
+        icon: "mail-warning",
+        estimated_install_minutes: 10,
+        includes: [
+            "Análisis 100% local (cero telemetría)",
+            "Soporta archivos .eml y texto pegado vía editor",
+            "Verificación SPF/DKIM/DMARC automática",
+            "Detección de display-name spoofing (PayPal/Amazon/banca ES)",
+            "Análisis profundo de URLs incluidos (typosquat, anchor mismatch)",
+            "Detección de extensiones peligrosas y doble extensión (factura.pdf.exe)",
+            "Detección de macros habilitadas en Office",
+            "Keywords de urgencia/premio/datos sensibles configurables",
+            "Reportes PDF con top 5 red flags + recomendaciones",
+            "CLI + GUI HTML single-file",
+            "57 tests unittest pasando",
+            "3 samples .eml educativos incluidos",
+        ],
+        guarantee_days: 7,
+        support_days: 30,
+    },
+    {
         slug: "verificador-urls",
         name: "Verificador URLs Sospechosas",
         tagline:
