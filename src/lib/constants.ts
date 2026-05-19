@@ -43,6 +43,8 @@ export interface Product {
     what_you_get?: string[];
     not_technical_friendly?: boolean;
     recommended_tools?: string[];
+    // Audio de presentación opcional (URL Vercel Blob, resuelta desde env).
+    audioUrl?: string;
 }
 
 export const PRODUCTS: Product[] = [
@@ -68,6 +70,7 @@ export const PRODUCTS: Product[] = [
         ],
         guarantee_days: 7,
         support_days: 30,
+        audioUrl: process.env.AUDIO_URL_PWGEN_BASICO,
     },
     {
         slug: "generador-contrasenas-pro",
