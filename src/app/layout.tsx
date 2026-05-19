@@ -10,21 +10,25 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-    title: "IA Flash Elite — Automatización con IA en 48h",
+    title: "iaflashelite — IA + Seguridad + Material formativo incluido",
     description:
-        "Bots, chatbots y scripts con IA, entregados en 48h. Eliminamos el trabajo manual que te roba tiempo.",
+        "Herramientas IA con código auditable. Mini guías y cursos de seguridad INCLUIDOS con cada compra. Privacy-first. Sin suscripciones. Sin precios inflados.",
     keywords: [
         "automatización IA",
+        "seguridad digital",
+        "auditable",
+        "código auditable",
+        "academia seguridad",
         "bot de Telegram",
         "chatbot",
-        "automatización de tareas",
         "scripts IA",
-        "agencia IA",
+        "privacy first",
         "iaflashelite",
     ],
     openGraph: {
-        title: "IA Flash Elite — Automatización con IA en 48h",
-        description: "Bots, chatbots y scripts con IA, entregados en 48h.",
+        title: "iaflashelite — IA + Seguridad + Material formativo incluido",
+        description:
+            "Herramientas IA con código auditable. Mini guías y cursos de seguridad INCLUIDOS con cada compra. Privacy-first.",
         url: "https://iaflashelite.com",
         siteName: "IA Flash Elite",
         locale: "es_ES",
@@ -32,8 +36,9 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "IA Flash Elite — Automatización con IA en 48h",
-        description: "Bots, chatbots y scripts con IA, entregados en 48h.",
+        title: "iaflashelite — IA + Seguridad + Material formativo incluido",
+        description:
+            "Herramientas IA con código auditable. Material de seguridad incluido con cada compra.",
     },
     metadataBase: new URL("https://iaflashelite.com"),
 };
