@@ -129,26 +129,38 @@ export default async function ProductDetailPage({
                     <section className="relative py-10 bg-white border-b border-gray-200">
                         <div className="max-w-3xl mx-auto px-6">
                             <div className="rounded-2xl border border-cyan-200 bg-cyan-50/30 p-5">
-                                <div className="flex items-center gap-3 mb-3">
-                                    <span className="text-2xl" aria-hidden>🎧</span>
-                                    <div>
-                                        <p className="font-semibold text-gray-900 text-sm">
-                                            Escucha antes de comprar
-                                        </p>
-                                        <p className="text-xs text-gray-500">
-                                            1 min 30 seg · Presentación del producto
-                                        </p>
+                                <div className="flex items-center gap-6">
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-3 mb-3">
+                                            <span className="text-2xl" aria-hidden>🎧</span>
+                                            <div>
+                                                <p className="font-semibold text-gray-900 text-sm">
+                                                    Escucha antes de comprar
+                                                </p>
+                                                <p className="text-xs text-gray-500">
+                                                    1 min 30 seg · Presentación del producto
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <audio
+                                            controls
+                                            preload="none"
+                                            className="w-full"
+                                            style={{ height: "40px" }}
+                                        >
+                                            <source src={product.audioUrl} type="audio/mp4" />
+                                            Tu navegador no soporta audio HTML5.
+                                        </audio>
+                                    </div>
+                                    <div className="hidden sm:block w-24 flex-shrink-0">
+                                        <img
+                                            src="/mascota-flash.svg"
+                                            alt="Flash"
+                                            className="w-full h-auto"
+                                            style={{ filter: "drop-shadow(0 0 8px rgba(34,211,238,0.4))" }}
+                                        />
                                     </div>
                                 </div>
-                                <audio
-                                    controls
-                                    preload="none"
-                                    className="w-full"
-                                    style={{ height: "40px" }}
-                                >
-                                    <source src={product.audioUrl} type="audio/mp4" />
-                                    Tu navegador no soporta audio HTML5.
-                                </audio>
                             </div>
                         </div>
                     </section>

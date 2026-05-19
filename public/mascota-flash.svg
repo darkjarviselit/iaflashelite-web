@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280" role="img" aria-label="Flash, mascota iaflashelite">
+  <defs>
+    <linearGradient id="flash-body" x1="28" y1="40" x2="172" y2="220" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#0891b2"/>
+    </linearGradient>
+    <style>
+      .character { animation: bob 2s ease-in-out infinite; transform-origin: 100px 240px; transform-box: view-box; }
+      .arm-right { animation: wave 2s ease-in-out infinite; transform-origin: 40px 130px; transform-box: view-box; }
+      .leg-left  { animation: legL 2s ease-in-out infinite; transform-origin: 75px 222px; transform-box: view-box; }
+      .leg-right { animation: legR 2s ease-in-out infinite; transform-origin: 125px 222px; transform-box: view-box; }
+      .eye-left  { animation: blink 4s ease-in-out infinite; transform-origin: 92px 80px; transform-box: view-box; }
+      .eye-right { animation: blink 4s ease-in-out infinite; transform-origin: 122px 80px; transform-box: view-box; }
+
+      @keyframes bob {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50%      { transform: translateY(-10px) rotate(2deg); }
+      }
+      @keyframes wave {
+        0%, 100% { transform: rotate(-100deg); }
+        50%      { transform: rotate(-135deg); }
+      }
+      @keyframes legL {
+        0%, 100% { transform: rotate(-8deg); }
+        50%      { transform: rotate(8deg);  }
+      }
+      @keyframes legR {
+        0%, 100% { transform: rotate(8deg);  }
+        50%      { transform: rotate(-8deg); }
+      }
+      @keyframes blink {
+        0%, 88%, 100% { transform: scaleY(1); }
+        92%, 96%      { transform: scaleY(0.08); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .character, .arm-right, .leg-left, .leg-right, .eye-left, .eye-right { animation: none; }
+      }
+    </style>
+  </defs>
+
+  <g class="character">
+    <!-- Piernas (detrás del cuerpo) -->
+    <g class="leg-left">
+      <rect x="70" y="222" width="10" height="42" rx="5" fill="url(#flash-body)" stroke="#0e7490" stroke-width="2"/>
+      <circle cx="75" cy="266" r="9" fill="url(#flash-body)" stroke="#0e7490" stroke-width="2"/>
+    </g>
+    <g class="leg-right">
+      <rect x="120" y="222" width="10" height="42" rx="5" fill="url(#flash-body)" stroke="#0e7490" stroke-width="2"/>
+      <circle cx="125" cy="266" r="9" fill="url(#flash-body)" stroke="#0e7490" stroke-width="2"/>
+    </g>
+
+    <!-- Cuerpo: rayo ⚡ idéntico al logo del nav (path escalado ×6 desde viewBox 0 0 24 30) -->
+    <path d="M112 40 L28 139 H79 L70 220 L172 112 H115 L112 40 Z"
+          fill="url(#flash-body)"
+          stroke="#0e7490"
+          stroke-width="2"
+          stroke-linejoin="round"/>
+
+    <!-- Brazo izquierdo del personaje (natural, viewer's right) -->
+    <g class="arm-left">
+      <rect x="155" y="125" width="10" height="55" rx="6" fill="url(#flash-body)" stroke="#0e7490" stroke-width="2"/>
+      <circle cx="160" cy="182" r="9" fill="url(#flash-body)" stroke="#0e7490" stroke-width="2"/>
+    </g>
+
+    <!-- Brazo derecho del personaje (saludando, viewer's left). Pivota en el hombro (40,130). -->
+    <g class="arm-right">
+      <rect x="35" y="130" width="10" height="55" rx="6" fill="url(#flash-body)" stroke="#0e7490" stroke-width="2"/>
+      <circle cx="40" cy="187" r="9" fill="url(#flash-body)" stroke="#0e7490" stroke-width="2"/>
+    </g>
+
+    <!-- Rubor en mejillas -->
+    <ellipse cx="78" cy="92" rx="8" ry="5" fill="#fda4af" opacity="0.55"/>
+    <ellipse cx="138" cy="92" rx="8" ry="5" fill="#fda4af" opacity="0.55"/>
+
+    <!-- Cejas -->
+    <path d="M85 66 Q92 62 99 66" stroke="#083344" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M115 66 Q122 62 129 66" stroke="#083344" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Ojo izquierdo del personaje -->
+    <g class="eye-left">
+      <circle cx="92" cy="80" r="7" fill="#ffffff" stroke="#083344" stroke-width="1.5"/>
+      <circle cx="92" cy="81" r="4" fill="#083344"/>
+      <circle cx="93.5" cy="79" r="1.5" fill="#ffffff"/>
+    </g>
+
+    <!-- Ojo derecho del personaje -->
+    <g class="eye-right">
+      <circle cx="122" cy="80" r="7" fill="#ffffff" stroke="#083344" stroke-width="1.5"/>
+      <circle cx="122" cy="81" r="4" fill="#083344"/>
+      <circle cx="123.5" cy="79" r="1.5" fill="#ffffff"/>
+    </g>
+
+    <!-- Sonrisa -->
+    <path d="M94 100 Q107 110 120 100" stroke="#083344" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>
