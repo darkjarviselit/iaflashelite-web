@@ -150,7 +150,7 @@ export default function ContactPage() {
                                     name="name"
                                     required
                                     type="text"
-                                    placeholder="Oscar Jarvis"
+                                    placeholder="Tu nombre"
                                     autoComplete="name"
                                     className={inputClass}
                                 />

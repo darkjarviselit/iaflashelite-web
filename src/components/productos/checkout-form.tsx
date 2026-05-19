@@ -308,7 +308,7 @@ export function CheckoutForm({ slug, name, price, type = "download" }: CheckoutF
                     name="name"
                     type="text"
                     required
-                    placeholder="Oscar Jarvis"
+                    placeholder="Tu nombre"
                     autoComplete="name"
                     onChange={(e) => setCustomerName(e.target.value)}
                     className={inputClass}
