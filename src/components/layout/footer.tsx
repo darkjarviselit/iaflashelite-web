@@ -15,15 +15,15 @@ const FOOTER_NAV = {
         { label: "Para Particulares", href: "/soluciones/particulares" },
         { label: "Para Desarrolladores", href: "/soluciones/desarrolladores" },
     ],
-    services: [
+    catalogo: [
         { label: "Productos", href: "/productos" },
-        { label: "Bots Telegram/WhatsApp", href: "/#servicios" },
-        { label: "Automatización", href: "/#servicios" },
-        { label: "Scripts personalizados", href: "/#servicios" },
-    ],
-    company: [
-        { label: "Proceso", href: "/#proceso" },
+        { label: "Servicios", href: "/servicios" },
+        { label: "Servicios extra", href: "/servicios-extra" },
         { label: "Casos", href: "/casos" },
+    ],
+    empresa: [
+        { label: "Sobre nosotros", href: "/sobre" },
+        { label: "Cómo trabajamos", href: "/como-trabajamos" },
         { label: "Mundo GiruIA", href: "/mundo-giruia" },
         { label: "Contacto", href: "/contacto" },
     ],
@@ -52,8 +52,8 @@ export function Footer() {
                         </a>
                     </div>
                     <FooterColumn title="Soluciones" items={FOOTER_NAV.soluciones} />
-                    <FooterColumn title="Servicios" items={FOOTER_NAV.services} />
-                    <FooterColumn title="Compañía" items={FOOTER_NAV.company} />
+                    <FooterColumn title="Catálogo" items={FOOTER_NAV.catalogo} />
+                    <FooterColumn title="Empresa" items={FOOTER_NAV.empresa} />
                     <FooterColumn title="Legal" items={FOOTER_NAV.legal} />
                 </div>
 

@@ -11,10 +11,9 @@ const FULL_NAV = [
     { label: "Soluciones", href: "/soluciones" },
     { label: "Productos", href: "/productos" },
     { label: "Servicios", href: "/servicios" },
-    { label: "Proceso", href: "#proceso" },
+    { label: "Cómo trabajamos", href: "/como-trabajamos" },
+    { label: "Sobre", href: "/sobre" },
     { label: "FAQ", href: "#faq" },
-    { label: "Casos", href: "/casos" },
-    { label: "Mundo GiruIA", href: "/mundo-giruia" },
 ] as ReadonlyArray<{ label: string; href: string }>;
 
 export function Header() {

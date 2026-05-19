@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { PRODUCTS } from "@/lib/constants";
+import { EXPRESS_SURCHARGE, PRODUCTS } from "@/lib/constants";
 
 interface OrderPayload {
     productSlug?: string;
@@ -9,6 +9,7 @@ interface OrderPayload {
     comments?: string;
     website?: string;
     acceptedPrivacy?: boolean;
+    isExpress?: boolean;
 }
 
 const GIRIS_URL = process.env.GIRIS_AGENT_URL ?? "http://localhost:5318";
@@ -111,12 +112,25 @@ export async function POST(request: Request) {
     if (product.status !== "available") return bad("product_not_available");
 
     const productType = product.type ?? "download";
+    const isExpress = payload.isExpress === true;
+    if (isExpress && productType !== "service") {
+        return bad("express_only_for_services");
+    }
+    const expressSurcharge = isExpress ? (EXPRESS_SURCHARGE[product.slug] ?? 0) : 0;
+    if (isExpress && expressSurcharge === 0) {
+        return bad("express_not_available_for_product");
+    }
+    const totalPrice = product.price + expressSurcharge;
+
     const forwardPayload = {
         type: "order",
         product: product.slug,
         product_name: product.name,
         product_type: productType,
         price: product.price,
+        is_express: isExpress,
+        express_surcharge: expressSurcharge,
+        total_price: totalPrice,
         customer: { name, email },
         payment_method: paymentMethod,
         payment_method_label: PAYMENT_METHOD_LABELS[paymentMethod],
@@ -127,7 +141,8 @@ export async function POST(request: Request) {
         user_agent: request.headers.get("user-agent") ?? "",
     };
 
-    const logTag = productType === "service" ? "[SERVICE_ORDER]" : "[DOWNLOAD_ORDER]";
+    const baseTag = productType === "service" ? "[SERVICE_ORDER]" : "[DOWNLOAD_ORDER]";
+    const logTag = isExpress ? `${baseTag}[EXPRESS]` : baseTag;
     console.log(`${logTag} new order:`, JSON.stringify(forwardPayload));
     await forwardOrder(forwardPayload);
 
