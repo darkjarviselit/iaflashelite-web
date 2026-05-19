@@ -530,6 +530,56 @@ export default async function ProductDetailPage({
                 )}
 
                 {available && (
+                    <section className="relative py-12 bg-white border-t border-gray-200">
+                        <div className="max-w-3xl mx-auto px-6">
+                            {isService ? (
+                                <div className="rounded-xl border border-cyan-200 bg-cyan-50 p-4 text-sm text-cyan-900 flex gap-3 items-start">
+                                    <span className="text-lg shrink-0">🛡️</span>
+                                    <div>
+                                        <p className="font-semibold mb-1">
+                                            Servicio con garantía de entrega
+                                        </p>
+                                        <p className="leading-relaxed">
+                                            Confirmamos plazo antes de empezar. Si no
+                                            entregamos en el plazo acordado, devolución
+                                            del 100% sin preguntas.{" "}
+                                            <Link
+                                                href="/legal/garantias"
+                                                className="underline font-medium hover:no-underline"
+                                            >
+                                                Ver política completa →
+                                            </Link>
+                                        </p>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900 flex gap-3 items-start">
+                                    <span className="text-lg shrink-0">⚡</span>
+                                    <div>
+                                        <p className="font-semibold mb-1">
+                                            Producto digital — descarga inmediata
+                                        </p>
+                                        <p className="leading-relaxed">
+                                            Una vez recibas el enlace, pierdes el
+                                            derecho de desistimiento de 14 días
+                                            (Directiva EU 2011/83/UE). Garantizamos que
+                                            funciona: si hay un fallo técnico no
+                                            resuelto en 48h, devolvemos el 100%.{" "}
+                                            <Link
+                                                href="/legal/garantias"
+                                                className="underline font-medium hover:no-underline"
+                                            >
+                                                Ver política completa →
+                                            </Link>
+                                        </p>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </section>
+                )}
+
+                {available && (
                     <section className="relative py-20 bg-onyx text-paper border-t border-border-dark">
                         <div className="absolute inset-0 bg-dot-grid opacity-50" aria-hidden />
                         <div className="relative max-w-3xl mx-auto px-6 text-center flex flex-col items-center gap-6">
