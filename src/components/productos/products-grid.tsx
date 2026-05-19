@@ -7,6 +7,7 @@ import {
     Clock,
     DatabaseBackup,
     KeyRound,
+    Link2,
     MonitorSmartphone,
     ScanSearch,
     ShieldCheck,
@@ -38,6 +39,7 @@ const PRODUCT_ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
     "scan-search": ScanSearch,
     "database-backup": DatabaseBackup,
     "monitor-smartphone": MonitorSmartphone,
+    "link-2": Link2,
     sparkles: Sparkles,
 };
 
