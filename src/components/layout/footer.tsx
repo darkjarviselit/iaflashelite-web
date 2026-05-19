@@ -24,9 +24,15 @@ const FOOTER_NAV = {
     empresa: [
         { label: "Sobre nosotros", href: "/sobre" },
         { label: "Cómo trabajamos", href: "/como-trabajamos" },
-        { label: "Cómo verificar", href: "/como-verificar" },
+        { label: "Soluciones", href: "/soluciones" },
         { label: "Mundo GiruIA", href: "/mundo-giruia" },
         { label: "Contacto", href: "/contacto" },
+    ],
+    seguridad: [
+        { label: "Manifiesto", href: "/seguridad" },
+        { label: "Cómo verificar", href: "/como-verificar" },
+        { label: "Academia", href: "/academia" },
+        { label: "FAQ", href: "/#faq" },
     ],
     legal: [
         { label: "Aviso legal", href: "/legal/aviso-legal" },
@@ -39,7 +45,7 @@ export function Footer() {
     return (
         <footer className="bg-onyx border-t border-border-dark mt-32">
             <div className="max-w-[1200px] mx-auto px-6 pt-20 pb-10">
-                <div className="grid md:grid-cols-[1.5fr_1fr_1fr_1fr_1fr] gap-12 lg:gap-12">
+                <div className="grid md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr_1fr] gap-10 lg:gap-10">
                     <div className="space-y-5">
                         <LogoFull size="md" />
                         <p className="text-sm text-text-secondary max-w-xs leading-relaxed">
@@ -54,6 +60,7 @@ export function Footer() {
                     </div>
                     <FooterColumn title="Soluciones" items={FOOTER_NAV.soluciones} />
                     <FooterColumn title="Catálogo" items={FOOTER_NAV.catalogo} />
+                    <FooterColumn title="Seguridad" items={FOOTER_NAV.seguridad} />
                     <FooterColumn title="Empresa" items={FOOTER_NAV.empresa} />
                     <FooterColumn title="Legal" items={FOOTER_NAV.legal} />
                 </div>

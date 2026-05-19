@@ -67,6 +67,16 @@ export function HeroSection() {
 
                 <motion.div
                     {...fadeUp}
+                    transition={{ duration: 0.5, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30"
+                >
+                    <span className="text-cyan-300 text-sm font-medium">
+                        🛡️ Todo el mundo vende IA. Nadie te enseña a protegerte. Aquí sí.
+                    </span>
+                </motion.div>
+
+                <motion.div
+                    {...fadeUp}
                     transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     className="flex flex-wrap items-center justify-center gap-3 pt-2"
                 >

@@ -54,6 +54,30 @@ export default async function ProductDetailPage({
     const available = product.status === "available";
     const isService = product.type === "service";
 
+    // Tier de material formativo según precio (PIEZA 5 W-11). Honesto, sin
+    // precios inflados: solo describimos qué incluye y marcamos «Próximamente».
+    const tier =
+        product.price < 20
+            ? {
+                  name: "Mini guía",
+                  items: ["1 audio (~15 min)", "1 PDF descargable (3 páginas)"],
+              }
+            : product.price < 49
+                ? {
+                      name: "Curso básico",
+                      items: [
+                          "3 audios (~30 min total)",
+                          "1 PDF descargable (10 páginas)",
+                      ],
+                  }
+                : {
+                      name: "Curso intermedio",
+                      items: [
+                          "5 audios (~1h total)",
+                          "2 PDFs descargables (15 + 10 páginas)",
+                      ],
+                  };
+
     return (
         <>
             <Header />
@@ -265,6 +289,49 @@ export default async function ProductDetailPage({
                                     className="inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-700 hover:text-cyan-800 hover:gap-2 transition-all"
                                 >
                                     Aprender cómo verificar <ArrowRight size={14} />
+                                </Link>
+                            </div>
+                        </div>
+                    </section>
+                )}
+
+                {available && (
+                    <section className="relative py-12 bg-white border-t border-gray-200">
+                        <div className="max-w-3xl mx-auto px-6">
+                            <div className="flex flex-col gap-3 p-6 rounded-2xl bg-emerald-50 border border-emerald-200">
+                                <h3 className="text-lg font-semibold text-gray-900 inline-flex items-center gap-2">
+                                    🎁 Incluido gratis con tu compra
+                                </h3>
+                                <p className="text-sm text-gray-700 leading-relaxed">
+                                    <span className="font-semibold text-gray-900">
+                                        {tier.name}
+                                    </span>{" "}
+                                    de seguridad digital, sin coste extra y sin precios
+                                    inflados.
+                                </p>
+                                <ul className="flex flex-col gap-1.5 text-sm text-gray-700">
+                                    {tier.items.map((item) => (
+                                        <li
+                                            key={item}
+                                            className="flex items-start gap-2"
+                                        >
+                                            <span className="text-emerald-700">·</span>
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <p className="text-xs text-gray-500 leading-relaxed">
+                                    Estado:{" "}
+                                    <span className="font-semibold text-emerald-800">
+                                        Próximamente
+                                    </span>
+                                    . Te avisamos por email cuando esté listo.
+                                </p>
+                                <Link
+                                    href="/academia"
+                                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-800 hover:text-emerald-900 hover:gap-2 transition-all"
+                                >
+                                    Ver detalles <ArrowRight size={14} />
                                 </Link>
                             </div>
                         </div>

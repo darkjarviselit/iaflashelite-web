@@ -8,11 +8,11 @@ import { LogoFull } from "@/components/brand/logo-full";
 import { Button } from "@/components/ui/button";
 
 const FULL_NAV = [
-    { label: "Soluciones", href: "/soluciones" },
     { label: "Productos", href: "/productos" },
     { label: "Servicios", href: "/servicios" },
-    { label: "🔍 Auditable", href: "/como-verificar", highlight: true },
-    { label: "Sobre", href: "/sobre" },
+    { label: "🛡️ Seguridad", href: "/seguridad", highlight: true },
+    { label: "🎓 Academia", href: "/academia" },
+    { label: "🔍 Auditable", href: "/como-verificar" },
     { label: "FAQ", href: "#faq" },
 ] as ReadonlyArray<{ label: string; href: string; highlight?: boolean }>;
 

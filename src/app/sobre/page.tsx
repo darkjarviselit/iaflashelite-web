@@ -131,6 +131,23 @@ export default function SobrePage() {
                                 Si funciona, financio el ecosistema. Si no, sigo
                                 aprendiendo. Es win-win.
                             </p>
+                            <p className="pt-4 border-t border-gray-200">
+                                Y por eso este año (2026) cambia el rumbo:{" "}
+                                <span className="font-semibold text-gray-900">
+                                    la seguridad pasa a ser eje central de
+                                    iaflashelite.
+                                </span>{" "}
+                                No solo vendemos herramientas — incluimos material
+                                formativo gratis con cada compra. Cada producto es
+                                auditable. Cada decisión nuestra prioriza tu
+                                privacidad por encima de la rentabilidad rápida.
+                            </p>
+                            <p>
+                                No soy un experto en ciberseguridad de élite. Soy un
+                                ingeniero honesto que conoce los peligros reales y
+                                los explica claros. Si tu caso necesita un
+                                profesional certificado, te lo digo abiertamente.
+                            </p>
                         </div>
                     </div>
                 </section>

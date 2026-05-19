@@ -495,6 +495,27 @@ export const FAQS = [
         q: "¿Por qué invitáis a verificaros con una IA?",
         a: "Porque es lo correcto. La desconfianza al instalar software es comprensible en 2026. Preferimos enseñarte a auditar antes que pedirte confianza ciega.",
     },
+    // SEGURIDAD + ACADEMIA
+    {
+        q: "¿Por qué la seguridad es vuestro eje central?",
+        a: "Porque en 2026 nadie te enseña a protegerte. Vendemos IA pero también enseñamos a usarla sin riesgos. Es lo correcto.",
+    },
+    {
+        q: "¿Qué incluye exactamente el material gratis con cada compra?",
+        a: "Depende del producto. Productos 9-19€: mini guía (1 audio + PDF corto). Productos 29-39€: curso básico (3 audios + PDF). Productos 49€+: curso intermedio (5 audios + 2 PDFs). Servicios 149€+ incluyen todo lo anterior + plantilla. Servicios 249€ además 30 min consulta 1-a-1.",
+    },
+    {
+        q: "¿Por qué no anunciáis valores de los cursos (ej. «curso valorado en 90€»)?",
+        a: "Porque odiamos inflar precios percibidos. Sería tratarte de tonto. El material va incluido honestamente. Si te aporta utilidad, perfecto. Si no, devuelves el producto en 7 días sin preguntas.",
+    },
+    {
+        q: "¿Cuándo estarán disponibles los cursos?",
+        a: "Los estamos produciendo con NotebookLM. Empezamos por la mini guía y avanzamos progresivamente. Si compras antes de que estén listos, recibes acceso automático cuando se publiquen. Te avisamos por email.",
+    },
+    {
+        q: "¿Sois expertos certificados en ciberseguridad?",
+        a: "No. Somos ingenieros honestos (UPC FIB + UPF) que conocen los peligros y los explican claros. Si tu caso necesita un pentester certificado, te lo decimos y te derivamos.",
+    },
 ] as const;
 
 export const STATS = [

@@ -7,6 +7,7 @@ import { FAQSection } from "@/components/sections/faq-section";
 import { GuaranteesSection } from "@/components/sections/guarantees-section";
 import { HeroSection } from "@/components/sections/hero-section";
 import { HowItWorksSection } from "@/components/sections/how-it-works-section";
+import { SecurityFirstSection } from "@/components/sections/security-first-section";
 import { ServicesSection } from "@/components/sections/services-section";
 import { StatsSection } from "@/components/sections/stats-section";
 import { WhyCheapSection } from "@/components/sections/why-cheap-section";
@@ -19,6 +20,7 @@ export default function Home() {
             <Header />
             <main>
                 <HeroSection />
+                <SecurityFirstSection />
                 <AudienceSection />
                 <GuaranteesSection />
                 <WhyTrustSection />
