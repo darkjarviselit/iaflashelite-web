@@ -125,6 +125,35 @@ export default async function ProductDetailPage({
                     </div>
                 </section>
 
+                {product.audioUrl && (
+                    <section className="relative py-10 bg-white border-b border-gray-200">
+                        <div className="max-w-3xl mx-auto px-6">
+                            <div className="rounded-2xl border border-cyan-200 bg-cyan-50/30 p-5">
+                                <div className="flex items-center gap-3 mb-3">
+                                    <span className="text-2xl" aria-hidden>🎧</span>
+                                    <div>
+                                        <p className="font-semibold text-gray-900 text-sm">
+                                            Escucha antes de comprar
+                                        </p>
+                                        <p className="text-xs text-gray-500">
+                                            1 min 30 seg · Presentación del producto
+                                        </p>
+                                    </div>
+                                </div>
+                                <audio
+                                    controls
+                                    preload="none"
+                                    className="w-full"
+                                    style={{ height: "40px" }}
+                                >
+                                    <source src={product.audioUrl} type="audio/mp4" />
+                                    Tu navegador no soporta audio HTML5.
+                                </audio>
+                            </div>
+                        </div>
+                    </section>
+                )}
+
                 {isService && available && (
                     <section className="relative py-12 bg-cyan-50 border-y border-cyan-100">
                         <div className="max-w-3xl mx-auto px-6 flex flex-col gap-4">
