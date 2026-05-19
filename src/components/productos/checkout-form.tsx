@@ -293,6 +293,7 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
     const [sending, setSending] = useState(false);
     const [success, setSuccess] = useState(false);
     const [paymentLabel, setPaymentLabel] = useState<string>("");
+    const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
 
     const totalPrice = price;
@@ -363,6 +364,7 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
                 effectiveExpress={false}
                 expressSurcharge={0}
                 variant={paymentLabel ? "download_manual" : "download_paypal"}
+                downloadUrl={downloadUrl}
             />
         );
     }
@@ -424,7 +426,7 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
                         active={mode === "paypal_direct"}
                         icon={<CreditCard className="w-4 h-4" />}
                         title="PayPal / Tarjeta"
-                        hint="Pago inmediato. Recibes el producto en menos de 1 hora."
+                        hint="Pago inmediato con tarjeta o PayPal. Recibes el ZIP por email al instante."
                         onClick={() => {
                             setError(null);
                             setMode("paypal_direct");
@@ -500,9 +502,14 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
                                                 consentDigitalAt || new Date().toISOString(),
                                         }),
                                     });
-                                    const result = (await res.json()) as { ok?: boolean; error?: string };
+                                    const result = (await res.json()) as {
+                                        ok?: boolean;
+                                        error?: string;
+                                        downloadUrl?: string | null;
+                                    };
                                     if (res.ok && result.ok) {
                                         setPaymentLabel("");
+                                        setDownloadUrl(result.downloadUrl ?? null);
                                         setSuccess(true);
                                     } else {
                                         setError(
@@ -881,6 +888,7 @@ interface SuccessCardProps {
     effectiveExpress: boolean;
     expressSurcharge: number;
     variant: "service" | "download_manual" | "download_paypal";
+    downloadUrl?: string | null;
 }
 
 function SuccessCard({
@@ -892,6 +900,7 @@ function SuccessCard({
     effectiveExpress,
     expressSurcharge,
     variant,
+    downloadUrl,
 }: SuccessCardProps) {
     const isService = variant === "service";
     const isPaypalDirect = variant === "download_paypal";
@@ -942,14 +951,25 @@ function SuccessCard({
                             ✅ El pago se ha cobrado correctamente vía PayPal.
                         </p>
                         <p>
-                            📧 Te enviamos el producto a{" "}
+                            📧 Te hemos enviado el enlace de descarga a{" "}
                             {customerEmail ? (
                                 <span className="font-semibold">{customerEmail}</span>
                             ) : (
                                 <span className="font-semibold">tu email</span>
-                            )}{" "}
-                            en menos de 1 hora.
+                            )}
+                            .
                         </p>
+                        {downloadUrl && (
+                            <div className="flex justify-center pt-2">
+                                <a
+                                    href={downloadUrl}
+                                    download
+                                    className="inline-flex items-center gap-2 bg-cyan-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-cyan-700 transition-colors"
+                                >
+                                    ⬇️ Descargar ahora
+                                </a>
+                            </div>
+                        )}
                     </>
                 ) : (
                     <>

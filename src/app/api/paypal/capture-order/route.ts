@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { PRODUCTS } from "@/lib/constants";
+import { getDownloadUrl, sendDeliveryEmail } from "@/lib/email";
 
 const PAYPAL_API =
     (process.env.PAYPAL_API_BASE ?? "https://api-m.paypal.com").replace(/\/+$/, "");
@@ -184,11 +185,29 @@ export async function POST(request: Request) {
         }
     })();
 
+    // Entrega automática del ZIP por email — fire-and-forget.
+    const downloadUrl = getDownloadUrl(productSlug);
+    if (downloadUrl) {
+        void sendDeliveryEmail({
+            to: customerEmail,
+            customerName,
+            productName: product.name,
+            productSlug,
+            downloadUrl,
+            amount: String(amount),
+        }).catch((err) => {
+            console.error("[paypal capture] delivery email error:", err);
+        });
+    } else {
+        console.error(`[paypal capture] sin URL de descarga para slug: ${productSlug}`);
+    }
+
     return NextResponse.json({
         ok: true,
         paypalOrderId,
         amount: Number(amount),
         currency,
+        downloadUrl: downloadUrl ?? null,
     });
 }
 
