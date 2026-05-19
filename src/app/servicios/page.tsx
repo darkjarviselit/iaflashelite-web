@@ -73,10 +73,44 @@ export default function ServiciosPage() {
                                 />
                             </div>
                             <p className="text-xs text-gray-500 leading-relaxed">
-                                Actualizo esta disponibilidad manualmente al confirmar
-                                cada pedido. Si ves huecos, son reales.
+                                Actualizamos esta disponibilidad manualmente al
+                                confirmar cada pedido. Si ves huecos, son reales.
                             </p>
                         </article>
+
+                        {SLOTS_CONFIG.working_days_note && (
+                            <article className="mt-4 p-6 sm:p-7 rounded-2xl bg-cyan-50 border border-cyan-200 flex flex-col gap-4">
+                                <div className="flex items-center gap-2.5">
+                                    <span className="text-base">📌</span>
+                                    <h3 className="text-base font-semibold text-gray-900 tracking-tight">
+                                        Cómo trabajamos
+                                    </h3>
+                                </div>
+                                <p className="text-sm text-gray-700 leading-relaxed">
+                                    {SLOTS_CONFIG.working_days_note}
+                                </p>
+                                <ul className="flex flex-col gap-1.5 text-sm text-gray-700">
+                                    <li className="flex items-start gap-2">
+                                        <span className="text-cyan-700 font-semibold">·</span>
+                                        <span>
+                                            <span className="font-semibold text-gray-900">
+                                                Lunes–jueves:
+                                            </span>{" "}
+                                            revisamos pedidos y comunicamos.
+                                        </span>
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                        <span className="text-cyan-700 font-semibold">·</span>
+                                        <span>
+                                            <span className="font-semibold text-gray-900">
+                                                Viernes–sábado:
+                                            </span>{" "}
+                                            trabajamos entregas intensivamente.
+                                        </span>
+                                    </li>
+                                </ul>
+                            </article>
+                        )}
                     </div>
                 </section>
 

@@ -243,9 +243,9 @@ export default function SeguridadPage() {
                             ))}
                         </ul>
                         <p className="text-base text-text-secondary leading-relaxed pt-4">
-                            Somos UN ingeniero (UPC FIB + UPF) que se preocupa
-                            genuinamente por la seguridad de sus clientes y construye
-                            herramientas accesibles.
+                            Somos un equipo de profesionales (UPC FIB + UPF) que se
+                            preocupa genuinamente por la seguridad de sus clientes y
+                            construye herramientas accesibles.
                         </p>
                         <div className="pt-2">
                             <Link

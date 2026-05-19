@@ -38,35 +38,35 @@ const STEPS: ReadonlyArray<{
         icon: Eye,
         title: "Revisión personal",
         description:
-            "Reviso tu pedido en menos de 12 horas. Confirmo que puedo cumplir el plazo y la calidad. Si por algún motivo no puedo, te aviso sin compromiso.",
+            "Revisamos tu pedido en menos de 12 horas. Confirmamos que podemos cumplir el plazo y la calidad. Si por algún motivo no podemos, te avisamos sin compromiso. Lunes–jueves: comunicación y revisión. Viernes–sábado: trabajamos entregas intensivamente. Pedidos L–J entran en cola del viernes siguiente. Por eso ofrecemos máximo 4 servicios normales + 1 express al mes.",
     },
     {
         num: "03",
         icon: CreditCard,
         title: "Pago tras confirmación",
         description:
-            "Te respondo por email con los datos de pago (Bizum, PayPal o transferencia). Pagas solo cuando aceptas el plazo confirmado.",
+            "Te respondemos por email con los datos de pago (Bizum, PayPal o transferencia). Pagas solo cuando aceptas el plazo confirmado.",
     },
     {
         num: "04",
         icon: Rocket,
         title: "Trabajo inicia",
         description:
-            "Empiezo tu pedido. Para servicios, en este punto recibes el cuestionario detallado para personalizar tu landing.",
+            "Empezamos tu pedido. Para servicios, en este punto recibes el cuestionario detallado para personalizar tu landing.",
     },
     {
         num: "05",
         icon: PackageCheck,
         title: "Entrega",
         description:
-            "Te envío todo por email: archivos, manuales, prompts pre-hechos, audio explicativo si aplica.",
+            "Te enviamos todo por email: archivos, manuales, prompts pre-hechos, audio explicativo si aplica.",
     },
     {
         num: "06",
         icon: LifeBuoy,
         title: "Soporte 30 días",
         description:
-            "Durante 30 días resuelvo dudas, ajusto detalles y te ayudo a configurar todo. Sin coste adicional.",
+            "Durante 30 días resolvemos dudas, ajustamos detalles y te ayudamos a configurar todo. Sin coste adicional.",
     },
 ];
 
@@ -100,20 +100,20 @@ const CASES: ReadonlyArray<{ q: string; a: string }> = [
         a: "Garantía 7 días: devolución 100% sin preguntas.",
     },
     {
-        q: "¿Qué pasa si tardas más del plazo?",
-        a: "Te aviso ANTES si veo que no llego. Si fallé al plazo confirmado: devolución 100%.",
+        q: "¿Qué pasa si tardáis más del plazo?",
+        a: "Te avisamos ANTES si vemos que no llegamos. Si fallamos al plazo confirmado: devolución 100%.",
     },
     {
         q: "¿Qué pasa si soy no-técnico?",
         a: "Recibes manual PDF + prompts pre-hechos para Claude/Codex. Tu landing online en 30 min sin saber programar.",
     },
     {
-        q: "¿Qué pasa si tienes muchos pedidos a la vez?",
-        a: "Limito 6 servicios al mes + 2 express. La web muestra disponibilidad real en /servicios.",
+        q: "¿Qué pasa si tenéis muchos pedidos a la vez?",
+        a: "Limitamos 4 servicios al mes + 1 express. La web muestra disponibilidad real en /servicios.",
     },
     {
-        q: "¿Qué pasa si Oscar desaparece?",
-        a: "Soy persona física real, ingeniero registrado UPC. Mis datos legales están en /legal/aviso-legal. RGPD compliant.",
+        q: "¿Y si el equipo desaparece?",
+        a: "Equipo profesional registrado en España. Datos legales completos en /legal/aviso-legal. RGPD compliant. El equipo lleva activo desde 2024.",
     },
 ];
 
@@ -185,26 +185,26 @@ export default function ComoTrabajamosPage() {
                             Pago manual
                         </span>
                         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
-                            Por qué cobro manual y no automático.
+                            Por qué cobramos manual y no automático.
                         </h2>
                         <div className="flex flex-col gap-5 text-gray-700 leading-relaxed">
                             <p>
                                 Muchas webs usan Stripe o pasarelas automatizadas que
-                                cobran al instante. Yo NO.
+                                cobran al instante. Nosotros NO.
                             </p>
                             <p className="font-semibold text-gray-900">
-                                Cobro manual por dos razones:
+                                Cobramos manual por dos razones:
                             </p>
                             <ol className="list-decimal pl-5 space-y-3">
                                 <li>
-                                    Quiero revisar tu pedido antes de aceptarlo. Si veo
-                                    que necesitas algo que se sale de lo prometido,
-                                    prefiero avisarte ANTES de cobrarte.
+                                    Queremos revisar tu pedido antes de aceptarlo. Si
+                                    vemos que necesitas algo que se sale de lo prometido,
+                                    preferimos avisarte ANTES de cobrarte.
                                 </li>
                                 <li>
                                     Stripe y similares requieren alta de autónomo (que aún
-                                    no tengo) y comisiones del 2-3% que se trasladarían a
-                                    tu precio.
+                                    no tenemos) y comisiones del 2-3% que se trasladarían
+                                    a tu precio.
                                 </li>
                             </ol>
                             <p>
@@ -216,8 +216,8 @@ export default function ComoTrabajamosPage() {
                                 Trato personal, precios honestos y cero sorpresas.
                             </p>
                             <p>
-                                Cuando alcance el volumen suficiente, automatizaré con
-                                Stripe. Hasta entonces, prefiero la transparencia.
+                                Cuando alcancemos el volumen suficiente, automatizaremos
+                                con Stripe. Hasta entonces, preferimos la transparencia.
                             </p>
                         </div>
                     </div>

@@ -12,7 +12,7 @@ const inter = Inter({
 export const metadata: Metadata = {
     title: "iaflashelite — IA + Seguridad + Material formativo incluido",
     description:
-        "Herramientas IA con código auditable. Mini guías y cursos de seguridad INCLUIDOS con cada compra. Privacy-first. Sin suscripciones. Sin precios inflados.",
+        "Equipo de profesionales con herramientas IA propias. Productos con código auditable. Material formativo gratis con cada compra. Privacy-first. Sin suscripciones.",
     keywords: [
         "automatización IA",
         "seguridad digital",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "iaflashelite — IA + Seguridad + Material formativo incluido",
         description:
-            "Herramientas IA con código auditable. Mini guías y cursos de seguridad INCLUIDOS con cada compra. Privacy-first.",
+            "Equipo de profesionales con herramientas IA propias. Código auditable y material formativo gratis con cada compra. Privacy-first.",
         url: "https://iaflashelite.com",
         siteName: "IA Flash Elite",
         locale: "es_ES",

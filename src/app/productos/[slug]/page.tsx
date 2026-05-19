@@ -127,33 +127,40 @@ export default async function ProductDetailPage({
 
                 {isService && available && (
                     <section className="relative py-12 bg-cyan-50 border-y border-cyan-100">
-                        <div className="max-w-3xl mx-auto px-6 grid sm:grid-cols-2 gap-4">
-                            <div className="flex items-center gap-4 p-5 rounded-2xl bg-white border border-cyan-100">
-                                <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-cyan-100 text-cyan-700 shrink-0">
-                                    <Clock className="w-5 h-5" />
-                                </span>
-                                <div className="flex flex-col">
-                                    <span className="text-[10px] tracking-[0.18em] uppercase text-gray-500 font-medium">
-                                        Plazo de entrega
+                        <div className="max-w-3xl mx-auto px-6 flex flex-col gap-4">
+                            <div className="grid sm:grid-cols-2 gap-4">
+                                <div className="flex items-center gap-4 p-5 rounded-2xl bg-white border border-cyan-100">
+                                    <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-cyan-100 text-cyan-700 shrink-0">
+                                        <Clock className="w-5 h-5" />
                                     </span>
-                                    <span className="text-xl font-bold text-gray-900 leading-none">
-                                        {product.delivery_time ?? "48 horas"}
+                                    <div className="flex flex-col">
+                                        <span className="text-[10px] tracking-[0.18em] uppercase text-gray-500 font-medium">
+                                            Plazo de entrega
+                                        </span>
+                                        <span className="text-xl font-bold text-gray-900 leading-none">
+                                            {product.delivery_time ?? "48 horas"}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-4 p-5 rounded-2xl bg-white border border-cyan-100">
+                                    <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-cyan-100 text-cyan-700 shrink-0">
+                                        <RefreshCw className="w-5 h-5" />
                                     </span>
+                                    <div className="flex flex-col">
+                                        <span className="text-[10px] tracking-[0.18em] uppercase text-gray-500 font-medium">
+                                            Revisiones incluidas
+                                        </span>
+                                        <span className="text-xl font-bold text-gray-900 leading-none">
+                                            {product.revisions ?? 1}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-4 p-5 rounded-2xl bg-white border border-cyan-100">
-                                <span className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-cyan-100 text-cyan-700 shrink-0">
-                                    <RefreshCw className="w-5 h-5" />
-                                </span>
-                                <div className="flex flex-col">
-                                    <span className="text-[10px] tracking-[0.18em] uppercase text-gray-500 font-medium">
-                                        Revisiones incluidas
-                                    </span>
-                                    <span className="text-xl font-bold text-gray-900 leading-none">
-                                        {product.revisions ?? 1}
-                                    </span>
-                                </div>
-                            </div>
+                            <p className="text-xs text-gray-600 leading-relaxed text-center">
+                                Entrega: <span className="font-semibold text-gray-900">48h tras confirmación del pago</span>.
+                                Trabajamos pedidos viernes–sábado. Pedidos L–J entran en
+                                cola del viernes siguiente.
+                            </p>
                         </div>
                     </section>
                 )}

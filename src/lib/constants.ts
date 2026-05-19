@@ -483,7 +483,7 @@ export const FAQS = [
     // GENERALES
     {
         q: "¿Quién está detrás de iaflashelite?",
-        a: "Oscar P., ingeniero por UPC FIB. Sin equipo, sin oficina. Más info en /sobre.",
+        a: "Un equipo de profesionales especializados en IA y ciberseguridad, con formación de universidades públicas españolas (UPC FIB + UPF). Sin oficina física, sin inversores. Más info en /sobre.",
     },
     {
         q: "¿Por qué los precios son tan bajos?",
@@ -491,15 +491,15 @@ export const FAQS = [
     },
     {
         q: "¿Es una empresa real o un experimento?",
-        a: "Persona física registrada en España. Mis datos legales completos están en /legal/aviso-legal. RGPD compliant.",
+        a: "Equipo profesional registrado en España. Nuestros datos legales completos están en /legal/aviso-legal. RGPD compliant.",
     },
     {
         q: "¿Cómo sé que recibiré el producto?",
         a: "Pagas SOLO tras confirmación personal por email. Garantía 7 días devolución sin preguntas. Sin riesgo.",
     },
     {
-        q: "¿Y si Oscar desaparece después de pagar?",
-        a: "Las garantías están publicadas y son legalmente exigibles según legislación española. PayPal y Bizum tienen sus propios mecanismos de devolución de pago.",
+        q: "¿Y si el equipo desaparece después de pagar?",
+        a: "Las garantías están publicadas y son legalmente exigibles según legislación española. PayPal y Bizum tienen sus propios mecanismos de devolución de pago. El equipo lleva activo desde 2024.",
     },
     // PRODUCTOS Y SERVICIOS
     {
@@ -576,7 +576,7 @@ export const FAQS = [
     },
     {
         q: "¿Sois expertos certificados en ciberseguridad?",
-        a: "No. Somos ingenieros honestos (UPC FIB + UPF) que conocen los peligros y los explican claros. Si tu caso necesita un pentester certificado, te lo decimos y te derivamos.",
+        a: "No, no somos expertos certificados de élite. Somos un equipo de profesionales en formación continua (UPC FIB + UPF) que conocen los peligros y los explican claros. Si tu caso necesita un pentester certificado, te lo decimos y te derivamos.",
     },
 ] as const;
 
@@ -598,16 +598,21 @@ export interface SlotsConfig {
     normal_available: number;
     express_available: number;
     next_slot_date: string;
+    working_days_note?: string;
 }
 
-// Editado manualmente por Oscar al confirmar pedidos.
+// Editado manualmente por el equipo al confirmar pedidos.
+// Capacidad real: 4 horas L-J (revisión + comunicación) + 12 horas V-S
+// (entregas intensivas). De ahí los 4 normales + 1 express por mes.
 export const SLOTS_CONFIG: SlotsConfig = {
-    normal_per_month: 6,
-    express_per_month: 2,
+    normal_per_month: 4,
+    express_per_month: 1,
     current_month: "Mayo 2026",
-    normal_available: 6,
-    express_available: 2,
-    next_slot_date: "Lunes 19 de Mayo",
+    normal_available: 4,
+    express_available: 1,
+    next_slot_date: "Viernes próximo",
+    working_days_note:
+        "Trabajamos pedidos en jornadas intensivas viernes y sábado. Pedidos recibidos lunes-jueves entran en cola del viernes siguiente.",
 };
 
 export const EXPRESS_SURCHARGE: Record<string, number> = {
