@@ -248,6 +248,29 @@ export default async function ProductDetailPage({
                     </div>
                 </section>
 
+                {available && (
+                    <section className="relative py-12 bg-white border-t border-gray-200">
+                        <div className="max-w-3xl mx-auto px-6">
+                            <div className="flex flex-col gap-3 p-6 rounded-2xl bg-cyan-50 border border-cyan-200">
+                                <h3 className="text-lg font-semibold text-gray-900 inline-flex items-center gap-2">
+                                    🔍 {isService ? "Auditable antes de subir a tu servidor" : "Auditable antes de instalar"}
+                                </h3>
+                                <p className="text-sm text-gray-700 leading-relaxed">
+                                    {isService
+                                        ? "Tu landing incluye código fuente legible + instrucciones para verificarlo con IA antes de desplegar."
+                                        : "Este producto incluye un archivo VERIFICAR-ANTES-DE-INSTALAR.md con un prompt para que verifiques nuestro código con Claude o ChatGPT en 2 minutos."}
+                                </p>
+                                <Link
+                                    href="/como-verificar"
+                                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-700 hover:text-cyan-800 hover:gap-2 transition-all"
+                                >
+                                    Aprender cómo verificar <ArrowRight size={14} />
+                                </Link>
+                            </div>
+                        </div>
+                    </section>
+                )}
+
                 <section className={`relative py-20 border-t border-gray-200 ${isService ? "bg-gray-50" : "bg-white"}`}>
                     <div className="max-w-3xl mx-auto px-6">
                         <div className="flex flex-col gap-6 mb-8">

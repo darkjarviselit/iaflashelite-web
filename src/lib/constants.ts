@@ -482,6 +482,19 @@ export const FAQS = [
         q: "¿Qué hacéis con mis datos?",
         a: "Lo mínimo legal para procesar tu pedido (nombre, email). Cero tracking, cero perfiles, cero venta de datos. Detalle completo en /legal/privacidad.",
     },
+    // VERIFICACIÓN DE CÓDIGO
+    {
+        q: "¿Cómo sé que vuestro código no es malicioso?",
+        a: "Cada producto incluye un archivo VERIFICAR-ANTES-DE-INSTALAR.md con un prompt para que verifiques el código con Claude o ChatGPT en 2 minutos. Detalles en /como-verificar.",
+    },
+    {
+        q: "¿Y si la IA dice que vuestro código es sospechoso?",
+        a: "Avísanos. Te devolvemos 100% del dinero sin preguntas y investigamos. Puede ser falso positivo (común en herramientas de seguridad) o error real que corregimos.",
+    },
+    {
+        q: "¿Por qué invitáis a verificaros con una IA?",
+        a: "Porque es lo correcto. La desconfianza al instalar software es comprensible en 2026. Preferimos enseñarte a auditar antes que pedirte confianza ciega.",
+    },
 ] as const;
 
 export const STATS = [

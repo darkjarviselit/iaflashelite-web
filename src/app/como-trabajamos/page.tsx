@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import {
+    ArrowRight,
     ClipboardEdit,
     CreditCard,
     Eye,
@@ -13,6 +14,7 @@ import {
     Smartphone,
     Wallet,
 } from "lucide-react";
+import Link from "next/link";
 import type { ComponentType, SVGProps } from "react";
 import { useState } from "react";
 import { Footer } from "@/components/layout/footer";
@@ -217,6 +219,44 @@ export default function ComoTrabajamosPage() {
                                 Cuando alcance el volumen suficiente, automatizaré con
                                 Stripe. Hasta entonces, prefiero la transparencia.
                             </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="relative py-24 bg-gray-50 border-t border-gray-200">
+                    <div className="max-w-3xl mx-auto px-6 flex flex-col gap-6">
+                        <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
+                            Verificación independiente
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
+                            Verificación independiente de nuestro código.
+                        </h2>
+                        <div className="flex flex-col gap-4 text-gray-700 leading-relaxed">
+                            <p>
+                                Nadie te obliga a confiar en nosotros. Por eso incluimos
+                                en cada producto un archivo{" "}
+                                <code className="px-1.5 py-0.5 rounded bg-gray-200 text-gray-900 text-[13px] font-mono">
+                                    VERIFICAR-ANTES-DE-INSTALAR.md
+                                </code>{" "}
+                                con un prompt listo para que una IA (Claude o ChatGPT)
+                                audite nuestro código en 2 minutos.
+                            </p>
+                            <p>
+                                Si la IA marca algo sospechoso:{" "}
+                                <span className="font-semibold text-gray-900">
+                                    NO instales y avísanos.
+                                </span>{" "}
+                                Devolución 100% garantizada.
+                            </p>
+                        </div>
+                        <div className="pt-2">
+                            <Link
+                                href="/como-verificar"
+                                className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-600 hover:text-cyan-700 hover:gap-3 transition-all"
+                            >
+                                Ver el prompt verificador completo
+                                <ArrowRight size={14} />
+                            </Link>
                         </div>
                     </div>
                 </section>
