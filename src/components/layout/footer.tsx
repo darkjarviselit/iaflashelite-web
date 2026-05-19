@@ -37,6 +37,7 @@ const FOOTER_NAV = {
     legal: [
         { label: "Aviso legal", href: "/legal/aviso-legal" },
         { label: "Privacidad", href: "/legal/privacidad" },
+        { label: "Garantías y devoluciones", href: "/legal/garantias" },
         { label: "Cookies", href: "/legal/cookies" },
     ],
 };

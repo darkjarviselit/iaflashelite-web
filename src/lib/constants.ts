@@ -495,7 +495,7 @@ export const FAQS = [
     },
     {
         q: "¿Cómo sé que recibiré el producto?",
-        a: "Pagas SOLO tras confirmación personal por email. Garantía 7 días devolución sin preguntas. Sin riesgo.",
+        a: "Pagas SOLO tras confirmación personal por email. Garantizamos que el producto funciona: si hay un fallo técnico no resuelto en 48h, devolvemos el 100%. Para servicios, devolución si no entregamos en el plazo acordado. Detalle completo en /legal/garantias.",
     },
     {
         q: "¿Y si el equipo desaparece después de pagar?",
@@ -503,8 +503,12 @@ export const FAQS = [
     },
     // PRODUCTOS Y SERVICIOS
     {
-        q: "¿Qué pasa si no me gusta el resultado?",
-        a: "7 días desde la entrega para pedir devolución 100%. Sin justificaciones.",
+        q: "¿Hay garantía de devolución?",
+        a: "Sí, con matices importantes. Productos digitales: garantía técnica de funcionamiento. Si hay un fallo no resuelto en 48h, devolución del 100%. NO aplica si simplemente cambias de opinión (contenido digital ejecutado, Directiva EU 2011/83/UE). Servicios: devolución total si no cumplimos el plazo acordado. Ver /legal/garantias para todos los detalles.",
+    },
+    {
+        q: "¿Puedo pedir devolución si no me gusta el producto descargable?",
+        a: "Para productos digitales descargables, no. Al aceptar la descarga confirmas que entiendes que pierdes el derecho de desistimiento de 14 días. Lo hacemos así porque el producto queda en tu poder tras la descarga — igual que Steam, Gumroad u otras plataformas digitales. Lo que sí garantizamos: que funciona. Si no funciona, devolución en 48h.",
     },
     {
         q: "¿Necesito ser técnico para usar los productos?",

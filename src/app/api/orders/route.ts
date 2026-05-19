@@ -10,6 +10,11 @@ interface OrderPayload {
     website?: string;
     acceptedPrivacy?: boolean;
     isExpress?: boolean;
+    // Consentimiento expreso renuncia al desistimiento de 14 días para
+    // contenido digital (Directiva EU 2011/83/UE Art. 16(m)).
+    // null = producto es servicio (no aplica).
+    consentDigital?: boolean | null;
+    consentDigitalAt?: string | null;
 }
 
 const GIRIS_URL = process.env.GIRIS_AGENT_URL ?? "http://localhost:5318";
@@ -122,6 +127,13 @@ export async function POST(request: Request) {
     }
     const totalPrice = product.price + expressSurcharge;
 
+    // Digital consent (EU 2011/83/UE Art. 16(m)) — required only for downloads.
+    const consentDigital = payload.consentDigital === true;
+    const consentDigitalAt = (payload.consentDigitalAt ?? "").trim();
+    if (productType === "download" && !consentDigital) {
+        return bad("missing_digital_consent");
+    }
+
     const forwardPayload = {
         type: "order",
         product: product.slug,
@@ -137,6 +149,9 @@ export async function POST(request: Request) {
         comments: (payload.comments ?? "").trim(),
         accepted_privacy: true,
         accepted_at: new Date().toISOString(),
+        // Digital consent audit trail (EU 2011/83/UE Art. 16(m))
+        consent_digital: productType === "download" ? consentDigital : null,
+        consent_digital_at: productType === "download" ? (consentDigitalAt || null) : null,
         ip,
         user_agent: request.headers.get("user-agent") ?? "",
     };
