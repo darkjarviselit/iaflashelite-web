@@ -74,15 +74,30 @@ export function CheckoutForm({ slug, name, price, type = "download" }: CheckoutF
     const [customerEmail, setCustomerEmail] = useState("");
     const [paymentMethod, setPaymentMethod] = useState<PaymentMethodValue | "">("");
     const [isExpress, setIsExpress] = useState(false);
+    // Consentimiento Directiva EU 2011/83/UE Art. 16(m): el comprador renuncia
+    // al derecho de desistimiento de 14 días al aceptar la descarga. Solo
+    // aplica a productos descargables; en servicios la garantía es de entrega.
+    const [consentDigital, setConsentDigital] = useState(false);
+    const [consentDigitalAt, setConsentDigitalAt] = useState<string>("");
 
+    const requiresDigitalConsent = !isService;
     const effectiveExpress = expressOffered && !expressDisabled && isExpress;
     const totalPrice = price + (effectiveExpress ? expressSurcharge : 0);
+
+    function toggleDigitalConsent(checked: boolean) {
+        setConsentDigital(checked);
+        setConsentDigitalAt(checked ? new Date().toISOString() : "");
+    }
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         setError(null);
         if (!paymentMethod) {
             setError("missing_payment_method");
+            return;
+        }
+        if (requiresDigitalConsent && !consentDigital) {
+            setError("missing_digital_consent");
             return;
         }
         const fd = new FormData(event.currentTarget);
@@ -95,6 +110,8 @@ export function CheckoutForm({ slug, name, price, type = "download" }: CheckoutF
             website: String(fd.get("website") ?? ""),
             acceptedPrivacy,
             isExpress: effectiveExpress,
+            consentDigital: requiresDigitalConsent ? consentDigital : null,
+            consentDigitalAt: requiresDigitalConsent ? consentDigitalAt : null,
         };
         setSending(true);
         try {
@@ -423,18 +440,76 @@ export function CheckoutForm({ slug, name, price, type = "download" }: CheckoutF
                 </label>
             </div>
 
-            <div className="sm:col-span-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
-                {error && <Badge variant="muted">⚠️ {error}</Badge>}
-                <div className="ml-auto">
-                    <Button
-                        size="lg"
-                        type="submit"
-                        variant="gradient"
-                        disabled={sending || !acceptedPrivacy || !paymentMethod}
+            {requiresDigitalConsent && (
+                <div className="sm:col-span-2 flex items-start gap-3 pt-2">
+                    <input
+                        type="checkbox"
+                        id="order-consent-digital"
+                        checked={consentDigital}
+                        onChange={(e) => toggleDigitalConsent(e.target.checked)}
+                        required
+                        className="mt-1 h-4 w-4 rounded border-gray-300 bg-white accent-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/40 shrink-0"
+                    />
+                    <label
+                        htmlFor="order-consent-digital"
+                        className="text-sm text-gray-600 leading-relaxed"
                     >
-                        {sending ? "Enviando…" : isService ? "Solicitar landing" : "Confirmar pedido"} <ArrowRight size={16} />
-                    </Button>
+                        Entiendo que al recibir el enlace de descarga pierdo el
+                        derecho de desistimiento de 14 días, conforme a la{" "}
+                        <a
+                            href="https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX%3A32011L0083"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-cyan-600 underline hover:no-underline"
+                        >
+                            Directiva EU 2011/83/UE Art. 16(m)
+                        </a>
+                        . En caso de fallo técnico no resuelto en 48h, puedo
+                        solicitar devolución adjuntando capturas del error a{" "}
+                        <a
+                            href="mailto:iaflashelite@gmail.com"
+                            className="text-cyan-600 underline hover:no-underline"
+                        >
+                            iaflashelite@gmail.com
+                        </a>
+                        . Ver{" "}
+                        <a
+                            href="/legal/garantias"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-cyan-600 underline hover:no-underline"
+                        >
+                            política de garantías
+                        </a>
+                        .
+                    </label>
                 </div>
+            )}
+
+            <div className="sm:col-span-2 flex flex-col gap-2 pt-2">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    {error && <Badge variant="muted">⚠️ {error}</Badge>}
+                    <div className="ml-auto">
+                        <Button
+                            size="lg"
+                            type="submit"
+                            variant="gradient"
+                            disabled={
+                                sending ||
+                                !acceptedPrivacy ||
+                                !paymentMethod ||
+                                (requiresDigitalConsent && !consentDigital)
+                            }
+                        >
+                            {sending ? "Enviando…" : isService ? "Solicitar landing" : "Confirmar pedido"} <ArrowRight size={16} />
+                        </Button>
+                    </div>
+                </div>
+                {requiresDigitalConsent && !consentDigital && (
+                    <p className="text-xs text-gray-400 text-right">
+                        Acepta las condiciones de descarga para continuar.
+                    </p>
+                )}
             </div>
         </form>
     );
