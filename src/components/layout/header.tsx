@@ -11,10 +11,10 @@ const FULL_NAV = [
     { label: "Soluciones", href: "/soluciones" },
     { label: "Productos", href: "/productos" },
     { label: "Servicios", href: "/servicios" },
-    { label: "Cómo trabajamos", href: "/como-trabajamos" },
+    { label: "🔍 Auditable", href: "/como-verificar", highlight: true },
     { label: "Sobre", href: "/sobre" },
     { label: "FAQ", href: "#faq" },
-] as ReadonlyArray<{ label: string; href: string }>;
+] as ReadonlyArray<{ label: string; href: string; highlight?: boolean }>;
 
 export function Header() {
     const [open, setOpen] = useState(false);
@@ -68,11 +68,19 @@ export function Header() {
                 <nav className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
                     {FULL_NAV.map((item) => {
                         const active = isActive(item.href);
+                        const base = "px-4 py-2 text-sm transition-colors duration-200";
+                        const tone = item.highlight
+                            ? active
+                                ? "text-flash"
+                                : "text-flash/85 hover:text-flash"
+                            : active
+                                ? "text-paper"
+                                : "text-text-secondary hover:text-paper";
                         return (
                             <a
                                 key={item.href}
                                 href={item.href}
-                                className={`px-4 py-2 text-sm transition-colors duration-200 ${active ? "text-paper" : "text-text-secondary hover:text-paper"}`}
+                                className={`${base} ${tone}`}
                             >
                                 {item.label}
                             </a>

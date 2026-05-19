@@ -24,6 +24,7 @@ const FOOTER_NAV = {
     empresa: [
         { label: "Sobre nosotros", href: "/sobre" },
         { label: "Cómo trabajamos", href: "/como-trabajamos" },
+        { label: "Cómo verificar", href: "/como-verificar" },
         { label: "Mundo GiruIA", href: "/mundo-giruia" },
         { label: "Contacto", href: "/contacto" },
     ],
