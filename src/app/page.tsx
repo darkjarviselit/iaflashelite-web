@@ -1,6 +1,7 @@
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { AudienceSection } from "@/components/sections/audience-section";
+import { AuditableSection } from "@/components/sections/auditable-section";
 import { CTASection } from "@/components/sections/cta-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { GuaranteesSection } from "@/components/sections/guarantees-section";
@@ -24,6 +25,7 @@ export default function Home() {
                 <HowItWorksSection />
                 <ServicesSection />
                 <WhyCheapSection />
+                <AuditableSection />
                 <WhyUsSection />
                 <StatsSection />
                 <FAQSection />
