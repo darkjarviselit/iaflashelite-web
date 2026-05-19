@@ -222,6 +222,14 @@ export function ProductsGrid({ products, initialAudience, hideFilters = false }:
                                                 <span className="text-2xl font-bold text-cyan-600 tracking-tight leading-none">
                                                     {product.price}€
                                                 </span>
+                                                <span className="text-xs font-medium text-emerald-600 mt-1">
+                                                    🎁 +{" "}
+                                                    {product.price < 20
+                                                        ? "Mini guía gratis"
+                                                        : product.price < 49
+                                                            ? "Curso básico gratis"
+                                                            : "Curso intermedio gratis"}
+                                                </span>
                                             </div>
                                             {available ? (
                                                 <Link
