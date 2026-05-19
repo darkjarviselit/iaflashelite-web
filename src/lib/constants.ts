@@ -114,6 +114,37 @@ export const PRODUCTS: Product[] = [
         support_days: 30,
     },
     {
+        slug: "verificador-urls",
+        name: "Verificador URLs Sospechosas",
+        tagline:
+            "Pega un link, te decimos si es seguro antes de clicar. 100% offline.",
+        description:
+            "Analiza URLs sospechosas con 6 motores integrados: análisis de dominio, SSL, redirecciones, typosquatting, heurísticas estáticas y blacklists públicas opcionales. Detecta IPs literales, dominios joven, certificados inválidos, redirects cruzados y homógrafos Unicode. 100% offline por defecto. Cero telemetría hacia iaflashelite. Reportes PDF con score 0-100 y veredicto SEGURO/SOSPECHOSO/PELIGROSO.",
+        price: 19,
+        status: "available",
+        category: "seguridad",
+        audience: ["particulares", "pymes", "desarrolladores"],
+        subcategory: "seguridad-web",
+        icon: "link-2",
+        estimated_install_minutes: 5,
+        includes: [
+            "Análisis 100% local (cero telemetría)",
+            "6 motores: heurísticas, typosquat, dominio, SSL, redirects, blacklists",
+            "Detección de typosquatting (amaz0n.com vs amazon.com)",
+            "Verificación de certificado SSL/TLS",
+            "Cadena de redirecciones HTTP",
+            "Heurísticas: IP literal, @ en URL, TLDs sospechosos, homógrafos Unicode",
+            "Blacklists públicas opt-in (URLhaus de abuse.ch)",
+            "Reportes PDF profesionales con reportlab",
+            "CLI con --format human/json/pdf",
+            "GUI HTML single-file (procesa JSON local en navegador)",
+            "50 tests unittest pasando",
+            "VERIFICAR-ANTES-DE-INSTALAR.md incluido",
+        ],
+        guarantee_days: 7,
+        support_days: 30,
+    },
+    {
         slug: "backup-cifrado",
         name: "Backup Automático Cifrado",
         tagline:
