@@ -177,6 +177,7 @@ export const PRODUCTS: Product[] = [
         ],
         guarantee_days: 7,
         support_days: 30,
+        audioUrl: process.env.AUDIO_URL_VERIFICADOR_URLS,
     },
     {
         slug: "backup-cifrado",
