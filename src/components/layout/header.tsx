@@ -13,6 +13,7 @@ const FULL_NAV = [
     { label: "🛡️ Seguridad", href: "/seguridad", highlight: true },
     { label: "🎓 Academia", href: "/academia" },
     { label: "🔍 Auditable", href: "/como-verificar" },
+    { label: "🌐 Mundo", href: "/mundo-giruia", highlight: true },
     { label: "FAQ", href: "#faq" },
 ] as ReadonlyArray<{ label: string; href: string; highlight?: boolean }>;
 
@@ -68,7 +69,7 @@ export function Header() {
                 <nav className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
                     {FULL_NAV.map((item) => {
                         const active = isActive(item.href);
-                        const base = "px-4 py-2 text-sm transition-colors duration-200";
+                        const base = "px-3 py-2 text-sm transition-colors duration-200 lg:px-4";
                         const tone = item.highlight
                             ? active
                                 ? "text-flash"
