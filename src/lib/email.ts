@@ -30,6 +30,7 @@ const DOWNLOAD_URL_BY_SLUG: Record<string, () => string | undefined> = {
     "verificador-urls": () => process.env.DOWNLOAD_URL_VERIFICADOR_URLS,
     "anti-phishing": () => process.env.DOWNLOAD_URL_ANTI_PHISHING,
     "auditor-web": () => process.env.DOWNLOAD_URL_AUDITOR_WEB,
+    "backup-cifrado": () => process.env.DOWNLOAD_URL_BACKUP_CIFRADO,
 };
 
 export function getDownloadUrl(productSlug: string): string | null {
