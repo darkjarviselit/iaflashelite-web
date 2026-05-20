@@ -146,6 +146,7 @@ export const PRODUCTS: Product[] = [
         ],
         guarantee_days: 7,
         support_days: 30,
+        audioUrl: process.env.AUDIO_URL_ANTI_PHISHING,
     },
     {
         slug: "verificador-urls",
