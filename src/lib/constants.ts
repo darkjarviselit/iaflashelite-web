@@ -115,6 +115,7 @@ export const PRODUCTS: Product[] = [
         ],
         guarantee_days: 7,
         support_days: 30,
+        audioUrl: process.env.AUDIO_URL_AUDITOR_WEB,
     },
     {
         slug: "anti-phishing",
