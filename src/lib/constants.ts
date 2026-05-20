@@ -187,7 +187,7 @@ export const PRODUCTS: Product[] = [
         tagline:
             "Copia de seguridad cifrada AES-256 diaria y automática. Sin suscripción.",
         description:
-            "Tu Mac hace una copia cifrada de tus carpetas cada día, sola. Doble clic para configurar, doble clic para restaurar. Sin terminal, sin nube propia. Compatible con USB, disco externo o carpetas de Dropbox/Drive ya sincronizadas.",
+            "Tu Mac hace una copia cifrada de tus carpetas cada día, sola. Doble clic para configurar, doble clic para restaurar. Sin terminal, sin nube propia. Compatible con USB, disco externo o carpetas de Dropbox/Drive ya sincronizadas. Solo macOS. Windows próximamente.",
         price: 49,
         status: "available",
         category: "seguridad",

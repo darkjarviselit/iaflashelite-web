@@ -115,6 +115,16 @@ export default async function ProductDetailPage({
                                     {product.price}€
                                 </span>
                             </div>
+                            {product.slug === "backup-cifrado" && (
+                                <div className="flex w-full items-center gap-2 mt-2">
+                                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-gray-800 text-gray-200 border border-gray-600">
+                                        🍎 macOS
+                                    </span>
+                                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-gray-800 text-gray-400 border border-gray-700">
+                                        🪟 Windows — Próximamente
+                                    </span>
+                                </div>
+                            )}
                             <ProductAvailability
                                 slug={product.slug}
                                 name={product.name}
