@@ -1,8 +1,8 @@
 export const BRAND = {
     name: "IA Flash Elite",
-    tagline: "IA aplicada. Resultados en 48h.",
+    tagline: "Herramientas locales. Pago único.",
     description:
-        "Automatizamos lo que te roba tiempo. Bots, chatbots y scripts con IA, entregados en 48h.",
+        "Herramientas descargables de seguridad para PYMES y particulares. Código auditable, sin nube, sin suscripciones.",
     email: "hola@iaflashelite.com",
     domain: "iaflashelite.com",
 } as const;

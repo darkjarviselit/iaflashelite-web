@@ -88,7 +88,8 @@ export default function ContactPage() {
                             Cuéntanos tu proyecto.
                         </h1>
                         <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
-                            Responderemos en menos de 24h con una propuesta concreta y plazo cerrado.
+                            Normalmente respondemos en &lt;24h con una propuesta
+                            concreta y plazo confirmado antes de empezar.
                         </p>
                         {headline && (
                             <div className="inline-flex items-center gap-2 self-start px-3 py-2 rounded-full bg-cyan-50 border border-cyan-200 text-sm text-cyan-800">
@@ -112,7 +113,9 @@ export default function ContactPage() {
                             </span>
                             <h2 className="text-2xl font-semibold text-emerald-900">¡Recibido!</h2>
                             <p className="text-emerald-800 max-w-md">
-                                Giris te contactará en menos de 24h con una propuesta concreta. ⚡
+                                Te respondemos con una propuesta concreta y plazo
+                                confirmado antes de empezar. Normalmente en &lt;24h
+                                laborables.
                             </p>
                             <Button href="/" variant="secondary">
                                 Volver al inicio

@@ -11,12 +11,13 @@ export default function CasosPage() {
             <main className="pt-32 pb-24 bg-white text-gray-900 min-h-screen">
                 <section className="relative">
                     <div className="relative max-w-5xl mx-auto px-6 lg:px-8 flex flex-col gap-8 pb-16">
-                        <Badge>● Casos en producción próximamente</Badge>
+                        <Badge>● Primeros casos en preparación</Badge>
                         <h1 className="text-4xl sm:text-6xl font-bold tracking-tight leading-[1.05] text-gray-900 max-w-3xl">
                             Casos de uso.
                         </h1>
                         <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
-                            Estamos cerrando los primeros pilotos. Si tu industria no aparece, probablemente sea perfecta para ser la primera.
+                            Aún no publicamos casos. Lo haremos cuando un cliente nos
+                            dé permiso explícito y podamos contar el resultado real.
                         </p>
                     </div>
                 </section>
@@ -25,14 +26,26 @@ export default function CasosPage() {
                     <div className="max-w-3xl mx-auto px-6 lg:px-8">
                         <div className="p-10 sm:p-14 rounded-3xl border border-gray-200 bg-white shadow-sm flex flex-col items-start gap-6">
                             <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight leading-tight text-gray-900">
-                                Cerrando pilotos con los primeros clientes.
+                                Publicaremos casos cuando tengamos permiso del cliente.
                             </h2>
                             <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-                                Los casos reales aparecen aquí cuando los entregamos. Sin maquetas, sin &quot;Coming soon&quot; eternos. Cuando un proyecto sale a producción y el cliente da el OK, lo publicamos con resultado medible.
+                                Sin maquetas, sin testimonios inventados, sin
+                                &quot;Coming soon&quot; eternos. Cuando un proyecto sale
+                                a producción y el cliente da el OK, lo publicamos con
+                                resultado medible.
                             </p>
                             <p className="text-sm text-gray-500 leading-relaxed">
-                                Mientras tanto: los primeros 5 clientes entran con condiciones especiales a cambio de un caso de estudio publicable cuando lo entreguemos.
+                                Mientras tanto, puedes revisar los productos
+                                descargables y las garantías publicadas.
                             </p>
+                            <div className="flex flex-wrap gap-3 pt-2">
+                                <Button href="/productos" variant="secondary">
+                                    Ver productos <ArrowRight size={14} />
+                                </Button>
+                                <Button href="/legal/garantias" variant="secondary">
+                                    Ver garantías <ArrowRight size={14} />
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 </section>
