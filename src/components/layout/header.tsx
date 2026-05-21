@@ -63,7 +63,7 @@ export function Header() {
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.05, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="sticky top-0 z-50 bg-onyx/70 backdrop-blur-xl border-b border-white/5"
+            className="sticky top-0 z-50 bg-onyx/90 backdrop-blur-md border-b border-white/5"
         >
             <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
                 <LogoFull size="md" />
