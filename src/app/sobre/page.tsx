@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 export const metadata: Metadata = {
     title: "Sobre — iaflashelite.com",
     description:
-        "Un equipo de profesionales + herramientas IA propias. Formación UPC FIB y UPF, especializados en automatización IA y ciberseguridad. Sin oficina física, sin inversores.",
+        "Proyecto técnico bootstrap creado por Oscar Pérez Tello. Herramientas locales de seguridad y automatización honesta. Sin oficina, sin inversores, sin equipo de marketing.",
 };
 
 export default function SobrePage() {
@@ -23,12 +23,12 @@ export default function SobrePage() {
                             Sobre nosotros
                         </span>
                         <h1 className="text-4xl sm:text-6xl font-bold tracking-[-0.025em] leading-[1.05] text-paper">
-                            Un equipo de profesionales + herramientas IA propias.
+                            Proyecto técnico bootstrap, sin humo.
                         </h1>
                         <p className="text-lg text-text-secondary leading-relaxed max-w-2xl">
                             Sin oficina física. Sin inversores. Sin equipo de marketing.
-                            Equipo técnico + ecosistema IA propio = precios honestos y
-                            entregas rápidas.
+                            Solo herramientas locales bien hechas, garantía 7 días y
+                            respuesta en menos de 12h.
                         </p>
                     </div>
                 </section>
@@ -43,27 +43,28 @@ export default function SobrePage() {
                         </h2>
                         <div className="flex flex-col gap-5 text-gray-700 leading-relaxed">
                             <p>
-                                Somos un equipo de profesionales especializados en
-                                automatización con IA, sistemas multi-agente y
-                                ciberseguridad.
+                                IA Flash Elite es un proyecto técnico bootstrap creado
+                                por <span className="font-semibold text-gray-900">Oscar Pérez Tello</span>,
+                                centrado en herramientas locales, seguridad práctica y
+                                automatización honesta.
                             </p>
                             <p>
-                                Combinamos formación de las mejores universidades
-                                públicas españolas con experiencia práctica construyendo
-                                nuestro propio ecosistema de agentes IA — una{" "}
-                                <span className="font-semibold text-gray-900">
-                                    herramienta interna
-                                </span>{" "}
-                                que potencia nuestro trabajo y nos permite ofrecer
-                                precios honestos.
+                                Trabajo con herramientas IA internas para acelerar
+                                investigación, desarrollo, revisión y entrega. Algunas
+                                partes del ecosistema GIRU están en desarrollo y se
+                                muestran como{" "}
+                                <Link
+                                    href="/mundo-giruia"
+                                    className="font-semibold text-cyan-600 hover:text-cyan-700"
+                                >
+                                    laboratorio
+                                </Link>
+                                , no como producto cerrado.
                             </p>
                             <p>
-                                Trabajamos desde Barcelona. Sin oficina física, sin
-                                inversores, sin equipo de marketing.{" "}
-                                <span className="font-semibold text-gray-900">
-                                    Equipo técnico + herramientas IA propias
-                                </span>{" "}
-                                = entregas rápidas y precios ajustados.
+                                Trabajo desde Barcelona. Sin oficina física, sin
+                                inversores, sin equipo de marketing. El trabajo final
+                                siempre pasa por revisión manual antes de entregarlo.
                             </p>
                         </div>
                     </div>
@@ -74,19 +75,16 @@ export default function SobrePage() {
                                 <GraduationCap className="w-5 h-5" />
                             </span>
                             <h3 className="text-lg font-semibold text-gray-900 mb-3 tracking-tight">
-                                Formación del equipo
+                                Formación personal
                             </h3>
                             <ul className="flex flex-col gap-1.5 text-sm text-gray-700 leading-relaxed">
                                 <li>
-                                    UPC FIB · Facultat d&apos;Informàtica de Barcelona
-                                    (acreditada con excelencia AQU Catalunya)
+                                    Formación universitaria en informática (UPC FIB) y
+                                    sistemas multi-agente IA (UPF).
                                 </li>
                                 <li>
-                                    UPF · Universitat Pompeu Fabra (especialización en
-                                    sistemas multi-agente IA)
-                                </li>
-                                <li>
-                                    Formación continua en ciberseguridad y automatización
+                                    Formación continua en ciberseguridad y
+                                    automatización.
                                 </li>
                             </ul>
                         </article>
@@ -101,7 +99,7 @@ export default function SobrePage() {
                                 <li>Barcelona, España</li>
                                 <li>Trabajo remoto · sin oficina física</li>
                                 <li>Respuesta en &lt;12h</li>
-                                <li>Equipo técnico + ecosistema IA propio</li>
+                                <li>Revisión manual de cada entrega</li>
                             </ul>
                         </article>
                     </div>
@@ -117,54 +115,41 @@ export default function SobrePage() {
                         </h2>
                         <div className="flex flex-col gap-5 text-gray-700 leading-relaxed">
                             <p>
-                                Empezamos a construir nuestro propio ecosistema de
-                                agentes IA en 2024 como parte de nuestra investigación
-                                académica y profesional. Cinco agentes que nos ayudan
-                                internamente: orquestación de proyectos, programación,
-                                búsqueda de leads, supervisión y seguridad.
+                                Este proyecto nace de una observación sencilla: PYMES y
+                                particulares pagan cuotas mensuales por gestores de
+                                contraseñas, escáneres de seguridad y herramientas que
+                                en el fondo son sencillas. Y agencias que cobran 1.500€
+                                por una landing básica.
                             </p>
                             <p>
-                                A medida que el ecosistema maduraba, vimos una realidad:
-                                PYMES y particulares pagan miles de euros por
-                                herramientas que en el fondo son sencillas.
-                                Suscripciones perpetuas por gestores de contraseñas.
-                                Cuotas anuales por escáneres de seguridad. Agencias que
-                                cobran 1.500€ por una landing simple.
-                            </p>
-                            <p>
-                                Decidimos hacer lo contrario:{" "}
+                                La propuesta es hacer lo contrario:{" "}
                                 <span className="font-semibold text-gray-900">
-                                    vender lo mismo a precios honestos. Una vez. Sin
-                                    suscripciones. Sin nube. Sin trackers. Sin letra
-                                    pequeña.
+                                    vender herramientas equivalentes a precios honestos.
+                                    Una vez. Sin suscripciones. Sin nube obligatoria.
+                                    Sin trackers. Sin letra pequeña.
                                 </span>
                             </p>
                             <p>
-                                Nuestras herramientas IA internas nos permiten ser
-                                eficientes. Por eso podemos cobrar menos sin perder
-                                calidad. Pero{" "}
+                                Para conseguirlo trabajo con herramientas IA internas
+                                que aceleran investigación, desarrollo y revisión. Eso
+                                permite bajar el precio sin bajar la calidad. Pero{" "}
                                 <span className="font-semibold text-gray-900">
-                                    el trabajo final SIEMPRE pasa por nuestras manos
+                                    el trabajo final siempre pasa por revisión manual
                                 </span>{" "}
-                                antes de llegarte.
+                                antes de entregarte nada.
                             </p>
                             <p className="pt-4 border-t border-gray-200">
-                                Y por eso este año (2026) cambia el rumbo:{" "}
-                                <span className="font-semibold text-gray-900">
-                                    la seguridad pasa a ser eje central de
-                                    iaflashelite.
-                                </span>{" "}
-                                No solo vendemos herramientas — incluimos material
-                                formativo gratis con cada compra. Cada producto es
-                                auditable. Cada decisión nuestra prioriza tu privacidad
-                                por encima de la rentabilidad rápida.
+                                A partir de 2026 el eje central es seguridad: cada
+                                producto incluye prompts para que verifiques el código
+                                con tu propia IA antes de instalarlo, y cada decisión
+                                prioriza tu privacidad por encima de la rentabilidad
+                                rápida.
                             </p>
                             <p>
-                                No somos expertos de élite en ciberseguridad. Somos un
-                                equipo de profesionales en formación continua que
-                                conocemos los peligros reales y los explicamos claros.
-                                Si tu caso necesita un pentester certificado, te lo
-                                decimos abiertamente y te derivamos.
+                                No hay certificaciones de élite en ciberseguridad
+                                detrás de este proyecto (sin CISSP, OSCP, CEH). Si tu
+                                caso necesita un pentester certificado, te lo digo
+                                abiertamente y te derivo.
                             </p>
                         </div>
                     </div>

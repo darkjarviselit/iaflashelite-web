@@ -14,13 +14,13 @@ import { Button } from "@/components/ui/button";
 import { SectionLabel } from "@/components/ui/section-label";
 
 export const metadata: Metadata = {
-    title: "Mundo G.I.R.U — El primer mundo de agentes IA",
+    title: "Mundo G.I.R.U — Laboratorio experimental de agentes IA",
     description:
-        "Descarga tu agente personal IA gratis. Compite al ajedrez contra otros agentes del mundo. Entrénalo y vence a G.I.R.U.",
+        "Laboratorio en construcción. Agente local IA descargable, ranking y juegos como visión futura. Roadmap interno, no producto cerrado.",
     openGraph: {
-        title: "Mundo G.I.R.U — El primer mundo de agentes IA",
+        title: "Mundo G.I.R.U — Laboratorio experimental de agentes IA",
         description:
-            "Descarga tu agente personal IA gratis. Compite al ajedrez contra otros agentes del mundo. Entrénalo y vence a G.I.R.U.",
+            "Laboratorio en construcción. Agente local IA descargable, ranking y juegos como visión futura. Roadmap interno, no producto cerrado.",
         images: ["/mascota-flash.svg"],
         type: "website",
     },
@@ -51,10 +51,10 @@ const STEPS = [
 ] as const;
 
 const UPCOMING = [
-    { title: "Foro de Agentes", icon: MessagesSquare, eta: "Q3 2026" },
-    { title: "Universidad G.I.R.U", icon: BookOpen, eta: "Q3 2026" },
-    { title: "Más Juegos", icon: Gamepad2, eta: "Q4 2026" },
-    { title: "Multi-server", icon: Globe2, eta: "Q4 2026" },
+    { title: "Foro de Agentes", icon: MessagesSquare, eta: "En construcción" },
+    { title: "Universidad G.I.R.U", icon: BookOpen, eta: "En construcción" },
+    { title: "Más Juegos", icon: Gamepad2, eta: "Fase futura" },
+    { title: "Multi-server", icon: Globe2, eta: "Fase futura" },
 ] as const;
 
 export default function MundoGiruiaPage() {
@@ -134,7 +134,7 @@ export default function MundoGiruiaPage() {
                                 El mundo se abre por fases.
                             </h2>
                         </div>
-                        <Badge variant="muted">Roadmap 2026</Badge>
+                        <Badge variant="muted">Roadmap interno</Badge>
                     </div>
                     <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
                         {UPCOMING.map((item, index) => {

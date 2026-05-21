@@ -10,12 +10,10 @@ import { Button } from "@/components/ui/button";
 const FULL_NAV = [
     { label: "Productos", href: "/productos" },
     { label: "Servicios", href: "/servicios" },
-    { label: "🛡️ Seguridad", href: "/seguridad", highlight: true },
-    { label: "🎓 Academia", href: "/academia" },
-    { label: "🔍 Auditable", href: "/como-verificar" },
-    { label: "🌐 Mundo", href: "/mundo-giruia", highlight: true },
-    { label: "FAQ", href: "#faq" },
-] as ReadonlyArray<{ label: string; href: string; highlight?: boolean }>;
+    { label: "Seguridad", href: "/seguridad" },
+    { label: "Sobre", href: "/sobre" },
+    { label: "FAQ", href: "/#faq" },
+] as ReadonlyArray<{ label: string; href: string }>;
 
 export function Header() {
     const [open, setOpen] = useState(false);
@@ -48,6 +46,10 @@ export function Header() {
     }, [open]);
 
     const isActive = (href: string): boolean => {
+        // Anchor en home (e.g. "/#faq"): activo solo si estamos en "/" y la sección está en viewport.
+        if (href.startsWith("/#")) {
+            return pathname === "/" && activeHash === href.slice(1);
+        }
         if (href.startsWith("/")) {
             if (href === "/") return pathname === "/";
             return pathname === href || pathname.startsWith(`${href}/`);
@@ -70,13 +72,9 @@ export function Header() {
                     {FULL_NAV.map((item) => {
                         const active = isActive(item.href);
                         const base = "px-3 py-2 text-sm transition-colors duration-200 lg:px-4";
-                        const tone = item.highlight
-                            ? active
-                                ? "text-flash"
-                                : "text-flash/85 hover:text-flash"
-                            : active
-                                ? "text-paper"
-                                : "text-text-secondary hover:text-paper";
+                        const tone = active
+                            ? "text-paper"
+                            : "text-text-secondary hover:text-paper";
                         return (
                             <a
                                 key={item.href}
@@ -91,7 +89,7 @@ export function Header() {
 
                 <div className="hidden md:flex items-center gap-3">
                     <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium tracking-wide rounded-full bg-flash/10 text-flash border border-flash/20">
-                        ⚡ 48h
+                        Pago único
                     </span>
                     <Button href="/contacto" size="sm">
                         Empezar →

@@ -5,9 +5,9 @@ import { ArrowDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const HERO_STATS = [
-    { value: "48h", label: "Entrega garantizada" },
-    { value: "IA", label: "Stack propio" },
-    { value: "1:1", label: "Trato directo" },
+    { value: "9–49€", label: "Herramientas descargables" },
+    { value: "7 días", label: "Garantía devolución" },
+    { value: "0 cuotas", label: "Sin suscripciones" },
 ];
 
 const fadeUp = {
@@ -34,7 +34,7 @@ export function HeroSection() {
                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 >
                     <span className="inline-flex items-center gap-1.5 text-xs font-medium bg-flash/10 text-flash border border-flash/20 px-3 py-1 rounded-full">
-                        ⚡ Entrega garantizada en 48h
+                        Pago único · Sin suscripciones
                     </span>
                 </motion.div>
 
@@ -43,7 +43,7 @@ export function HeroSection() {
                     transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                     className="font-black text-paper text-[clamp(2.75rem,7.5vw,5.5rem)] leading-[1.0] tracking-[-0.04em]"
                 >
-                    Automatiza tu negocio{" "}
+                    Herramientas de seguridad local.{" "}
                     <span
                         className="bg-clip-text text-transparent"
                         style={{
@@ -51,9 +51,9 @@ export function HeroSection() {
                                 "linear-gradient(135deg, #00e5ff 0%, #00b8d4 50%, #ffffff 100%)",
                         }}
                     >
-                        antes de que termine
+                        Pago único,
                     </span>{" "}
-                    <span className="text-text-secondary/90">la semana.</span>
+                    <span className="text-text-secondary/90">código auditable.</span>
                 </motion.h1>
 
                 <motion.p
@@ -61,30 +61,20 @@ export function HeroSection() {
                     transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                     className="text-lg lg:text-xl text-text-secondary leading-relaxed max-w-2xl"
                 >
-                    Bots, chatbots y scripts con IA. Sin meses de espera, sin
-                    presupuestos inflados. Tu negocio automatizado en menos de 48h.
+                    Software descargable para PYMES y particulares. Sin nube, sin
+                    trackers, sin suscripciones. Compra una vez y úsalo siempre.
                 </motion.p>
-
-                <motion.div
-                    {...fadeUp}
-                    transition={{ duration: 0.5, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30"
-                >
-                    <span className="text-cyan-300 text-sm font-medium">
-                        🛡️ Todo el mundo vende IA. Nadie te enseña a protegerte. Aquí sí.
-                    </span>
-                </motion.div>
 
                 <motion.div
                     {...fadeUp}
                     transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     className="flex flex-wrap items-center justify-center gap-3 pt-2"
                 >
-                    <Button href="/contacto" size="lg" variant="gradient">
-                        Empezar proyecto <ArrowRight size={16} />
+                    <Button href="/productos" size="lg" variant="gradient">
+                        Ver productos <ArrowRight size={16} />
                     </Button>
-                    <Button href="#servicios" variant="secondary" size="lg">
-                        Ver servicios <ArrowDown size={16} />
+                    <Button href="#productos-destacados" variant="secondary" size="lg">
+                        Destacados <ArrowDown size={16} />
                     </Button>
                 </motion.div>
 

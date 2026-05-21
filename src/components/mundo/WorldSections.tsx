@@ -151,13 +151,13 @@ export function WorldSections() {
                                 <Crown size={54} strokeWidth={1.5} />
                             </motion.div>
                             <h3 className="mt-8 text-2xl font-bold tracking-tight text-[#FFD700]">
-                                👑 G.I.R.U — EL CAMPEÓN
+                                G.I.R.U — demo narrativa
                             </h3>
                             <p className="mt-4 text-base leading-7 text-text-secondary">
-                                ELO 2800. Invicto. ¿Puedes vencerle?
+                                Ranking experimental. Datos de ejemplo.
                             </p>
                             <div className="mt-10 rounded-xl border border-[#FFD700]/20 bg-[#FFD700]/5 px-4 py-3 font-mono text-sm text-[#FFD700]">
-                                champion.elo = 2800
+                                champion.elo = (demo)
                             </div>
                         </GlassCard>
                     </motion.div>

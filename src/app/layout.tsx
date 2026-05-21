@@ -10,25 +10,23 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-    title: "iaflashelite — IA + Seguridad + Material formativo incluido",
+    title: "IA Flash Elite — Herramientas locales de seguridad. Pago único.",
     description:
-        "Equipo de profesionales con herramientas IA propias. Productos con código auditable. Material formativo gratis con cada compra. Privacy-first. Sin suscripciones.",
+        "Herramientas descargables de seguridad para PYMES y particulares. Código auditable, sin nube, sin suscripciones. Garantía 7 días.",
     keywords: [
-        "automatización IA",
         "seguridad digital",
         "auditable",
         "código auditable",
-        "academia seguridad",
-        "bot de Telegram",
-        "chatbot",
-        "scripts IA",
+        "herramientas locales",
+        "pago único",
+        "sin suscripción",
         "privacy first",
         "iaflashelite",
     ],
     openGraph: {
-        title: "iaflashelite — IA + Seguridad + Material formativo incluido",
+        title: "IA Flash Elite — Herramientas locales de seguridad. Pago único.",
         description:
-            "Equipo de profesionales con herramientas IA propias. Código auditable y material formativo gratis con cada compra. Privacy-first.",
+            "Herramientas descargables de seguridad para PYMES y particulares. Código auditable, sin nube, sin suscripciones. Garantía 7 días.",
         url: "https://iaflashelite.com",
         siteName: "IA Flash Elite",
         locale: "es_ES",
@@ -36,9 +34,9 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "iaflashelite — IA + Seguridad + Material formativo incluido",
+        title: "IA Flash Elite — Herramientas locales de seguridad. Pago único.",
         description:
-            "Herramientas IA con código auditable. Material de seguridad incluido con cada compra.",
+            "Herramientas descargables de seguridad para PYMES y particulares. Código auditable, sin nube, sin suscripciones. Garantía 7 días.",
     },
     metadataBase: new URL("https://iaflashelite.com"),
 };

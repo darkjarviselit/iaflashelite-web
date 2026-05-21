@@ -10,11 +10,6 @@ const PAYMENT_METHODS = [
 ] as const;
 
 const FOOTER_NAV = {
-    soluciones: [
-        { label: "Para PYMES", href: "/soluciones/pymes" },
-        { label: "Para Particulares", href: "/soluciones/particulares" },
-        { label: "Para Desarrolladores", href: "/soluciones/desarrolladores" },
-    ],
     catalogo: [
         { label: "Productos", href: "/productos" },
         { label: "Servicios", href: "/servicios" },
@@ -25,13 +20,13 @@ const FOOTER_NAV = {
         { label: "Sobre nosotros", href: "/sobre" },
         { label: "Cómo trabajamos", href: "/como-trabajamos" },
         { label: "Soluciones", href: "/soluciones" },
-        { label: "Mundo GiruIA", href: "/mundo-giruia" },
         { label: "Contacto", href: "/contacto" },
     ],
-    seguridad: [
-        { label: "Manifiesto", href: "/seguridad" },
+    recursos: [
+        { label: "Seguridad", href: "/seguridad" },
         { label: "Cómo verificar", href: "/como-verificar" },
         { label: "Academia", href: "/academia" },
+        { label: "Mundo G.I.R.U", href: "/mundo-giruia" },
         { label: "FAQ", href: "/#faq" },
     ],
     legal: [
@@ -46,7 +41,7 @@ export function Footer() {
     return (
         <footer className="bg-onyx border-t border-border-dark mt-32">
             <div className="max-w-[1200px] mx-auto px-6 pt-20 pb-10">
-                <div className="grid md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr_1fr] gap-10 lg:gap-10">
+                <div className="grid md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr] gap-10 lg:gap-10">
                     <div className="space-y-5">
                         <LogoFull size="md" />
                         <p className="text-sm text-text-secondary max-w-xs leading-relaxed">
@@ -59,10 +54,9 @@ export function Footer() {
                             {BRAND.email} →
                         </a>
                     </div>
-                    <FooterColumn title="Soluciones" items={FOOTER_NAV.soluciones} />
                     <FooterColumn title="Catálogo" items={FOOTER_NAV.catalogo} />
-                    <FooterColumn title="Seguridad" items={FOOTER_NAV.seguridad} />
                     <FooterColumn title="Empresa" items={FOOTER_NAV.empresa} />
+                    <FooterColumn title="Recursos" items={FOOTER_NAV.recursos} />
                     <FooterColumn title="Legal" items={FOOTER_NAV.legal} />
                 </div>
 
@@ -94,7 +88,7 @@ export function Footer() {
 
                 <div className="mt-10 pt-8 border-t border-border-dark flex flex-col sm:flex-row items-center justify-between gap-4">
                     <p className="text-[11px] tracking-[0.18em] uppercase text-text-muted">
-                        © {new Date().getFullYear()} {BRAND.name}. Hecho con IA propia.
+                        © {new Date().getFullYear()} {BRAND.name}. Creado desde Barcelona.
                     </p>
                     <p className="text-[11px] tracking-[0.18em] uppercase text-text-muted">
                         {BRAND.tagline}

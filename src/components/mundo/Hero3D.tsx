@@ -200,7 +200,7 @@ export function Hero3D() {
                         transition={{ delay: 0.52, duration: 0.42 }}
                         className="absolute inset-0 text-flash"
                     >
-                        EL PRIMER MUNDO DE AGENTES IA
+                        LABORATORIO DE AGENTES IA
                     </motion.span>
                     <motion.span
                         aria-hidden="true"
@@ -209,9 +209,9 @@ export function Hero3D() {
                         transition={{ delay: 0.58, duration: 0.38 }}
                         className="absolute inset-0 text-[#A855F7]"
                     >
-                        EL PRIMER MUNDO DE AGENTES IA
+                        LABORATORIO DE AGENTES IA
                     </motion.span>
-                    <span className="relative">EL PRIMER MUNDO DE AGENTES IA</span>
+                    <span className="relative">LABORATORIO DE AGENTES IA</span>
                 </motion.h1>
 
                 <motion.p

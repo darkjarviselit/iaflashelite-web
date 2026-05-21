@@ -86,7 +86,7 @@ export const PRODUCTS: Product[] = [
         subcategory: "privacidad-personal",
         icon: "shield-check",
         estimated_install_minutes: 10,
-        includes: ["Próximamente. Lanzamiento esta semana."],
+        includes: ["En desarrollo. Apúntate para recibir aviso cuando esté listo."],
         guarantee_days: 7,
         support_days: 30,
     },

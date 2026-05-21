@@ -82,12 +82,13 @@ export function AuditableSection() {
                 <div className="mt-12 p-6 rounded-2xl bg-white border border-cyan-200">
                     <p className="text-sm text-gray-700 leading-relaxed">
                         <span className="font-semibold text-gray-900">
-                            ⚠️ Importante:
+                            Importante:
                         </span>{" "}
-                        ninguna verificación es 100% infalible, pero pasar el código por
-                        una IA detecta el 95% del malware conocido en minutos. Es una
-                        capa de seguridad gratuita que recomendamos SIEMPRE — no solo
-                        con nosotros, sino con CUALQUIER software que descargues.
+                        ninguna verificación es infalible, pero pasar el código por una
+                        IA ayuda a detectar patrones comunes de riesgo antes de
+                        ejecutar código desconocido. Es una capa de seguridad gratuita
+                        que recomendamos siempre — no solo con nosotros, sino con
+                        cualquier software que descargues.
                     </p>
                 </div>
 
