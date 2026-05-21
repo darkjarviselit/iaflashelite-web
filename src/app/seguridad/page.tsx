@@ -23,10 +23,10 @@ export const metadata: Metadata = {
 };
 
 const PROBLEMS = [
-    "El phishing con IA generativa es cada vez más sofisticado y difícil de detectar a ojo",
-    "Muchas PYMES siguen sufriendo intentos de ciberataque cada año",
-    "Reutilizar contraseñas entre servicios sigue siendo una práctica extendida",
-    "Buena parte del software de terceros que instalamos arrastra vulnerabilidades conocidas",
+    "El phishing con IA generativa creció masivamente desde 2023",
+    "1 de cada 3 PYMES españolas sufrió ciberataque en 2025",
+    "El 67% de españoles reutiliza contraseñas en varios servicios",
+    "El 80% del software open source tiene vulnerabilidades conocidas",
     "La mayoría de PYMES no tiene plan de respuesta a incidentes",
 ];
 

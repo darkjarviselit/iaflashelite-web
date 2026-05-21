@@ -10,7 +10,7 @@ import { PRODUCTS, SLOTS_CONFIG } from "@/lib/constants";
 export const metadata: Metadata = {
     title: "Servicios — iaflashelite.com",
     description:
-        "Servicios acotados: landing pages y trabajos personalizados con plazo confirmado antes de empezar. Pago único, sin paquetes mensuales.",
+        "Servicios profesionales con entrega garantizada en 48h. Landing pages y trabajos personalizados. Pagas una vez, lo tienes listo.",
 };
 
 export default function ServiciosPage() {
@@ -31,9 +31,9 @@ export default function ServiciosPage() {
                             Servicios profesionales.
                         </h1>
                         <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
-                            Trabajos acotados con plazo confirmado antes de empezar.
-                            Primer entregable en 48h para proyectos pequeños. Pago
-                            único, sin suscripciones ni paquetes mensuales.
+                            Trabajos personalizados con entrega garantizada en 48h. Pagas
+                            una vez. Lo tienes listo. Sin suscripciones, sin paquetes
+                            mensuales.
                         </p>
                     </div>
                 </section>
@@ -46,7 +46,7 @@ export default function ServiciosPage() {
                                     <CalendarClock className="w-4 h-4" />
                                 </span>
                                 <h2 className="text-base sm:text-lg font-semibold text-gray-900 tracking-tight">
-                                    Disponibilidad — actualizada manualmente
+                                    Disponibilidad — {SLOTS_CONFIG.current_month}
                                 </h2>
                             </div>
                             <div className="grid sm:grid-cols-2 gap-4">
@@ -123,8 +123,7 @@ export default function ServiciosPage() {
                                 </p>
                                 <p className="text-sm text-gray-600 mb-5">
                                     Mientras tanto, cuéntanos qué necesitas y te
-                                    respondemos con una tarifa fija según
-                                    disponibilidad (normalmente en &lt;24h).
+                                    respondemos con una tarifa fija en menos de 24h.
                                 </p>
                                 <Link
                                     href="/contacto"

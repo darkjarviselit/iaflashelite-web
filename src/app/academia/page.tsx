@@ -6,9 +6,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-    title: "Academia — recurso en preparación · iaflashelite.com",
+    title: "Academia — iaflashelite.com",
     description:
-        "Plan de contenidos de seguridad digital en preparación. Mini guías y cursos cortos que se incluirán gratis con cada compra cuando estén listos. Aún no disponibles.",
+        "Mini guías y cursos cortos de seguridad digital INCLUIDOS gratis con cada compra. Sin precios inflados, sin trampas. Solo material útil honesto.",
 };
 
 const TIERS = [
@@ -17,8 +17,9 @@ const TIERS = [
         name: "Mini guía",
         priceRange: "Productos 9–19€",
         items: [
-            "Formato previsto: audio corto + PDF resumen",
-            "Tema previsto: contraseñas, phishing básico o detección de webs falsas",
+            "1 audio (~15 min)",
+            "1 PDF (3 páginas)",
+            "Tema concreto: contraseñas, phishing básico o detección de webs falsas",
         ],
     },
     {
@@ -26,8 +27,9 @@ const TIERS = [
         name: "Curso básico",
         priceRange: "Productos 29–39€",
         items: [
-            "Formato previsto: serie de audios cortos + PDF",
-            "Tema previsto: «Internet seguro: lo esencial»",
+            "3 audios (~30 min total)",
+            "1 PDF (10 páginas)",
+            "Tema: «Internet Seguro: lo esencial»",
         ],
         recommended: true,
     },
@@ -36,8 +38,9 @@ const TIERS = [
         name: "Curso intermedio",
         priceRange: "Productos 49€+",
         items: [
-            "Formato previsto: serie de audios + PDFs",
-            "Tema previsto: «Seguridad digital para PYMES y profesionales»",
+            "5 audios (~1h)",
+            "2 PDFs (15 + 10 páginas)",
+            "Tema: «Seguridad Digital para PYMES y profesionales»",
         ],
     },
 ];
@@ -50,13 +53,12 @@ const STEPS = [
     },
     {
         num: "02",
-        title: "Recibes el ZIP del producto",
-        description:
-            "El material de seguridad asociado todavía no está disponible. Cuando se publique te llegará por email automáticamente.",
+        title: "Recibes el ZIP + material correspondiente",
+        description: "Junto al producto recibes el material de seguridad de ese tier.",
     },
     {
         num: "03",
-        title: "Aprendes a tu ritmo (cuando esté listo)",
+        title: "Aprendes a tu ritmo",
         description:
             "Audios para escuchar en cualquier momento. PDFs para consultar. Tuyo para siempre.",
     },
@@ -74,17 +76,12 @@ export default function AcademiaPage() {
                             <GraduationCap className="w-3.5 h-3.5" />
                             Academia
                         </span>
-                        <span className="inline-flex items-center self-start px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-amber-500/15 text-amber-300 border border-amber-500/30">
-                            Recurso en preparación
-                        </span>
                         <h1 className="text-4xl sm:text-6xl font-bold tracking-[-0.025em] leading-[1.05] text-paper">
-                            Academia — en preparación.
+                            Aprende a protegerte. Gratis.
                         </h1>
                         <p className="text-lg text-text-secondary leading-relaxed max-w-2xl">
-                            Plan de contenidos previsto: mini guías y cursos cortos de
-                            seguridad digital que se incluirán gratis con cada compra
-                            cuando estén listos. Aún no están disponibles para
-                            descarga.
+                            Mini guías y cursos cortos sobre seguridad digital. Cada
+                            compra incluye material según el producto.
                         </p>
                     </div>
                 </section>
@@ -100,22 +97,21 @@ export default function AcademiaPage() {
                         <div className="flex flex-col gap-4 text-gray-700 leading-relaxed">
                             <p>
                                 No queremos venderte un producto y desaparecer. Queremos
-                                que sepas usarlo y, sobre todo, queremos que sepas
-                                protegerte en internet.
+                                que sepas USARLO y, sobre todo, queremos que sepas
+                                PROTEGERTE en internet.
                             </p>
                             <p>
-                                Por eso el plan es{" "}
+                                Por eso cada producto incluye material de seguridad
+                                <span className="font-semibold text-gray-900"> GRATIS</span>.
+                                Audios y PDFs descargables.{" "}
                                 <span className="font-semibold text-gray-900">
-                                    incluir material de seguridad gratis con cada compra
-                                </span>{" "}
-                                cuando esté listo: audios y PDFs descargables, sin coste
-                                extra, sin letra pequeña, sin precios inflados.
+                                    Sin coste extra. Sin letra pequeña. Sin precios
+                                    inflados.
+                                </span>
                             </p>
                             <p>
-                                Es una manera honesta de aportar más que el código que se
-                                vende. Hoy estamos en fase de producción de los primeros
-                                contenidos — esta página irá creciendo a medida que
-                                publiquemos.
+                                Es una manera honesta de aportar más que el código que te
+                                vendemos.
                             </p>
                         </div>
                     </div>
@@ -125,16 +121,11 @@ export default function AcademiaPage() {
                     <div className="max-w-[1200px] mx-auto px-6 flex flex-col gap-12">
                         <div className="flex flex-col gap-4 max-w-2xl">
                             <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
-                                Plan de contenidos
+                                Tiers
                             </span>
                             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
-                                Plan previsto por tramo de precio.
+                                Qué se incluye con cada compra.
                             </h2>
-                            <p className="text-sm text-gray-600 leading-relaxed">
-                                Ninguno de estos materiales está disponible aún. Esta
-                                es la hoja de ruta para acompañar cada producto cuando
-                                los publiquemos.
-                            </p>
                         </div>
 
                         <div className="grid md:grid-cols-3 gap-5">
@@ -149,7 +140,7 @@ export default function AcademiaPage() {
                                 >
                                     {tier.recommended && (
                                         <span className="absolute -top-3 right-6 inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold tracking-[0.18em] uppercase text-white bg-cyan-600">
-                                            Tramo intermedio
+                                            Más común
                                         </span>
                                     )}
                                     <span className="text-4xl">{tier.emoji}</span>
@@ -184,18 +175,19 @@ export default function AcademiaPage() {
 
                         <div className="p-6 rounded-2xl bg-cyan-50 border border-cyan-200 flex flex-col gap-2 text-sm text-gray-800 leading-relaxed">
                             <p>
+                                💼{" "}
                                 <span className="font-semibold text-gray-900">
-                                    Servicios 149–249€:
+                                    Servicios 149–249€
                                 </span>{" "}
-                                incluirán todo el material anterior + plantilla
-                                adicional cuando esté publicado.
+                                incluyen TODO el material anterior + plantilla
+                                adicional.
                             </p>
                             <p>
+                                🎯{" "}
                                 <span className="font-semibold text-gray-900">
-                                    Servicios Pro 249€:
+                                    Servicios Pro 249€
                                 </span>{" "}
-                                además incluyen 30 min de consultoría 1-a-1 (esto sí
-                                disponible hoy).
+                                además incluyen 30 min de consultoría 1-a-1.
                             </p>
                         </div>
                     </div>

@@ -27,9 +27,13 @@ export function CTASection() {
                         aria-hidden
                     />
 
-                    <div className="absolute top-4 right-4 sm:top-6 sm:right-10 pointer-events-none hidden sm:block">
+                    <motion.div
+                        animate={{ y: [-6, 6, -6], rotate: [-2, 2, -2] }}
+                        transition={{ duration: 5, ease: "easeInOut", repeat: Infinity }}
+                        className="absolute top-4 right-4 sm:top-6 sm:right-10 pointer-events-none hidden sm:block"
+                    >
                         <FlashMascot pose="thinking" size={110} />
-                    </div>
+                    </motion.div>
 
                     <div className="relative flex flex-col items-center text-center gap-7 max-w-3xl mx-auto">
                         <h2 className="text-4xl sm:text-6xl font-bold tracking-[-0.02em] leading-[1.05] text-paper">

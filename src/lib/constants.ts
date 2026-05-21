@@ -1,8 +1,8 @@
 export const BRAND = {
     name: "IA Flash Elite",
-    tagline: "Herramientas locales. Pago único.",
+    tagline: "IA aplicada. Resultados en 48h.",
     description:
-        "Herramientas descargables de seguridad para PYMES y particulares. Código auditable, sin nube, sin suscripciones.",
+        "Automatizamos lo que te roba tiempo. Bots, chatbots y scripts con IA, entregados en 48h.",
     email: "hola@iaflashelite.com",
     domain: "iaflashelite.com",
 } as const;
@@ -86,7 +86,7 @@ export const PRODUCTS: Product[] = [
         subcategory: "privacidad-personal",
         icon: "shield-check",
         estimated_install_minutes: 10,
-        includes: ["En desarrollo. Apúntate para recibir aviso cuando esté listo."],
+        includes: ["Próximamente. Lanzamiento esta semana."],
         guarantee_days: 7,
         support_days: 30,
     },

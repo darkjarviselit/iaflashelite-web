@@ -9,18 +9,19 @@ export function WhyCheapSection() {
             <div className="max-w-[1200px] mx-auto px-6 flex flex-col gap-12">
                 <div className="flex flex-col gap-4 max-w-2xl">
                     <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
-                        Pago único frente a suscripciones
+                        Comparativa
                     </span>
                     <h2 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.05] text-gray-900">
-                        Precio claro. Pago único. Cero cuotas.
+                        ¿Por qué tan barato?
                     </h2>
                     <p className="text-lg text-gray-700 leading-relaxed">
-                        Compras la herramienta, te la quedas, sin renovaciones.
+                        No es magia. Es matemática honesta.
                     </p>
                     <p className="text-base text-gray-600 leading-relaxed">
-                        Sin cuotas mensuales. Sin nube obligatoria. Código auditable y
-                        ejecutable en local. Pensado para quien no quiere otro SaaS al
-                        que pagar todos los meses.
+                        Sin oficina. Sin equipo de marketing. Sin inversores que exijan
+                        márgenes del 80%. Solo yo + un ecosistema de IA propio que
+                        trabaja conmigo. Lo que ahorro en estructura, te lo descuento
+                        en el precio.
                     </p>
                 </div>
 
@@ -123,9 +124,9 @@ export function WhyCheapSection() {
                 </div>
 
                 <p className="text-xs text-gray-500 leading-relaxed max-w-3xl">
-                    Comparativas basadas en precios públicos de competidores
-                    (actualizado manualmente). Cada proveedor cobra lo que necesita;
-                    estos son nuestros costes reflejados en precios.
+                    Comparativas basadas en precios públicos de competidores en mayo
+                    2026. Sin afán de menospreciar a nadie — cada uno cobra lo que
+                    necesita. Estos son nuestros costes reales reflejados en precios.
                 </p>
             </div>
         </section>
