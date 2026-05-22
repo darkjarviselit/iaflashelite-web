@@ -4,7 +4,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Float, Preload } from "@react-three/drei";
 import { motion } from "framer-motion";
 import { ChevronsDown } from "lucide-react";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { Badge } from "@/components/ui/badge";
 import { TerminalAnimated } from "@/components/mundo/TerminalAnimated";
@@ -140,6 +140,38 @@ function CameraRig({ compact = false }: { compact?: boolean }) {
 }
 
 export function BrainCanvas({ compact = false }: { compact?: boolean }) {
+    const [enabled, setEnabled] = useState(false);
+
+    useEffect(() => {
+        let cancelled = false;
+
+        if (typeof window === "undefined") return;
+
+        const mq = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+
+        if (!mq) {
+            if (!cancelled) setEnabled(true);
+            return () => {
+                cancelled = true;
+            };
+        }
+
+        const prefersReduced = mq.matches;
+        if (!cancelled) setEnabled(!prefersReduced);
+
+        const handler = (event: MediaQueryListEvent) => {
+            if (!cancelled) setEnabled(!event.matches);
+        };
+        mq.addEventListener("change", handler);
+
+        return () => {
+            cancelled = true;
+            mq.removeEventListener("change", handler);
+        };
+    }, []);
+
+    if (!enabled) return null;
+
     return (
         <Canvas
             camera={{ position: [0, 0, compact ? 4.7 : 4.35], fov: compact ? 42 : 48 }}
