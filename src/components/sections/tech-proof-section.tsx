@@ -26,7 +26,7 @@ export function TechProofSection() {
                             Tecnología propia en evolución
                         </h2>
                         <p className="mt-6 max-w-2xl text-lg leading-8 text-text-secondary">
-                            G.I.R.U es nuestro laboratorio de agentes IA con memoria,
+                            GIRU es nuestro laboratorio de agentes IA con memoria,
                             herramientas y aprendizaje supervisado.
                         </p>
                     </div>
@@ -39,12 +39,74 @@ export function TechProofSection() {
                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                     className="border-l border-white/10 pl-6 lg:pl-10"
                 >
+                    <div className="mb-8 rounded-2xl border border-flash/20 bg-onyx/60 p-6">
+                        <svg
+                            viewBox="0 0 520 320"
+                            role="img"
+                            aria-labelledby="giru-brain-title"
+                            className="h-auto w-full"
+                        >
+                            <title id="giru-brain-title">
+                                Cerebro estático de G.I.R.U con nodos conectados
+                            </title>
+                            <rect width="520" height="320" rx="24" fill="#0a0a0a" />
+                            <g stroke="#00E5FF" strokeOpacity="0.38" strokeWidth="2">
+                                <line x1="260" y1="160" x2="132" y2="74" />
+                                <line x1="260" y1="160" x2="388" y2="74" />
+                                <line x1="260" y1="160" x2="94" y2="172" />
+                                <line x1="260" y1="160" x2="426" y2="172" />
+                                <line x1="260" y1="160" x2="144" y2="254" />
+                                <line x1="260" y1="160" x2="376" y2="254" />
+                                <line x1="260" y1="160" x2="260" y2="48" />
+                                <line x1="260" y1="160" x2="260" y2="272" />
+                            </g>
+                            <g fill="#00E5FF">
+                                <circle cx="132" cy="74" r="8" opacity="0.82" />
+                                <circle cx="388" cy="74" r="8" opacity="0.82" />
+                                <circle cx="94" cy="172" r="8" opacity="0.82" />
+                                <circle cx="426" cy="172" r="8" opacity="0.82" />
+                                <circle cx="144" cy="254" r="8" opacity="0.82" />
+                                <circle cx="376" cy="254" r="8" opacity="0.82" />
+                                <circle cx="260" cy="48" r="8" opacity="0.82" />
+                                <circle cx="260" cy="272" r="8" opacity="0.82" />
+                            </g>
+                            <circle
+                                cx="260"
+                                cy="160"
+                                r="70"
+                                fill="#00E5FF"
+                                fillOpacity="0.08"
+                                stroke="#00E5FF"
+                                strokeWidth="2"
+                            />
+                            <circle
+                                cx="260"
+                                cy="160"
+                                r="47"
+                                fill="#00E5FF"
+                                fillOpacity="0.14"
+                                stroke="#00E5FF"
+                                strokeOpacity="0.65"
+                            />
+                            <text
+                                x="260"
+                                y="168"
+                                fill="#EAFBFF"
+                                fontFamily="Inter, Arial, sans-serif"
+                                fontSize="22"
+                                fontWeight="700"
+                                textAnchor="middle"
+                            >
+                                G.I.R.U
+                            </text>
+                        </svg>
+                    </div>
                     <p className="text-base leading-8 text-text-secondary">
                         No vendemos humo. Nuestros productos nacen de investigación real.
                         Puedes auditarlos tú mismo con Claude o ChatGPT.
                     </p>
                     <Button href="/mundo-giruia" variant="secondary" className="mt-8">
-                        Ver la tecnología <ArrowRight size={16} />
+                        Ver laboratorio <ArrowRight size={16} />
                     </Button>
                 </motion.div>
             </div>

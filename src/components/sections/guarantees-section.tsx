@@ -30,9 +30,9 @@ const GUARANTEES: ReadonlyArray<{
     },
     {
         icon: Wallet,
-        title: "Pago tras confirmación",
+        title: "Pago claro según producto",
         description:
-            "NO cobramos al instante. Reviso tu pedido y confirmo antes de pasarte los datos de pago.",
+            "Productos descargables con pago directo. Proyectos a medida con alcance y plazo confirmados antes de empezar.",
     },
     {
         icon: Lock,
