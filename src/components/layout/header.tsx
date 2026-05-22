@@ -5,40 +5,18 @@ import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LogoFull } from "@/components/brand/logo-full";
-import { Button } from "@/components/ui/button";
 
 const FULL_NAV = [
     { label: "Productos", href: "/productos" },
     { label: "Servicios", href: "/servicios" },
-    { label: "🛡️ Seguridad", href: "/seguridad", highlight: true },
-    { label: "🎓 Academia", href: "/academia" },
-    { label: "🔍 Auditable", href: "/como-verificar" },
-    { label: "🌐 Mundo", href: "/mundo-giruia", highlight: true },
-    { label: "FAQ", href: "#faq" },
+    { label: "Seguridad", href: "/seguridad", highlight: true },
+    { label: "Mundo G.I.R.U", href: "/mundo-giruia", highlight: true },
+    { label: "Contacto", href: "/contacto" },
 ] as ReadonlyArray<{ label: string; href: string; highlight?: boolean }>;
 
 export function Header() {
     const [open, setOpen] = useState(false);
-    const [activeHash, setActiveHash] = useState("");
     const pathname = usePathname();
-
-    useEffect(() => {
-        if (pathname !== "/") return;
-        const ids = ["servicios", "proceso", "faq"];
-        const obs = new IntersectionObserver(
-            (entries) => {
-                for (const e of entries) {
-                    if (e.isIntersecting) setActiveHash(`#${e.target.id}`);
-                }
-            },
-            { rootMargin: "-40% 0px -55% 0px" },
-        );
-        ids.forEach((id) => {
-            const el = document.getElementById(id);
-            if (el) obs.observe(el);
-        });
-        return () => obs.disconnect();
-    }, [pathname]);
 
     useEffect(() => {
         document.body.style.overflow = open ? "hidden" : "";
@@ -52,7 +30,6 @@ export function Header() {
             if (href === "/") return pathname === "/";
             return pathname === href || pathname.startsWith(`${href}/`);
         }
-        if (pathname === "/" && href.startsWith("#")) return activeHash === href;
         return false;
     };
 
@@ -88,15 +65,6 @@ export function Header() {
                         );
                     })}
                 </nav>
-
-                <div className="hidden md:flex items-center gap-3">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium tracking-wide rounded-full bg-flash/10 text-flash border border-flash/20">
-                        ⚡ 48h
-                    </span>
-                    <Button href="/contacto" size="sm">
-                        Empezar →
-                    </Button>
-                </div>
 
                 <button
                     type="button"
@@ -139,9 +107,6 @@ export function Header() {
                                     {item.label}
                                 </a>
                             ))}
-                            <Button href="/contacto" size="lg" className="mt-6">
-                                Empezar proyecto →
-                            </Button>
                         </nav>
                     </motion.div>
                 )}
