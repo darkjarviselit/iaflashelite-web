@@ -1,0 +1,14 @@
+GestorIA - Programa Piloto Privado RC1
+
+Fecha: 2026-05-23 01:00 CEST
+Version: 0.8.0
+Commit agente: daa3ce325fede13fb618f4ad9300149a678ffc2a
+Tarball: gestorai-agent-0.8.0.tgz
+SHA256: 22064e3db32178460860d8bbcef37931beb0fd391024aacaff55f65f4261bfd2
+
+Instalacion:
+curl -fsSL https://iaflashelite.com/gestoria/install.sh | bash
+
+Aviso:
+Programa Piloto Privado. Este paquete es una RC interna para validacion con
+usuarios seleccionados. No es una publicacion final ni una release publica.
