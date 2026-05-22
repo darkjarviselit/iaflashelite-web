@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { ArrowRight, BookOpen, Cpu, Download, Gamepad2, Globe2, MessagesSquare, MonitorPlay, TerminalSquare } from "lucide-react";
 import { FlashMascot } from "@/components/brand/flash-mascot";
-import { BrainCanvas, Hero3D } from "@/components/mundo/Hero3D";
+import { BrainCanvas } from "@/components/mundo/BrainCanvasDynamic";
+import { Hero3D } from "@/components/mundo/Hero3D";
 import { ChessLive } from "@/components/mundo/ChessLive";
 import { GlassCard } from "@/components/mundo/GlassCard";
 import { RankingLive } from "@/components/mundo/RankingLive";
