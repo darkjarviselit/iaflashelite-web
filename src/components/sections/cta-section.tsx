@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { FlashMascot } from "@/components/brand/flash-mascot";
 import { BRAND } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
@@ -37,13 +36,14 @@ export function CTASection() {
 
                     <div className="relative flex flex-col items-center text-center gap-7 max-w-3xl mx-auto">
                         <h2 className="text-4xl sm:text-6xl font-bold tracking-[-0.02em] leading-[1.05] text-paper">
-                            ¿Listo para automatizar?
+                            ¿Quieres crear un agente IA o automatizar un proceso?
                         </h2>
                         <p className="text-lg text-text-secondary leading-relaxed max-w-2xl">
-                            Cuéntanos tu proceso. Te ayudamos a identificar qué se puede automatizar y entregamos en 48h.
+                            Cuéntanos qué necesitas y te diremos qué se puede
+                            construir, cuánto costaría y qué plazo tendría.
                         </p>
                         <Button href="/contacto" size="lg">
-                            Consulta gratuita <ArrowRight size={16} />
+                            Hablar con IAFlashElite →
                         </Button>
                         <a
                             href={`mailto:${BRAND.email}`}

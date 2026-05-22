@@ -2,9 +2,12 @@
 
 import { motion } from "framer-motion";
 import { Bot, Shield, Zap } from "lucide-react";
+import Link from "next/link";
 import type { ComponentType, SVGProps } from "react";
 
 type Capability = {
+    cta: string;
+    href: string;
     icon: ComponentType<SVGProps<SVGSVGElement>>;
     title: string;
     description: string;
@@ -12,18 +15,24 @@ type Capability = {
 
 const CAPABILITIES: ReadonlyArray<Capability> = [
     {
+        cta: "Ver agentes →",
+        href: "/servicios",
         icon: Bot,
         title: "Agentes IA",
         description:
             "Automatizaciones inteligentes con memoria, herramientas y aprendizaje supervisado. Adaptados a tu negocio.",
     },
     {
+        cta: "Ver automatizaciones →",
+        href: "/servicios",
         icon: Zap,
         title: "Automatizaciones",
         description:
             "Flujos de trabajo automáticos que eliminan tareas repetitivas. Integración con tus sistemas actuales.",
     },
     {
+        cta: "Ver herramientas →",
+        href: "/productos",
         icon: Shield,
         title: "Herramientas Seguras",
         description:
@@ -72,6 +81,12 @@ export function WhatWeDoSection() {
                                         {item.description}
                                     </p>
                                 </div>
+                                <Link
+                                    href={item.href}
+                                    className="mt-auto w-fit text-sm font-semibold text-flash underline-offset-4 transition-colors hover:underline"
+                                >
+                                    {item.cta}
+                                </Link>
                             </motion.article>
                         );
                     })}

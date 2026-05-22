@@ -6,6 +6,7 @@ import type { ComponentType, SVGProps } from "react";
 import { Button } from "@/components/ui/button";
 
 type Offer = {
+    cta: string;
     icon: ComponentType<SVGProps<SVGSVGElement>>;
     title: string;
     price: string;
@@ -14,6 +15,7 @@ type Offer = {
 
 const OFFERS: ReadonlyArray<Offer> = [
     {
+        cta: "Solicitar auditoría",
         icon: Sparkles,
         title: "Auditoría IA para empresas",
         price: "490€",
@@ -21,6 +23,7 @@ const OFFERS: ReadonlyArray<Offer> = [
             "Analizamos tus procesos e identificamos dónde la IA te ahorra tiempo y dinero.",
     },
     {
+        cta: "Automatizar proceso",
         icon: Zap,
         title: "Automatización a medida",
         price: "desde 590€",
@@ -28,6 +31,7 @@ const OFFERS: ReadonlyArray<Offer> = [
             "Flujo de trabajo automatizado adaptado a tu negocio. Entrega en 5-7 días.",
     },
     {
+        cta: "Pedir agente",
         icon: Bot,
         title: "Agente IA privado",
         price: "desde 1.500€",
@@ -35,6 +39,7 @@ const OFFERS: ReadonlyArray<Offer> = [
             "Tu propio agente con memoria, personalidad y herramientas. Desplegado en tu infraestructura.",
     },
     {
+        cta: "Ver soporte",
         icon: Wrench,
         title: "Mantenimiento de agente",
         price: "99€/mes",
@@ -42,6 +47,7 @@ const OFFERS: ReadonlyArray<Offer> = [
             "Actualizaciones, monitorización y soporte continuo para tu agente IA.",
     },
     {
+        cta: "Ver pack",
         icon: ShieldCheck,
         title: "Pack Seguridad PYME",
         price: "79€",
@@ -49,6 +55,7 @@ const OFFERS: ReadonlyArray<Offer> = [
             "Herramientas de ciberseguridad esenciales para proteger tu negocio digital.",
     },
     {
+        cta: "Ver catálogo",
         icon: Code2,
         title: "Herramientas descargables",
         price: "desde 9€",
@@ -112,7 +119,7 @@ export function ServicesSection() {
                                 </div>
 
                                 <Button href="/contacto" variant="gradient" className="mt-auto w-fit">
-                                    Solicitar <ArrowRight size={14} />
+                                    {offer.cta} <ArrowRight size={14} />
                                 </Button>
                             </motion.article>
                         );

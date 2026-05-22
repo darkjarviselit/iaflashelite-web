@@ -9,7 +9,7 @@ import { LogoFull } from "@/components/brand/logo-full";
 const FULL_NAV = [
     { label: "Productos", href: "/productos" },
     { label: "Servicios", href: "/servicios" },
-    { label: "Pricing", href: "/pricing" },
+    { label: "Precios", href: "/pricing" },
     { label: "Seguridad", href: "/seguridad", highlight: true },
     { label: "Mundo G.I.R.U", href: "/mundo-giruia", highlight: true },
     { label: "Contacto", href: "/contacto" },
@@ -48,13 +48,11 @@ export function Header() {
                     {FULL_NAV.map((item) => {
                         const active = isActive(item.href);
                         const base = "px-3 py-2 text-sm transition-colors duration-200 lg:px-4";
-                        const tone = item.highlight
-                            ? active
+                        const tone = active
+                            ? item.highlight
                                 ? "text-flash"
-                                : "text-flash/85 hover:text-flash"
-                            : active
-                                ? "text-paper"
-                                : "text-text-secondary hover:text-paper";
+                                : "text-paper"
+                            : "text-text-secondary hover:text-paper";
                         return (
                             <a
                                 key={item.href}
