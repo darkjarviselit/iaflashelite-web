@@ -1,86 +1,116 @@
 import type { Metadata } from "next";
+import type { ComponentType, SVGProps } from "react";
 import {
     ArrowRight,
-    Building2,
-    Code2,
-    User,
+    Building,
+    Check,
+    FileText,
+    Heart,
+    MapPin,
+    TrendingUp,
 } from "lucide-react";
-import Link from "next/link";
-import type { ComponentType, SVGProps } from "react";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
-import { SectionLabel } from "@/components/ui/section-label";
-import { AUDIENCES } from "@/lib/constants";
+import { Button } from "@/components/ui/button";
+import { solutions, type Solution } from "@/lib/solutions";
 
 export const metadata: Metadata = {
-    title: "Soluciones por perfil — iaflashelite.com",
+    title: "Soluciones IA por sector — iaflashelite.com",
     description:
-        "Herramientas de seguridad y automatización agrupadas por audiencia: PYMES, particulares y desarrolladores. Encuentra rápido la que encaja contigo.",
+        "Agentes IA verticales para gestorías, clínicas dentales, inmobiliarias, agencias de marketing y negocios locales.",
 };
 
-const AUDIENCE_ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
-    "building-2": Building2,
-    user: User,
-    "code-2": Code2,
-};
+type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
-const AUDIENCE_COLOR: Record<string, { iconBg: string; iconBorder: string; iconText: string }> = {
-    pymes: { iconBg: "bg-blue-50", iconBorder: "border-blue-100", iconText: "text-blue-600" },
-    particulares: { iconBg: "bg-emerald-50", iconBorder: "border-emerald-100", iconText: "text-emerald-600" },
-    desarrolladores: { iconBg: "bg-purple-50", iconBorder: "border-purple-100", iconText: "text-purple-600" },
+const SOLUTION_ICONS: Record<Solution["icon"], IconComponent> = {
+    FileText,
+    Heart,
+    Building,
+    TrendingUp,
+    MapPin,
 };
 
 export default function SolucionesPage() {
     return (
         <>
             <Header />
-            <main className="bg-white text-gray-900 min-h-screen pb-24">
-                <section className="relative bg-onyx text-paper pt-32 pb-16">
-                    <div className="absolute inset-0 bg-dot-grid opacity-50" aria-hidden />
-                    <div className="relative max-w-3xl mx-auto px-6 flex flex-col gap-6">
-                        <SectionLabel>Soluciones</SectionLabel>
-                        <h1 className="text-4xl sm:text-6xl font-bold tracking-[-0.025em] leading-[1.05] text-paper">
-                            Soluciones por perfil.
+            <main className="min-h-screen bg-onyx text-paper">
+                <section className="relative overflow-hidden px-6 pb-20 pt-32 text-center lg:pb-24 lg:pt-40">
+                    <div className="absolute inset-0 bg-dot-grid opacity-25" aria-hidden />
+                    <div
+                        className="absolute inset-x-0 top-0 h-[65%] bg-[radial-gradient(ellipse_at_top,rgba(0,229,255,0.12),transparent_64%)]"
+                        aria-hidden
+                    />
+                    <div className="relative mx-auto max-w-4xl">
+                        <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
+                            Soluciones
+                        </span>
+                        <h1 className="mt-6 text-5xl font-black leading-[0.98] text-paper sm:text-6xl lg:text-7xl">
+                            Soluciones IA por sector
                         </h1>
-                        <p className="text-lg text-text-secondary leading-relaxed max-w-2xl">
-                            Selecciona tu caso y verás solo las herramientas pensadas
-                            para ti. Mismo catálogo, lectura más rápida.
+                        <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-text-secondary sm:text-xl">
+                            Elige tu sector y descubre qué puede automatizar un
+                            agente IA entrenado específicamente para tu negocio.
                         </p>
                     </div>
                 </section>
 
-                <section className="relative py-20 bg-white">
-                    <div className="max-w-[1200px] mx-auto px-6 grid md:grid-cols-3 gap-5">
-                        {AUDIENCES.map((a) => {
-                            const Icon = AUDIENCE_ICONS[a.icon] ?? User;
-                            const c = AUDIENCE_COLOR[a.id] ?? AUDIENCE_COLOR.pymes;
-                            return (
-                                <Link
-                                    key={a.id}
-                                    href={`/soluciones/${a.id}`}
-                                    className="group flex flex-col gap-5 p-7 rounded-2xl bg-white border border-gray-200 hover:border-cyan-500 hover:-translate-y-1 hover:shadow-xl transition-all duration-200 ease-out"
-                                >
-                                    <span className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl ${c.iconBg} border ${c.iconBorder} ${c.iconText}`}>
-                                        <Icon className="w-6 h-6" />
-                                    </span>
-                                    <div>
-                                        <h2 className="text-xl font-semibold text-gray-900 tracking-tight mb-1.5">
-                                            {a.label}
-                                        </h2>
-                                        <p className="text-sm text-gray-600 leading-relaxed">
-                                            {a.description}
-                                        </p>
-                                    </div>
-                                    <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-cyan-600 group-hover:text-cyan-700 group-hover:gap-2 transition-all">
-                                        Ver soluciones <ArrowRight size={14} />
-                                    </span>
-                                </Link>
-                            );
-                        })}
+                <section className="px-6 py-20 lg:py-24">
+                    <div className="mx-auto grid max-w-[1200px] gap-5 md:grid-cols-2 xl:grid-cols-3">
+                        {solutions.map((solution) => (
+                            <SolutionCard key={solution.slug} solution={solution} />
+                        ))}
                     </div>
                 </section>
             </main>
             <Footer />
         </>
+    );
+}
+
+function SolutionCard({ solution }: { solution: Solution }) {
+    const Icon = SOLUTION_ICONS[solution.icon] ?? FileText;
+
+    return (
+        <article className="flex min-h-[440px] flex-col rounded-2xl border border-white/10 bg-[#111111] p-7">
+            <div className="flex items-start justify-between gap-4">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-flash/20 bg-flash/10 text-flash">
+                    <Icon className="h-5 w-5" />
+                </span>
+                <span className="text-right text-sm font-semibold text-flash">
+                    desde {solution.priceFrom}
+                </span>
+            </div>
+
+            <div className="mt-7">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-text-muted">
+                    {solution.tagline}
+                </span>
+                <h2 className="mt-3 text-2xl font-bold text-paper">{solution.name}</h2>
+                <p className="mt-4 text-sm leading-7 text-text-secondary">
+                    {solution.pain}
+                </p>
+            </div>
+
+            <ul className="mt-6 flex flex-col gap-3 border-t border-white/10 pt-6">
+                {solution.features.slice(0, 3).map((feature) => (
+                    <li
+                        key={feature}
+                        className="flex items-start gap-3 text-sm leading-6 text-text-secondary"
+                    >
+                        <Check className="mt-1 h-4 w-4 shrink-0 text-flash" />
+                        <span>{feature}</span>
+                    </li>
+                ))}
+            </ul>
+
+            <Button
+                href={`/soluciones/${solution.slug}`}
+                variant="gradient"
+                className="mt-auto w-full"
+            >
+                Ver solución <ArrowRight size={16} />
+            </Button>
+        </article>
     );
 }

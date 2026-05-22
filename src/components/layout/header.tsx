@@ -1,19 +1,26 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LogoFull } from "@/components/brand/logo-full";
 
 const FULL_NAV = [
     { label: "Productos", href: "/productos" },
-    { label: "Servicios", href: "/servicios" },
     { label: "Precios", href: "/pricing" },
     { label: "Seguridad", href: "/seguridad", highlight: true },
     { label: "Mundo G.I.R.U", href: "/mundo-giruia", highlight: true },
     { label: "Contacto", href: "/contacto" },
 ] as ReadonlyArray<{ label: string; href: string; highlight?: boolean }>;
+
+const SOLUTIONS_NAV = [
+    { label: "Gestorías / Contables", href: "/soluciones/gestorias" },
+    { label: "Dentistas / Clínicas", href: "/soluciones/dentistas" },
+    { label: "Inmobiliarias", href: "/soluciones/inmobiliarias" },
+    { label: "Marketing / Agencias", href: "/soluciones/marketing" },
+    { label: "Negocios locales", href: "/soluciones/negocios-locales" },
+] as const;
 
 export function Header() {
     const [open, setOpen] = useState(false);
@@ -54,13 +61,43 @@ export function Header() {
                                 : "text-paper"
                             : "text-text-secondary hover:text-paper";
                         return (
-                            <a
-                                key={item.href}
-                                href={item.href}
-                                className={`${base} ${tone}`}
-                            >
-                                {item.label}
-                            </a>
+                            <div key={item.href} className="contents">
+                                <a
+                                    href={item.href}
+                                    className={`${base} ${tone}`}
+                                >
+                                    {item.label}
+                                </a>
+                                {item.href === "/productos" ? (
+                                    <div className="group relative">
+                                        <button
+                                            type="button"
+                                            className={`inline-flex items-center gap-1 px-3 py-2 text-sm transition-colors duration-200 lg:px-4 ${
+                                                pathname === "/soluciones" ||
+                                                pathname.startsWith("/soluciones/")
+                                                    ? "text-paper"
+                                                    : "text-text-secondary hover:text-paper"
+                                            }`}
+                                        >
+                                            Soluciones
+                                            <ChevronDown className="h-3.5 w-3.5" />
+                                        </button>
+                                        <div className="hidden group-hover:block group-focus-within:block absolute left-0 top-full pt-3">
+                                            <div className="w-64 rounded-xl border border-[#1a1a1a] bg-[#111111] p-2 shadow-2xl">
+                                                {SOLUTIONS_NAV.map((solution) => (
+                                                    <a
+                                                        key={solution.href}
+                                                        href={solution.href}
+                                                        className="block rounded-lg px-3 py-2.5 text-sm text-text-secondary transition-colors hover:text-flash"
+                                                    >
+                                                        {solution.label}
+                                                    </a>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                ) : null}
+                            </div>
                         );
                     })}
                 </nav>
@@ -96,7 +133,32 @@ export function Header() {
                             </button>
                         </div>
                         <nav className="flex-1 flex flex-col gap-1 p-6">
-                            {FULL_NAV.map((item) => (
+                            <a
+                                href="/productos"
+                                onClick={() => setOpen(false)}
+                                className="py-4 text-2xl font-semibold tracking-tight text-paper hover:text-flash transition-colors border-b border-border-dark"
+                            >
+                                Productos
+                            </a>
+                            <details className="border-b border-border-dark py-4">
+                                <summary className="cursor-pointer list-none text-2xl font-semibold tracking-tight text-paper hover:text-flash transition-colors">
+                                    <span className="inline-flex items-center gap-2">
+                                        Soluciones <ChevronDown className="h-5 w-5" />
+                                    </span>
+                                </summary>
+                                <div className="mt-4 flex flex-col gap-1 pl-3">
+                                    {SOLUTIONS_NAV.map((solution) => (
+                                        <a
+                                            key={solution.href}
+                                            href={solution.href}
+                                            className="py-2 text-base text-text-secondary hover:text-flash transition-colors"
+                                        >
+                                            {solution.label}
+                                        </a>
+                                    ))}
+                                </div>
+                            </details>
+                            {FULL_NAV.filter((item) => item.href !== "/productos").map((item) => (
                                 <a
                                     key={item.href}
                                     href={item.href}
