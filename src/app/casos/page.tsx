@@ -1,8 +1,7 @@
-import { ArrowRight } from "lucide-react";
-import { Header } from "@/components/layout/header";
+import { EmailInterestForm } from "@/components/email-interest-form";
 import { Footer } from "@/components/layout/footer";
+import { Header } from "@/components/layout/header";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 
 export default function CasosPage() {
     return (
@@ -39,16 +38,20 @@ export default function CasosPage() {
 
                 <section className="relative py-20 bg-onyx text-paper border-t border-border-dark">
                     <div className="absolute inset-0 bg-dot-grid opacity-50" aria-hidden />
-                    <div className="relative max-w-3xl mx-auto px-6 lg:px-8 text-center flex flex-col items-center gap-6">
+                    <div className="relative max-w-3xl mx-auto px-6 lg:px-8 text-center flex flex-col items-center gap-8">
                         <h2 className="text-3xl sm:text-5xl font-bold tracking-[-0.02em] leading-[1.05] text-paper">
                             ¿Quieres ser de los primeros?
                         </h2>
                         <p className="text-text-secondary text-base leading-relaxed max-w-xl">
-                            Cuéntanos tu proyecto. Si encaja, entras en el lote piloto con condiciones especiales.
+                            Te avisaremos cuando publiquemos los primeros casos reales con cliente autorizado. Sin spam, sin casos falsos.
                         </p>
-                        <Button href="/contacto" size="lg" variant="gradient">
-                            Quiero ser de los primeros <ArrowRight size={16} />
-                        </Button>
+                        <EmailInterestForm
+                            topic="casos"
+                            headline="Avísame cuando publiquemos los primeros casos reales"
+                            subtext="Te avisaremos cuando un cliente nos autorice a publicar un caso o demo real. Sin casos falsos y sin spam."
+                            submitLabel="Avisarme de los casos"
+                            successMessage="Perfecto. Te avisaremos cuando publiquemos los primeros casos reales."
+                        />
                     </div>
                 </section>
             </main>

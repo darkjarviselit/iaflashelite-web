@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ArrowRight, GraduationCap, Headphones, Sparkles } from "lucide-react";
+import { EmailInterestForm } from "@/components/email-interest-form";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { Badge } from "@/components/ui/badge";
@@ -245,6 +246,28 @@ export default function AcademiaPage() {
                                 de cada compra.
                             </p>
                         </div>
+                    </div>
+                </section>
+
+                <section className="relative py-24 bg-white border-t border-gray-200">
+                    <div className="max-w-3xl mx-auto px-6 flex flex-col items-center gap-8 text-center">
+                        <span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
+                            Aviso de lanzamiento
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
+                            ¿Quieres saber cuando estén listos los cursos?
+                        </h2>
+                        <p className="text-gray-700 leading-relaxed max-w-xl">
+                            Estamos preparando los materiales en PDF y audio. Te
+                            avisamos por email cuando los publiquemos. Sin spam.
+                        </p>
+                        <EmailInterestForm
+                            topic="academia"
+                            headline="Avísame cuando publiquemos los primeros cursos"
+                            subtext="Estamos preparando materiales en PDF, vídeo y audio. Te avisaremos cuando estén listos."
+                            submitLabel="Avisarme de la academia"
+                            successMessage="Perfecto. Te avisaremos cuando publiquemos los primeros materiales."
+                        />
                     </div>
                 </section>
 
