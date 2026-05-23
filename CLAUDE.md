@@ -85,3 +85,25 @@ No hay tests automatizados ni CI en GitHub Actions. Vercel hace el build en cada
 ## Deploy
 
 Push a `main` → Vercel construye y publica en `iaflashelite.com`. Detalle de DNS + variables de entorno en `DEPLOY.md`. Nunca disparar deploy desde el agente sin instrucción directa de Oscar en el turno.
+
+## Skills avanzadas de IAFlashElite web
+
+Cinco skills locales en `.claude/skills/` y cuatro subagents en `.claude/agents/` cubren los flujos profesionales del repo. Las skills globales base siguen siendo `/audit-only`, `/safe-feature`, `/review-diff`, `/debug-candado`, `/ship-candado`. Las locales se invocan igual (`/<nombre>`).
+
+**Qué usar según la tarea**:
+- **Landings, productos, agentes IA, secciones comerciales** → `/product-landing-builder`. Obliga a declarar problema, cliente ideal, promesa segura, promesas prohibidas, CTA, FAQ, riesgos y validaciones antes de tocar código. Prohíbe humo.
+- **SEO / AEO (Google + ChatGPT Search + Perplexity + AI Overviews)** → `/seo-aeo-review`. Read-only por defecto. Audita titles, metadata, headings, sitemap, robots, schema, contenido indexable server-side. Si hay que implementar, se hace en una `/safe-feature` aparte aprobada por Oscar.
+- **UI / estética / responsive / spacing / CTAs visuales** → `/ui-polish`. Solo presentación. Prohibido tocar lógica, endpoints, pagos, legal, envs o datos.
+- **Verificación post-deploy en Vercel** → `/release-verify`. Comprueba rutas 200/404, sitemap, robots, formularios visibles, headers Vercel. Nunca envía formularios reales ni hace POST salvo orden explícita en el turno.
+- **Hallazgos laterales (bugs, riesgos, mejoras fuera del objetivo)** → `/scope-guardian`. Clasifica en **BLOQUEANTE / RIESGO ALTO / BACKLOG / RUIDO**. Solo genera prompt de implementación si es BLOQUEANTE o si Oscar dice "hazlo" / "adelante" / "arréglalo" / "priorízalo".
+
+**Subagents** (`.claude/agents/`, invocados vía Agent tool):
+- `product-ux-reviewer` — voz de cliente sobre páginas/secciones (vende, fricción, humo, CTA).
+- `seo-aeo-reviewer` — auditoría profunda SEO + AEO con schema y `llms.txt`.
+- `scope-guardian` — segunda voz independiente que clasifica scope creep al cierre de cualquier fase.
+- `release-verifier` — verificación independiente de deploy en Vercel.
+
+**Reglas operativas adicionales**:
+- Si una tarea toca **pagos, legal, envs o endpoints (`/api/*`)** → `audit-only` + `security-auditor` **antes** de cualquier `safe-feature`. No saltarse el paso.
+- No perseguir hallazgos laterales sin aprobación explícita de Oscar. Aplicar `scope-guardian` siempre al cierre de fase.
+- Las skills locales del repo conviven con las globales: el orden recomendado para una fase comercial es `audit-only` → `product-landing-builder` o `ui-polish` o `seo-aeo-review` → `review-diff` → `ship-candado` → `release-verify`.
