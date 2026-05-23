@@ -1,0 +1,23 @@
+GestorIA RC8 Manifest
+
+Fecha: 2026-05-23
+Commit: 66a758654046788c49c54d6e777f4034e617e7f3
+Version: 0.8.0
+Tarball: gestorai-agent-0.8.0-rc8.tgz
+SHA256: 397598441bfa9aa45ebea34838957b13d84554684e4443cc0fc8aa6a9403d171
+
+Cambios principales:
+- Telegram pending_actions.
+- Botones Confirmar/Cancelar.
+- callback_query.
+- Crear evento solo tras confirmar.
+- Cancelar no aplica.
+- Doble confirmar no duplica.
+
+Validaciones:
+- npm run typecheck OK.
+- npm run test OK.
+- npm run build OK.
+- npm pack --dry-run OK.
+- git diff --check OK.
+- Instalacion temporal OK.
