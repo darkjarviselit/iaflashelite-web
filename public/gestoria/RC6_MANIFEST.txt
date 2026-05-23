@@ -1,0 +1,22 @@
+GestorIA RC6 Manifest
+=====================
+
+Fecha: 2026-05-23 13:21:25 CEST
+Commit: 6c55c84 feat(gestoria): add Telegram read-only conversation router
+Version: 0.8.0
+Tarball: gestorai-agent-0.8.0-rc6.tgz
+SHA256: 51b58a8957b30bf58250ec53ae23ce2c18b8fee59724279c11fea0903f898d37
+
+Cambios principales:
+- Telegram texto entrante read-only
+- Memoria corta por chat
+- Consultas locales sin LLM
+- Voz NO implementada
+- Acciones NO implementadas
+
+Validaciones OK:
+- npm run typecheck
+- npm run test
+- npm run build
+- npm pack --dry-run
+- git diff --check
