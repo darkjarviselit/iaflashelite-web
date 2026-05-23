@@ -1,0 +1,19 @@
+GestorIA RC4 Manifest
+Fecha: 2026-05-23
+Commit: ce98e2c feat(gestoria): simplify AI provider setup UX
+Version: 0.8.0-rc4
+Tarball: gestorai-agent-0.8.0-rc4.tgz
+SHA256: babc480733bca2e6537f600c2e3461acc4af1efdb7e989548bd7a4343f4c5338
+
+Cambios principales:
+- OpenCode Go visible como opcion economica.
+- Ayuda "Ayudame a elegir IA" en Configuracion -> Motor IA.
+- Proveedor compatible OpenAI marcado como avanzado.
+- Codex local no implementado todavia; solo aparece como proximamente / asistido.
+
+Validaciones OK:
+- npm run typecheck
+- npm run test
+- npm run build
+- npm pack --dry-run
+- git diff --check

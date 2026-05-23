@@ -4,8 +4,8 @@ set -euo pipefail
 echo "GestorIA — Instalador Programa Piloto Privado"
 echo
 
-PACKAGE_NAME="gestorai-agent-0.8.0-rc3.tgz"
-EXPECTED_SHA256="1b7b739e5bc6f0d28df3f0f729684d4f099cbe17b6344d87904d1d71cd1df9de"
+PACKAGE_NAME="gestorai-agent-0.8.0-rc4.tgz"
+EXPECTED_SHA256="babc480733bca2e6537f600c2e3461acc4af1efdb7e989548bd7a4343f4c5338"
 INSTALL_DIR="/tmp/gestoria-install"
 
 # When installed with "curl .../gestoria/install.sh | bash", Bash cannot
