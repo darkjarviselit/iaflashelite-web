@@ -1,0 +1,24 @@
+GestorIA RC9 Manifest
+=====================
+
+Fecha: 2026-05-23 17:46:34 CEST
+Commit: d82d82a26164d2cc9fdf8b6ad4e81c31cad1c884
+Version: 0.8.0
+Tarball: gestorai-agent-0.8.0-rc9.tgz
+SHA256: d1dabaa868ce19802afa7ef705f511084916a4d856634b402733c774fa5ef5c0
+
+Cambios principales:
+- Botones Telegram: ✅ Confirmar / ❌ Cancelar.
+- Edicion del mensaje original tras confirmar/cancelar.
+- Eliminacion de reply_markup tras confirmar/cancelar.
+- Idempotencia conservada ante doble click o callback tardio.
+- No acciones nuevas.
+- Sin cambios de logica de negocio.
+
+Validaciones OK:
+- npm run typecheck
+- npm run test
+- npm run build
+- npm pack --dry-run
+- git diff --check
+
