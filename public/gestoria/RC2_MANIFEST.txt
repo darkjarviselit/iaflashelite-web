@@ -1,0 +1,26 @@
+GestorIA RC2 - Manifest interno
+
+Fecha: 2026-05-23 07:19:02 CEST
+Base commit: daa3ce325fede13fb618f4ad9300149a678ffc2a
+Package name: gestorai-agent
+Version: 0.8.0
+Tarball: gestorai-agent-0.8.0-rc2.tgz
+SHA256: 195d5d1563b7f1678aa4527bccf7fd4adc85542bb5aeacf5c5a62727af207b83
+
+Fix RC2:
+- Doctor detecta dist-ui desde el paquete instalado, no desde el cwd.
+- Doctor trata ollama/local-basic sin API key como modo local basico, no como error de motor inaccesible.
+
+Validaciones:
+- typecheck OK
+- tests OK: 80 tests
+- build OK
+- npm pack --dry-run OK
+- instalacion temporal con GESTORAI_HOME=/tmp/gestoria-rc2-home OK
+- doctor global desde cwd temporal OK
+
+Advertencia:
+- RC2 interno para validacion privada.
+- No publicar en npm todavia.
+- No crear release publica todavia.
+- La web privada debe actualizar tarball y SHA antes de probar por curl.
