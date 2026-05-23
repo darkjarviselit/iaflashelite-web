@@ -8,6 +8,7 @@ import { LogoFull } from "@/components/brand/logo-full";
 
 const FULL_NAV = [
     { label: "Productos", href: "/productos" },
+    { label: "Servicios", href: "/servicios" },
     { label: "Precios", href: "/pricing" },
     { label: "Seguridad", href: "/seguridad", highlight: true },
     { label: "Mundo G.I.R.U", href: "/mundo-giruia", highlight: true },

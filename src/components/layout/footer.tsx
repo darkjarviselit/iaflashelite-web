@@ -11,9 +11,11 @@ const PAYMENT_METHODS = [
 
 const FOOTER_NAV = {
     soluciones: [
-        { label: "Para PYMES", href: "/soluciones/pymes" },
-        { label: "Para Particulares", href: "/soluciones/particulares" },
-        { label: "Para Desarrolladores", href: "/soluciones/desarrolladores" },
+        { label: "Gestorías", href: "/soluciones/gestorias" },
+        { label: "Dentistas", href: "/soluciones/dentistas" },
+        { label: "Inmobiliarias", href: "/soluciones/inmobiliarias" },
+        { label: "Marketing", href: "/soluciones/marketing" },
+        { label: "Negocios locales", href: "/soluciones/negocios-locales" },
     ],
     catalogo: [
         { label: "Productos", href: "/productos" },
