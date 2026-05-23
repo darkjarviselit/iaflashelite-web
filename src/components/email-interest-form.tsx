@@ -42,14 +42,12 @@ export function EmailInterestForm({
 
 		setSending(true);
 		try {
-			const res = await fetch("/api/contact", {
+			const res = await fetch("/api/interest", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
-					name: "—",
 					email,
-					message: `interés:${topic}`,
-					service: topic,
+					topic,
 					acceptedPrivacy,
 					website,
 				}),
