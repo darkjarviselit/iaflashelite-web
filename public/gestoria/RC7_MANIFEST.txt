@@ -1,0 +1,21 @@
+GestorIA RC7 Manifest
+Date: 2026-05-23
+Commit: ca9cfe7 feat(gestoria): add guided Telegram CLI setup
+Version: 0.8.0
+Tarball: gestorai-agent-0.8.0-rc7.tgz
+SHA256: eb435c5ee3a9b56714b41f4d5f19a4829d63689b604543c296b2865bdccd1d02
+
+Main changes:
+- gestoria config telegram
+- BotFather guided setup
+- token validation with getMe
+- chatId detection via /start
+- encrypted token storage
+- Telegram test message
+
+Validations OK:
+- npm run typecheck
+- npm run test
+- npm run build
+- npm pack --dry-run
+- git diff --check
