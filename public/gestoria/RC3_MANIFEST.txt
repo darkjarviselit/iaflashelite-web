@@ -1,0 +1,23 @@
+GestorIA RC3 - Manifest interno
+
+Fecha: 2026-05-23 07:45:48 CEST
+Commit: e9987e41e8a61f096139fd50851c65eb15ba49bc
+Package name: gestorai-agent
+Version: 0.8.0
+Tarball: gestorai-agent-0.8.0-rc3.tgz
+SHA256: 1b7b739e5bc6f0d28df3f0f729684d4f099cbe17b6344d87904d1d71cd1df9de
+
+Cambios RC3:
+- Copiloto IA movido a launcher flotante global inferior derecha.
+- Desktop: boton pill con texto.
+- Mobile: boton circular solo icono.
+
+Validaciones:
+- typecheck OK
+- tests OK: 80 tests
+- build OK
+- npm pack OK
+
+Advertencia:
+- RC3 interno para validacion privada.
+- No publicar en npm todavia.
