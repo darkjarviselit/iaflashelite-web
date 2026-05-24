@@ -266,7 +266,7 @@ function DemoSection() {
                     <div className="aspect-video overflow-hidden rounded-xl border border-white/10 bg-black/60">
                         {hasDemoVideo ? (
                             <video
-                                className="h-full w-full"
+                                className="h-full w-full bg-black object-contain"
                                 controls
                                 playsInline
                                 preload="metadata"
