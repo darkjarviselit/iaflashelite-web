@@ -8,6 +8,9 @@ export const BRAND = {
 } as const;
 
 export const GUARANTEE_POLICY_VERSION = "garantia-flash-v1-2026-05";
+export const GESTORIA_LOCAL_PRODUCT_SLUG = "gestoria-local";
+export const GESTORIA_LOCAL_ASSISTANCE_ADDON_ID =
+    "gestoria-install-assistance";
 
 export type ProductStatus = "available" | "coming_soon";
 
@@ -49,7 +52,103 @@ export interface Product {
     audioUrl?: string;
 }
 
+export interface ProductAddon {
+    id: string;
+    productSlug: string;
+    name: string;
+    description: string;
+    price: number;
+    optional: boolean;
+}
+
+export const GESTORIA_LOCAL_DELIVERY_LINKS = {
+    package: "/gestoria/gestorai-agent-0.8.0-rc9.tgz",
+    macInstaller: "/gestoria/install.sh",
+    windowsInstaller: "/gestoria/install.ps1",
+    startGuide: "/gestoria/GestorIA_Guia_Inicio_Programa_Piloto_Privado.pdf",
+    aiGuide: "/gestoria/GestorIA_Guia_Motores_IA_Economicos.pdf",
+    manifest: "/gestoria/RC9_MANIFEST.txt",
+} as const;
+
+export const PRODUCT_ADDONS: ProductAddon[] = [
+    {
+        id: GESTORIA_LOCAL_ASSISTANCE_ADDON_ID,
+        productSlug: GESTORIA_LOCAL_PRODUCT_SLUG,
+        name: "Asistencia de instalación y configuración",
+        description:
+            "Ayuda inicial para instalar, configurar y dejar funcionando GestorIA Local.",
+        price: 59,
+        optional: true,
+    },
+];
+
+export interface ProductTotal {
+    selectedAddons: ProductAddon[];
+    addonsTotal: number;
+    total: number;
+}
+
+export function getProductAddons(productSlug: string): ProductAddon[] {
+    return PRODUCT_ADDONS.filter((addon) => addon.productSlug === productSlug);
+}
+
+export function calculateProductTotal(
+    productSlug: string,
+    basePrice: number,
+    addonIds: ReadonlyArray<string>,
+): ProductTotal | null {
+    const availableAddons = getProductAddons(productSlug);
+    const selectedAddons: ProductAddon[] = [];
+
+    for (const addonId of addonIds) {
+        if (selectedAddons.some((addon) => addon.id === addonId)) {
+            return null;
+        }
+        const addon = availableAddons.find((item) => item.id === addonId);
+        if (!addon) {
+            return null;
+        }
+        selectedAddons.push(addon);
+    }
+
+    const addonsTotal = selectedAddons.reduce(
+        (total, addon) => total + addon.price,
+        0,
+    );
+    return {
+        selectedAddons,
+        addonsTotal,
+        total: basePrice + addonsTotal,
+    };
+}
+
 export const PRODUCTS: Product[] = [
+    {
+        slug: GESTORIA_LOCAL_PRODUCT_SLUG,
+        name: "GestorIA Local",
+        tagline:
+            "Copiloto privado para gestorías pequeñas, instalable en tu ordenador.",
+        description:
+            "Producto digital con paquete instalable, instaladores para macOS/Linux y Windows, PDFs y guías para organizar clientes, documentos, vencimientos y revisión humana junto a tu software fiscal.",
+        price: 490,
+        status: "available",
+        category: "ia",
+        audience: ["pymes"],
+        subcategory: "automatizacion",
+        icon: "sparkles",
+        estimated_install_minutes: 20,
+        includes: [
+            "Paquete instalable GestorIA Local",
+            "Instalador macOS/Linux",
+            "Instalador Windows PowerShell",
+            "Guía de inicio e instalación",
+            "Guía de configuración de motores IA",
+            "Manifest de versión y verificación",
+            "Garantía Flash de entrega y funcionamiento",
+        ],
+        guarantee_days: 7,
+        support_days: 30,
+    },
     {
         slug: "generador-contrasenas-basico",
         name: "Generador de Contraseñas Básico",

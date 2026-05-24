@@ -27,6 +27,7 @@ import type {
     ProductStatus,
     Subcategory,
 } from "@/lib/constants";
+import { GESTORIA_LOCAL_PRODUCT_SLUG } from "@/lib/constants";
 
 interface ProductsGridProps {
     products: Product[];
@@ -157,6 +158,8 @@ export function ProductsGrid({ products, initialAudience, hideFilters = false }:
                             {filtered.map((product, idx) => {
                                 const available = product.status === "available";
                                 const isService = product.type === "service";
+                                const isGestoriaLocal =
+                                    product.slug === GESTORIA_LOCAL_PRODUCT_SLUG;
                                 const Icon =
                                     PRODUCT_ICONS[product.icon] ?? KeyRound;
                                 return (
@@ -214,6 +217,8 @@ export function ProductsGrid({ products, initialAudience, hideFilters = false }:
                                                 <Clock className="w-3 h-3 text-cyan-600" />
                                                 {isService
                                                     ? `Entrega ${product.delivery_time ?? "48h"}`
+                                                    : isGestoriaLocal
+                                                        ? "Entrega digital"
                                                     : `~${product.estimated_install_minutes} min instalación`}
                                             </span>
                                         </div>
@@ -227,17 +232,24 @@ export function ProductsGrid({ products, initialAudience, hideFilters = false }:
                                                     {product.price}€
                                                 </span>
                                                 <span className="text-xs font-medium text-emerald-600 mt-1">
-                                                    🎁 +{" "}
-                                                    {product.price < 20
+                                                    {isGestoriaLocal
+                                                        ? "Guías e instaladores incluidos"
+                                                        : `🎁 + ${
+                                                            product.price < 20
                                                         ? "Mini guía gratis"
                                                         : product.price < 49
                                                             ? "Curso básico gratis"
-                                                            : "Curso intermedio gratis"}
+                                                            : "Curso intermedio gratis"
+                                                        }`}
                                                 </span>
                                             </div>
                                             {available ? (
                                                 <Link
-                                                    href={`/productos/${product.slug}`}
+                                                    href={
+                                                        isGestoriaLocal
+                                                            ? "/gestoria-local"
+                                                            : `/productos/${product.slug}`
+                                                    }
                                                     className="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-600 hover:text-cyan-700 hover:gap-2 transition-all"
                                                 >
                                                     Ver detalles <ArrowRight size={14} />

@@ -20,6 +20,8 @@ import {
     EXPRESS_SURCHARGE,
     GUARANTEE_POLICY_VERSION,
     SLOTS_CONFIG,
+    calculateProductTotal,
+    type ProductAddon,
     type ProductType,
 } from "@/lib/constants";
 
@@ -28,6 +30,7 @@ interface CheckoutFormProps {
     name: string;
     price: number;
     type?: ProductType;
+    addons?: readonly ProductAddon[];
 }
 
 const SERVICE_QUESTIONS = [
@@ -94,12 +97,18 @@ const METHOD_LABELS: Record<PaymentMethodValue, string> = {
 const inputClass =
     "w-full h-12 px-4 rounded-xl bg-white border border-gray-300 text-gray-900 placeholder:text-gray-400 text-sm focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-colors";
 
-export function CheckoutForm({ slug, name, price, type = "download" }: CheckoutFormProps) {
+export function CheckoutForm({
+    slug,
+    name,
+    price,
+    type = "download",
+    addons = [],
+}: CheckoutFormProps) {
     const isService = type === "service";
     return isService ? (
         <ServiceCheckout slug={slug} name={name} price={price} />
     ) : (
-        <DownloadCheckout slug={slug} name={name} price={price} />
+        <DownloadCheckout slug={slug} name={name} price={price} addons={addons} />
     );
 }
 
@@ -292,7 +301,17 @@ function ServiceCheckout({ slug, name, price }: { slug: string; name: string; pr
 
 // ─── Descargables (PayPal directo + tab manual Bizum/Transferencia) ───────
 
-function DownloadCheckout({ slug, name, price }: { slug: string; name: string; price: number }) {
+function DownloadCheckout({
+    slug,
+    name,
+    price,
+    addons,
+}: {
+    slug: string;
+    name: string;
+    price: number;
+    addons: readonly ProductAddon[];
+}) {
     const [mode, setMode] = useState<DownloadMode>("paypal_direct");
     const [customerName, setCustomerName] = useState("");
     const [customerEmail, setCustomerEmail] = useState("");
@@ -300,13 +319,16 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
     const [consentDigital, setConsentDigital] = useState(false);
     const [consentDigitalAt, setConsentDigitalAt] = useState("");
     const [manualMethod, setManualMethod] = useState<DownloadManualMethod | "">("");
+    const [selectedAddonIds, setSelectedAddonIds] = useState<string[]>([]);
     const [sending, setSending] = useState(false);
     const [success, setSuccess] = useState(false);
     const [paymentLabel, setPaymentLabel] = useState<string>("");
     const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
 
-    const totalPrice = price;
+    const total = calculateProductTotal(slug, price, selectedAddonIds);
+    const selectedAddons = total?.selectedAddons ?? [];
+    const totalPrice = total?.total ?? price;
     const trimmedName = customerName.trim();
     const trimmedEmail = customerEmail.trim();
     const validEmail = /.+@.+\..+/.test(trimmedEmail);
@@ -316,6 +338,15 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
     function toggleDigitalConsent(checked: boolean) {
         setConsentDigital(checked);
         setConsentDigitalAt(checked ? new Date().toISOString() : "");
+    }
+
+    function toggleAddon(addonId: string, checked: boolean) {
+        setSelectedAddonIds((current) => {
+            if (checked) {
+                return current.includes(addonId) ? current : [...current, addonId];
+            }
+            return current.filter((id) => id !== addonId);
+        });
     }
 
     async function handleManualSubmit(event: FormEvent<HTMLFormElement>) {
@@ -336,6 +367,7 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
             name: trimmedName,
             email: trimmedEmail,
             paymentMethod: manualMethod,
+            addonIds: selectedAddonIds,
             comments: String(fd.get("comments") ?? ""),
             website: String(fd.get("website") ?? ""),
             acceptedPrivacy,
@@ -395,6 +427,7 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
                 totalPrice={totalPrice}
                 effectiveExpress={false}
                 expressSurcharge={0}
+                selectedAddons={selectedAddons}
             />
 
             <p className="text-sm text-gray-600 leading-relaxed">
@@ -402,6 +435,14 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
                 digital. Guardaremos la prueba del pedido, consentimiento, fecha
                 y método de pago para proteger ambas partes.
             </p>
+
+            {addons.length > 0 && (
+                <AddonSelector
+                    addons={addons}
+                    selectedAddonIds={selectedAddonIds}
+                    onToggle={toggleAddon}
+                />
+            )}
 
             <div className="grid sm:grid-cols-2 gap-5">
                 <Field label="Nombre completo *">
@@ -447,7 +488,7 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
                         active={mode === "paypal_direct"}
                         icon={<CreditCard className="w-4 h-4" />}
                         title="PayPal / Tarjeta"
-                        hint="Pago inmediato con tarjeta o PayPal. Recibes el ZIP por email al instante."
+                        hint="Pago inmediato con tarjeta o PayPal. Recibes la entrega por email al instante."
                         onClick={() => {
                             setError(null);
                             setMode("paypal_direct");
@@ -498,9 +539,9 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
                                         method: "POST",
                                         headers: { "Content-Type": "application/json" },
                                         body: JSON.stringify({
-                                            amount: price,
                                             productName: name,
                                             productSlug: slug,
+                                            addonIds: selectedAddonIds,
                                         }),
                                     });
                                     const data = (await res.json()) as { id?: string; error?: string };
@@ -520,6 +561,7 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
                                             customerName: trimmedName,
                                             customerEmail: trimmedEmail,
                                             productSlug: slug,
+                                            addonIds: selectedAddonIds,
                                             consentDigital,
                                             consentDigitalAt: consentTimestamp,
                                             consentTimestamp,
@@ -639,6 +681,7 @@ interface ProductSummaryProps {
     totalPrice: number;
     effectiveExpress: boolean;
     expressSurcharge: number;
+    selectedAddons?: readonly ProductAddon[];
 }
 
 function ProductSummary({
@@ -648,12 +691,18 @@ function ProductSummary({
     totalPrice,
     effectiveExpress,
     expressSurcharge,
+    selectedAddons = [],
 }: ProductSummaryProps) {
     return (
-        <div className="sm:col-span-2 flex items-center justify-between p-4 rounded-xl border border-cyan-200 bg-cyan-50">
+        <div className="sm:col-span-2 flex items-start justify-between gap-4 p-4 rounded-xl border border-cyan-200 bg-cyan-50">
             <div className="flex flex-col">
                 <Badge variant="cyan">{isService ? "Servicio" : "Producto"}</Badge>
                 <span className="mt-2 text-base font-semibold text-gray-900">{name}</span>
+                {selectedAddons.length > 0 && (
+                    <span className="mt-1 text-xs font-medium text-cyan-800">
+                        Extra: {selectedAddons.map((addon) => addon.name).join(", ")}
+                    </span>
+                )}
                 {effectiveExpress && (
                     <span className="mt-1 inline-flex items-center gap-1 text-[11px] font-medium text-cyan-700">
                         <Zap className="w-3 h-3" /> Express activado · entrega 24h
@@ -672,7 +721,62 @@ function ProductSummary({
                         {price}€ + {expressSurcharge}€ express
                     </span>
                 )}
+                {!effectiveExpress && selectedAddons.length > 0 && (
+                    <span className="block text-[11px] text-gray-500 mt-1">
+                        {price}€ +{" "}
+                        {selectedAddons.reduce((sum, addon) => sum + addon.price, 0)}€ extras
+                    </span>
+                )}
             </div>
+        </div>
+    );
+}
+
+interface AddonSelectorProps {
+    addons: readonly ProductAddon[];
+    selectedAddonIds: readonly string[];
+    onToggle: (addonId: string, checked: boolean) => void;
+}
+
+function AddonSelector({
+    addons,
+    selectedAddonIds,
+    onToggle,
+}: AddonSelectorProps) {
+    return (
+        <div className="flex flex-col gap-3 rounded-2xl border border-gray-200 bg-gray-50 p-5">
+            <span className="text-[11px] tracking-[0.18em] uppercase text-gray-500 font-medium">
+                Extras opcionales
+            </span>
+            {addons.map((addon) => {
+                const checked = selectedAddonIds.includes(addon.id);
+                return (
+                    <label
+                        key={addon.id}
+                        className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-all ${
+                            checked
+                                ? "border-cyan-500 bg-cyan-50"
+                                : "border-gray-200 bg-white hover:border-cyan-300"
+                        }`}
+                    >
+                        <input
+                            type="checkbox"
+                            checked={checked}
+                            onChange={(event) => onToggle(addon.id, event.target.checked)}
+                            className="mt-1 h-4 w-4 rounded border-gray-300 bg-white accent-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/40"
+                        />
+                        <span className="flex flex-1 flex-col gap-1">
+                            <span className="flex flex-col gap-1 text-sm font-semibold text-gray-900 sm:flex-row sm:items-center sm:justify-between">
+                                <span>{addon.name}</span>
+                                <span className="text-cyan-700">+{addon.price}€</span>
+                            </span>
+                            <span className="text-xs leading-relaxed text-gray-600">
+                                {addon.description}
+                            </span>
+                        </span>
+                    </label>
+                );
+            })}
         </div>
     );
 }

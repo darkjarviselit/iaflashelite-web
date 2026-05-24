@@ -1,8 +1,14 @@
 import { NextResponse } from "next/server";
-import { EXPRESS_SURCHARGE, GUARANTEE_POLICY_VERSION, PRODUCTS } from "@/lib/constants";
+import {
+    EXPRESS_SURCHARGE,
+    GUARANTEE_POLICY_VERSION,
+    PRODUCTS,
+    calculateProductTotal,
+} from "@/lib/constants";
 
 interface OrderPayload {
     productSlug?: string;
+    addonIds?: unknown;
     name?: string;
     email?: string;
     paymentMethod?: string;
@@ -54,6 +60,11 @@ function bad(reason: string) {
     return NextResponse.json({ ok: false, error: reason }, { status: 400 });
 }
 
+function readAddonIds(value: unknown): string[] {
+    if (!Array.isArray(value)) return [];
+    return value.filter((item): item is string => typeof item === "string");
+}
+
 async function forwardOrder(payload: Record<string, unknown>): Promise<void> {
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), FORWARD_TIMEOUT_MS);
@@ -100,6 +111,7 @@ export async function POST(request: Request) {
     const name = (payload.name ?? "").trim();
     const email = (payload.email ?? "").trim();
     const productSlug = (payload.productSlug ?? "").trim();
+    const addonIds = readAddonIds(payload.addonIds);
     const paymentMethod = (payload.paymentMethod ?? "").trim();
 
     if (!name || !email || !productSlug || !paymentMethod) {
@@ -128,7 +140,9 @@ export async function POST(request: Request) {
     if (isExpress && expressSurcharge === 0) {
         return bad("express_not_available_for_product");
     }
-    const totalPrice = product.price + expressSurcharge;
+    const calculated = calculateProductTotal(product.slug, product.price, addonIds);
+    if (!calculated) return bad("invalid_addons");
+    const totalPrice = calculated.total + expressSurcharge;
 
     // Digital consent (EU 2011/83/UE Art. 16(m)) — required only for downloads.
     const consentDigital = payload.consentDigital === true;
@@ -147,6 +161,12 @@ export async function POST(request: Request) {
         product_name: product.name,
         product_type: productType,
         price: product.price,
+        addons: calculated.selectedAddons.map((addon) => ({
+            id: addon.id,
+            name: addon.name,
+            price: addon.price,
+        })),
+        addons_total: calculated.addonsTotal,
         is_express: isExpress,
         express_surcharge: expressSurcharge,
         total_price: totalPrice,
