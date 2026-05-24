@@ -1,57 +1,57 @@
-# Guion audio guia: Pack Arranque IA
+# Guion audio guía: Pack Arranque IA
 
-Duracion objetivo futura: 25-30 minutos.
+Duración objetivo futura: 25-30 minutos.
 
-Uso previsto: base para locucion. No es audio final.
+Uso previsto: base para locución. No es audio final.
 
 ## 0:00 - 2:00 | Bienvenida
 
 Bienvenido a Pack Arranque IA.
 
-La idea de este audio es acompanarte mientras preparas tu primer sistema sencillo
+La idea de este audio es acompañarte mientras preparas tu primer sistema sencillo
 para trabajar mejor con IA. No necesitas tener todo perfecto. De hecho, si
 intentas hacerlo perfecto hoy, probablemente no lo termines.
 
-El objetivo es mas concreto: terminar la tarde con una IA mejor configurada para
+El objetivo es más concreto: terminar la tarde con una IA mejor configurada para
 ayudarte en proyectos reales.
 
 Cuando digo "mejor configurada", no hablo de trucos raros. Hablo de tres cosas:
 contexto, instrucciones y plantillas.
 
-Contexto significa que la IA entiende un poco mejor quien eres, en que trabajas
-y que tipo de ayuda necesitas.
+Contexto significa que la IA entiende un poco mejor quién eres, en qué trabajas
+y qué tipo de ayuda necesitas.
 
-Instrucciones significa que no tienes que repetir cada dia como quieres que te
+Instrucciones significa que no tienes que repetir cada día cómo quieres que te
 responda.
 
 Plantillas significa que conviertes tareas frecuentes en procesos reutilizables.
 
-Este pack no promete resultados economicos. No promete que la IA acierte siempre.
-No promete que una plantilla sirva para todos los casos. Lo que si busca es que
+Este pack no promete resultados económicos. No promete que la IA acierte siempre.
+No promete que una plantilla sirva para todos los casos. Lo que sí busca es que
 dejes de empezar desde una pantalla en blanco.
 
-## 2:00 - 5:00 | Que vas a construir
+## 2:00 - 5:00 | Qué vas a construir
 
 Durante este pack vas a crear cinco piezas.
 
-La primera es tu curriculum IA personal. No es un curriculum profesional. Es una
-ficha de contexto para que la IA entienda como ayudarte.
+La primera es tu currículum IA personal. No es un currículum profesional. Es una
+ficha de contexto para que la IA entienda cómo ayudarte.
 
 La segunda son tus instrucciones base para ChatGPT, Claude o Codex. Esas
-instrucciones marcan tono, limites y forma de trabajo.
+instrucciones marcan tono, límites y forma de trabajo.
 
-La tercera pieza es una skill de planificacion diaria. Sirve para convertir una
+La tercera pieza es una skill de planificación diaria. Sirve para convertir una
 lista de tareas en un plan realista.
 
-La cuarta pieza es una skill de revision de ideas. Sirve para evitar que inviertas
-tiempo en ideas que todavia no estan claras.
+La cuarta pieza es una skill de revisión de ideas. Sirve para evitar que inviertas
+tiempo en ideas que todavía no están claras.
 
 La quinta pieza es una skill para crear prompts de proyecto. En vez de pedir a
-la IA que lo resuelva todo, le pides que te ayude a construir una instruccion
+la IA que lo resuelva todo, le pides que te ayude a construir una instrucción
 mejor.
 
-Y como bonus tienes un `CLAUDE.md` base. Ese archivo es muy util si trabajas con
-proyectos largos, codigo o documentacion que necesita continuidad.
+Y como bonus tienes un `CLAUDE.md` base. Ese archivo es muy útil si trabajas con
+proyectos largos, código o documentación que necesita continuidad.
 
 ## 5:00 - 8:00 | Antes de abrir la IA
 
@@ -69,26 +69,26 @@ Una para instrucciones base.
 
 Una para skills.
 
-Si ya usas Notion, Obsidian o Google Docs, puedes hacerlo ahi. Si no, archivos
+Si ya usas Notion, Obsidian o Google Docs, puedes hacerlo ahí. Si no, archivos
 Markdown en una carpeta son suficiente.
 
-La clave es que no quede perdido en una conversacion antigua. Si lo pierdes, no
+La clave es que no quede perdido en una conversación antigua. Si lo pierdes, no
 se convierte en sistema. Se convierte en otro texto que usaste una vez.
 
-## 8:00 - 12:00 | Curriculum IA personal
+## 8:00 - 12:00 | Currículum IA personal
 
-El curriculum IA personal es el centro del pack.
+El currículum IA personal es el centro del pack.
 
 Abre la plantilla `curriculum-ia-personal.md`.
 
-No intentes sonar impresionante. La IA no necesita una biografia. Necesita datos
-utiles para ayudarte.
+No intentes sonar impresionante. La IA no necesita una biografía. Necesita datos
+útiles para ayudarte.
 
-Empieza por quien eres en terminos de trabajo.
+Empieza por quién eres en términos de trabajo.
 
 Por ejemplo:
 
-"Estoy creando productos digitales pequenos con IA."
+"Estoy creando productos digitales pequeños con IA."
 
 O:
 
@@ -97,49 +97,49 @@ mejor."
 
 O:
 
-"Tengo una pequena empresa y quiero automatizar tareas sin perder control."
+"Tengo una pequeña empresa y quiero automatizar tareas sin perder control."
 
-Despues escribe que herramientas usas. No escondas tu nivel real. Si eres
+Después escribe qué herramientas usas. No escondas tu nivel real. Si eres
 principiante, dilo. Si tienes nivel medio, dilo. Si sabes programar, dilo. La IA
 ajusta mejor si no tiene que adivinar.
 
-Luego escribe como quieres que responda.
+Luego escribe cómo quieres que responda.
 
-Aqui puedes ser muy claro:
+Aquí puedes ser muy claro:
 
-"Quiero respuestas practicas."
+"Quiero respuestas prácticas."
 
-"No quiero tono de guru."
+"No quiero tono de gurú."
 
 "Prefiero que me digas riesgos antes de avanzar."
 
-"Si falta informacion, preguntame."
+"Si falta información, pregúntame."
 
 Esto no limita la creatividad. La enfoca.
 
 ## 12:00 - 15:00 | Instrucciones base
 
-Despues abre la plantilla de instrucciones base.
+Después abre la plantilla de instrucciones base.
 
-La tentacion aqui es escribir una constitucion enorme. No lo hagas. Cuanto mas
-larga y contradictoria sea la instruccion, mas facil es que la IA ignore partes.
+La tentación aquí es escribir una constitución enorme. No lo hagas. Cuanto más
+larga y contradictoria sea la instrucción, más fácil es que la IA ignore partes.
 
-Empieza con una version corta:
+Empieza con una versión corta:
 
-"Responde en espanol claro, practico y directo."
+"Responde en español claro, práctico y directo."
 
 "Prioriza soluciones aplicables."
 
 "No inventes datos."
 
-"No prometas resultados economicos."
+"No prometas resultados económicos."
 
-"Si una idea tiene riesgos, explicalos."
+"Si una idea tiene riesgos, explícalos."
 
-Para ChatGPT y Claude, estas instrucciones pueden vivir en una configuracion
-personal, un proyecto o el primer mensaje de una conversacion importante.
+Para ChatGPT y Claude, estas instrucciones pueden vivir en una configuración
+personal, un proyecto o el primer mensaje de una conversación importante.
 
-Para Codex o un agente de codigo, necesitas reglas mas operativas:
+Para Codex o un agente de código, necesitas reglas más operativas:
 
 "Lee el proyecto antes de tocar archivos."
 
@@ -166,17 +166,17 @@ Tus tareas.
 
 Tu tiempo disponible.
 
-Tu energia.
+Tu energía.
 
-La fecha limite si existe.
+La fecha límite si existe.
 
-Y pide una cosa importante: que te diga que no hacer hoy.
+Y pide una cosa importante: que te diga qué no hacer hoy.
 
-La lista de "no hacer hoy" es una de las partes mas utiles. Si no decides que
+La lista de "no hacer hoy" es una de las partes más útiles. Si no decides que
 queda fuera, todo parece urgente.
 
-Prueba esta skill con un dia real. No con un ejemplo ideal. Usala cuando tengas
-cansancio, interrupciones y tareas mezcladas. Ahi es donde se ve si funciona.
+Prueba esta skill con un día real. No con un ejemplo ideal. Úsala cuando tengas
+cansancio, interrupciones y tareas mezcladas. Ahí es donde se ve si funciona.
 
 ## 18:00 - 21:00 | Skill: revisor de ideas
 
@@ -184,28 +184,28 @@ La segunda skill es el revisor de ideas.
 
 Esta skill sirve para bajar una idea a tierra.
 
-No la uses para buscar aprobacion. Usala para detectar:
+No la uses para buscar aprobación. Úsala para detectar:
 
-Que problema resuelve.
+Qué problema resuelve.
 
-Para quien es.
+Para quién es.
 
-Que dificultad tiene.
+Qué dificultad tiene.
 
-Que riesgos aparecen.
+Qué riesgos aparecen.
 
-Que version minima podria probarse.
+Qué versión mínima podría probarse.
 
-Una buena revision puede decirte que la idea necesita cambios. Eso no es un
+Una buena revisión puede decirte que la idea necesita cambios. Eso no es un
 fracaso. Es ahorro de tiempo.
 
-Si la IA te responde solo con entusiasmo, ajusta la instruccion:
+Si la IA te responde solo con entusiasmo, ajusta la instrucción:
 
-"No quiero validacion emocional. Quiero una revision practica."
+"No quiero validación emocional. Quiero una revisión práctica."
 
-Tambien puedes pedir:
+También puedes pedir:
 
-"Dime que no construir todavia."
+"Dime qué no construir todavía."
 
 Esa pregunta suele ahorrar horas.
 
@@ -221,15 +221,15 @@ Normalmente pedimos a la IA algo demasiado directo:
 
 "Crea una estrategia."
 
-El problema es que la instruccion es pobre. Entonces la respuesta tambien suele
-ser generica.
+El problema es que la instrucción es pobre. Entonces la respuesta también suele
+ser genérica.
 
 Esta skill hace un paso previo: construir el prompt de trabajo.
 
 Le dices la tarea, el contexto y el resultado que quieres. La IA te devuelve una
-instruccion mejor, con rol, objetivo, proceso, criterios y formato.
+instrucción mejor, con rol, objetivo, proceso, criterios y formato.
 
-Esto es especialmente util para tareas que se repiten:
+Esto es especialmente útil para tareas que se repiten:
 
 revisar una landing;
 
@@ -252,63 +252,63 @@ El bonus es el archivo `CLAUDE.md`.
 Aunque tenga ese nombre, la idea no depende solo de Claude. Es un archivo de
 contexto para proyectos.
 
-Cuando un proyecto dura mas de una sesion, la IA necesita continuidad. Si no,
-cada conversacion empieza con explicaciones repetidas.
+Cuando un proyecto dura más de una sesión, la IA necesita continuidad. Si no,
+cada conversación empieza con explicaciones repetidas.
 
 Un buen `CLAUDE.md` dice:
 
-Que es el proyecto.
+Qué es el proyecto.
 
-Para quien es.
+Para quién es.
 
-Que reglas hay.
+Qué reglas hay.
 
-Que no debe tocarse.
+Qué no debe tocarse.
 
-Que comandos o validaciones existen.
+Qué comandos o validaciones existen.
 
-Que significa terminar una tarea.
+Qué significa terminar una tarea.
 
-Si trabajas con codigo, este archivo evita muchos errores. Si trabajas con
-documentos, tambien ayuda: mantiene tono, criterios y limites.
+Si trabajas con código, este archivo evita muchos errores. Si trabajas con
+documentos, también ayuda: mantiene tono, criterios y límites.
 
-Empieza con el archivo base. No lo llenes de informacion innecesaria. Una pagina
-clara vale mas que diez paginas que nadie lee.
+Empieza con el archivo base. No lo llenes de información innecesaria. Una página
+clara vale más que diez páginas que nadie lee.
 
 ## 27:00 - 30:00 | Cierre y checklist
 
 Para cerrar, revisa la checklist final.
 
-No necesitas tener un sistema perfecto. Necesitas tener una primera version que
-puedas usar manana.
+No necesitas tener un sistema perfecto. Necesitas tener una primera versión que
+puedas usar mañana.
 
 Pregunta:
 
-Tengo mi curriculum IA personal?
+¿Tengo mi currículum IA personal?
 
-Tengo instrucciones base?
+¿Tengo instrucciones base?
 
-Tengo una skill para planificar?
+¿Tengo una skill para planificar?
 
-Tengo una skill para revisar ideas?
+¿Tengo una skill para revisar ideas?
 
-Tengo una skill para crear prompts?
+¿Tengo una skill para crear prompts?
 
-Tengo un `CLAUDE.md` base si trabajo con proyectos?
+¿Tengo un `CLAUDE.md` base si trabajo con proyectos?
 
-He probado al menos una plantilla con una tarea real?
+¿He probado al menos una plantilla con una tarea real?
 
-Si la respuesta es si a la mayoria, el pack ya cumplio su objetivo.
+Si la respuesta es sí a la mayoría, el pack ya cumplió su objetivo.
 
-Tu IA no se vuelve automatica. Pero deja de estar en blanco. Tiene mas contexto,
+Tu IA no se vuelve automática. Pero deja de estar en blanco. Tiene más contexto,
 mejores reglas y primeras herramientas de trabajo.
 
 Ese es el arranque.
 
-El siguiente paso, cuando esto ya te sirva, sera convertirlo en un sistema mas
-estable: mas skills, memoria de decisiones, revision semanal y proyectos con
+El siguiente paso, cuando esto ya te sirva, será convertirlo en un sistema más
+estable: más skills, memoria de decisiones, revisión semanal y proyectos con
 estructura.
 
 Por ahora, termina esta tarde con algo funcional. Guarda tus plantillas, prueba
-una de ellas y ajusta una frase. Ese pequeno ajuste ya es el comienzo de tu
+una de ellas y ajusta una frase. Ese pequeño ajuste ya es el comienzo de tu
 sistema IA.

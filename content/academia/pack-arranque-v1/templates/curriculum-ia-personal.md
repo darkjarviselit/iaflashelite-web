@@ -1,18 +1,18 @@
-# Curriculum IA personal
+# Currículum IA personal
 
-Copia este documento, cambia los campos entre corchetes y guardalo como tu
-contexto base. No hace falta rellenarlo perfecto. Hace falta que sea util.
+Copia este documento, cambia los campos entre corchetes y guárdalo como tu
+contexto base. No hace falta rellenarlo perfecto. Hace falta que sea útil.
 
-## 1. Quien soy
+## 1. Quién soy
 
 ```text
 Me llamo [nombre].
-Trabajo/estudio en [area].
-Mi nivel tecnico es [basico / medio / avanzado] en [herramientas].
+Trabajo/estudio en [área].
+Mi nivel técnico es [básico / medio / avanzado] en [herramientas].
 Uso la IA principalmente para [tareas principales].
 ```
 
-## 2. Que estoy construyendo o mejorando
+## 2. Qué estoy construyendo o mejorando
 
 ```text
 Ahora mismo quiero avanzar en:
@@ -20,7 +20,7 @@ Ahora mismo quiero avanzar en:
 - [proyecto 2]
 - [proyecto 3]
 
-Mi objetivo real durante las proximas semanas es:
+Mi objetivo real durante las próximas semanas es:
 [objetivo concreto]
 ```
 
@@ -37,40 +37,40 @@ Canales o sistemas importantes:
 - [email / Telegram / web / CRM / GitHub / otros]
 ```
 
-## 4. Como quiero que me responda la IA
+## 4. Cómo quiero que me responda la IA
 
 ```text
 Prefiero respuestas:
 - claras;
-- practicas;
+- prácticas;
 - ordenadas por prioridad;
 - sin exageraciones;
 - con riesgos visibles;
 - con ejemplos cuando ayuden.
 
 No quiero respuestas:
-- motivacionales sin accion;
+- motivacionales sin acción;
 - demasiado largas sin estructura;
-- que prometan resultados economicos;
+- que prometan resultados económicos;
 - que oculten incertidumbre;
 - que parezcan publicidad.
 ```
 
-## 5. Mis limites
+## 5. Mis límites
 
 ```text
 La IA no debe:
 - tomar decisiones importantes sin explicarme alternativas;
 - inventar datos;
 - asumir que tengo herramientas de pago si no las menciono;
-- recomendar acciones legales, medicas o financieras como si fueran certeza;
+- recomendar acciones legales, médicas o financieras como si fueran certeza;
 - usar tono agresivo o de venta exagerada.
 ```
 
 ## 6. Criterios de calidad
 
 ```text
-Una respuesta buena para mi:
+Una respuesta buena para mí:
 - me ayuda a decidir el siguiente paso;
 - separa lo urgente de lo opcional;
 - deja claro que falta por validar;
@@ -81,8 +81,8 @@ Una respuesta buena para mi:
 ## 7. Tareas frecuentes
 
 ```text
-Usare la IA para:
-- planificar dias o semanas;
+Usaré la IA para:
+- planificar días o semanas;
 - revisar ideas;
 - crear prompts mejores;
 - escribir documentos;
@@ -91,14 +91,61 @@ Usare la IA para:
 - generar borradores que yo reviso.
 ```
 
-## 8. Prompt de uso rapido
+## 8. Prompt de uso rápido
 
-Copia esto al iniciar una conversacion importante:
+Copia esto al iniciar una conversación importante:
 
 ```text
-Voy a darte mi curriculum IA personal. Usalo como contexto de trabajo.
+Voy a darte mi currículum IA personal. Úsalo como contexto de trabajo.
 No lo repitas completo. Tenlo en cuenta para adaptar tus respuestas.
-Si alguna parte entra en conflicto con la tarea concreta, avisame antes de asumir.
+Si alguna parte entra en conflicto con la tarea concreta, avísame antes de asumir.
 
-[pega aqui las secciones 1-7]
+[pega aquí las secciones 1-7]
+```
+
+## Ejemplo completado
+
+Usa este ejemplo como referencia de nivel de detalle. No copies los datos si no
+son los tuyos.
+
+```text
+Me llamo Laura.
+Trabajo en una pequeña tienda online y llevo también la parte de contenidos.
+Mi nivel técnico es medio en herramientas no-code y básico en automatizaciones.
+Uso la IA principalmente para ordenar ideas, escribir borradores, revisar textos
+y preparar procesos internos.
+
+Ahora mismo quiero avanzar en:
+- mejorar las descripciones de producto;
+- crear una rutina semanal de contenidos;
+- ordenar preguntas frecuentes de clientes.
+
+Mi objetivo real durante las próximas semanas es:
+crear un sistema sencillo para preparar contenido y revisar textos sin empezar
+cada vez desde cero.
+
+Herramientas IA:
+- ChatGPT y Claude.
+
+Herramientas de trabajo:
+- Google Docs, Notion, Canva y hojas de cálculo.
+
+Prefiero respuestas:
+- claras;
+- accionables;
+- sin promesas exageradas;
+- con ejemplos cortos;
+- con riesgos visibles cuando una idea pueda confundir al cliente.
+
+No quiero respuestas:
+- que suenen a anuncio;
+- que inventen datos sobre mis productos;
+- que propongan herramientas de pago sin justificarlo;
+- que oculten dudas importantes.
+
+La IA no debe:
+- publicar nada sin mi revisión;
+- prometer entregas o resultados que no puedo garantizar;
+- inventar políticas de devolución;
+- asumir que tengo un equipo grande.
 ```
