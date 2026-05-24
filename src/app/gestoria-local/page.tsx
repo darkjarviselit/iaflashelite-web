@@ -4,13 +4,10 @@ import type { Metadata } from "next";
 import {
     ArrowRight,
     CheckCircle2,
-    ClipboardCheck,
     Headphones,
     LockKeyhole,
     MailCheck,
-    MonitorCheck,
     PlayCircle,
-    ShieldCheck,
     Sparkles,
     XCircle,
 } from "lucide-react";
@@ -39,13 +36,13 @@ const hasDemoPoster = existsSync(
 
 const AUDIO_GUIDES = [
     {
-        title: "1. Qué es GestorIA Local",
+        title: "Qué es GestorIA Local",
         description:
             "Una explicación clara del copiloto privado para gestorías pequeñas: qué hace, qué no hace y cómo encaja junto a tu software fiscal.",
         src: "/gestoria-local/audio/gestoria-local-audio-01-que-es.mp3",
     },
     {
-        title: "2. Cómo funciona el Piloto Founders",
+        title: "Cómo funciona el Piloto Founders",
         description:
             "Instalación guiada, configuración inicial, 30 días de acompañamiento, soporte y mantenimiento opcional.",
         src: "/gestoria-local/audio/gestoria-local-audio-02-piloto-founders.mp3",
@@ -183,7 +180,7 @@ export default function GestoriaLocalPage() {
             <Header />
             <main className="min-h-screen bg-onyx text-paper">
                 <HeroSection />
-                <MediaSection />
+                <AudioGuidesSection />
                 <AudienceSection />
                 <CapabilitiesSection />
                 <PrivacySection />
@@ -200,13 +197,13 @@ export default function GestoriaLocalPage() {
 
 function HeroSection() {
     return (
-        <section className="relative overflow-hidden px-6 pb-16 pt-28 lg:pb-24 lg:pt-36">
+        <section className="relative overflow-hidden px-6 pb-14 pt-24 lg:pb-20 lg:pt-28">
             <div className="absolute inset-0 bg-dot-grid opacity-25" aria-hidden />
             <div
-                className="absolute inset-x-0 top-0 h-[62%] bg-[radial-gradient(ellipse_at_top,rgba(0,229,255,0.14),transparent_64%)]"
+                className="absolute inset-x-0 top-0 h-[72%] bg-[radial-gradient(ellipse_at_top,rgba(0,229,255,0.14),transparent_64%)]"
                 aria-hidden
             />
-            <div className="relative mx-auto grid max-w-[1180px] gap-12 lg:grid-cols-[1fr_0.82fr] lg:items-center">
+            <div className="relative mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
                 <div className="max-w-3xl">
                     <span className="inline-flex items-center gap-2 rounded-full border border-flash/25 bg-flash/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-flash">
                         <Sparkles className="h-4 w-4" />
@@ -216,140 +213,105 @@ function HeroSection() {
                         Ordena tu gestoría sin migrar a otro software.
                     </h1>
                     <p className="mt-6 max-w-2xl text-lg leading-8 text-text-secondary sm:text-xl">
-                        GestorIA Local es el copiloto privado para gestorías pequeñas.
-                        Ordena clientes, documentos, vencimientos y revisiones en tu propio
-                        ordenador. La IA propone; el profesional decide.
+                        Un copiloto privado para gestorías pequeñas. Organiza clientes,
+                        documentos, vencimientos y revisiones en tu propio ordenador. La IA
+                        propone; el profesional decide.
                     </p>
                     <p className="mt-5 max-w-2xl text-base leading-7 text-text-secondary">
-                        No factura, no toca AEAT y no sustituye tu software fiscal. Te ayuda
-                        a trabajar con más orden y menos ruido operativo.
+                        No factura. No toca AEAT. No sustituye tu software fiscal.
+                    </p>
+                    <p className="mt-5 max-w-2xl rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-semibold leading-6 text-paper">
+                        Piloto Founders · 490 € pago único · máximo 5 instalaciones
+                        guiadas al mes
                     </p>
                     <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                         <Button href={CONTACT_HREF} size="lg" variant="gradient">
                             Solicitar Piloto Founders <ArrowRight size={18} />
                         </Button>
                         <Button
-                            href="#demo-gestoria-local"
+                            href="#audio-gestoria-local"
                             size="lg"
                             variant="secondary"
                         >
-                            Ver demo y audios <PlayCircle size={18} />
+                            Escuchar guía <Headphones size={18} />
                         </Button>
                     </div>
                 </div>
 
-                <div className="rounded-2xl border border-white/10 bg-[#111111] p-6 shadow-2xl shadow-black/30">
-                    <div className="flex items-start gap-4">
-                        <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-flash/25 bg-flash/10 text-flash">
-                            <ClipboardCheck className="h-6 w-6" />
-                        </span>
-                        <div>
-                            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-flash">
-                                Piloto guiado
-                            </p>
-                            <h2 className="mt-3 text-2xl font-bold text-paper">
-                                490 € · pago único
-                            </h2>
-                            <p className="mt-3 text-sm leading-6 text-text-secondary">
-                                Instalación asistida, configuración inicial y 30 días de
-                                seguimiento para comprobar si encaja con tu despacho.
-                            </p>
-                        </div>
+                <article className="rounded-2xl border border-white/10 bg-[#111111] p-4 shadow-2xl shadow-black/30">
+                    <div className="px-1 pb-4">
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-flash">
+                            Demo real de GestorIA Local
+                        </p>
                     </div>
-                    <div className="mt-6 grid gap-3">
-                        <ProofPill icon={<MonitorCheck className="h-4 w-4" />}>
-                            Probado en Mac y Windows.
-                        </ProofPill>
-                        <ProofPill icon={<ShieldCheck className="h-4 w-4" />}>
-                            Instalación y uso comprobados con revisión técnica externa.
-                        </ProofPill>
-                        <ProofPill icon={<CheckCircle2 className="h-4 w-4" />}>
-                            La IA propone; el profesional decide.
-                        </ProofPill>
+                    <div className="aspect-video overflow-hidden rounded-xl border border-white/10 bg-black/60">
+                        {hasDemoVideo ? (
+                            <video
+                                className="h-full w-full bg-black object-contain"
+                                controls
+                                playsInline
+                                preload="metadata"
+                                poster={hasDemoPoster ? DEMO_POSTER_PUBLIC_PATH : undefined}
+                            >
+                                <source src={DEMO_VIDEO_PUBLIC_PATH} type="video/mp4" />
+                                Tu navegador no puede reproducir este vídeo.
+                            </video>
+                        ) : (
+                            <DemoFallback />
+                        )}
                     </div>
-                </div>
+                    <p className="mt-4 text-sm leading-6 text-text-secondary">
+                        Demo guiada de unos 3 minutos: instalación, configuración inicial,
+                        Telegram y calendario con datos ficticios.
+                    </p>
+                </article>
             </div>
         </section>
     );
 }
 
-function MediaSection() {
+function AudioGuidesSection() {
     return (
         <section
-            id="demo-gestoria-local"
-            className="scroll-mt-24 px-6 py-16 lg:py-24"
+            id="audio-gestoria-local"
+            className="scroll-mt-24 bg-[#111111] px-6 py-16 lg:py-24"
         >
             <div className="mx-auto max-w-[1180px]">
                 <SectionIntro
-                    eyebrow="Demo y audio"
-                    title="Mira y escucha GestorIA Local en 5 minutos"
-                    text="Empieza por la demo guiada real y, si quieres más contexto, escucha las dos guías breves sobre qué es GestorIA Local y cómo funciona el Piloto Founders."
+                    eyebrow="Audio guía"
+                    title="Escucha la guía de GestorIA Local"
+                    text="Dos audios breves para entender qué hace GestorIA Local y cómo funciona el Piloto Founders antes de solicitar una instalación guiada."
                 />
-                <div className="mt-10 grid gap-5 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
-                    <article className="rounded-2xl border border-white/10 bg-[#111111] p-4 shadow-2xl shadow-black/30">
-                        <div className="px-1 pb-4">
-                            <h3 className="text-2xl font-bold text-paper">
-                                Demo guiada real
-                            </h3>
-                            <p className="mt-2 text-sm leading-6 text-text-secondary">
-                                Vídeo de unos 3 minutos: instalación, configuración inicial,
-                                dashboard, motor IA y un caso donde una reunión enviada por
-                                Telegram queda preparada en calendario.
-                            </p>
-                        </div>
-                        <div className="aspect-video overflow-hidden rounded-xl border border-white/10 bg-black/60">
-                            {hasDemoVideo ? (
-                                <video
-                                    className="h-full w-full bg-black object-contain"
-                                    controls
-                                    playsInline
-                                    preload="metadata"
-                                    poster={hasDemoPoster ? DEMO_POSTER_PUBLIC_PATH : undefined}
-                                >
-                                    <source src={DEMO_VIDEO_PUBLIC_PATH} type="video/mp4" />
-                                    Tu navegador no puede reproducir este vídeo.
-                                </video>
-                            ) : (
-                                <DemoFallback />
-                            )}
-                        </div>
-                        <p className="mt-4 text-sm leading-6 text-text-secondary">
-                            Los datos mostrados deben ser ficticios. El token de Telegram
-                            debe mantenerse privado.
-                        </p>
-                    </article>
-
-                    <div className="grid gap-5">
-                        {AUDIO_GUIDES.map((guide) => (
-                            <article
-                                key={guide.src}
-                                className="rounded-2xl border border-white/10 bg-[#111111] p-5 shadow-xl shadow-black/20"
-                            >
-                                <div className="flex items-start gap-4">
-                                    <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-flash/25 bg-flash/10 text-flash">
-                                        <Headphones className="h-5 w-5" />
-                                    </span>
-                                    <div>
-                                        <h3 className="text-xl font-bold text-paper">
-                                            {guide.title}
-                                        </h3>
-                                        <p className="mt-2 text-sm leading-6 text-text-secondary">
-                                            {guide.description}
-                                        </p>
-                                    </div>
+                <div className="mt-10 grid gap-5 lg:grid-cols-2">
+                    {AUDIO_GUIDES.map((guide, index) => (
+                        <article
+                            key={guide.src}
+                            className="rounded-2xl border border-white/10 bg-onyx p-5 shadow-xl shadow-black/20"
+                        >
+                            <div className="flex items-start gap-4">
+                                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-flash/25 bg-flash/10 text-flash">
+                                    <Headphones className="h-5 w-5" />
+                                </span>
+                                <div>
+                                    <h3 className="text-xl font-bold text-paper">
+                                        {index + 1}. {guide.title}
+                                    </h3>
+                                    <p className="mt-2 text-sm leading-6 text-text-secondary">
+                                        {guide.description}
+                                    </p>
                                 </div>
-                                <audio
-                                    className="mt-5 w-full"
-                                    controls
-                                    controlsList="nodownload"
-                                    preload="metadata"
-                                >
-                                    <source src={guide.src} type="audio/mpeg" />
-                                    Tu navegador no puede reproducir este audio.
-                                </audio>
-                            </article>
-                        ))}
-                    </div>
+                            </div>
+                            <audio
+                                className="mt-5 w-full"
+                                controls
+                                controlsList="nodownload"
+                                preload="metadata"
+                            >
+                                <source src={guide.src} type="audio/mpeg" />
+                                Tu navegador no puede reproducir este audio.
+                            </audio>
+                        </article>
+                    ))}
                 </div>
             </div>
         </section>
@@ -627,20 +589,5 @@ function ListCard({
                 ))}
             </ul>
         </article>
-    );
-}
-
-function ProofPill({
-    children,
-    icon,
-}: {
-    readonly children: React.ReactNode;
-    readonly icon: React.ReactNode;
-}) {
-    return (
-        <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm leading-6 text-paper">
-            <span className="text-flash">{icon}</span>
-            <span>{children}</span>
-        </div>
     );
 }
