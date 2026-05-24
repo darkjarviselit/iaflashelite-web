@@ -32,13 +32,14 @@ export default function PrivacidadPage() {
 
             <h2>2. Datos que recogemos</h2>
             <p>
-                A través del formulario de contacto recogemos los siguientes datos:
+                A través del formulario de contacto y formularios de interés o
+                lista de espera recogemos los siguientes datos:
             </p>
             <ul>
                 <li>Nombre</li>
                 <li>Email</li>
                 <li>Empresa (opcional)</li>
-                <li>Tipo de servicio que te interesa</li>
+                <li>Tipo de servicio, producto o iniciativa que te interesa</li>
                 <li>Urgencia y presupuesto orientativo</li>
                 <li>Mensaje libre</li>
             </ul>
@@ -50,8 +51,9 @@ export default function PrivacidadPage() {
 
             <h2>3. Finalidad del tratamiento</h2>
             <p>
-                Los datos se utilizan exclusivamente para responder a tu consulta
-                y, si así lo decides, iniciar una conversación comercial. No se
+                Los datos se utilizan exclusivamente para responder a tu consulta,
+                avisarte sobre la iniciativa concreta a la que te has apuntado y,
+                si así lo decides, iniciar una conversación comercial. No se
                 utilizan para envíos masivos, perfilado automatizado ni publicidad
                 de terceros.
             </p>
@@ -105,6 +107,12 @@ export default function PrivacidadPage() {
                 <a href="mailto:iaflashelite@gmail.com">iaflashelite@gmail.com</a>{" "}
                 indicando el derecho que deseas ejercer. Responderemos en un
                 plazo máximo de 30 días.
+            </p>
+            <p>
+                Si te apuntas a una lista de espera o aviso de lanzamiento, puedes
+                solicitar la baja en cualquier momento respondiendo al email que
+                recibas o escribiendo a{" "}
+                <a href="mailto:iaflashelite@gmail.com">iaflashelite@gmail.com</a>.
             </p>
 
             <h2>8. Reclamaciones</h2>
