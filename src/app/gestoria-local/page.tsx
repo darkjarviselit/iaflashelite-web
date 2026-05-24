@@ -5,6 +5,7 @@ import {
     ArrowRight,
     CheckCircle2,
     ClipboardCheck,
+    Headphones,
     LockKeyhole,
     MailCheck,
     MonitorCheck,
@@ -35,6 +36,21 @@ const hasDemoVideo = existsSync(
 const hasDemoPoster = existsSync(
     join(publicDir, "gestoria-local", "gestoria-local-demo-poster.webp"),
 );
+
+const AUDIO_GUIDES = [
+    {
+        title: "Qué es GestorIA Local",
+        description:
+            "Una explicación clara del copiloto privado para gestorías pequeñas: qué hace, qué no hace y cómo encaja junto a tu software fiscal.",
+        src: "/gestoria-local/audio/gestoria-local-audio-01-que-es.mp3",
+    },
+    {
+        title: "Cómo funciona el Piloto Founders",
+        description:
+            "Instalación guiada, configuración inicial, 30 días de acompañamiento, soporte y mantenimiento opcional.",
+        src: "/gestoria-local/audio/gestoria-local-audio-02-piloto-founders.mp3",
+    },
+] as const;
 
 const FIT_ITEMS = [
     "Asesoría fiscal-laboral mixta.",
@@ -168,6 +184,7 @@ export default function GestoriaLocalPage() {
             <main className="min-h-screen bg-onyx text-paper">
                 <HeroSection />
                 <DemoSection />
+                <AudioGuidesSection />
                 <AudienceSection />
                 <CapabilitiesSection />
                 <PrivacySection />
@@ -306,6 +323,51 @@ function DemoFallback() {
                 Solicitar demo personalizada <ArrowRight size={16} />
             </Button>
         </div>
+    );
+}
+
+function AudioGuidesSection() {
+    return (
+        <section className="bg-[#111111] px-6 py-16 lg:py-24">
+            <div className="mx-auto max-w-[1180px]">
+                <SectionIntro
+                    eyebrow="Audio guía"
+                    title="Escucha la guía de GestorIA Local"
+                    text="Dos audios breves para entender qué es GestorIA Local y cómo funciona el Piloto Founders antes de solicitar una instalación guiada."
+                />
+                <div className="mt-10 grid gap-5 lg:grid-cols-2">
+                    {AUDIO_GUIDES.map((guide) => (
+                        <article
+                            key={guide.src}
+                            className="rounded-2xl border border-white/10 bg-onyx p-5 shadow-xl shadow-black/20"
+                        >
+                            <div className="flex items-start gap-4">
+                                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-flash/25 bg-flash/10 text-flash">
+                                    <Headphones className="h-5 w-5" />
+                                </span>
+                                <div>
+                                    <h3 className="text-xl font-bold text-paper">
+                                        {guide.title}
+                                    </h3>
+                                    <p className="mt-2 text-sm leading-6 text-text-secondary">
+                                        {guide.description}
+                                    </p>
+                                </div>
+                            </div>
+                            <audio
+                                className="mt-5 w-full"
+                                controls
+                                controlsList="nodownload"
+                                preload="metadata"
+                            >
+                                <source src={guide.src} type="audio/mpeg" />
+                                Tu navegador no puede reproducir este audio.
+                            </audio>
+                        </article>
+                    ))}
+                </div>
+            </div>
+        </section>
     );
 }
 
