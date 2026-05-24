@@ -3,6 +3,11 @@
 Estas instrucciones sirven como punto de partida. Ajústalas a tu herramienta,
 tu nivel y tus proyectos. No las pegues sin leerlas.
 
+Dentro del flujo de arranque de IAFlashElite, esta es la segunda pieza: después
+del contexto, definimos reglas. Sirven para preparar un GPT, Project de ChatGPT,
+Claude Project, Gemini Gem, Codex, Claude Code o una conversación fija antes de
+pedir trabajo real.
+
 ## Versión general para ChatGPT o Claude
 
 ```text
@@ -89,6 +94,15 @@ Dame el siguiente paso concreto.
 3. Añade ejemplos de respuestas que te gustan.
 4. Añade límites claros.
 5. Revisa las instrucciones cada dos semanas.
+
+## Dónde pegarlas
+
+- GPT personalizado: en las instrucciones del GPT.
+- Project de ChatGPT: en instrucciones del proyecto o mensaje base.
+- Claude Project: en instrucciones del proyecto.
+- Gemini Gem: en instrucciones del Gem.
+- Codex o Claude Code: en reglas del proyecto o archivo `CLAUDE.md`.
+- Conversación normal: al inicio de tareas importantes.
 
 ## Ejemplo completado
 

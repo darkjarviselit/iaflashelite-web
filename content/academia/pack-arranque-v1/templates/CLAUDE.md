@@ -1,5 +1,9 @@
 # Proyecto: [nombre del proyecto]
 
+Este archivo convierte el flujo de arranque en contexto de proyecto. Úsalo como
+base para Claude Code, Codex o cualquier proyecto largo donde la IA necesite
+entender objetivo, reglas, límites y definición de terminado antes de tocar nada.
+
 ## Objetivo
 
 [Describe en 3-5 líneas qué intenta conseguir este proyecto.]

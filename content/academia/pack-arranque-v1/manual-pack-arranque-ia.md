@@ -1,17 +1,27 @@
-# Pack Arranque IA: configura tu agente de trabajo
+# Pack Arranque IA: prepara tu IA antes de tocar proyectos reales
 
 Promesa del pack:
 
-> Termina la tarde con tu IA configurada para ayudarte mejor en proyectos reales.
+> Termina la tarde con tu IA preparada con contexto, reglas y primeras skills
+> para ayudarte mejor en proyectos reales.
 
-Este pack no intenta impresionarte con palabras grandes. Su objetivo es más
-simple: que dejes de abrir una IA en blanco y empieces a trabajar con contexto,
-criterio y plantillas reutilizables.
+Este pack recoge el flujo de arranque que usamos en IAFlashElite para preparar a
+nuevos colaboradores y agentes IA antes de tocar un proyecto real.
+
+Antes de construir un agente, bot o automatización, en IAFlashElite preparamos
+siempre lo mismo: contexto, instrucciones, skills, reglas y método. No es teoría
+ni una colección de prompts sueltos. Es la base mínima para que una IA entienda
+qué está haciendo, qué límites debe respetar y cómo se revisa su trabajo.
+
+El objetivo es simple: que dejes de abrir una IA en blanco y empieces a trabajar
+con una preparación clara antes de pedirle tareas importantes.
 
 Al terminar deberías tener:
 
 - un currículum IA personal;
 - instrucciones base para ChatGPT, Claude y Codex;
+- una forma de preparar un GPT, Project de ChatGPT, Claude Project, Gemini Gem,
+  Codex o Claude Code;
 - tres skills sencillas para trabajar mejor;
 - un `CLAUDE.md` base para proyectos;
 - una checklist para comprobar que tu configuración ya sirve para trabajo real.
@@ -21,8 +31,8 @@ Al terminar deberías tener:
 ### Qué necesitas
 
 Necesitas una herramienta de IA que puedas usar con texto. Puede ser ChatGPT,
-Claude, Codex u otra herramienta similar. No necesitas programar, pero sí
-necesitas leer, adaptar y revisar.
+Claude, Gemini, Codex, Claude Code u otra herramienta similar. No necesitas
+programar, pero sí necesitas leer, adaptar y revisar.
 
 También necesitas un lugar donde guardar tus plantillas. Puede ser una carpeta
 en tu ordenador, Notion, Obsidian, Google Docs, Apple Notes o cualquier sistema
@@ -73,6 +83,10 @@ La mayoría de personas usa la IA como una caja de texto suelta. Escriben una
 pregunta, reciben una respuesta, corrigen un poco y vuelven a empezar desde
 cero al día siguiente.
 
+En IAFlashElite no arrancamos así cuando queremos trabajar en serio. Antes de
+pedirle a una IA que revise una web, ayude a construir un agente, prepare una
+automatización o colabore en un producto digital, la preparamos.
+
 Eso genera tres problemas:
 
 1. La IA no sabe suficiente sobre ti.
@@ -87,7 +101,8 @@ Este pack resuelve el arranque:
 - convierte tu perfil en un contexto reutilizable;
 - define instrucciones base para tus herramientas;
 - crea skills pequeñas para tareas frecuentes;
-- te da una forma práctica de revisar si la IA está ayudando de verdad.
+- te da una forma práctica de revisar si la IA está ayudando de verdad;
+- te enseña el flujo: contexto → reglas → plantilla → prueba real → mejora.
 
 ## Qué es un contexto IA
 
@@ -147,7 +162,7 @@ Una skill buena tiene cinco partes:
 
 1. Rol: qué papel debe asumir la IA.
 2. Objetivo: qué resultado debe producir.
-3. Contexto: que información necesita.
+3. Contexto: qué información necesita.
 4. Proceso: qué pasos debe seguir.
 5. Salida: cómo debe entregar la respuesta.
 
@@ -168,6 +183,35 @@ Eso es más útil que escribir:
 
 La primera instrucción crea una forma de trabajo. La segunda abre una
 conversación demasiado libre.
+
+## Dónde preparar tu IA de trabajo
+
+El flujo sirve aunque cambie la herramienta. Lo importante no es el nombre de la
+plataforma, sino que tu IA tenga un lugar donde guardar contexto, reglas y
+criterios.
+
+Puedes usarlo en:
+
+- un GPT personalizado;
+- un Project de ChatGPT;
+- un Claude Project;
+- un Gemini Gem;
+- un proyecto con Codex;
+- un proyecto con Claude Code;
+- una conversación fija donde pegues tu contexto al empezar.
+
+La estructura es la misma:
+
+1. Contexto: quién eres, qué haces, qué proyecto quieres trabajar y qué
+   restricciones existen.
+2. Reglas: cómo debe responder la IA, qué tono debe usar y qué no debe prometer.
+3. Plantillas: instrucciones reutilizables para tareas frecuentes.
+4. Prueba real: una tarea pequeña que compruebe si la preparación ayuda.
+5. Mejora: ajustes después de ver una respuesta real.
+
+Si una herramienta permite instrucciones persistentes, pega ahí la versión corta
+de tus reglas. Si no lo permite, guarda el texto y úsalo al inicio de
+conversaciones importantes. Lo importante es no empezar desde cero cada vez.
 
 ## Cómo usar este pack paso a paso
 
@@ -196,6 +240,10 @@ guarda las plantillas de este pack.
 No busques una app perfecta. Empieza con archivos `.md`. Son simples, portables
 y fáciles de versionar.
 
+Esta carpeta es tu punto de arranque. En IAFlashElite hacemos lo mismo antes de
+abrir un proyecto real: separar contexto, reglas, skills y notas de prueba para
+que el trabajo no dependa de memoria improvisada.
+
 ### Paso 2: completa tu currículum IA personal
 
 Abre `templates/curriculum-ia-personal.md` y rellénalo con calma. No hace falta
@@ -218,6 +266,10 @@ personalizadas, memoria, proyecto o documento base.
 Si una herramienta no tiene instrucciones persistentes, guarda el texto y pégalo
 al inicio de conversaciones importantes.
 
+Estas instrucciones son la capa de seguridad operativa. No hacen magia, pero
+evitan muchos errores: tono incorrecto, respuestas demasiado largas, promesas que
+no quieres hacer o cambios fuera de alcance.
+
 ### Paso 4: prueba una skill al día
 
 No intentes usar todo a la vez. Prueba:
@@ -228,6 +280,9 @@ No intentes usar todo a la vez. Prueba:
 
 Después ajusta las plantillas según lo que realmente necesites.
 
+Una skill no se considera lista hasta que pasa por una prueba real. Si no la has
+probado con una tarea tuya, sigue siendo una plantilla teórica.
+
 ### Paso 5: crea un `CLAUDE.md` por proyecto
 
 Si trabajas con código, documentación larga o proyectos que duran más de una
@@ -236,6 +291,10 @@ restricciones y comandos.
 
 La idea es que cualquier IA que lea ese archivo entienda cómo ayudarte sin
 empezar de cero.
+
+En proyectos con Codex o Claude Code, este archivo es especialmente útil porque
+convierte tus reglas de trabajo en contexto del repositorio: qué tocar, qué no
+tocar, cómo validar y cuándo una tarea está terminada.
 
 ## Plantilla 1: Currículum IA personal
 
@@ -404,10 +463,14 @@ versión funcional. Lo importante es salir del modo "IA en blanco".
 
 ## Próximo paso: Sistema IA Pro / Builder Pass
 
-Pack Arranque IA es el primer nivel. Sirve para ordenar tu contexto y crear tus
-primeras plantillas.
+Pack Arranque IA es el primer nivel. Sirve para dejar preparada tu IA de trabajo
+antes de tocar proyectos reales.
 
-El siguiente nivel es convertir eso en sistema:
+Cuando ya tienes tu IA preparada, el siguiente paso es aprender a usarla para
+ejecutar proyectos completos con auditoría, prompts controlados, revisión y
+entrega. Eso será `Sistema IA Pro`.
+
+Ahí el foco ya no será solo arrancar. Será convertir esta base en un sistema:
 
 - bibliotecas de skills por área;
 - memoria de decisiones;
@@ -416,13 +479,12 @@ El siguiente nivel es convertir eso en sistema:
 - automatizaciones pequeñas;
 - metodología de construcción con IA.
 
-Ese será el camino de `Sistema IA Pro` y `Builder Pass`.
-
 La diferencia es simple:
 
-- Pack Arranque IA: de cero a contexto funcional.
-- Sistema IA Pro: de contexto funcional a sistema de trabajo.
-- Builder Pass: sesiones guiadas para construir proyectos reales con IA.
+- Pack Arranque IA: preparar contexto, reglas y primeras skills.
+- Sistema IA Pro: usar esa base para ejecutar proyectos con método.
+- Builder Pass: sesiones guiadas para construir y revisar proyectos reales con
+  IA.
 
 No necesitas saltar al siguiente nivel hoy. Primero deja tu IA mejor preparada
 para trabajar contigo esta tarde.

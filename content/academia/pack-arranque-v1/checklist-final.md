@@ -9,7 +9,8 @@ tener un sistema perfecto, sino salir de la tarde con una primera versión útil
 - [ ] He guardado el manual, las plantillas y la garantía en un lugar fácil de
   encontrar.
 - [ ] He leído el LEEME antes de empezar.
-- [ ] Sé qué herramienta voy a usar primero: ChatGPT, Claude, Codex u otra.
+- [ ] Sé qué herramienta voy a usar primero: ChatGPT, Claude, Gemini, Codex,
+  Claude Code u otra.
 
 ## Currículum IA
 
@@ -22,6 +23,8 @@ tener un sistema perfecto, sino salir de la tarde con una primera versión útil
 ## Instrucciones base
 
 - [ ] He adaptado las instrucciones base a mi herramienta principal.
+- [ ] He decidido dónde vivirán: GPT, Project, Gem, `CLAUDE.md` o conversación
+  fija.
 - [ ] He eliminado frases que no aplican a mi caso.
 - [ ] He añadido mi sector, tipo de proyecto o contexto principal.
 - [ ] He incluido límites claros: no inventar datos, no prometer resultados y
@@ -49,6 +52,7 @@ tener un sistema perfecto, sino salir de la tarde con una primera versión útil
 - [ ] He comprobado si la respuesta fue más útil que empezar desde cero.
 - [ ] He guardado el resultado o las mejoras que quiero repetir.
 - [ ] He anotado qué parte todavía necesita ajuste.
+- [ ] He aplicado el ciclo contexto → reglas → plantilla → prueba real → mejora.
 
 ## Siguiente paso recomendado
 

@@ -10,17 +10,20 @@ Hola. Bienvenido a Pack Arranque IA.
 
 Pausa breve.
 
-Este audio está pensado para acompañarte mientras preparas tu primer sistema
-sencillo de trabajo con IA.
+Este audio te acompaña por el flujo de arranque que usamos en IAFlashElite para
+preparar a nuevos colaboradores y agentes IA antes de tocar un proyecto real.
+
+No es teoría. Antes de construir un agente, bot o automatización, preparamos
+siempre lo mismo: contexto, instrucciones, skills, reglas y método.
 
 No necesitas hacerlo perfecto. De hecho, si hoy intentas diseñar el sistema
 perfecto, probablemente no lo termines.
 
-El objetivo es mucho más concreto: terminar la tarde con una IA mejor preparada
-para ayudarte en proyectos reales.
+El objetivo es concreto: terminar la tarde con tu IA de trabajo preparada para
+ayudarte en proyectos reales.
 
-Cuando digo mejor preparada, hablo de tres cosas: contexto, instrucciones y
-plantillas.
+Cuando digo preparada, hablo de cinco cosas: contexto, instrucciones, skills,
+reglas de proyecto y una primera prueba real.
 
 Contexto significa que la IA entiende mejor quién eres, en qué trabajas, qué
 tipo de ayuda necesitas y qué límites no debe cruzar.
@@ -28,7 +31,8 @@ tipo de ayuda necesitas y qué límites no debe cruzar.
 Instrucciones significa que no tienes que repetir en cada conversación cómo
 quieres que te responda.
 
-Plantillas significa que conviertes tareas frecuentes en procesos reutilizables.
+Skills o plantillas significa que conviertes tareas frecuentes en procesos
+reutilizables.
 
 Pausa breve.
 
@@ -36,17 +40,17 @@ Este pack no promete dinero. No promete resultados automáticos. No promete que
 la IA acierte siempre. Tampoco promete que una plantilla sirva igual para todo el
 mundo.
 
-Lo que sí busca es algo más honesto y útil: que dejes de empezar desde una
-pantalla en blanco.
+Lo que sí busca es algo más honesto y útil: que tu IA tenga una base clara antes
+de colaborar contigo.
 
 Al final deberías tener una carpeta con tu currículum IA personal, tus
-instrucciones base, tres skills de trabajo y un archivo CLAUDE.md que puedes
-adaptar a proyectos largos.
+instrucciones base, tres skills de trabajo, una prueba real y un archivo
+CLAUDE.md que puedes adaptar a proyectos largos.
 
 Pausa breve.
 
-Antes de abrir ChatGPT, Claude, Codex o cualquier otra herramienta, crea una
-carpeta base.
+Antes de abrir ChatGPT, Claude, Gemini, Codex, Claude Code o cualquier otra
+herramienta, crea una carpeta base.
 
 Puede llamarse mi sistema IA, plantillas IA, contexto IA o como prefieras. No
 pierdas tiempo buscando el nombre perfecto.
@@ -59,12 +63,18 @@ Una zona para instrucciones base.
 
 Una zona para skills.
 
+Y una zona para pruebas reales.
+
 Si ya usas Notion, Obsidian, Google Docs o una carpeta local, usa eso. No
 necesitas cambiar todo tu sistema de trabajo.
 
 La clave es que este material no se pierda en una conversación antigua. Si lo
 pierdes, no se convierte en sistema. Se convierte en otro texto que usaste una
 vez.
+
+El flujo es sencillo: contexto, reglas, plantilla, prueba real y mejora.
+
+Primero preparas. Después pides trabajo.
 
 Pausa breve.
 
@@ -655,9 +665,11 @@ Ese es el arranque.
 
 Pausa breve.
 
-El siguiente paso, cuando esto ya te sirva, será convertirlo en un sistema más
-estable: más skills, memoria de decisiones, revisión semanal y proyectos con
-estructura.
+El siguiente paso, cuando esto ya te sirva, será aprender a usar tu IA preparada
+para ejecutar proyectos completos con auditoría, prompts controlados, revisión y
+entrega.
+
+Eso será Sistema IA Pro.
 
 Por ahora, termina esta tarde con algo funcional. Guarda tus plantillas, prueba
 una de ellas y ajusta una frase.

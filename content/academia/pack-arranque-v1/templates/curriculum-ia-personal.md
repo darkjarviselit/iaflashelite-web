@@ -3,6 +3,10 @@
 Copia este documento, cambia los campos entre corchetes y guárdalo como tu
 contexto base. No hace falta rellenarlo perfecto. Hace falta que sea útil.
 
+Dentro del flujo de arranque de IAFlashElite, esta es la primera pieza: antes de
+pedir trabajo a una IA, le damos contexto claro sobre quién va a trabajar con
+ella, qué proyecto existe, qué nivel real hay y qué límites no debe cruzar.
+
 ## 1. Quién soy
 
 ```text
@@ -149,3 +153,17 @@ La IA no debe:
 - inventar políticas de devolución;
 - asumir que tengo un equipo grande.
 ```
+
+## Primera prueba real
+
+Después de completar tu currículum IA, pégalo en tu herramienta y prueba con una
+tarea pequeña:
+
+```text
+Usa este currículum IA como contexto. Ayúdame a ordenar mis 3 prioridades de
+esta semana. No repitas todo el contexto; aplícalo para darme una respuesta más
+útil.
+```
+
+Si la respuesta sigue siendo genérica, añade más contexto o límites. Si la
+respuesta mejora, guarda esa versión como tu base.

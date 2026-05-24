@@ -4,6 +4,10 @@ Objetivo: analizar una idea antes de invertir tiempo, dinero o energía.
 
 Esta skill no está para destruir ideas. Está para hacerlas más claras.
 
+Dentro del flujo de arranque de IAFlashElite, esta skill prepara a la IA para
+trabajar con criterio antes de construir. La usamos para separar entusiasmo,
+riesgo, alcance y siguiente paso verificable.
+
 ## Prompt base
 
 ```text

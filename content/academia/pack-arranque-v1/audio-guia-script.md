@@ -8,15 +8,17 @@ Uso previsto: base para locución. No es audio final.
 
 Bienvenido a Pack Arranque IA.
 
-La idea de este audio es acompañarte mientras preparas tu primer sistema sencillo
-para trabajar mejor con IA. No necesitas tener todo perfecto. De hecho, si
-intentas hacerlo perfecto hoy, probablemente no lo termines.
+Este audio te acompaña por el flujo de arranque que usamos en IAFlashElite para
+preparar a nuevos colaboradores y agentes IA antes de tocar un proyecto real.
 
-El objetivo es más concreto: terminar la tarde con una IA mejor configurada para
-ayudarte en proyectos reales.
+No es teoría. Antes de construir un agente, bot o automatización, preparamos la
+base: contexto, instrucciones, skills, reglas y método.
 
-Cuando digo "mejor configurada", no hablo de trucos raros. Hablo de tres cosas:
-contexto, instrucciones y plantillas.
+El objetivo es concreto: terminar la tarde con tu IA de trabajo preparada para
+ayudarte en proyectos reales sin empezar desde una pantalla en blanco.
+
+Cuando digo "preparada", no hablo de trucos raros. Hablo de cinco piezas:
+contexto, instrucciones, skills, reglas de proyecto y una prueba real.
 
 Contexto significa que la IA entiende un poco mejor quién eres, en qué trabajas
 y qué tipo de ayuda necesitas.
@@ -24,15 +26,16 @@ y qué tipo de ayuda necesitas.
 Instrucciones significa que no tienes que repetir cada día cómo quieres que te
 responda.
 
-Plantillas significa que conviertes tareas frecuentes en procesos reutilizables.
+Skills o plantillas significa que conviertes tareas frecuentes en procesos
+reutilizables.
 
 Este pack no promete resultados económicos. No promete que la IA acierte siempre.
 No promete que una plantilla sirva para todos los casos. Lo que sí busca es que
-dejes de empezar desde una pantalla en blanco.
+tu IA tenga una base clara antes de colaborar contigo.
 
 ## 2:00 - 5:00 | Qué vas a construir
 
-Durante este pack vas a crear cinco piezas.
+Durante este pack vas a crear seis piezas.
 
 La primera es tu currículum IA personal. No es un currículum profesional. Es una
 ficha de contexto para que la IA entienda cómo ayudarte.
@@ -40,13 +43,17 @@ ficha de contexto para que la IA entienda cómo ayudarte.
 La segunda son tus instrucciones base para ChatGPT, Claude o Codex. Esas
 instrucciones marcan tono, límites y forma de trabajo.
 
-La tercera pieza es una skill de planificación diaria. Sirve para convertir una
+La tercera pieza es una forma de preparar tu herramienta: puede ser un GPT, un
+Project de ChatGPT, un Claude Project, un Gemini Gem, Codex, Claude Code o una
+conversación fija con contexto.
+
+La cuarta pieza es una skill de planificación diaria. Sirve para convertir una
 lista de tareas en un plan realista.
 
-La cuarta pieza es una skill de revisión de ideas. Sirve para evitar que inviertas
+La quinta pieza es una skill de revisión de ideas. Sirve para evitar que inviertas
 tiempo en ideas que todavía no están claras.
 
-La quinta pieza es una skill para crear prompts de proyecto. En vez de pedir a
+La sexta pieza es una skill para crear prompts de proyecto. En vez de pedir a
 la IA que lo resuelva todo, le pides que te ayude a construir una instrucción
 mejor.
 
@@ -55,8 +62,8 @@ proyectos largos, código o documentación que necesita continuidad.
 
 ## 5:00 - 8:00 | Antes de abrir la IA
 
-Antes de pegar nada en ChatGPT, Claude o Codex, crea una carpeta para este
-sistema.
+Antes de pegar nada en ChatGPT, Claude, Gemini, Codex o Claude Code, crea una
+carpeta para este sistema.
 
 Puede llamarse `mi-sistema-ia`, `contexto-ia`, `plantillas-ia` o como quieras.
 No pierdas tiempo eligiendo el nombre perfecto.
@@ -74,6 +81,9 @@ Markdown en una carpeta son suficiente.
 
 La clave es que no quede perdido en una conversación antigua. Si lo pierdes, no
 se convierte en sistema. Se convierte en otro texto que usaste una vez.
+
+Este orden es el método: contexto, reglas, plantilla, prueba real y mejora.
+Primero preparas. Después pides trabajo.
 
 ## 8:00 - 12:00 | Currículum IA personal
 
@@ -306,8 +316,8 @@ mejores reglas y primeras herramientas de trabajo.
 Ese es el arranque.
 
 El siguiente paso, cuando esto ya te sirva, será convertirlo en un sistema más
-estable: más skills, memoria de decisiones, revisión semanal y proyectos con
-estructura.
+estable: aprender a usar tu IA preparada para ejecutar proyectos completos con
+auditoría, prompts controlados, revisión y entrega. Eso será Sistema IA Pro.
 
 Por ahora, termina esta tarde con algo funcional. Guarda tus plantillas, prueba
 una de ellas y ajusta una frase. Ese pequeño ajuste ya es el comienzo de tu

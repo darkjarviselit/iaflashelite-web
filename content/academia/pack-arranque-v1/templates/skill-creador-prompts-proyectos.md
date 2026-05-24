@@ -3,6 +3,10 @@
 Objetivo: crear un prompt de trabajo para una tarea concreta, con contexto,
 criterios y formato de salida.
 
+Dentro del flujo de arranque de IAFlashElite, esta skill evita pedirle a la IA
+"hazlo todo" demasiado pronto. Primero construye una instrucción controlada;
+después se usa esa instrucción para ejecutar, revisar y mejorar.
+
 ## Prompt base
 
 ```text

@@ -2,6 +2,13 @@
 
 Contenido fuente del primer producto de academia de IAFlashElite.
 
+Este pack recoge el flujo de arranque que usamos en IAFlashElite para preparar a
+nuevos colaboradores y agentes IA antes de tocar un proyecto real.
+
+Antes de construir un agente, bot o automatización, en IAFlashElite preparamos
+siempre lo mismo: contexto, instrucciones, skills, reglas y método. Este pack te
+entrega esa base para aplicarla en tu propio proyecto.
+
 Este paquete está pensado para convertirse más adelante en un producto
 descargable con PDF, audio guía, plantillas y prompts. En esta fase no es
 todavía el ZIP final, no es una landing y no está conectado a checkout.
@@ -19,16 +26,18 @@ todavía el ZIP final, no es una landing y no está conectado a checkout.
 
 ## Orden recomendado de uso
 
-1. Lee `manual-pack-arranque-ia.md` de principio a fin.
+1. Lee este LEEME para entender el flujo completo.
 2. Completa `templates/curriculum-ia-personal.md`.
-3. Copia y adapta `templates/instrucciones-base-chatgpt-claude-codex.md`.
-4. Prueba las tres skills de trabajo:
+3. Adapta `templates/instrucciones-base-chatgpt-claude-codex.md` a tu
+   herramienta principal.
+4. Copia y ajusta las tres skills iniciales:
    - `templates/skill-planificador-diario.md`
    - `templates/skill-revisor-ideas.md`
    - `templates/skill-creador-prompts-proyectos.md`
-5. Si trabajas en proyectos de código o documentación larga, adapta
-   `templates/CLAUDE.md` en la raíz de tu proyecto.
-6. Cierra con `checklist-final.md`.
+5. Crea `templates/CLAUDE.md` si usas Claude Code, Codex o proyectos con
+   contexto largo.
+6. Haz una primera prueba real con un proyecto pequeño.
+7. Cierra con `checklist-final.md`.
 
 ## Plan de una tarde
 
@@ -89,14 +98,9 @@ bien. Dedica 15 minutos a personalizarla antes de pedir resultados.
 
 ## Siguiente paso recomendado
 
-Cuando tengas tu contexto base y tus primeras skills funcionando, el siguiente
-paso natural es crear un sistema más estable:
+Cuando ya tienes tu IA preparada, el siguiente paso es aprender a usarla para
+ejecutar proyectos completos con auditoría, prompts controlados, revisión y
+entrega. Eso será `Sistema IA Pro`.
 
-- un espacio de trabajo por proyecto;
-- instrucciones por tipo de tarea;
-- checklist de revisión;
-- memoria de decisiones importantes;
-- plantillas reutilizables.
-
-Ese será el terreno de `Sistema IA Pro` y de `Builder Pass`, donde se trabaja
-con proyectos reales y sesiones guiadas.
+No necesitas saltar ahí hoy. Primero deja bien hecho el arranque: contexto,
+reglas, skills y una prueba real.

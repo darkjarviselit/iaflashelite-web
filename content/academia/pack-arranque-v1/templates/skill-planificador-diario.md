@@ -3,6 +3,10 @@
 Objetivo: convertir una lista desordenada de tareas en un plan realista para
 hoy.
 
+Dentro del flujo de arranque de IAFlashElite, esta skill sirve como primera
+prueba real: comprueba si tu IA ya entiende contexto, prioridades, límites y
+forma de respuesta antes de pasar a tareas más grandes.
+
 ## Prompt base
 
 ```text
