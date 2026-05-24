@@ -11,7 +11,7 @@ const PAYMENT_METHODS = [
 
 const FOOTER_NAV = {
     soluciones: [
-        { label: "Gestorías", href: "/soluciones/gestorias" },
+        { label: "Gestorías", href: "/gestoria-local" },
         { label: "Dentistas", href: "/soluciones/dentistas" },
         { label: "Inmobiliarias", href: "/soluciones/inmobiliarias" },
         { label: "Marketing", href: "/soluciones/marketing" },
