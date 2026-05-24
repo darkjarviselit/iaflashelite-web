@@ -1,7 +1,12 @@
 Nombre: Pack Arranque IA v1
+Subtítulo: Prepara tu agente y tu flujo de trabajo
 Marca: IAFlashElite
-Versión: v1.0
+Versión: v1.1-fuente
 Fecha: 2026-05-24
+
+Posicionamiento:
+El flujo de arranque que usamos en IAFlashElite para preparar a nuevos
+colaboradores y agentes IA antes de tocar un proyecto real.
 
 Archivos incluidos:
 - LEEME.md
@@ -12,12 +17,17 @@ Archivos incluidos:
 - checklist-final.md
 - garantia-calidad.md
 - templates/curriculum-ia-personal.md
-- templates/instrucciones-base-chatgpt-claude-codex.md
+- templates/contexto-maestro-proyecto.md
+- templates/instrucciones-trabajo-proyecto-ia.md
 - templates/skill-planificador-diario.md
+- templates/skill-auditoria-quirurgica.md
 - templates/skill-revisor-ideas.md
-- templates/skill-creador-prompts-proyectos.md
+- templates/skill-creador-prompts-tecnicos.md
+- templates/skill-checklist-final-entrega.md
 - templates/CLAUDE.md
 
 Nota:
 Contenido fuente pendiente de convertir a PDF/audio/ZIP final.
 No es todavía el producto descargable publicado.
+La carpeta dist/academia/pack-arranque* generada antes debe regenerarse antes de
+la venta.

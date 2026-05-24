@@ -1,113 +1,84 @@
-# Skill: Revisor de ideas
+# Skill — Revisor de ideas
 
-Objetivo: analizar una idea antes de invertir tiempo, dinero o energía.
+## Para qué sirve
 
-Esta skill no está para destruir ideas. Está para hacerlas más claras.
+Ayuda a decidir si una idea merece tiempo ahora, necesita madurar o debe
+descartarse. No mata ideas; las baja a tierra.
 
-Dentro del flujo de arranque de IAFlashElite, esta skill prepara a la IA para
-trabajar con criterio antes de construir. La usamos para separar entusiasmo,
-riesgo, alcance y siguiente paso verificable.
+## Cuándo usarla
 
-## Prompt base
+Úsala cuando tengas una idea atractiva pero todavía confusa: un producto, una
+automatización, un contenido, una oferta o una mejora de proyecto.
+
+## Cómo copiarla
+
+Pega el prompt y describe la idea en bruto. Si tienes Contexto maestro del
+proyecto, añádelo.
+
+## Prompt
 
 ```text
-Actúa como revisor de ideas práctico y honesto.
+Actúa como revisor de ideas con criterio práctico.
 
-Voy a darte una idea. Quiero que la analices antes de dedicarle más tiempo.
+Objetivo:
+Quiero saber si esta idea merece avanzar ahora, si necesita cambiar o si debería
+quedar aparcada.
 
 Reglas:
-- no uses tono motivacional;
-- no prometas resultados económicos;
-- no asumas que existe demanda si no hay prueba;
-- detecta contradicciones;
-- separa potencial, dificultad y riesgos;
-- termina con un siguiente paso pequeño y verificable.
+- No intentes venderme mi propia idea.
+- No la descartes sin explicar por qué.
+- Separa potencial, dificultad y riesgos.
+- No prometas resultados económicos.
+- No inventes demanda, clientes ni métricas.
 
 Evalúa:
-1. Problema que intenta resolver.
-2. Usuario o comprador probable.
-3. Valor real de la idea.
-4. Dificultad técnica u operativa.
-5. Riesgos de copy, legales o de expectativas.
-6. Versión mínima viable.
-7. Qué tendría que validar antes de construir.
-8. Recomendación final: avanzar, ajustar o pausar.
+1. Qué problema intenta resolver.
+2. Para quién sería útil.
+3. Qué tendría que existir para que funcione.
+4. Qué parte es demasiado vaga.
+5. Qué riesgo estoy ignorando.
+6. Qué versión mínima se podría probar.
+7. Qué debería hacer esta semana si decido avanzar.
 
-Idea:
-[pega aquí la idea]
-
-Contexto:
-[quién eres, recursos, plazo, herramientas, restricciones]
+Formato de salida:
+- Idea resumida en una frase.
+- Potencial.
+- Riesgos.
+- Versión mínima.
+- Preguntas pendientes.
+- Recomendación: avanzar, ajustar o aparcar.
 ```
 
-## Tabla de salida recomendada
-
-Pide este formato cuando quieras claridad:
+## Ejemplo de uso
 
 ```text
-Devuelve una tabla con columnas:
-- Área
-- Observación
-- Riesgo
-- Recomendación
-
-Después añade:
-- decisión recomendada;
-- primer experimento de validación;
-- qué no construir todavía.
-```
-
-## Preguntas útiles
-
-Si la idea sigue poco clara, pide:
-
-```text
-Hazme 7 preguntas para aclarar esta idea antes de construir nada.
-Ordénalas de más importante a menos importante.
-```
-
-Si quieres reducir alcance:
-
-```text
-Convierte esta idea en una primera versión que pueda probar en una tarde.
-No añadas funcionalidades extra.
+Idea: quiero crear una plantilla para ayudar a autónomos a preparar contenido
+semanal con IA. No sé si venderlo como PDF, Notion o servicio.
 ```
 
 ## Ejemplo completado
 
-Idea de ejemplo:
+```markdown
+## Idea resumida
 
-```text
-Quiero vender una plantilla de Notion para organizar proyectos personales con IA.
-```
+Una plantilla para convertir ideas sueltas en contenido semanal con IA.
 
-Salida útil esperada:
+## Potencial
 
-```text
-Resumen:
-La idea puede tener valor, pero necesita diferenciarse. "Plantilla de Notion con
-IA" es demasiado amplio si no se concreta qué problema resuelve.
+Puede ser útil si se enfoca en una persona concreta y entrega un flujo simple.
 
-Potencial:
-- Puede servir a estudiantes, creadores o profesionales con muchos proyectos.
-- El precio debería ser bajo o incluir una guía clara de uso.
+## Riesgos
 
-Riesgos:
-- Suena genérico si solo promete "organización".
-- Puede parecer otra plantilla más si no incluye ejemplos reales.
-- No debe prometer productividad garantizada.
+- El mercado está saturado de plantillas genéricas.
+- Falta definir si el comprador quiere contenido, calendario o revisión.
+- No se debe prometer crecimiento de audiencia.
 
-Versión mínima viable:
-Una plantilla con tres vistas: proyectos activos, tareas de esta semana y
-prompts reutilizables. Añadir un PDF corto con instrucciones y un ejemplo
-relleno.
+## Versión mínima
 
-Qué validar antes de construir:
-1. Si la gente entiende el problema en una frase.
-2. Si pagaría por plantilla + guía o solo quiere el tutorial.
-3. Si el comprador usa Notion de verdad.
+Una plantilla de 7 días con instrucciones, ejemplo completado y checklist.
 
-Recomendación:
-Ajustar antes de construir. Define un público concreto y prueba una página de
-venta simple antes de dedicar tiempo a una plantilla completa.
+## Recomendación
+
+Ajustar antes de construir. Primero define público, formato y resultado
+concreto.
 ```

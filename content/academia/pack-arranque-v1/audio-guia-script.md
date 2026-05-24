@@ -1,9 +1,11 @@
 # Audio guía — Pack Arranque IA
 
-Duración objetivo: 25-30 minutos.
+Duración esperada: 10-15 minutos aproximadamente.
 
-Uso previsto: guion fuente para grabar o generar una guía hablada. No es audio
-final.
+Uso previsto: audio guía breve de acompañamiento para seguir el pack con más
+claridad. No es audio final.
+
+No se debe expandir por relleno. La guía debe sonar natural, concreta y útil.
 
 ## Apertura
 

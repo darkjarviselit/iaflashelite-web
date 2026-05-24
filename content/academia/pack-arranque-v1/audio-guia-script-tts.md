@@ -1,6 +1,9 @@
 Guion limpio para locución. Pack Arranque IA.
 
-Duración objetivo: 25 a 30 minutos.
+Duración esperada: 10 a 15 minutos aproximadamente.
+
+Uso previsto: audio guía breve de acompañamiento para seguir el pack con más
+claridad. No es audio final.
 
 Hola. Bienvenido a Pack Arranque IA: prepara tu agente y tu flujo de trabajo.
 

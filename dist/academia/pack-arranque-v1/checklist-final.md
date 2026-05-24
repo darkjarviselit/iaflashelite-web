@@ -1,65 +1,66 @@
 # Checklist final — Pack Arranque IA
 
-Imprime esta lista o cópiala en tu herramienta de notas. El objetivo no es
-tener un sistema perfecto, sino salir de la tarde con una primera versión útil.
+Usa esta checklist al terminar la tarde. No busca perfección; busca confirmar
+que tienes una base funcional para trabajar con IA con más método.
 
-## Preparación
+## Contexto personal
 
-- [ ] He creado una carpeta base para mi sistema IA.
-- [ ] He guardado el manual, las plantillas y la garantía en un lugar fácil de
-  encontrar.
-- [ ] He leído el LEEME antes de empezar.
-- [ ] Sé qué herramienta voy a usar primero: ChatGPT, Claude, Gemini, Codex,
-  Claude Code u otra.
+- [ ] He creado mi `curriculum-ia-personal.md`.
+- [ ] El documento explica quién soy, qué sé hacer y qué quiero conseguir.
+- [ ] Incluye mi forma de trabajar, mis límites y mi estilo preferido.
+- [ ] Puedo pegarlo en ChatGPT, Claude, Gemini, Grok o una herramienta similar
+      sin tener que reescribirlo.
 
-## Currículum IA
+## Contexto del proyecto
 
-- [ ] He completado mi currículum IA personal.
-- [ ] He escrito mi nivel real, sin exagerarlo.
-- [ ] He definido qué tipo de respuestas quiero.
-- [ ] He escrito qué límites no quiero que la IA cruce.
-- [ ] He guardado una versión lista para copiar y pegar.
+- [ ] He creado mi `contexto-maestro-proyecto.md`.
+- [ ] El documento explica qué es el proyecto.
+- [ ] Explica qué problema resuelve y a quién sirve.
+- [ ] Indica qué existe ya y qué falta.
+- [ ] Incluye riesgos, límites y cosas que no debe prometer.
+- [ ] Define objetivos a 30, 60 y 90 días.
 
-## Instrucciones base
+## Instrucciones de trabajo
 
-- [ ] He adaptado las instrucciones base a mi herramienta principal.
-- [ ] He decidido dónde vivirán: GPT, Project, Gem, `CLAUDE.md` o conversación
-  fija.
-- [ ] He eliminado frases que no aplican a mi caso.
-- [ ] He añadido mi sector, tipo de proyecto o contexto principal.
-- [ ] He incluido límites claros: no inventar datos, no prometer resultados y
-  avisar si falta información.
+- [ ] He creado `instrucciones-trabajo-proyecto-ia.md`.
+- [ ] Define qué papel debe tener la IA.
+- [ ] Define qué tareas puede hacer y cuáles no.
+- [ ] Indica tono, formato, profundidad y nivel de crítica.
+- [ ] Explica cuándo debe investigar, cuándo debe pedir revisión y cuándo debe
+      crear prompts técnicos.
+- [ ] Pide separar hechos, hipótesis, riesgos, recomendación y próximos pasos.
 
-## Skills
+## Estructura de proyectos IA
 
-- [ ] He copiado y adaptado la skill de planificador diario.
-- [ ] He copiado y adaptado la skill de revisor de ideas.
-- [ ] He copiado y adaptado la skill de creador de prompts para proyectos.
-- [ ] He probado al menos una skill con una tarea real.
-- [ ] He ajustado una frase después de probarla.
+- [ ] Tengo al menos una IA o proyecto configurado con mi contexto.
+- [ ] Sé si voy a empezar con un único espacio o con 2-3 espacios separados.
+- [ ] Si el proyecto crece, sé cómo separar:
+      - Estrategia y mejoras.
+      - Marketing y ventas.
+      - Prompt Builder técnico.
 
-## CLAUDE.md base
+## Skills base
 
-- [ ] He creado un `CLAUDE.md` base si trabajo con proyectos largos, código o
-  documentación.
-- [ ] He escrito el objetivo del proyecto.
-- [ ] He añadido límites y criterios de calidad.
-- [ ] He indicado cómo revisar si una tarea está terminada.
+- [ ] Tengo guardada la skill de planificador diario.
+- [ ] Tengo guardada la skill de auditoría quirúrgica.
+- [ ] Tengo guardada la skill de revisor de ideas.
+- [ ] Tengo guardada la skill de creador de prompts técnicos.
+- [ ] Tengo guardada la skill de checklist final de entrega.
+- [ ] Entiendo que estas skills no se activan solas en todas las herramientas:
+      debo copiarlas o llamarlas cuando las necesite.
 
 ## Primera prueba real
 
-- [ ] He usado mi contexto y una skill en una tarea real.
-- [ ] He comprobado si la respuesta fue más útil que empezar desde cero.
-- [ ] He guardado el resultado o las mejoras que quiero repetir.
-- [ ] He anotado qué parte todavía necesita ajuste.
-- [ ] He aplicado el ciclo contexto → reglas → plantilla → prueba real → mejora.
+- [ ] He usado mi nueva configuración en una tarea real.
+- [ ] La IA entendió mejor mi contexto que en una conversación vacía.
+- [ ] Detecté al menos una cosa que debo ajustar.
+- [ ] Guardé la versión corregida de mis documentos.
 
-## Siguiente paso recomendado
+## Siguiente paso
 
-- [ ] Elegir una tarea semanal donde usaré este sistema.
-- [ ] Revisar mis instrucciones dentro de 7 días.
-- [ ] Crear una nueva skill solo si aparece una tarea repetitiva real.
-- [ ] No añadir complejidad hasta que las plantillas actuales estén probadas.
+- [ ] Sé cuál es el siguiente paso de mi proyecto.
+- [ ] Sé qué parte necesita estrategia, marketing o prompt técnico.
+- [ ] Sé qué preguntarle a la IA la próxima vez.
 
-Resultado esperado: tu IA ya tiene mejor contexto, instrucciones más claras y
-tres primeras formas de trabajo reutilizables.
+Si has marcado casi todo, ya tienes el arranque. Lo siguiente no es acumular más
+plantillas: es usar esta base en un proyecto real, revisar y mejorar.

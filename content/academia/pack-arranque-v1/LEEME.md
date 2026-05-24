@@ -22,7 +22,7 @@ todavía el ZIP final, no es una landing y no está conectado a checkout.
 
 - Manual principal en Markdown.
 - Tres prompts principales para preparar persona, proyecto e instrucciones.
-- Guion para futuro audio guía de 25-30 minutos.
+- Guion para futuro audio guía breve de acompañamiento.
 - Versión limpia del guion para locución TTS.
 - Plantillas listas para copiar, pegar y adaptar.
 - Cinco skills base de trabajo.
