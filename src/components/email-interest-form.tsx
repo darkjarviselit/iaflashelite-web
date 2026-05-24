@@ -6,7 +6,7 @@ import { type FormEvent, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 interface EmailInterestFormProps {
-	topic: "casos" | "academia";
+	topic: "casos" | "academia" | "builder-pass";
 	headline: string;
 	subtext?: string;
 	submitLabel?: string;
