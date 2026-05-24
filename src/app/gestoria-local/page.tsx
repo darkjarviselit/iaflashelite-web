@@ -225,8 +225,14 @@ function HeroSection() {
                         </p>
                     </div>
                     <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                        <Button href={BUY_HREF} size="lg" variant="gradient">
-                            Comprar GestorIA Local — 490 € <ArrowRight size={18} />
+                        <Button
+                            href={BUY_HREF}
+                            size="lg"
+                            variant="gradient"
+                            className="w-full whitespace-nowrap px-5 text-sm leading-none sm:w-auto sm:min-w-[19rem] sm:px-7 sm:text-base"
+                        >
+                            Comprar GestorIA Local — 490 €{" "}
+                            <ArrowRight className="h-[18px] w-[18px] shrink-0" />
                         </Button>
                         <Button
                             href={SPECIFIC_SERVICE_HREF}
