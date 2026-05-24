@@ -6,6 +6,7 @@ import {
     Bell,
     Clock,
     DatabaseBackup,
+    GraduationCap,
     KeyRound,
     Link2,
     MailWarning,
@@ -44,6 +45,7 @@ const PRODUCT_ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
     "link-2": Link2,
     "mail-warning": MailWarning,
     sparkles: Sparkles,
+    "graduation-cap": GraduationCap,
 };
 
 export function ProductsGrid({ products, initialAudience, hideFilters = false }: ProductsGridProps) {

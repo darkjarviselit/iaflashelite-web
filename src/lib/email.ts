@@ -3,8 +3,10 @@ import {
     GESTORIA_LOCAL_ASSISTANCE_ADDON_ID,
     GESTORIA_LOCAL_DELIVERY_LINKS,
     GESTORIA_LOCAL_PRODUCT_SLUG,
+    PACK_ARRANQUE_PRODUCT_SLUG,
     type ProductAddon,
 } from "@/lib/constants";
+import { createPackArranqueDownloadUrl } from "@/lib/secure-downloads";
 
 let cachedTransporter: Transporter | null = null;
 
@@ -47,11 +49,24 @@ export interface GestoriaLocalDeliveryEmailParams {
     paymentMethodLabel?: string;
 }
 
+export interface PackArranqueDeliveryEmailParams {
+    to: string;
+    customerName: string;
+    productName: string;
+    amount: string;
+    customerEmail?: string;
+    orderId?: string | null;
+    transactionId?: string | null;
+    policyVersion?: string;
+    paymentMethodLabel?: string;
+}
+
 // Slugs reales del catálogo (constants.ts). Las env vars siguen la convención
 // DOWNLOAD_URL_<SLUG_UPPER_SNAKE>. Las URLs se generan con scripts/upload-zips.mjs.
 const DOWNLOAD_URL_BY_SLUG: Record<string, () => string | undefined> = {
     [GESTORIA_LOCAL_PRODUCT_SLUG]: () =>
         publicUrl(GESTORIA_LOCAL_DELIVERY_LINKS.package),
+    [PACK_ARRANQUE_PRODUCT_SLUG]: () => undefined,
     "generador-contrasenas-basico": () => process.env.DOWNLOAD_URL_GENERADOR_CONTRASENAS_BASICO,
     "verificador-urls": () => process.env.DOWNLOAD_URL_VERIFICADOR_URLS,
     "anti-phishing": () => process.env.DOWNLOAD_URL_ANTI_PHISHING,
@@ -363,6 +378,145 @@ export async function sendGestoriaLocalDeliveryEmail(
         return true;
     } catch (error) {
         console.error("[email] Error enviando GestorIA Local:", error);
+        return false;
+    }
+}
+
+export async function sendPackArranqueDeliveryEmail(
+    params: PackArranqueDeliveryEmailParams,
+): Promise<boolean> {
+    const {
+        to,
+        customerName,
+        productName,
+        amount,
+        customerEmail,
+        orderId,
+        transactionId,
+        policyVersion,
+        paymentMethodLabel,
+    } = params;
+    const user = (process.env.GMAIL_USER ?? "").trim();
+    if (!user || !(process.env.GMAIL_APP_PASSWORD ?? "").trim()) {
+        console.error("[email] GMAIL_USER / GMAIL_APP_PASSWORD no configurados");
+        return false;
+    }
+
+    let downloadUrl: string;
+    try {
+        downloadUrl = createPackArranqueDownloadUrl({
+            customerEmail: customerEmail ?? to,
+            orderId: orderId ?? transactionId ?? `manual-${Date.now()}`,
+        });
+    } catch (error) {
+        console.error("[email] No se pudo generar enlace seguro Pack Arranque:", error);
+        return false;
+    }
+
+    const deliveredAt = new Date().toISOString();
+    const buyerEmail = customerEmail ?? to;
+    const orderLine = orderId
+        ? `<p style="margin: 4px 0; color: #475569;"><strong>Pedido:</strong> ${escapeHtml(orderId)}</p>`
+        : "";
+    const transactionLine = transactionId
+        ? `<p style="margin: 4px 0; color: #475569;"><strong>Transacción:</strong> ${escapeHtml(transactionId)}</p>`
+        : "";
+    const paymentLine = paymentMethodLabel
+        ? `<p style="margin: 4px 0; color: #475569;"><strong>Método de pago:</strong> ${escapeHtml(paymentMethodLabel)}</p>`
+        : "";
+    const policyLine = policyVersion
+        ? `<p style="margin: 4px 0; color: #475569;"><strong>Política aplicada:</strong> ${escapeHtml(policyVersion)}</p>`
+        : "";
+
+    const html = `<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"></head>
+<body style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 20px; color: #333;">
+  <div style="text-align: center; margin-bottom: 30px;">
+    <h1 style="color: #0891b2; font-size: 24px;">iaflashelite</h1>
+  </div>
+
+  <h2 style="color: #1e293b;">Tu Pack Arranque IA está listo</h2>
+
+  <p>Hola <strong>${escapeHtml(customerName)}</strong>,</p>
+
+  <p>Tu compra de <strong>${escapeHtml(productName)}</strong> por
+  <strong>${escapeHtml(amount)}€</strong> está lista. El enlace de descarga es
+  temporal para proteger el material.</p>
+
+  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; margin: 20px 0;">
+    <p style="margin: 4px 0; color: #475569;"><strong>Email comprador:</strong> ${escapeHtml(buyerEmail)}</p>
+    <p style="margin: 4px 0; color: #475569;"><strong>Fecha de entrega:</strong> ${escapeHtml(deliveredAt)}</p>
+    ${paymentLine}
+    ${orderLine}
+    ${transactionLine}
+    ${policyLine}
+  </div>
+
+  <div style="text-align: center; margin: 30px 0;">
+    <a href="${downloadUrl}"
+       style="background-color: #0891b2; color: white; padding: 16px 32px;
+              text-decoration: none; border-radius: 8px; font-size: 18px;
+              font-weight: bold; display: inline-block;">
+      Descargar Pack Arranque IA
+    </a>
+  </div>
+
+  <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 16px; margin: 20px 0;">
+    <p style="margin: 0; color: #166534;">
+      <strong>Garantía de calidad — 14 días:</strong> cubre la calidad y
+      completitud del material descargable. No cubre resultados económicos ni
+      ejecución incorrecta por parte del comprador.
+    </p>
+  </div>
+
+  <p style="font-size: 13px; color: #64748b; line-height: 1.6;">
+    Al haberse iniciado la entrega digital solicitada, el derecho de
+    desistimiento de 14 días deja de aplicarse cuando empieza el acceso,
+    descarga o envío. Mantienes tus derechos si hay un problema real de
+    entrega, archivo, descripción o funcionamiento.
+  </p>
+
+  <p>Si necesitas reenvío del enlace, responde a este email o escribe a
+    <a href="mailto:iaflashelite@gmail.com" style="color: #0891b2;">iaflashelite@gmail.com</a>.
+  </p>
+</body>
+</html>`;
+
+    const textLines = [
+        `Hola ${customerName},`,
+        ``,
+        `Tu Pack Arranque IA está listo.`,
+        `Producto: ${productName}`,
+        `Importe: ${amount}€`,
+        `Email comprador: ${buyerEmail}`,
+        `Fecha de entrega: ${deliveredAt}`,
+        paymentMethodLabel ? `Método de pago: ${paymentMethodLabel}` : ``,
+        orderId ? `Pedido: ${orderId}` : ``,
+        transactionId ? `Transacción: ${transactionId}` : ``,
+        policyVersion ? `Política aplicada: ${policyVersion}` : ``,
+        ``,
+        `Descarga temporal:`,
+        downloadUrl,
+        ``,
+        `Garantía de calidad — 14 días: cubre la calidad y completitud del material descargable. No cubre resultados económicos ni ejecución incorrecta por parte del comprador.`,
+        `Si necesitas reenvío del enlace, responde a este email.`,
+        ``,
+        `iaflashelite`,
+    ].filter((line) => line.length > 0);
+
+    try {
+        await getTransporter().sendMail({
+            from: `"iaflashelite" <${user}>`,
+            to,
+            subject: `Tu Pack Arranque IA está listo — iaflashelite`,
+            text: textLines.join("\n"),
+            html,
+        });
+        console.log(`[email] Entrega Pack Arranque IA enviada a ${to}`);
+        return true;
+    } catch (error) {
+        console.error("[email] Error enviando Pack Arranque IA:", error);
         return false;
     }
 }

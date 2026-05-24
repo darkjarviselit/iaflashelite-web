@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import {
     GESTORIA_LOCAL_PRODUCT_SLUG,
     GUARANTEE_POLICY_VERSION,
+    PACK_ARRANQUE_PRODUCT_SLUG,
     PRODUCTS,
     calculateProductTotal,
 } from "@/lib/constants";
@@ -12,7 +13,9 @@ import {
     getDownloadUrl,
     sendDeliveryEmail,
     sendGestoriaLocalDeliveryEmail,
+    sendPackArranqueDeliveryEmail,
 } from "@/lib/email";
+import { isPackArranqueSecureDeliveryConfigured } from "@/lib/secure-downloads";
 
 interface DeliverBody {
     customerEmail?: string;
@@ -71,36 +74,59 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "invalid_addons" }, { status: 400 });
     }
 
-    const downloadUrl = getDownloadUrl(productSlug);
-    if (!downloadUrl) {
+    const isPackArranque = product.slug === PACK_ARRANQUE_PRODUCT_SLUG;
+    if (isPackArranque && !isPackArranqueSecureDeliveryConfigured()) {
+        return NextResponse.json(
+            { error: "secure_delivery_not_configured" },
+            { status: 503 },
+        );
+    }
+
+    const downloadUrl = isPackArranque ? null : getDownloadUrl(productSlug);
+    if (!isPackArranque && !downloadUrl) {
         return NextResponse.json({ error: "no_download_url" }, { status: 500 });
     }
 
     // La prueba histórica de consentimiento vive en el pedido manual reenviado a giris-agent.
     // Este endpoint solo ejecuta la entrega tras confirmar pago fuera del checkout.
-    const sent =
-        product.slug === GESTORIA_LOCAL_PRODUCT_SLUG
-            ? await sendGestoriaLocalDeliveryEmail({
-                  to: customerEmail,
-                  customerName,
-                  productName: product.name,
-                  amount: String(calculated.total),
-                  customerEmail,
-                  policyVersion: GUARANTEE_POLICY_VERSION,
-                  selectedAddons: calculated.selectedAddons,
-                  paymentMethodLabel: paymentMethodLabel || "Pago manual confirmado",
-              })
-            : await sendDeliveryEmail({
-                  to: customerEmail,
-                  customerName,
-                  productName: product.name,
-                  productSlug,
-                  downloadUrl,
-                  amount: String(calculated.total),
-                  customerEmail,
-                  policyVersion: GUARANTEE_POLICY_VERSION,
-                  deliverySource: "manual_delivery",
-              });
+    let sent: boolean;
+    if (isPackArranque) {
+        sent = await sendPackArranqueDeliveryEmail({
+            to: customerEmail,
+            customerName,
+            productName: product.name,
+            amount: String(calculated.total),
+            customerEmail,
+            policyVersion: GUARANTEE_POLICY_VERSION,
+            paymentMethodLabel: paymentMethodLabel || "Pago manual confirmado",
+        });
+    } else if (product.slug === GESTORIA_LOCAL_PRODUCT_SLUG) {
+        sent = await sendGestoriaLocalDeliveryEmail({
+            to: customerEmail,
+            customerName,
+            productName: product.name,
+            amount: String(calculated.total),
+            customerEmail,
+            policyVersion: GUARANTEE_POLICY_VERSION,
+            selectedAddons: calculated.selectedAddons,
+            paymentMethodLabel: paymentMethodLabel || "Pago manual confirmado",
+        });
+    } else {
+        if (!downloadUrl) {
+            return NextResponse.json({ error: "no_download_url" }, { status: 500 });
+        }
+        sent = await sendDeliveryEmail({
+            to: customerEmail,
+            customerName,
+            productName: product.name,
+            productSlug,
+            downloadUrl,
+            amount: String(calculated.total),
+            customerEmail,
+            policyVersion: GUARANTEE_POLICY_VERSION,
+            deliverySource: "manual_delivery",
+        });
+    }
 
     if (!sent) {
         return NextResponse.json({ error: "email_failed" }, { status: 500 });

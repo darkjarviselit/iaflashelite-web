@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import {
     GESTORIA_LOCAL_PRODUCT_SLUG,
     GUARANTEE_POLICY_VERSION,
+    PACK_ARRANQUE_PRODUCT_SLUG,
     PRODUCTS,
     calculateProductTotal,
 } from "@/lib/constants";
@@ -9,7 +10,9 @@ import {
     getDownloadUrl,
     sendDeliveryEmail,
     sendGestoriaLocalDeliveryEmail,
+    sendPackArranqueDeliveryEmail,
 } from "@/lib/email";
+import { isPackArranqueSecureDeliveryConfigured } from "@/lib/secure-downloads";
 
 const PAYPAL_API =
     (process.env.PAYPAL_API_BASE ?? "https://api-m.paypal.com").replace(/\/+$/, "");
@@ -124,6 +127,15 @@ export async function POST(request: Request) {
     if (!calculated) {
         return NextResponse.json({ error: "invalid_addons" }, { status: 400 });
     }
+    if (
+        product.slug === PACK_ARRANQUE_PRODUCT_SLUG &&
+        !isPackArranqueSecureDeliveryConfigured()
+    ) {
+        return NextResponse.json(
+            { error: "secure_delivery_not_configured" },
+            { status: 503 },
+        );
+    }
 
     let captureData: PaypalCapture;
     try {
@@ -167,8 +179,13 @@ export async function POST(request: Request) {
     const paypalCaptureId = capture?.id ?? null;
     const captureTime = capture?.create_time ?? new Date().toISOString();
     const payerEmail = captureData.payer?.email_address ?? null;
-    const downloadUrl = getDownloadUrl(productSlug);
-    const deliveryStatus = downloadUrl ? "email_delivery_requested" : "download_url_missing";
+    const isPackArranque = product.slug === PACK_ARRANQUE_PRODUCT_SLUG;
+    const downloadUrl = isPackArranque ? null : getDownloadUrl(productSlug);
+    const deliveryStatus = isPackArranque
+        ? "secure_email_delivery_requested"
+        : downloadUrl
+            ? "email_delivery_requested"
+            : "download_url_missing";
 
     // Forward a giris-agent — fire-and-forget, no rompemos respuesta al cliente.
     const forwardPayload = {
@@ -234,7 +251,21 @@ export async function POST(request: Request) {
     })();
 
     // Entrega automática por email — fire-and-forget.
-    if (product.slug === GESTORIA_LOCAL_PRODUCT_SLUG) {
+    if (isPackArranque) {
+        void sendPackArranqueDeliveryEmail({
+            to: customerEmail,
+            customerName,
+            productName: product.name,
+            amount: String(calculated.total),
+            orderId: paypalOrderId,
+            transactionId: paypalCaptureId,
+            customerEmail,
+            policyVersion,
+            paymentMethodLabel: "PayPal / Tarjeta",
+        }).catch((err) => {
+            console.error("[paypal capture] Pack Arranque delivery email error:", err);
+        });
+    } else if (product.slug === GESTORIA_LOCAL_PRODUCT_SLUG) {
         void sendGestoriaLocalDeliveryEmail({
             to: customerEmail,
             customerName,

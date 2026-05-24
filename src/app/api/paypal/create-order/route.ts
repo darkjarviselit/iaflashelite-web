@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
-import { PRODUCTS, calculateProductTotal } from "@/lib/constants";
+import {
+    PACK_ARRANQUE_PRODUCT_SLUG,
+    PRODUCTS,
+    calculateProductTotal,
+} from "@/lib/constants";
+import { isPackArranqueSecureDeliveryConfigured } from "@/lib/secure-downloads";
 
 const PAYPAL_API =
     (process.env.PAYPAL_API_BASE ?? "https://api-m.paypal.com").replace(/\/+$/, "");
@@ -66,6 +71,15 @@ export async function POST(request: Request) {
     const productType = product.type ?? "download";
     if (productType !== "download") {
         return NextResponse.json({ error: "paypal_direct_only_for_downloads" }, { status: 400 });
+    }
+    if (
+        product.slug === PACK_ARRANQUE_PRODUCT_SLUG &&
+        !isPackArranqueSecureDeliveryConfigured()
+    ) {
+        return NextResponse.json(
+            { error: "secure_delivery_not_configured" },
+            { status: 503 },
+        );
     }
 
     const calculated = calculateProductTotal(product.slug, product.price, addonIds);
