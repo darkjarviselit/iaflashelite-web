@@ -1,324 +1,241 @@
-# Guion audio guía: Pack Arranque IA
+# Audio guía — Pack Arranque IA
 
-Duración objetivo futura: 25-30 minutos.
+Duración objetivo: 25-30 minutos.
 
-Uso previsto: base para locución. No es audio final.
+Uso previsto: guion fuente para grabar o generar una guía hablada. No es audio
+final.
 
-## 0:00 - 2:00 | Bienvenida
+## Apertura
 
-Bienvenido a Pack Arranque IA.
+Hola. Bienvenido a Pack Arranque IA: prepara tu agente y tu flujo de trabajo.
 
-Este audio te acompaña por el flujo de arranque que usamos en IAFlashElite para
-preparar a nuevos colaboradores y agentes IA antes de tocar un proyecto real.
+Este pack recoge el flujo de arranque que usamos en IAFlashElite para preparar a
+nuevos colaboradores y agentes IA antes de tocar un proyecto real.
 
-No es teoría. Antes de construir un agente, bot o automatización, preparamos la
-base: contexto, instrucciones, skills, reglas y método.
+Antes de construir un agente, bot o automatización, preparamos siempre lo mismo:
+contexto, instrucciones, skills, reglas y método.
 
-El objetivo es concreto: terminar la tarde con tu IA de trabajo preparada para
-ayudarte en proyectos reales sin empezar desde una pantalla en blanco.
+No es teoría. No es una colección de prompts sueltos. Es la base mínima para que
+tu IA entienda quién eres, qué proyecto quieres construir y cómo debe ayudarte.
 
-Cuando digo "preparada", no hablo de trucos raros. Hablo de cinco piezas:
-contexto, instrucciones, skills, reglas de proyecto y una prueba real.
+La promesa es concreta: terminar la tarde con tu IA preparada para entender tu
+perfil, tu proyecto y tu forma de trabajar.
 
-Contexto significa que la IA entiende un poco mejor quién eres, en qué trabajas
-y qué tipo de ayuda necesitas.
+## Qué vas a construir
 
-Instrucciones significa que no tienes que repetir cada día cómo quieres que te
-responda.
+Al terminar este pack deberías tener cinco piezas:
 
-Skills o plantillas significa que conviertes tareas frecuentes en procesos
-reutilizables.
+1. Tu Currículum IA personal.
+2. El Contexto maestro de tu proyecto.
+3. Las Instrucciones de trabajo de tu proyecto IA.
+4. Una estructura básica de espacios IA.
+5. Cinco skills base para trabajar con método.
 
-Este pack no promete resultados económicos. No promete que la IA acierte siempre.
-No promete que una plantilla sirva para todos los casos. Lo que sí busca es que
-tu IA tenga una base clara antes de colaborar contigo.
+El resultado no es perfecto ni definitivo. Es una base usable. A partir de ahí,
+cada proyecto real te ayudará a mejorarla.
 
-## 2:00 - 5:00 | Qué vas a construir
+## Por qué no empezamos con prompts sueltos
 
-Durante este pack vas a crear seis piezas.
+Mucha gente abre una IA, escribe una petición rápida y espera una respuesta
+brillante. A veces funciona para tareas pequeñas. Pero cuando quieres construir
+algo serio, la IA necesita más que una orden.
 
-La primera es tu currículum IA personal. No es un currículum profesional. Es una
-ficha de contexto para que la IA entienda cómo ayudarte.
+Necesita saber quién eres, qué sabes, qué proyecto estás trabajando, qué no debe
+prometer y cómo debe revisar el resultado.
 
-La segunda son tus instrucciones base para ChatGPT, Claude o Codex. Esas
-instrucciones marcan tono, límites y forma de trabajo.
+Si no le das esa base, la IA rellena huecos. Y cuando rellena huecos, puede
+responder con seguridad sobre cosas que no entiende.
 
-La tercera pieza es una forma de preparar tu herramienta: puede ser un GPT, un
-Project de ChatGPT, un Claude Project, un Gemini Gem, Codex, Claude Code o una
-conversación fija con contexto.
+El flujo de IAFlashElite evita ese arranque desordenado:
 
-La cuarta pieza es una skill de planificación diaria. Sirve para convertir una
-lista de tareas en un plan realista.
+Primero contexto.
 
-La quinta pieza es una skill de revisión de ideas. Sirve para evitar que inviertas
-tiempo en ideas que todavía no están claras.
+Después reglas.
 
-La sexta pieza es una skill para crear prompts de proyecto. En vez de pedir a
-la IA que lo resuelva todo, le pides que te ayude a construir una instrucción
-mejor.
+Después skills.
 
-Y como bonus tienes un `CLAUDE.md` base. Ese archivo es muy útil si trabajas con
-proyectos largos, código o documentación que necesita continuidad.
+Después prueba real.
 
-## 5:00 - 8:00 | Antes de abrir la IA
+Y después mejora.
 
-Antes de pegar nada en ChatGPT, Claude, Gemini, Codex o Claude Code, crea una
-carpeta para este sistema.
+## Paso 1: Currículum IA personal
 
-Puede llamarse `mi-sistema-ia`, `contexto-ia`, `plantillas-ia` o como quieras.
-No pierdas tiempo eligiendo el nombre perfecto.
+El Currículum IA personal es una ficha de contexto sobre ti.
 
-Dentro crea tres zonas:
+No es un currículum laboral. No está pensado para impresionar. Está pensado para
+que la IA entienda cómo ayudarte.
 
-Una para contexto personal.
+Aquí defines quién eres, qué sabes hacer, qué quieres construir, qué estilo
+prefieres y qué límites tienes.
 
-Una para instrucciones base.
+Lo más importante es no inventar un perfil ideal. Si estás empezando, dilo. Si
+tienes poco tiempo, dilo. Si prefieres respuestas cortas, dilo. Si necesitas que
+la IA te contradiga cuando una idea no está clara, dilo.
 
-Una para skills.
+La plantilla incluye un prompt que pide a la IA entrevistarte paso a paso. Eso
+es importante. No queremos 40 preguntas de golpe. Queremos una conversación que
+profundice cuando haga falta.
 
-Si ya usas Notion, Obsidian o Google Docs, puedes hacerlo ahí. Si no, archivos
-Markdown en una carpeta son suficiente.
+Cuando termines, guarda el resultado como `curriculum-ia-personal.md`.
 
-La clave es que no quede perdido en una conversación antigua. Si lo pierdes, no
-se convierte en sistema. Se convierte en otro texto que usaste una vez.
+Puedes usarlo en ChatGPT, Claude, Gemini, Grok, GPT Projects, Claude Projects,
+Gemini Gems o cualquier IA de confianza.
 
-Este orden es el método: contexto, reglas, plantilla, prueba real y mejora.
-Primero preparas. Después pides trabajo.
+## Paso 2: Contexto maestro del proyecto
 
-## 8:00 - 12:00 | Currículum IA personal
+La segunda pieza es el Contexto maestro del proyecto.
 
-El currículum IA personal es el centro del pack.
+Aquí la IA debe entender qué estás construyendo: una web, una app, un producto,
+un negocio, una idea, un trabajo o una futura automatización.
 
-Abre la plantilla `curriculum-ia-personal.md`.
+Este documento responde preguntas clave:
 
-No intentes sonar impresionante. La IA no necesita una biografía. Necesita datos
-útiles para ayudarte.
+- qué es el proyecto;
+- qué problema resuelve;
+- a quién sirve;
+- qué existe ya;
+- qué falta;
+- qué se quiere vender o entregar;
+- qué riesgos hay;
+- qué no debe prometer;
+- qué objetivos existen a 30, 60 y 90 días.
 
-Empieza por quién eres en términos de trabajo.
+Este paso evita que cada conversación empiece desde cero. También evita que la
+IA proponga cosas que no encajan con el momento real del proyecto.
+
+Guarda el resultado como `contexto-maestro-proyecto.md`.
+
+## Paso 3: Instrucciones de trabajo del proyecto IA
+
+La tercera pieza define cómo quieres que trabaje tu IA.
+
+Aquí decides si la IA debe ayudarte con estrategia, marketing, prompts técnicos,
+revisión de ideas, planificación, documentación o control de calidad.
+
+También defines tono, formato, profundidad, nivel de crítica y reglas de
+respuesta.
+
+Una instrucción útil no dice solo "responde bien". Dice, por ejemplo:
+
+"Separa hechos, hipótesis, riesgos, recomendación y próximos pasos".
+
+O:
+
+"Cuando falte información crítica, no avances. Pregunta".
+
+O:
+
+"Cuando la tarea sea técnica, prepara un prompt claro para Claude Code o Codex
+con objetivo, archivos, restricciones y validaciones".
+
+Guarda el resultado como `instrucciones-trabajo-proyecto-ia.md`.
+
+## Paso 4: Estructura de proyectos IA
+
+Si estás empezando, puedes usar un solo espacio. Pero cuando el proyecto crece,
+conviene separar.
+
+Recomendamos tres espacios:
+
+Uno: Estrategia y mejoras.
+
+Para ideas, decisiones, riesgos, oportunidades y prioridades.
+
+Dos: Marketing y ventas.
+
+Para copy, ofertas, precios, mensajes, contenido y posicionamiento.
+
+Tres: Prompt Builder técnico.
+
+Para convertir decisiones en prompts claros para Claude Code, Codex o
+herramientas técnicas.
+
+No es obligatorio crear los tres hoy. Pero sí conviene entender la lógica. Si
+mezclas estrategia, ventas y tareas técnicas en una sola conversación, la IA
+puede perder foco.
+
+## Paso 5: Las cinco skills base
+
+En este pack usamos skill como plantilla reutilizable.
+
+No significa que se active sola en todas las herramientas. Significa que la
+dejas disponible y sabes cuándo usarla.
+
+La primera skill es Planificador diario.
+
+Sirve para convertir una lista de tareas en un plan realista para hoy.
+
+La segunda es Auditoría quirúrgica.
+
+Sirve para revisar una idea, página, producto o prompt con mirada crítica.
+
+La tercera es Revisor de ideas.
+
+Sirve para decidir si una idea merece avanzar, ajustarse o aparcarse.
+
+La cuarta es Creador de prompts técnicos para Claude Code/Codex.
+
+Sirve para convertir una intención en un prompt técnico seguro y claro.
+
+La quinta es Checklist final de entrega.
+
+Sirve para cerrar una tarea sin olvidar restricciones, riesgos y siguiente
+paso.
+
+## Plan de una tarde
+
+El plan completo es:
+
+Quince minutos para preparar carpeta y leer el manual.
+
+Treinta y cinco minutos para crear tu Currículum IA personal.
+
+Cuarenta minutos para crear el Contexto maestro del proyecto.
+
+Treinta y cinco minutos para crear las Instrucciones de trabajo.
+
+Cuarenta y cinco minutos para preparar las skills base.
+
+Treinta minutos para hacer una primera prueba real.
+
+Diez minutos para completar la checklist final.
+
+No necesitas hacerlo perfecto. Necesitas terminar con una base usable.
+
+## Primera prueba real
+
+Cuando tengas tus documentos, no cierres el pack todavía. Haz una prueba real.
 
 Por ejemplo:
 
-"Estoy creando productos digitales pequeños con IA."
+"Lee mi Currículum IA personal, mi Contexto maestro y mis Instrucciones de
+trabajo. Después ayúdame a decidir cuál es la siguiente tarea P0 de mi proyecto.
+Separa hechos, hipótesis, riesgos, recomendación y próximo paso".
 
-O:
+Si la respuesta mejora, el flujo ya está funcionando.
 
-"Soy estudiante y quiero usar IA para estudiar, organizar proyectos y escribir
-mejor."
+Si la respuesta sigue siendo genérica, ajusta contexto e instrucciones.
 
-O:
+## Garantía de calidad
 
-"Tengo una pequeña empresa y quiero automatizar tareas sin perder control."
+Este pack tiene garantía de calidad de 14 días.
 
-Después escribe qué herramientas usas. No escondas tu nivel real. Si eres
-principiante, dilo. Si tienes nivel medio, dilo. Si sabes programar, dilo. La IA
-ajusta mejor si no tiene que adivinar.
+Si después de recibir el material consideras que no entrega lo prometido en la
+página de venta, se devuelve el importe.
 
-Luego escribe cómo quieres que responda.
+La garantía cubre la calidad y completitud del material descargable. No cubre
+resultados económicos ni ejecución incorrecta por parte del comprador.
 
-Aquí puedes ser muy claro:
+## Cierre
 
-"Quiero respuestas prácticas."
+Cuando ya tienes tu IA preparada, el siguiente paso es aprender a usarla para
+ejecutar proyectos completos con auditoría, prompts controlados, revisión y
+entrega.
 
-"No quiero tono de gurú."
+Eso será Sistema IA Pro.
 
-"Prefiero que me digas riesgos antes de avanzar."
+Pero hoy no necesitas llegar ahí. Hoy necesitas hacer bien el arranque.
 
-"Si falta información, pregúntame."
+Contexto. Proyecto. Instrucciones. Skills. Prueba real.
 
-Esto no limita la creatividad. La enfoca.
-
-## 12:00 - 15:00 | Instrucciones base
-
-Después abre la plantilla de instrucciones base.
-
-La tentación aquí es escribir una constitución enorme. No lo hagas. Cuanto más
-larga y contradictoria sea la instrucción, más fácil es que la IA ignore partes.
-
-Empieza con una versión corta:
-
-"Responde en español claro, práctico y directo."
-
-"Prioriza soluciones aplicables."
-
-"No inventes datos."
-
-"No prometas resultados económicos."
-
-"Si una idea tiene riesgos, explícalos."
-
-Para ChatGPT y Claude, estas instrucciones pueden vivir en una configuración
-personal, un proyecto o el primer mensaje de una conversación importante.
-
-Para Codex o un agente de código, necesitas reglas más operativas:
-
-"Lee el proyecto antes de tocar archivos."
-
-"No edites secretos."
-
-"No cambies archivos fuera del alcance."
-
-"Ejecuta validaciones antes de cerrar."
-
-No son frases decorativas. Son barreras para reducir errores.
-
-## 15:00 - 18:00 | Skill: planificador diario
-
-La primera skill es el planificador diario.
-
-Mucha gente usa la IA para planificar y acaba con una lista imposible. Eso no
-sirve.
-
-Un buen planificador diario debe ayudarte a elegir, no a llenarte de tareas.
-
-Cuando uses la skill, dale cuatro datos:
-
-Tus tareas.
-
-Tu tiempo disponible.
-
-Tu energía.
-
-La fecha límite si existe.
-
-Y pide una cosa importante: que te diga qué no hacer hoy.
-
-La lista de "no hacer hoy" es una de las partes más útiles. Si no decides que
-queda fuera, todo parece urgente.
-
-Prueba esta skill con un día real. No con un ejemplo ideal. Úsala cuando tengas
-cansancio, interrupciones y tareas mezcladas. Ahí es donde se ve si funciona.
-
-## 18:00 - 21:00 | Skill: revisor de ideas
-
-La segunda skill es el revisor de ideas.
-
-Esta skill sirve para bajar una idea a tierra.
-
-No la uses para buscar aprobación. Úsala para detectar:
-
-Qué problema resuelve.
-
-Para quién es.
-
-Qué dificultad tiene.
-
-Qué riesgos aparecen.
-
-Qué versión mínima podría probarse.
-
-Una buena revisión puede decirte que la idea necesita cambios. Eso no es un
-fracaso. Es ahorro de tiempo.
-
-Si la IA te responde solo con entusiasmo, ajusta la instrucción:
-
-"No quiero validación emocional. Quiero una revisión práctica."
-
-También puedes pedir:
-
-"Dime qué no construir todavía."
-
-Esa pregunta suele ahorrar horas.
-
-## 21:00 - 24:00 | Skill: creador de prompts para proyectos
-
-La tercera skill es el creador de prompts para proyectos.
-
-Normalmente pedimos a la IA algo demasiado directo:
-
-"Hazme una landing."
-
-"Revisa esta idea."
-
-"Crea una estrategia."
-
-El problema es que la instrucción es pobre. Entonces la respuesta también suele
-ser genérica.
-
-Esta skill hace un paso previo: construir el prompt de trabajo.
-
-Le dices la tarea, el contexto y el resultado que quieres. La IA te devuelve una
-instrucción mejor, con rol, objetivo, proceso, criterios y formato.
-
-Esto es especialmente útil para tareas que se repiten:
-
-revisar una landing;
-
-crear un email;
-
-ordenar un proyecto;
-
-preparar una propuesta;
-
-analizar riesgos;
-
-crear un documento.
-
-No busques el prompt perfecto. Busca un prompt suficientemente claro para probar.
-
-## 24:00 - 27:00 | Bonus: CLAUDE.md base
-
-El bonus es el archivo `CLAUDE.md`.
-
-Aunque tenga ese nombre, la idea no depende solo de Claude. Es un archivo de
-contexto para proyectos.
-
-Cuando un proyecto dura más de una sesión, la IA necesita continuidad. Si no,
-cada conversación empieza con explicaciones repetidas.
-
-Un buen `CLAUDE.md` dice:
-
-Qué es el proyecto.
-
-Para quién es.
-
-Qué reglas hay.
-
-Qué no debe tocarse.
-
-Qué comandos o validaciones existen.
-
-Qué significa terminar una tarea.
-
-Si trabajas con código, este archivo evita muchos errores. Si trabajas con
-documentos, también ayuda: mantiene tono, criterios y límites.
-
-Empieza con el archivo base. No lo llenes de información innecesaria. Una página
-clara vale más que diez páginas que nadie lee.
-
-## 27:00 - 30:00 | Cierre y checklist
-
-Para cerrar, revisa la checklist final.
-
-No necesitas tener un sistema perfecto. Necesitas tener una primera versión que
-puedas usar mañana.
-
-Pregunta:
-
-¿Tengo mi currículum IA personal?
-
-¿Tengo instrucciones base?
-
-¿Tengo una skill para planificar?
-
-¿Tengo una skill para revisar ideas?
-
-¿Tengo una skill para crear prompts?
-
-¿Tengo un `CLAUDE.md` base si trabajo con proyectos?
-
-¿He probado al menos una plantilla con una tarea real?
-
-Si la respuesta es sí a la mayoría, el pack ya cumplió su objetivo.
-
-Tu IA no se vuelve automática. Pero deja de estar en blanco. Tiene más contexto,
-mejores reglas y primeras herramientas de trabajo.
-
-Ese es el arranque.
-
-El siguiente paso, cuando esto ya te sirva, será convertirlo en un sistema más
-estable: aprender a usar tu IA preparada para ejecutar proyectos completos con
-auditoría, prompts controlados, revisión y entrega. Eso será Sistema IA Pro.
-
-Por ahora, termina esta tarde con algo funcional. Guarda tus plantillas, prueba
-una de ellas y ajusta una frase. Ese pequeño ajuste ya es el comienzo de tu
-sistema IA.
+Esa es la base.

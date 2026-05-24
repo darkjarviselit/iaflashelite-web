@@ -1,169 +1,147 @@
-# Currículum IA personal
+# Plantilla — Currículum IA personal
 
-Copia este documento, cambia los campos entre corchetes y guárdalo como tu
-contexto base. No hace falta rellenarlo perfecto. Hace falta que sea útil.
+## Para qué sirve
 
-Dentro del flujo de arranque de IAFlashElite, esta es la primera pieza: antes de
-pedir trabajo a una IA, le damos contexto claro sobre quién va a trabajar con
-ella, qué proyecto existe, qué nivel real hay y qué límites no debe cruzar.
+Esta plantilla crea un documento de contexto sobre ti. Sirve para que una IA
+entienda quién eres, qué sabes hacer, cómo trabajas y qué tipo de ayuda
+necesitas antes de tocar un proyecto real.
 
-## 1. Quién soy
+## Cuándo usarla
+
+Úsala al crear un GPT Project, Claude Project, Gemini Gem o cualquier espacio de
+trabajo con IA. También puedes pegarla al principio de una conversación
+importante.
+
+## Cómo copiarla
+
+Copia el prompt completo y pégalo en tu IA. Puedes responder escribiendo o por
+voz. La IA debe entrevistarte poco a poco, esperar tus respuestas y profundizar.
+
+## Prompt
 
 ```text
-Me llamo [nombre].
-Trabajo/estudio en [área].
-Mi nivel técnico es [básico / medio / avanzado] en [herramientas].
-Uso la IA principalmente para [tareas principales].
+Actúa como entrevistador estratégico para crear mi Currículum IA personal.
+
+Objetivo:
+Quiero crear un documento de contexto que pueda usar en ChatGPT, Claude,
+Gemini, Grok, GPT Projects, Claude Projects, Gemini Gems o cualquier IA de
+confianza para que me entienda mejor antes de ayudarme en proyectos reales.
+
+Reglas:
+- No me hagas 40 preguntas de golpe.
+- Haz una pregunta o un bloque pequeño de preguntas cada vez.
+- Espera mi respuesta antes de avanzar.
+- Si mi respuesta es vaga, profundiza con una pregunta concreta.
+- No inventes datos sobre mí.
+- No conviertas esto en una biografía larga.
+- Busca información útil para trabajar mejor con IA.
+
+Necesito que extraigas:
+1. Quién soy y en qué contexto trabajo o estudio.
+2. Qué sé hacer realmente.
+3. Qué quiero conseguir.
+4. Qué proyectos o áreas quiero mejorar.
+5. Cómo trabajo mejor.
+6. Qué estilo de respuesta prefiero.
+7. Qué nivel técnico tengo.
+8. Qué herramientas uso.
+9. Qué límites tengo de tiempo, dinero, energía o conocimientos.
+10. Qué estoy dispuesto a hacer por mi proyecto.
+11. Qué no quiero que la IA haga por mí.
+12. Qué riesgos debo tener presentes.
+
+Proceso:
+Primero entrevístame paso a paso.
+Después resume lo que has entendido y pregúntame si falta algo.
+Cuando confirme, genera un documento limpio titulado:
+"Currículum IA personal".
+
+Formato final:
+- Perfil breve.
+- Actividad actual.
+- Objetivos principales.
+- Habilidades y conocimientos.
+- Nivel técnico real.
+- Herramientas habituales.
+- Forma de trabajar.
+- Estilo de respuesta preferido.
+- Límites y restricciones.
+- Criterios de calidad.
+- Qué puede hacer la IA por mí.
+- Qué no debe hacer la IA.
+- Primeros usos recomendados.
 ```
 
-## 2. Qué estoy construyendo o mejorando
+## Qué salida pedirle a la IA
+
+Pídele un documento limpio y reutilizable. Si quieres, puedes pedirle también:
 
 ```text
-Ahora mismo quiero avanzar en:
-- [proyecto 1]
-- [proyecto 2]
-- [proyecto 3]
-
-Mi objetivo real durante las próximas semanas es:
-[objetivo concreto]
+Convierte este Currículum IA personal en una versión corta de máximo 900
+palabras para pegarla como contexto en un proyecto IA.
 ```
 
-## 3. Herramientas que uso
+## Cómo guardar el resultado
+
+Guárdalo como:
 
 ```text
-Herramientas IA:
-- [ChatGPT / Claude / Codex / otra]
-
-Herramientas de trabajo:
-- [Notion / Obsidian / Google Docs / VS Code / Excel / otras]
-
-Canales o sistemas importantes:
-- [email / Telegram / web / CRM / GitHub / otros]
+curriculum-ia-personal.md
 ```
 
-## 4. Cómo quiero que me responda la IA
+También puedes pedirle a la IA que lo convierta en PDF o copiarlo en un
+documento de trabajo.
+
+## Ejemplo breve de uso
 
 ```text
-Prefiero respuestas:
-- claras;
-- prácticas;
-- ordenadas por prioridad;
-- sin exageraciones;
-- con riesgos visibles;
-- con ejemplos cuando ayuden.
-
-No quiero respuestas:
-- motivacionales sin acción;
-- demasiado largas sin estructura;
-- que prometan resultados económicos;
-- que oculten incertidumbre;
-- que parezcan publicidad.
-```
-
-## 5. Mis límites
-
-```text
-La IA no debe:
-- tomar decisiones importantes sin explicarme alternativas;
-- inventar datos;
-- asumir que tengo herramientas de pago si no las menciono;
-- recomendar acciones legales, médicas o financieras como si fueran certeza;
-- usar tono agresivo o de venta exagerada.
-```
-
-## 6. Criterios de calidad
-
-```text
-Una respuesta buena para mí:
-- me ayuda a decidir el siguiente paso;
-- separa lo urgente de lo opcional;
-- deja claro que falta por validar;
-- es aplicable con mis recursos actuales;
-- no depende de promesas imposibles.
-```
-
-## 7. Tareas frecuentes
-
-```text
-Usaré la IA para:
-- planificar días o semanas;
-- revisar ideas;
-- crear prompts mejores;
-- escribir documentos;
-- analizar riesgos;
-- ordenar proyectos;
-- generar borradores que yo reviso.
-```
-
-## 8. Prompt de uso rápido
-
-Copia esto al iniciar una conversación importante:
-
-```text
-Voy a darte mi currículum IA personal. Úsalo como contexto de trabajo.
-No lo repitas completo. Tenlo en cuenta para adaptar tus respuestas.
-Si alguna parte entra en conflicto con la tarea concreta, avísame antes de asumir.
-
-[pega aquí las secciones 1-7]
+Voy a trabajar contigo en un proyecto. Lee mi Currículum IA personal y úsalo
+como contexto. Antes de proponer soluciones, dime qué has entendido, qué falta y
+qué riesgos ves.
 ```
 
 ## Ejemplo completado
 
-Usa este ejemplo como referencia de nivel de detalle. No copies los datos si no
-son los tuyos.
+```markdown
+# Currículum IA personal
 
-```text
-Me llamo Laura.
-Trabajo en una pequeña tienda online y llevo también la parte de contenidos.
-Mi nivel técnico es medio en herramientas no-code y básico en automatizaciones.
-Uso la IA principalmente para ordenar ideas, escribir borradores, revisar textos
-y preparar procesos internos.
+## Perfil breve
 
-Ahora mismo quiero avanzar en:
-- mejorar las descripciones de producto;
-- crear una rutina semanal de contenidos;
-- ordenar preguntas frecuentes de clientes.
+Soy una persona que está creando un pequeño producto digital mientras mantiene
+un trabajo principal. Necesito usar IA para ordenar ideas, preparar contenido,
+revisar riesgos y convertir decisiones en tareas concretas.
 
-Mi objetivo real durante las próximas semanas es:
-crear un sistema sencillo para preparar contenido y revisar textos sin empezar
-cada vez desde cero.
+## Objetivos principales
 
-Herramientas IA:
-- ChatGPT y Claude.
+- Crear una oferta sencilla y comprensible.
+- Evitar promesas exageradas.
+- Preparar una landing clara.
+- Convertir ideas en tareas ejecutables.
 
-Herramientas de trabajo:
-- Google Docs, Notion, Canva y hojas de cálculo.
+## Nivel técnico real
 
-Prefiero respuestas:
-- claras;
-- accionables;
-- sin promesas exageradas;
-- con ejemplos cortos;
-- con riesgos visibles cuando una idea pueda confundir al cliente.
+Nivel medio. Entiendo conceptos de IA, herramientas web y automatización, pero
+prefiero instrucciones paso a paso cuando hay decisiones técnicas.
 
-No quiero respuestas:
-- que suenen a anuncio;
-- que inventen datos sobre mis productos;
-- que propongan herramientas de pago sin justificarlo;
-- que oculten dudas importantes.
+## Estilo de respuesta preferido
 
-La IA no debe:
-- publicar nada sin mi revisión;
-- prometer entregas o resultados que no puedo garantizar;
-- inventar políticas de devolución;
-- asumir que tengo un equipo grande.
+Español claro, directo y profesional. Prefiero respuestas con recomendación,
+riesgos y siguiente paso. No quiero tono de gurú ni frases motivacionales
+vacías.
+
+## Límites
+
+No quiero publicar nada sin revisión humana. No quiero inventar métricas,
+clientes ni resultados. No quiero prometer capacidades que no estén
+implementadas.
+
+## Qué puede hacer la IA por mí
+
+Ayudarme a pensar, ordenar, redactar, revisar riesgos y preparar prompts para
+herramientas técnicas.
+
+## Qué no debe hacer la IA
+
+No debe decidir por mí en temas legales, económicos o de marca. No debe asumir
+que algo está listo sin comprobarlo.
 ```
-
-## Primera prueba real
-
-Después de completar tu currículum IA, pégalo en tu herramienta y prueba con una
-tarea pequeña:
-
-```text
-Usa este currículum IA como contexto. Ayúdame a ordenar mis 3 prioridades de
-esta semana. No repitas todo el contexto; aplícalo para darme una respuesta más
-útil.
-```
-
-Si la respuesta sigue siendo genérica, añade más contexto o límites. Si la
-respuesta mejora, guarda esa versión como tu base.

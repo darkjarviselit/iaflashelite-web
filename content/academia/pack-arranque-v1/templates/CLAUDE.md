@@ -1,129 +1,130 @@
-# Proyecto: [nombre del proyecto]
+# CLAUDE.md — Base de proyecto IA
 
-Este archivo convierte el flujo de arranque en contexto de proyecto. Úsalo como
-base para Claude Code, Codex o cualquier proyecto largo donde la IA necesite
-entender objetivo, reglas, límites y definición de terminado antes de tocar nada.
+Usa este archivo como punto de partida para Claude Code, Codex o cualquier
+proyecto donde una IA necesite entender contexto, límites, reglas y definición
+de terminado antes de tocar un trabajo real.
 
-## Objetivo
+## Proyecto
 
-[Describe en 3-5 líneas qué intenta conseguir este proyecto.]
+Nombre:
 
-## Usuario o audiencia
+Descripción en una frase:
 
-[Quién lo usará, qué problema tiene y qué nivel técnico tiene.]
+Objetivo principal:
 
-## Estado actual
+Estado actual:
 
-- Estado: [idea / borrador / en construcción / publicado]
-- Prioridad actual: [qué hay que resolver primero]
-- Fecha o hito importante: [si existe]
+## Contexto personal relevante
 
-## Reglas de trabajo con IA
+Resumen corto del Currículum IA personal:
 
-- Responde en español claro y práctico.
-- Lee el contexto antes de proponer cambios.
-- Separa hechos, supuestos y recomendaciones.
-- No prometas resultados económicos.
-- No inventes datos, integraciones ni capacidades.
-- Si falta información crítica, dilo.
-- Prioriza cambios pequeños, revisables y útiles.
+- Quién soy:
+- Qué sé hacer:
+- Cómo trabajo:
+- Qué estilo de ayuda necesito:
+- Límites personales o de tiempo:
 
-## Criterios de calidad
+## Contexto maestro del proyecto
 
-Una respuesta útil debe:
+- Qué es el proyecto:
+- Qué problema resuelve:
+- A quién sirve:
+- Qué existe ya:
+- Qué falta:
+- Qué no debe prometer:
+- Riesgos principales:
 
-- ayudar a decidir el siguiente paso;
-- explicar riesgos;
-- evitar humo;
-- mantener coherencia con el objetivo;
-- diferenciar P0, P1 y P2 si la tarea es grande.
+## Instrucciones de trabajo
 
-## Límites
+La IA debe:
 
-- No tocar secretos, credenciales ni variables privadas.
-- No cambiar precios, claims legales ni condiciones sin aviso.
-- No añadir dependencias sin justificar.
-- No crear funcionalidades fuera del alcance.
-- No asumir que algo está implementado sin comprobarlo.
+- responder en español claro, práctico y profesional;
+- separar hechos, hipótesis, riesgos, recomendación y próximos pasos cuando la
+  respuesta sea importante;
+- preguntar si falta información crítica;
+- señalar contradicciones;
+- proponer cambios pequeños antes de rediseños grandes;
+- mantener revisión humana antes de publicar, enviar o ejecutar.
 
-## Comandos o validaciones
+La IA no debe:
 
-```bash
-[comando de build]
-[comando de tests]
-[comando de lint o typecheck]
-```
+- inventar datos, métricas, clientes o capacidades;
+- asumir integraciones no confirmadas;
+- tocar secretos, credenciales o archivos sensibles;
+- cambiar precios, condiciones legales o claims sin aviso;
+- dar por terminada una tarea sin checklist.
 
-Si no hay comandos, escribe:
+## Estructura recomendada
 
-```text
-Validación manual requerida: [describe cómo revisar]
-```
+Si el proyecto crece, separa conversaciones o espacios:
 
-## Estructura del proyecto
+1. Estrategia y mejoras.
+2. Marketing y ventas.
+3. Prompt Builder técnico.
 
-```text
-[carpeta o archivo importante] - [para qué sirve]
-[carpeta o archivo importante] - [para qué sirve]
-```
+## Skills disponibles
 
-## Tareas frecuentes
+- Planificador diario.
+- Auditoría quirúrgica.
+- Revisor de ideas.
+- Creador de prompts técnicos para Claude Code/Codex.
+- Checklist final de entrega.
 
-- Revisar copy.
-- Ordenar ideas.
-- Crear checklist.
-- Preparar prompts.
-- Detectar riesgos.
-- Mejorar documentación.
+Estas skills no se activan automáticamente en todas las herramientas. Llámalas
+de forma explícita cuando las necesites.
+
+## Validaciones o revisión
+
+Antes de cerrar una tarea, comprobar:
+
+- objetivo cumplido;
+- restricciones respetadas;
+- riesgos escritos;
+- siguiente paso claro;
+- revisión humana pendiente si aplica.
 
 ## Definición de terminado
 
-Una tarea se considera terminada cuando:
+Una tarea está terminada cuando:
 
-- el resultado cumple el objetivo;
-- no rompe restricciones;
-- está revisado;
-- los riesgos pendientes están escritos;
-- hay un siguiente paso claro si algo queda fuera.
+- cumple el objetivo;
+- no rompe límites del proyecto;
+- no introduce promesas no demostradas;
+- está revisada;
+- deja claro qué queda fuera de alcance.
 
 ## Ejemplo completado
 
 ```markdown
-# Proyecto: Mini landing para producto digital
+# CLAUDE.md — Mini landing de producto digital
 
-## Objetivo
+## Proyecto
 
-Crear una landing clara para vender un pack descargable de bajo precio. La
-landing debe explicar qué incluye, para quién es, qué no promete, garantía y
-botón de compra.
+Nombre: Pack simple de plantillas IA.
 
-## Usuario o audiencia
+Descripción en una frase: página de venta para un pack descargable de bajo
+precio.
 
-Personas que empiezan a usar IA para trabajar mejor y quieren una guía práctica,
-no un curso largo.
+Objetivo principal: explicar qué incluye, para quién es y permitir compra sin
+prometer resultados económicos.
 
-## Estado actual
+## Contexto personal relevante
 
-- Estado: borrador.
-- Prioridad actual: aclarar promesa, CTA y garantía.
-- Fecha o hito importante: revisar una primera versión esta semana.
+Soy una persona que crea productos digitales pequeños. Necesito ayuda para
+ordenar copy, detectar riesgos y convertir decisiones en tareas concretas.
 
-## Reglas de trabajo con IA
+## Contexto maestro del proyecto
 
-- Responde en español claro y práctico.
-- No prometas resultados económicos.
-- Detecta copy exagerado, urgencia falsa o claims ambiguos.
-- Propón cambios pequeños antes que rediseños completos.
+El producto entrega plantillas y guía práctica. No es un curso completo. No
+debe prometer ingresos, automatización perfecta ni resultados universales.
 
-## Límites
+## Instrucciones de trabajo
 
-- No inventar testimonios.
-- No añadir precios o garantías que no estén escritos.
-- No cambiar el objetivo del producto.
-- No asumir integraciones técnicas no confirmadas.
+Separa hechos, hipótesis, riesgos, recomendación y próximos pasos. Si falta una
+decisión de precio, garantía o entrega, detente y pregunta.
 
 ## Definición de terminado
 
-Una tarea está terminada cuando el copy es claro, el CTA funciona, la garantía
-no crea expectativas falsas y los riesgos pendientes están anotados.
+La landing está lista cuando explica entrega, precio, garantía, límites y CTA
+sin claims peligrosos.
 ```

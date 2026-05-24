@@ -1,106 +1,76 @@
-# Skill: Planificador diario
+# Skill — Planificador diario
 
-Objetivo: convertir una lista desordenada de tareas en un plan realista para
-hoy.
+## Para qué sirve
 
-Dentro del flujo de arranque de IAFlashElite, esta skill sirve como primera
-prueba real: comprueba si tu IA ya entiende contexto, prioridades, límites y
-forma de respuesta antes de pasar a tareas más grandes.
+Convierte tareas sueltas en un plan realista para hoy. No intenta organizar tu
+vida entera. Sirve para decidir qué hacer primero y qué dejar fuera.
 
-## Prompt base
+## Cuándo usarla
+
+Úsala al empezar una sesión de trabajo, cuando tengas demasiadas tareas o cuando
+no sepas por dónde avanzar.
+
+## Cómo copiarla
+
+Copia el prompt en tu IA. Añade tu Currículum IA personal y el Contexto maestro
+del proyecto si la tarea pertenece a un proyecto concreto.
+
+## Prompt
 
 ```text
 Actúa como planificador diario práctico.
 
-Voy a darte mis tareas, tiempo disponible y energía actual.
-Tu trabajo es ayudarme a elegir qué hacer hoy sin llenar el día de fantasía.
+Contexto:
+Voy a trabajar hoy en un proyecto real. Necesito ordenar tareas, energía y
+prioridades sin crear un plan imposible.
+
+Antes de planificar, pregúntame:
+1. Cuánto tiempo real tengo hoy.
+2. Qué tarea o proyecto es más importante.
+3. Qué entregable concreto me gustaría terminar.
+4. Qué bloqueos existen.
+5. Qué no debería intentar hoy.
 
 Reglas:
-- prioriza impacto y urgencia real;
-- separa lo importante de lo accesorio;
-- no propongas más tareas de las que caben;
-- deja una tarea principal clara;
-- reserva margen para imprevistos;
-- dime qué NO debería hacer hoy.
+- No propongas más tareas de las que caben en el tiempo disponible.
+- Prioriza una tarea principal y dos secundarias como máximo.
+- Separa P0, P1 y P2.
+- Incluye una revisión final de 10 minutos.
+- Si el objetivo es demasiado grande, reduce alcance.
 
-Devuelve:
-1. Diagnóstico breve.
-2. Prioridad principal del día.
-3. Plan por bloques.
-4. Tareas secundarias si queda tiempo.
-5. Lista de "no hacer hoy".
-6. Cierre recomendado de 10 minutos.
-
-Mis datos:
-- Tareas pendientes: [pegar lista]
-- Tiempo disponible: [ej. 2 horas, 4 horas, tarde completa]
-- Energía: [baja / media / alta]
-- Fecha límite o presión real: [si existe]
-- Contexto importante: [reuniones, cansancio, entregas, bloqueos]
+Formato de salida:
+- Objetivo principal del día.
+- Plan por bloques de tiempo.
+- Tarea P0.
+- Tareas opcionales.
+- Riesgos o bloqueos.
+- Qué significa terminar hoy.
 ```
 
 ## Ejemplo de uso
 
 ```text
-Tareas pendientes:
-- revisar landing;
-- estudiar 1 hora;
-- responder emails;
-- escribir guion de audio;
-- ordenar carpeta de proyecto;
-- publicar post.
-
-Tiempo disponible: 3 horas.
-Energía: media.
-Fecha límite: mañana tengo que enseñar la landing.
+Tengo 2 horas. Quiero avanzar mi landing y dejar listo el primer bloque de
+venta. No quiero tocar checkout hoy. Ayúdame a decidir qué hacer.
 ```
 
 ## Ejemplo completado
 
-Ejemplo de respuesta útil esperada:
+```markdown
+## Objetivo principal
 
-```text
-Diagnóstico breve:
-Tienes demasiadas tareas para 3 horas. La landing tiene prioridad porque mañana
-debes enseñarla. El resto solo entra si no bloquea el objetivo principal.
+Dejar escrito y revisado el hero de la landing.
 
-Prioridad principal del día:
-Revisar la landing y dejar una lista corta de cambios P0.
+## Plan
 
-Plan por bloques:
-1. 90 min — revisar hero, CTA, precio, garantía y entrega.
-2. 30 min — anotar cambios P0 y P1.
-3. 30 min — responder solo emails urgentes.
-4. 20 min — preparar cierre: qué está listo y qué falta.
-5. 10 min — guardar notas y siguiente paso.
+- 20 min: revisar promesa y público.
+- 45 min: redactar hero y CTAs.
+- 25 min: revisar claims peligrosos.
+- 20 min: ajustar versión móvil.
+- 10 min: checklist final.
 
-Tareas secundarias si queda tiempo:
-- ordenar carpeta de proyecto;
-- escribir una primera idea del guion de audio.
+## Qué significa terminar
 
-No hacer hoy:
-- publicar post;
-- rediseñar toda la landing;
-- abrir nuevas herramientas.
-
-Cierre recomendado:
-Escribe tres líneas: qué quedó listo, qué revisarás mañana y cuál es el primer
-paso antes de enseñar la landing.
-```
-
-## Cómo evaluar si funcionó
-
-Al final del día, responde:
-
-```text
-¿Esto era realista?
-¿Qué tarea se quedó fuera y por qué?
-¿Qué bloqueo apareció?
-¿Qué cambio para mañana?
-```
-
-Si la IA propone demasiado, añade esta frase:
-
-```text
-Reduce el plan a la mitad. Prefiero terminar poco que abrir demasiado.
+El hero explica qué se vende, para quién, qué no promete y qué debe hacer el
+usuario después.
 ```
