@@ -39,13 +39,13 @@ const hasDemoPoster = existsSync(
 
 const AUDIO_GUIDES = [
     {
-        title: "Qué es GestorIA Local",
+        title: "1. Qué es GestorIA Local",
         description:
             "Una explicación clara del copiloto privado para gestorías pequeñas: qué hace, qué no hace y cómo encaja junto a tu software fiscal.",
         src: "/gestoria-local/audio/gestoria-local-audio-01-que-es.mp3",
     },
     {
-        title: "Cómo funciona el Piloto Founders",
+        title: "2. Cómo funciona el Piloto Founders",
         description:
             "Instalación guiada, configuración inicial, 30 días de acompañamiento, soporte y mantenimiento opcional.",
         src: "/gestoria-local/audio/gestoria-local-audio-02-piloto-founders.mp3",
@@ -183,8 +183,7 @@ export default function GestoriaLocalPage() {
             <Header />
             <main className="min-h-screen bg-onyx text-paper">
                 <HeroSection />
-                <DemoSection />
-                <AudioGuidesSection />
+                <MediaSection />
                 <AudienceSection />
                 <CapabilitiesSection />
                 <PrivacySection />
@@ -229,8 +228,12 @@ function HeroSection() {
                         <Button href={CONTACT_HREF} size="lg" variant="gradient">
                             Solicitar Piloto Founders <ArrowRight size={18} />
                         </Button>
-                        <Button href="#demo-guiada" size="lg" variant="secondary">
-                            Ver demo guiada <PlayCircle size={18} />
+                        <Button
+                            href="#demo-gestoria-local"
+                            size="lg"
+                            variant="secondary"
+                        >
+                            Ver demo y audios <PlayCircle size={18} />
                         </Button>
                     </div>
                 </div>
@@ -270,36 +273,83 @@ function HeroSection() {
     );
 }
 
-function DemoSection() {
+function MediaSection() {
     return (
-        <section id="demo-guiada" className="scroll-mt-24 px-6 py-16 lg:py-24">
-            <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+        <section
+            id="demo-gestoria-local"
+            className="scroll-mt-24 px-6 py-16 lg:py-24"
+        >
+            <div className="mx-auto max-w-[1180px]">
                 <SectionIntro
-                    eyebrow="Demo guiada"
-                    title="Demo guiada real de GestorIA Local"
-                    text="Vídeo de unos 3 minutos: instalación, configuración inicial, dashboard, motor IA y un caso donde una reunión enviada por Telegram queda preparada en calendario."
+                    eyebrow="Demo y audio"
+                    title="Mira y escucha GestorIA Local en 5 minutos"
+                    text="Empieza por la demo guiada real y, si quieres más contexto, escucha las dos guías breves sobre qué es GestorIA Local y cómo funciona el Piloto Founders."
                 />
-                <div className="rounded-2xl border border-white/10 bg-[#111111] p-4 shadow-2xl shadow-black/30">
-                    <div className="aspect-video overflow-hidden rounded-xl border border-white/10 bg-black/60">
-                        {hasDemoVideo ? (
-                            <video
-                                className="h-full w-full bg-black object-contain"
-                                controls
-                                playsInline
-                                preload="metadata"
-                                poster={hasDemoPoster ? DEMO_POSTER_PUBLIC_PATH : undefined}
+                <div className="mt-10 grid gap-5 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+                    <article className="rounded-2xl border border-white/10 bg-[#111111] p-4 shadow-2xl shadow-black/30">
+                        <div className="px-1 pb-4">
+                            <h3 className="text-2xl font-bold text-paper">
+                                Demo guiada real
+                            </h3>
+                            <p className="mt-2 text-sm leading-6 text-text-secondary">
+                                Vídeo de unos 3 minutos: instalación, configuración inicial,
+                                dashboard, motor IA y un caso donde una reunión enviada por
+                                Telegram queda preparada en calendario.
+                            </p>
+                        </div>
+                        <div className="aspect-video overflow-hidden rounded-xl border border-white/10 bg-black/60">
+                            {hasDemoVideo ? (
+                                <video
+                                    className="h-full w-full bg-black object-contain"
+                                    controls
+                                    playsInline
+                                    preload="metadata"
+                                    poster={hasDemoPoster ? DEMO_POSTER_PUBLIC_PATH : undefined}
+                                >
+                                    <source src={DEMO_VIDEO_PUBLIC_PATH} type="video/mp4" />
+                                    Tu navegador no puede reproducir este vídeo.
+                                </video>
+                            ) : (
+                                <DemoFallback />
+                            )}
+                        </div>
+                        <p className="mt-4 text-sm leading-6 text-text-secondary">
+                            Los datos mostrados deben ser ficticios. El token de Telegram
+                            debe mantenerse privado.
+                        </p>
+                    </article>
+
+                    <div className="grid gap-5">
+                        {AUDIO_GUIDES.map((guide) => (
+                            <article
+                                key={guide.src}
+                                className="rounded-2xl border border-white/10 bg-[#111111] p-5 shadow-xl shadow-black/20"
                             >
-                                <source src={DEMO_VIDEO_PUBLIC_PATH} type="video/mp4" />
-                                Tu navegador no puede reproducir este vídeo.
-                            </video>
-                        ) : (
-                            <DemoFallback />
-                        )}
+                                <div className="flex items-start gap-4">
+                                    <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-flash/25 bg-flash/10 text-flash">
+                                        <Headphones className="h-5 w-5" />
+                                    </span>
+                                    <div>
+                                        <h3 className="text-xl font-bold text-paper">
+                                            {guide.title}
+                                        </h3>
+                                        <p className="mt-2 text-sm leading-6 text-text-secondary">
+                                            {guide.description}
+                                        </p>
+                                    </div>
+                                </div>
+                                <audio
+                                    className="mt-5 w-full"
+                                    controls
+                                    controlsList="nodownload"
+                                    preload="metadata"
+                                >
+                                    <source src={guide.src} type="audio/mpeg" />
+                                    Tu navegador no puede reproducir este audio.
+                                </audio>
+                            </article>
+                        ))}
                     </div>
-                    <p className="mt-4 text-sm leading-6 text-text-secondary">
-                        Los datos mostrados deben ser ficticios. El token de Telegram debe
-                        mantenerse privado.
-                    </p>
                 </div>
             </div>
         </section>
@@ -323,51 +373,6 @@ function DemoFallback() {
                 Solicitar demo personalizada <ArrowRight size={16} />
             </Button>
         </div>
-    );
-}
-
-function AudioGuidesSection() {
-    return (
-        <section className="bg-[#111111] px-6 py-16 lg:py-24">
-            <div className="mx-auto max-w-[1180px]">
-                <SectionIntro
-                    eyebrow="Audio guía"
-                    title="Escucha la guía de GestorIA Local"
-                    text="Dos audios breves para entender qué es GestorIA Local y cómo funciona el Piloto Founders antes de solicitar una instalación guiada."
-                />
-                <div className="mt-10 grid gap-5 lg:grid-cols-2">
-                    {AUDIO_GUIDES.map((guide) => (
-                        <article
-                            key={guide.src}
-                            className="rounded-2xl border border-white/10 bg-onyx p-5 shadow-xl shadow-black/20"
-                        >
-                            <div className="flex items-start gap-4">
-                                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-flash/25 bg-flash/10 text-flash">
-                                    <Headphones className="h-5 w-5" />
-                                </span>
-                                <div>
-                                    <h3 className="text-xl font-bold text-paper">
-                                        {guide.title}
-                                    </h3>
-                                    <p className="mt-2 text-sm leading-6 text-text-secondary">
-                                        {guide.description}
-                                    </p>
-                                </div>
-                            </div>
-                            <audio
-                                className="mt-5 w-full"
-                                controls
-                                controlsList="nodownload"
-                                preload="metadata"
-                            >
-                                <source src={guide.src} type="audio/mpeg" />
-                                Tu navegador no puede reproducir este audio.
-                            </audio>
-                        </article>
-                    ))}
-                </div>
-            </div>
-        </section>
     );
 }
 
