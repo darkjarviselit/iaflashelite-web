@@ -11,12 +11,18 @@ export type Solution = {
     heroTitle: string;
     heroSubtitle: string;
     problems: string[];
+    problemsTitle?: string;
     features: string[];
+    featuresIntro?: string;
+    featuresTitle?: string;
+    landingCta?: string;
+    landingHref?: string;
     levels: {
         template: SolutionLevel;
         setup: SolutionLevel;
         managed: SolutionLevel;
     };
+    pricingTitle?: string;
     ctaSector: string;
     icon: string;
     priceFrom: string;
@@ -26,60 +32,66 @@ export type Solution = {
 export const solutions: Solution[] = [
     {
         slug: "gestorias",
-        name: "GestorIA",
+        name: "GestorIA Local",
         tagline: "Gestorías / Contables",
         icon: "FileText",
-        priceFrom: "199€",
-        pain: "Documentos, facturas, plazos y emails que se acumulan sin parar.",
-        heroTitle: "GestorIA — Agente IA para gestorías y contables",
+        priceFrom: "490€",
+        pain: "Clientes, documentos, vencimientos y revisiones repartidos entre carpetas, email y hojas de cálculo.",
+        heroTitle: "GestorIA Local — Copiloto privado para gestorías pequeñas",
         heroSubtitle:
-            "Automatiza documentos, recordatorios y comunicación con clientes. Sin cambiar tus herramientas actuales.",
+            "Ordena clientes, documentos, vencimientos y revisiones en tu propio ordenador. Complementa tu software fiscal; no lo sustituye.",
         problems: [
-            "Clientes que no mandan documentos a tiempo",
-            "Plazos fiscales que se solapan",
-            "Emails repetitivos que consumen horas",
-            "Resúmenes para clientes que tardan media jornada",
+            "Documentos pendientes dispersos entre email, carpetas y mensajes",
+            "Vencimientos y revisiones que dependen de memoria o Excel",
+            "Seguimiento de clientes sin una cola clara de próximos pasos",
+            "Borradores y resúmenes que necesitan revisión antes de enviarse",
         ],
+        problemsTitle: "Dónde reduce ruido operativo.",
         features: [
-            "Solicitud y orden de documentos pendientes",
-            "Recordatorios automáticos de plazos fiscales",
-            "Resúmenes de estado para clientes",
-            "Gestión de email y WhatsApp",
+            "Fichas de clientes y checklists documentales",
+            "Cola de revisión humana para documentos y propuestas",
+            "Calendario y vencimientos operativos",
+            "Borradores revisables y próximos pasos sugeridos",
             "Checklist de documentación por cliente",
         ],
+        landingHref: "/gestoria-local",
+        landingCta: "Ver Piloto Founders",
+        featuresTitle: "Qué ayuda a ordenar GestorIA Local.",
+        featuresIntro:
+            "Un piloto guiado con flujos y documentación pensados para complementar el trabajo de una gestoría pequeña.",
+        pricingTitle: "Piloto guiado.",
         levels: {
             template: {
-                name: "Template",
-                price: "199€",
+                name: "Piloto Founders",
+                price: "490€",
                 features: [
-                    "Descarga y configura tú mismo",
-                    "Guía de instalación incluida",
-                    "Prompts para Claude/ChatGPT",
-                    "Soporte 30 días",
+                    "Instalación remota asistida",
+                    "Configuración inicial",
+                    "30 días de seguimiento",
+                    "Hasta 3 ajustes iniciales",
                     "Garantía Flash",
                 ],
             },
             setup: {
-                name: "Setup asistido",
-                price: "desde 790€",
+                name: "Alcance del piloto",
+                price: "incluido",
                 features: [
-                    "Todo lo del Template",
-                    "Nosotros lo configuramos",
-                    "Adaptado a tu negocio",
-                    "Integración con tus herramientas",
-                    "Formación incluida",
-                    "Soporte 60 días",
+                    "Fichas de clientes",
+                    "Checklists documentales",
+                    "Calendario y revisión humana",
+                    "Proveedor IA configurable",
+                    "Complemento del software fiscal",
                 ],
             },
             managed: {
-                name: "Managed",
-                price: "149€/mes",
+                name: "Mantenimiento opcional",
+                price: "69€/mes",
                 features: [
-                    "Todo lo del Setup",
-                    "Mantenimiento mensual",
-                    "Actualizaciones incluidas",
-                    "Monitorización continua",
-                    "Soporte prioritario",
+                    "Después de los 30 días",
+                    "Soporte por email",
+                    "Revisión de configuración",
+                    "Ajustes menores acordados",
+                    "Sin permanencia",
                 ],
             },
         },

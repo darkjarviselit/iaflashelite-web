@@ -95,7 +95,7 @@ export default async function SolutionPage({
 
                 <ProblemsBlock solution={solution} />
                 <FeaturesBlock solution={solution} />
-                <PricingBlock levels={levels} />
+                <PricingBlock levels={levels} pricingTitle={solution.pricingTitle} />
                 <FinalCtaBlock solution={solution} />
             </main>
             <Footer />
@@ -116,7 +116,8 @@ function ProblemsBlock({ solution }: { solution: Solution }) {
                         Problemas
                     </span>
                     <h2 className="mt-4 text-4xl font-bold text-paper sm:text-5xl">
-                        Lo que el agente elimina de tu día a día.
+                        {solution.problemsTitle ??
+                            "Lo que el agente elimina de tu día a día."}
                     </h2>
                 </div>
                 <div className="grid gap-5 md:grid-cols-2">
@@ -148,11 +149,11 @@ function FeaturesBlock({ solution }: { solution: Solution }) {
                         Agente incluido
                     </span>
                     <h2 className="mt-4 text-4xl font-bold text-paper sm:text-5xl">
-                        Qué automatiza {solution.name}.
+                        {solution.featuresTitle ?? `Qué automatiza ${solution.name}.`}
                     </h2>
                     <p className="mt-5 text-base leading-8 text-text-secondary">
-                        Un sistema vertical con prompts, flujos y documentación
-                        pensados para {solution.ctaSector}.
+                        {solution.featuresIntro ??
+                            `Un sistema vertical con prompts, flujos y documentación pensados para ${solution.ctaSector}.`}
                     </p>
                 </div>
                 <div className="grid gap-3">
@@ -175,8 +176,10 @@ function FeaturesBlock({ solution }: { solution: Solution }) {
 
 function PricingBlock({
     levels,
+    pricingTitle,
 }: {
     levels: readonly [SolutionLevel, SolutionLevel, SolutionLevel];
+    pricingTitle?: string;
 }) {
     return (
         <section className="px-6 py-20 lg:py-24">
@@ -186,7 +189,7 @@ function PricingBlock({
                         Pricing
                     </span>
                     <h2 className="mt-4 text-4xl font-bold text-paper sm:text-5xl">
-                        Tres formas de empezar.
+                        {pricingTitle ?? "Tres formas de empezar."}
                     </h2>
                 </div>
                 <div className="grid gap-5 lg:grid-cols-3">
@@ -194,7 +197,10 @@ function PricingBlock({
                         <PricingCard
                             key={level.name}
                             level={level}
-                            featured={level.name === "Setup asistido"}
+                            featured={
+                                level.name === "Setup asistido" ||
+                                level.name === "Piloto Founders"
+                            }
                         />
                     ))}
                 </div>
@@ -246,6 +252,8 @@ function PricingCard({
 }
 
 function FinalCtaBlock({ solution }: { solution: Solution }) {
+    const hasLanding = Boolean(solution.landingHref);
+
     return (
         <section className="relative overflow-hidden bg-[#111111] px-6 py-20 lg:py-24">
             <div
@@ -257,15 +265,23 @@ function FinalCtaBlock({ solution }: { solution: Solution }) {
                     Siguiente paso
                 </span>
                 <h2 className="mt-4 text-4xl font-bold text-paper sm:text-5xl">
-                    ¿Listo para automatizar {solution.ctaSector}?
+                    {hasLanding
+                        ? `¿Quieres revisar el piloto para ${solution.ctaSector}?`
+                        : `¿Listo para automatizar ${solution.ctaSector}?`}
                 </h2>
                 <p className="mt-5 max-w-2xl text-base leading-8 text-text-secondary">
-                    Cuéntanos tu caso y te diremos qué nivel encaja mejor:
-                    Template, Setup asistido o Managed.
+                    {hasLanding
+                        ? "Consulta la landing del piloto guiado y escríbenos si encaja con el tamaño y forma de trabajo de tu despacho."
+                        : "Cuéntanos tu caso y te diremos qué nivel encaja mejor: Template, Setup asistido o Managed."}
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                    <Button href="/contacto" size="lg" variant="gradient">
-                        Solicitar propuesta <ArrowRight size={16} />
+                    <Button
+                        href={solution.landingHref ?? "/contacto"}
+                        size="lg"
+                        variant="gradient"
+                    >
+                        {solution.landingCta ?? "Solicitar propuesta"}{" "}
+                        <ArrowRight size={16} />
                     </Button>
                     <Button href="/servicios" size="lg" variant="secondary">
                         Ver todos los servicios <ArrowRight size={16} />

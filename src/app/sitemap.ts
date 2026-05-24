@@ -20,6 +20,7 @@ const STATIC_ROUTES: ReadonlyArray<{
 	{ path: "/servicios", changeFrequency: "weekly", priority: 0.9 },
 	{ path: "/servicios-extra", changeFrequency: "monthly", priority: 0.6 },
 	{ path: "/soluciones", changeFrequency: "weekly", priority: 0.9 },
+	{ path: "/gestoria-local", changeFrequency: "monthly", priority: 0.8 },
 	{ path: "/seguridad", changeFrequency: "monthly", priority: 0.6 },
 	{ path: "/casos", changeFrequency: "monthly", priority: 0.6 },
 	{ path: "/academia", changeFrequency: "monthly", priority: 0.6 },
