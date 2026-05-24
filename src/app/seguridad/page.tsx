@@ -69,9 +69,9 @@ const TRUST_CARDS: ReadonlyArray<TrustCard> = [
     },
     {
         icon: ShieldCheck,
-        title: "Garantía 7 días",
+        title: "Garantía Flash",
         description:
-            "Si en 7 días el producto no funciona como acordamos, te devolvemos el dinero sin preguntas. Sin letra pequeña, sin excusas.",
+            "Compra protegida: entrega digital segura, soporte si algo falla y revisión si el producto no funciona según lo descrito.",
     },
     {
         icon: BookOpen,
@@ -115,8 +115,8 @@ const COMPARISON_ROWS: ReadonlyArray<ComparisonRow> = [
         noCode: { value: "Depende", tone: "warning" },
     },
     {
-        metric: "Garantía devolución",
-        flash: { value: "7 días", tone: "positive" },
+        metric: "Compra protegida",
+        flash: { value: "Flash", tone: "positive" },
         noCode: { value: "No", tone: "negative" },
     },
     {

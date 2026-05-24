@@ -16,7 +16,12 @@ import { useState, type ComponentType, type FormEvent, type SVGProps } from "rea
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { EXPRESS_SURCHARGE, SLOTS_CONFIG, type ProductType } from "@/lib/constants";
+import {
+    EXPRESS_SURCHARGE,
+    GUARANTEE_POLICY_VERSION,
+    SLOTS_CONFIG,
+    type ProductType,
+} from "@/lib/constants";
 
 interface CheckoutFormProps {
     slug: string;
@@ -124,6 +129,7 @@ function ServiceCheckout({ slug, name, price }: { slug: string; name: string; pr
             return;
         }
         const fd = new FormData(event.currentTarget);
+        const consentTimestamp = new Date().toISOString();
         const payload = {
             productSlug: slug,
             name: String(fd.get("name") ?? ""),
@@ -135,6 +141,10 @@ function ServiceCheckout({ slug, name, price }: { slug: string; name: string; pr
             isExpress: effectiveExpress,
             consentDigital: null,
             consentDigitalAt: null,
+            consentTimestamp,
+            policyVersion: GUARANTEE_POLICY_VERSION,
+            consentSummary:
+                "Privacidad aceptada. Garantía Flash aplicable al plazo y alcance acordados para servicios personalizados.",
         };
         setSending(true);
         try {
@@ -320,6 +330,7 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
             return;
         }
         const fd = new FormData(event.currentTarget);
+        const consentTimestamp = consentDigitalAt || new Date().toISOString();
         const payload = {
             productSlug: slug,
             name: trimmedName,
@@ -330,7 +341,11 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
             acceptedPrivacy,
             isExpress: false,
             consentDigital,
-            consentDigitalAt,
+            consentDigitalAt: consentTimestamp,
+            consentTimestamp,
+            policyVersion: GUARANTEE_POLICY_VERSION,
+            consentSummary:
+                "Entrega inmediata solicitada. El cliente reconoce pérdida de desistimiento tras acceso, descarga o envío y mantiene Garantía Flash de entrega y funcionamiento.",
         };
         setSending(true);
         try {
@@ -381,6 +396,12 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
                 effectiveExpress={false}
                 expressSurcharge={0}
             />
+
+            <p className="text-sm text-gray-600 leading-relaxed">
+                Antes de pagar, confirma tus datos y las condiciones de entrega
+                digital. Guardaremos la prueba del pedido, consentimiento, fecha
+                y método de pago para proteger ambas partes.
+            </p>
 
             <div className="grid sm:grid-cols-2 gap-5">
                 <Field label="Nombre completo *">
@@ -489,6 +510,8 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
                                     return data.id;
                                 }}
                                 onApprove={async (data) => {
+                                    const consentTimestamp =
+                                        consentDigitalAt || new Date().toISOString();
                                     const res = await fetch("/api/paypal/capture-order", {
                                         method: "POST",
                                         headers: { "Content-Type": "application/json" },
@@ -498,8 +521,11 @@ function DownloadCheckout({ slug, name, price }: { slug: string; name: string; p
                                             customerEmail: trimmedEmail,
                                             productSlug: slug,
                                             consentDigital,
-                                            consentDigitalAt:
-                                                consentDigitalAt || new Date().toISOString(),
+                                            consentDigitalAt: consentTimestamp,
+                                            consentTimestamp,
+                                            policyVersion: GUARANTEE_POLICY_VERSION,
+                                            consentSummary:
+                                                "Entrega inmediata solicitada. El cliente reconoce pérdida de desistimiento tras acceso, descarga o envío y mantiene Garantía Flash de entrega y funcionamiento.",
                                         }),
                                     });
                                     const result = (await res.json()) as {
@@ -779,7 +805,7 @@ function PrivacyCheckbox({ checked, onChange }: PrivacyCheckboxProps) {
                 htmlFor="order-accepted-privacy"
                 className="text-sm text-gray-600 leading-relaxed"
             >
-                He leído y acepto la{" "}
+                He leído la{" "}
                 <a
                     href="/legal/privacidad"
                     target="_blank"
@@ -788,7 +814,8 @@ function PrivacyCheckbox({ checked, onChange }: PrivacyCheckboxProps) {
                 >
                     política de privacidad
                 </a>{" "}
-                y consiento el tratamiento de mis datos para procesar este pedido.
+                y acepto que IAFlashElite trate mis datos para gestionar este
+                pedido y el soporte asociado.
             </label>
         </div>
     );
@@ -815,8 +842,9 @@ function DigitalConsentCheckbox({
                 htmlFor="order-consent-digital"
                 className="text-sm text-gray-600 leading-relaxed"
             >
-                Entiendo que al recibir el enlace de descarga pierdo el derecho de
-                desistimiento de 14 días, conforme a la{" "}
+                Solicito la entrega inmediata del contenido digital y entiendo
+                que, cuando empiece el acceso, descarga o envío, pierdo el
+                derecho de desistimiento de 14 días, conforme a la{" "}
                 <a
                     href="https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX%3A32011L0083"
                     target="_blank"
@@ -825,15 +853,8 @@ function DigitalConsentCheckbox({
                 >
                     Directiva EU 2011/83/UE Art. 16(m)
                 </a>
-                . En caso de fallo técnico no resuelto en 48h, puedo solicitar devolución
-                adjuntando capturas del error a{" "}
-                <a
-                    href="mailto:iaflashelite@gmail.com"
-                    className="text-cyan-600 underline hover:no-underline"
-                >
-                    iaflashelite@gmail.com
-                </a>
-                . Ver{" "}
+                . Mantengo la Garantía Flash si el producto no llega, falla,
+                está dañado o no coincide con la descripción. Ver{" "}
                 <a
                     href="/legal/garantias"
                     target="_blank"

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { PRODUCTS } from "@/lib/constants";
+import { GUARANTEE_POLICY_VERSION, PRODUCTS } from "@/lib/constants";
 import { getDownloadUrl, sendDeliveryEmail } from "@/lib/email";
 
 const PAYPAL_API =
@@ -14,6 +14,9 @@ interface CaptureBody {
     productSlug?: string;
     consentDigital?: boolean | null;
     consentDigitalAt?: string | null;
+    consentTimestamp?: string | null;
+    policyVersion?: string | null;
+    consentSummary?: string | null;
 }
 
 async function getAccessToken(): Promise<string> {
@@ -82,6 +85,10 @@ export async function POST(request: Request) {
     const productSlug = (body.productSlug ?? "").trim();
     const consentDigital = body.consentDigital === true;
     const consentDigitalAt = (body.consentDigitalAt ?? "").trim();
+    const consentTimestamp = (body.consentTimestamp ?? consentDigitalAt).trim();
+    const policyVersion =
+        (body.policyVersion ?? "").trim() || GUARANTEE_POLICY_VERSION;
+    const consentSummary = (body.consentSummary ?? "").trim();
 
     if (!customerName || !customerEmail || !productSlug) {
         return NextResponse.json({ error: "missing_customer_or_product" }, { status: 400 });
@@ -89,7 +96,7 @@ export async function POST(request: Request) {
     if (!/.+@.+\..+/.test(customerEmail)) {
         return NextResponse.json({ error: "invalid_email" }, { status: 400 });
     }
-    if (!consentDigital || !consentDigitalAt) {
+    if (!consentDigital || !consentTimestamp) {
         return NextResponse.json({ error: "missing_digital_consent" }, { status: 400 });
     }
 
@@ -131,6 +138,8 @@ export async function POST(request: Request) {
     const paypalCaptureId = capture?.id ?? null;
     const captureTime = capture?.create_time ?? new Date().toISOString();
     const payerEmail = captureData.payer?.email_address ?? null;
+    const downloadUrl = getDownloadUrl(productSlug);
+    const deliveryStatus = downloadUrl ? "email_delivery_requested" : "download_url_missing";
 
     // Forward a giris-agent — fire-and-forget, no rompemos respuesta al cliente.
     const forwardPayload = {
@@ -154,7 +163,11 @@ export async function POST(request: Request) {
         accepted_privacy: true,
         accepted_at: new Date().toISOString(),
         consent_digital: true,
-        consent_digital_at: consentDigitalAt,
+        consent_digital_at: consentTimestamp,
+        consent_timestamp: consentTimestamp,
+        consent_summary: consentSummary || null,
+        policy_version: policyVersion,
+        delivery_status: deliveryStatus,
         ip: getClientIp(request),
         user_agent: request.headers.get("user-agent") ?? "",
     };
@@ -186,7 +199,6 @@ export async function POST(request: Request) {
     })();
 
     // Entrega automática del ZIP por email — fire-and-forget.
-    const downloadUrl = getDownloadUrl(productSlug);
     if (downloadUrl) {
         void sendDeliveryEmail({
             to: customerEmail,
@@ -195,6 +207,10 @@ export async function POST(request: Request) {
             productSlug,
             downloadUrl,
             amount: String(amount),
+            orderId: paypalOrderId,
+            transactionId: paypalCaptureId,
+            customerEmail,
+            policyVersion,
         }).catch((err) => {
             console.error("[paypal capture] delivery email error:", err);
         });
@@ -208,6 +224,8 @@ export async function POST(request: Request) {
         amount: Number(amount),
         currency,
         downloadUrl: downloadUrl ?? null,
+        policyVersion,
+        deliveryStatus,
     });
 }
 

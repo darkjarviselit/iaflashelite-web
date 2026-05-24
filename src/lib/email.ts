@@ -21,6 +21,11 @@ export interface DeliveryEmailParams {
     productSlug: string;
     downloadUrl: string;
     amount: string;
+    customerEmail?: string;
+    orderId?: string | null;
+    transactionId?: string | null;
+    policyVersion?: string;
+    deliverySource?: "paypal_direct" | "manual_delivery";
 }
 
 // Slugs reales del catálogo (constants.ts). Las env vars siguen la convención
@@ -41,12 +46,33 @@ export function getDownloadUrl(productSlug: string): string | null {
 }
 
 export async function sendDeliveryEmail(params: DeliveryEmailParams): Promise<boolean> {
-    const { to, customerName, productName, downloadUrl, amount } = params;
+    const {
+        to,
+        customerName,
+        productName,
+        downloadUrl,
+        amount,
+        customerEmail,
+        orderId,
+        transactionId,
+        policyVersion,
+    } = params;
     const user = (process.env.GMAIL_USER ?? "").trim();
     if (!user || !(process.env.GMAIL_APP_PASSWORD ?? "").trim()) {
         console.error("[email] GMAIL_USER / GMAIL_APP_PASSWORD no configurados");
         return false;
     }
+    const deliveredAt = new Date().toISOString();
+    const buyerEmail = customerEmail ?? to;
+    const orderLine = orderId
+        ? `<p style="margin: 4px 0; color: #475569;"><strong>Pedido PayPal:</strong> ${escapeHtml(orderId)}</p>`
+        : "";
+    const transactionLine = transactionId
+        ? `<p style="margin: 4px 0; color: #475569;"><strong>Transacción:</strong> ${escapeHtml(transactionId)}</p>`
+        : "";
+    const policyLine = policyVersion
+        ? `<p style="margin: 4px 0; color: #475569;"><strong>Política aplicada:</strong> ${escapeHtml(policyVersion)}</p>`
+        : "";
 
     const html = `<!DOCTYPE html>
 <html lang="es">
@@ -56,12 +82,20 @@ export async function sendDeliveryEmail(params: DeliveryEmailParams): Promise<bo
     <h1 style="color: #0891b2; font-size: 24px;">⚡ iaflashelite</h1>
   </div>
 
-  <h2 style="color: #1e293b;">✅ Tu pedido está listo</h2>
+  <h2 style="color: #1e293b;">Tu pedido está listo</h2>
 
   <p>Hola <strong>${escapeHtml(customerName)}</strong>,</p>
 
-  <p>Tu pago de <strong>${escapeHtml(amount)}€</strong> se ha procesado correctamente.
-  Aquí tienes tu descarga de <strong>${escapeHtml(productName)}</strong>:</p>
+  <p>Tu pedido está listo. Hemos iniciado la entrega digital solicitada de
+  <strong>${escapeHtml(productName)}</strong> por <strong>${escapeHtml(amount)}€</strong>.</p>
+
+  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; margin: 20px 0;">
+    <p style="margin: 4px 0; color: #475569;"><strong>Email comprador:</strong> ${escapeHtml(buyerEmail)}</p>
+    <p style="margin: 4px 0; color: #475569;"><strong>Fecha de entrega:</strong> ${escapeHtml(deliveredAt)}</p>
+    ${orderLine}
+    ${transactionLine}
+    ${policyLine}
+  </div>
 
   <div style="text-align: center; margin: 30px 0;">
     <a href="${downloadUrl}"
@@ -74,10 +108,18 @@ export async function sendDeliveryEmail(params: DeliveryEmailParams): Promise<bo
 
   <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 16px; margin: 20px 0;">
     <p style="margin: 0; color: #166534;">
-      <strong>🛡️ Garantía técnica:</strong> Si tienes algún problema técnico con el producto
-      en las próximas 48h, escríbenos y lo resolvemos o te devolvemos el dinero.
+      <strong>Garantía Flash:</strong> Si el enlace falla, el archivo está dañado
+      o el producto no funciona según lo descrito, responde a este email:
+      lo revisamos y te damos solución.
     </p>
   </div>
+
+  <p style="font-size: 13px; color: #64748b; line-height: 1.6;">
+    Al haberse iniciado la entrega digital solicitada, el derecho de
+    desistimiento de 14 días deja de aplicarse cuando empieza el acceso,
+    descarga o envío. Mantienes tus derechos si hay un problema real de
+    entrega, archivo, descripción o funcionamiento.
+  </p>
 
   <p>Cualquier duda:
     <a href="mailto:iaflashelite@gmail.com" style="color: #0891b2;">iaflashelite@gmail.com</a>
@@ -95,12 +137,19 @@ export async function sendDeliveryEmail(params: DeliveryEmailParams): Promise<bo
     const text = [
         `Hola ${customerName},`,
         ``,
-        `Tu pago de ${amount}€ se ha procesado correctamente.`,
+        `Tu pedido está listo. Hemos iniciado la entrega digital solicitada de ${productName} por ${amount}€.`,
+        `Email comprador: ${buyerEmail}`,
+        `Fecha de entrega: ${deliveredAt}`,
+        orderId ? `Pedido PayPal: ${orderId}` : ``,
+        transactionId ? `Transacción: ${transactionId}` : ``,
+        policyVersion ? `Política aplicada: ${policyVersion}` : ``,
+        ``,
         `Descarga tu ${productName} aquí:`,
         ``,
         downloadUrl,
         ``,
-        `Garantía técnica: fallo no resuelto en 48h = devolución 100%.`,
+        `Garantía Flash: si el enlace falla, el archivo está dañado o el producto no funciona según lo descrito, responde a este email y lo revisamos contigo.`,
+        `Al haberse iniciado la entrega digital solicitada, el derecho de desistimiento de 14 días deja de aplicarse cuando empieza el acceso, descarga o envío.`,
         `Cualquier duda: iaflashelite@gmail.com`,
         ``,
         `— iaflashelite`,

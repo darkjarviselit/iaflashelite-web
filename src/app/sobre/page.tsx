@@ -185,7 +185,7 @@ export default function SobrePage() {
                             <Pledge icon={<Lock className="w-5 h-5" />} title="No vendemos datos. Nunca." />
                             <Pledge icon={<Mail className="w-5 h-5" />} title="Respondemos personalmente cada email." />
                             <Pledge icon={<Wallet className="w-5 h-5" />} title="Sin suscripciones ni cargos ocultos." />
-                            <Pledge icon={<ShieldCheck className="w-5 h-5" />} title="Garantía 7 días devolución sin preguntas." />
+                            <Pledge icon={<ShieldCheck className="w-5 h-5" />} title="Compra protegida por Garantía Flash." />
                         </div>
                     </div>
                 </section>

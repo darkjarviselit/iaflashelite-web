@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { EXPRESS_SURCHARGE, PRODUCTS } from "@/lib/constants";
+import { EXPRESS_SURCHARGE, GUARANTEE_POLICY_VERSION, PRODUCTS } from "@/lib/constants";
 
 interface OrderPayload {
     productSlug?: string;
@@ -15,6 +15,9 @@ interface OrderPayload {
     // null = producto es servicio (no aplica).
     consentDigital?: boolean | null;
     consentDigitalAt?: string | null;
+    consentTimestamp?: string | null;
+    policyVersion?: string | null;
+    consentSummary?: string | null;
 }
 
 const GIRIS_URL = process.env.GIRIS_AGENT_URL ?? "http://localhost:5318";
@@ -130,6 +133,10 @@ export async function POST(request: Request) {
     // Digital consent (EU 2011/83/UE Art. 16(m)) — required only for downloads.
     const consentDigital = payload.consentDigital === true;
     const consentDigitalAt = (payload.consentDigitalAt ?? "").trim();
+    const consentTimestamp = (payload.consentTimestamp ?? consentDigitalAt ?? "").trim();
+    const policyVersion =
+        (payload.policyVersion ?? "").trim() || GUARANTEE_POLICY_VERSION;
+    const consentSummary = (payload.consentSummary ?? "").trim();
     if (productType === "download" && !consentDigital) {
         return bad("missing_digital_consent");
     }
@@ -152,6 +159,11 @@ export async function POST(request: Request) {
         // Digital consent audit trail (EU 2011/83/UE Art. 16(m))
         consent_digital: productType === "download" ? consentDigital : null,
         consent_digital_at: productType === "download" ? (consentDigitalAt || null) : null,
+        consent_timestamp: consentTimestamp || new Date().toISOString(),
+        consent_summary: consentSummary || null,
+        policy_version: policyVersion,
+        delivery_status:
+            productType === "download" ? "pending_manual_delivery" : "pending_service_review",
         ip,
         user_agent: request.headers.get("user-agent") ?? "",
     };

@@ -7,6 +7,8 @@ export const BRAND = {
     domain: "iaflashelite.com",
 } as const;
 
+export const GUARANTEE_POLICY_VERSION = "garantia-flash-v1-2026-05";
+
 export type ProductStatus = "available" | "coming_soon";
 
 export type Audience = "pymes" | "particulares" | "desarrolladores";
@@ -238,7 +240,7 @@ export const PRODUCTS: Product[] = [
             "Prompts pre-hechos para Claude/Codex (despliegue rápido)",
             "Audio explicativo descargable",
             "Soporte por email 30 días",
-            "Garantía 7 días devolución sin preguntas",
+            "Garantía Flash de entrega y funcionamiento",
         ],
         guarantee_days: 7,
         support_days: 30,
@@ -513,7 +515,7 @@ export const FAQS = [
     },
     {
         q: "¿Cómo sé que recibiré el producto?",
-        a: "Productos digitales: pagas directamente con PayPal o tarjeta y recibes el producto por email en menos de 1 hora. Si prefieres Bizum o transferencia, te enviamos las instrucciones en menos de 12h. Servicios: confirmamos plazo primero, luego pagas. Garantía técnica: fallo no resuelto en 48h = devolución 100%. Detalle en /legal/garantias.",
+        a: "Productos digitales: pagas directamente con PayPal o tarjeta y recibes el producto por email en menos de 1 hora. Si prefieres Bizum o transferencia, te enviamos las instrucciones en menos de 12h. Servicios: confirmamos plazo primero, luego pagas. Compra protegida por Garantía Flash: entrega digital segura y soporte si algo falla. Detalle en /legal/garantias.",
     },
     {
         q: "¿Y si el equipo desaparece después de pagar?",
@@ -521,12 +523,12 @@ export const FAQS = [
     },
     // PRODUCTOS Y SERVICIOS
     {
-        q: "¿Hay garantía de devolución?",
-        a: "Sí, con matices importantes. Productos digitales: garantía técnica de funcionamiento. Si hay un fallo no resuelto en 48h, devolución del 100%. NO aplica si simplemente cambias de opinión (contenido digital ejecutado, Directiva EU 2011/83/UE). Servicios: devolución total si no cumplimos el plazo acordado. Ver /legal/garantias para todos los detalles.",
+        q: "¿Qué cubre la Garantía Flash?",
+        a: "Sí, si hay un problema real de entrega, archivo, descripción o funcionamiento y no podemos resolverlo. Primero intentamos solucionarlo, reenviarlo o entregar una versión funcional. No aplica por cambio de opinión, compra por error o uso distinto al descrito tras recibir el contenido. Ver /legal/garantias.",
     },
     {
-        q: "¿Puedo pedir devolución si no me gusta el producto descargable?",
-        a: "Para productos digitales descargables, no. Al aceptar la descarga confirmas que entiendes que pierdes el derecho de desistimiento de 14 días. Lo hacemos así porque el producto queda en tu poder tras la descarga — igual que Steam, Gumroad u otras plataformas digitales. Lo que sí garantizamos: que funciona. Si no funciona, devolución en 48h.",
+        q: "¿Puedo pedir devolución?",
+        a: "Sí, si hay un problema real de entrega, archivo, descripción o funcionamiento y no podemos resolverlo. No aplica por cambio de opinión, compra por error o uso distinto al descrito tras recibir el contenido.",
     },
     {
         q: "¿Necesito ser técnico para usar los productos?",
@@ -534,7 +536,7 @@ export const FAQS = [
     },
     {
         q: "¿Qué pasa si tarda más del plazo prometido?",
-        a: "Te aviso ANTES si veo que no llego. Si fallé al plazo CONFIRMADO contigo: devolución 100%.",
+        a: "Te aviso antes si veo que no llego. En servicios, la Garantía Flash cubre el plazo y alcance acordados por escrito: primero intentamos resolverlo y, si no podemos, valoramos un reembolso total o parcial según el caso.",
     },
     {
         q: "¿Hay límite de pedidos al mes?",
@@ -569,7 +571,7 @@ export const FAQS = [
     },
     {
         q: "¿Y si la IA dice que vuestro código es sospechoso?",
-        a: "Avísanos. Te devolvemos 100% del dinero sin preguntas y investigamos. Puede ser falso positivo (común en herramientas de seguridad) o error real que corregimos.",
+        a: "Avísanos antes de instalar. Lo revisamos contigo, explicamos el resultado y, si hay un fallo real del producto que no podamos resolver, aplicamos la Garantía Flash.",
     },
     {
         q: "¿Por qué invitáis a verificaros con una IA?",
@@ -586,7 +588,7 @@ export const FAQS = [
     },
     {
         q: "¿Por qué no anunciáis valores de los cursos (ej. «curso valorado en 90€»)?",
-        a: "Porque odiamos inflar precios percibidos. Sería tratarte de tonto. El material va incluido honestamente. Si te aporta utilidad, perfecto. Si no, devuelves el producto en 7 días sin preguntas.",
+        a: "Porque no inflamos precios percibidos. El material va incluido de forma honesta: si te aporta utilidad, perfecto; si hay un problema real de entrega o funcionamiento, lo cubre la Garantía Flash.",
     },
     {
         q: "¿Cuándo estarán disponibles los cursos?",
@@ -602,7 +604,7 @@ export const STATS = [
     { value: "100%", label: "Bootstrapped sin inversores" },
     { value: "0", label: "Trackers en la web" },
     { value: "<12h", label: "Tiempo medio de respuesta" },
-    { value: "7 días", label: "Garantía devolución" },
+    { value: "Flash", label: "Compra protegida" },
     { value: "30 días", label: "Soporte incluido" },
     { value: "2", label: "Universidades top (UPC + UPF)" },
 ] as const;

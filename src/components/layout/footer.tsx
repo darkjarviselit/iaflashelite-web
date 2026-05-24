@@ -39,7 +39,7 @@ const FOOTER_NAV = {
     legal: [
         { label: "Aviso legal", href: "/legal/aviso-legal" },
         { label: "Privacidad", href: "/legal/privacidad" },
-        { label: "Garantías y devoluciones", href: "/legal/garantias" },
+        { label: "Garantía Flash y devoluciones", href: "/legal/garantias" },
         { label: "Cookies", href: "/legal/cookies" },
     ],
 };
@@ -89,8 +89,8 @@ export function Footer() {
                         })}
                     </div>
                     <p className="text-xs text-text-secondary leading-relaxed max-w-2xl">
-                        Pago manual con confirmación por email. Tu producto se entrega en
-                        cuanto se confirma el pago.
+                        Pago manual con confirmación por email. Tu compra queda
+                        protegida por Garantía Flash de entrega y funcionamiento.
                     </p>
                 </div>
 

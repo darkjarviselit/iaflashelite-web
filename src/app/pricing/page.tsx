@@ -56,7 +56,7 @@ const ONE_TIME_PLANS: ReadonlyArray<PricingCard> = [
             "Guía de instalación PDF",
             "Prompts para Claude/ChatGPT incluidos",
             "Soporte 30 días",
-            "Garantía 7 días devolución",
+            "Garantía Flash incluida",
         ],
         cta: "Ver herramientas",
         href: "/productos",
@@ -73,7 +73,7 @@ const ONE_TIME_PLANS: ReadonlyArray<PricingCard> = [
             "Manual de uso completo",
             "Guía no-técnicos incluida",
             "Soporte 30 días",
-            "Garantía 7 días",
+            "Garantía Flash",
         ],
         cta: "Solicitar pack",
         href: "/contacto",
@@ -186,7 +186,7 @@ const FAQ_ITEMS: ReadonlyArray<FaqItem> = [
     {
         question: "¿Qué pasa si no quedo satisfecho?",
         answer:
-            "Garantía de 7 días para herramientas descargables. Para proyectos a medida, trabajamos contigo hasta que el resultado cumpla lo acordado en el briefing inicial.",
+            "La Garantía Flash cubre problemas reales de entrega, archivo, descripción o funcionamiento. Para proyectos a medida, trabajamos contigo hasta que la entrega cumpla el alcance acordado en el briefing inicial.",
     },
     {
         question: "¿Puedo pedir presupuesto sin compromiso?",

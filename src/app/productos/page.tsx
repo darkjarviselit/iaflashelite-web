@@ -10,7 +10,7 @@ import { BRAND_VALUES, PRODUCTS } from "@/lib/constants";
 export const metadata: Metadata = {
     title: "Productos — iaflashelite.com",
     description:
-        "Catálogo completo: herramientas descargables y servicios personalizados. Filtra por audiencia o categoría. Garantía 7 días.",
+        "Catálogo completo: herramientas descargables y servicios personalizados. Filtra por audiencia o categoría. Compra protegida por Garantía Flash.",
 };
 
 const VALUE_ICONS: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
@@ -92,11 +92,12 @@ export default function ProductosPage() {
                         <ul className="grid sm:grid-cols-2 gap-4 mt-4">
                             <li className="p-5 rounded-2xl bg-gray-50 border border-gray-200">
                                 <span className="text-sm font-semibold text-gray-900 block mb-1">
-                                    7 días devolución sin preguntas
+                                    Compra protegida por Garantía Flash
                                 </span>
                                 <span className="text-sm text-gray-600 leading-relaxed">
-                                    Si no te gusta, te devolvemos el 100% en menos de 48h
-                                    laborables.
+                                    Entrega digital segura, soporte si algo falla
+                                    y revisión si el producto no llega, está
+                                    dañado o no coincide con la descripción.
                                 </span>
                             </li>
                             <li className="p-5 rounded-2xl bg-gray-50 border border-gray-200">

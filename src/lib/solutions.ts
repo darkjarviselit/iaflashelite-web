@@ -56,7 +56,7 @@ export const solutions: Solution[] = [
                     "Guía de instalación incluida",
                     "Prompts para Claude/ChatGPT",
                     "Soporte 30 días",
-                    "Garantía 7 días",
+                    "Garantía Flash",
                 ],
             },
             setup: {
@@ -117,7 +117,7 @@ export const solutions: Solution[] = [
                     "Guía de instalación incluida",
                     "Prompts para Claude/ChatGPT",
                     "Soporte 30 días",
-                    "Garantía 7 días",
+                    "Garantía Flash",
                 ],
             },
             setup: {
@@ -178,7 +178,7 @@ export const solutions: Solution[] = [
                     "Guía de instalación incluida",
                     "Prompts para Claude/ChatGPT",
                     "Soporte 30 días",
-                    "Garantía 7 días",
+                    "Garantía Flash",
                 ],
             },
             setup: {
@@ -239,7 +239,7 @@ export const solutions: Solution[] = [
                     "Guía de instalación incluida",
                     "Prompts para Claude/ChatGPT",
                     "Soporte 30 días",
-                    "Garantía 7 días",
+                    "Garantía Flash",
                 ],
             },
             setup: {
@@ -300,7 +300,7 @@ export const solutions: Solution[] = [
                     "Guía de instalación incluida",
                     "Prompts para Claude/ChatGPT",
                     "Soporte 30 días",
-                    "Garantía 7 días",
+                    "Garantía Flash",
                 ],
             },
             setup: {

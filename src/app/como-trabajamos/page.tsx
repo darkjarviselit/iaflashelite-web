@@ -97,11 +97,11 @@ const PAYMENT_METHODS: ReadonlyArray<{
 const CASES: ReadonlyArray<{ q: string; a: string }> = [
     {
         q: "¿Qué pasa si no me gusta el resultado?",
-        a: "Garantía 7 días: devolución 100% sin preguntas.",
+        a: "Garantía Flash: revisamos cualquier incidencia real de entrega, alcance o funcionamiento. Primero intentamos corregirla y, si no podemos resolverla, valoramos un reembolso total o parcial según el caso.",
     },
     {
         q: "¿Qué pasa si tardáis más del plazo?",
-        a: "Te avisamos ANTES si vemos que no llegamos. Si fallamos al plazo confirmado: devolución 100%.",
+        a: "Te avisamos antes si vemos que no llegamos. Si el plazo confirmado se incumple por causa nuestra, aplicamos Garantía Flash y buscamos una solución justa.",
     },
     {
         q: "¿Qué pasa si soy no-técnico?",
@@ -246,7 +246,7 @@ export default function ComoTrabajamosPage() {
                                 <span className="font-semibold text-gray-900">
                                     NO instales y avísanos.
                                 </span>{" "}
-                                Devolución 100% garantizada.
+                                Revisión cubierta por Garantía Flash.
                             </p>
                         </div>
                         <div className="pt-2">

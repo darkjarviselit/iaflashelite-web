@@ -296,10 +296,10 @@ export default async function ProductDetailPage({
                                     <ShieldCheck className="w-5 h-5" />
                                 </span>
                                 <h3 className="text-sm font-semibold text-gray-900 mb-1">
-                                    Garantía {product.guarantee_days} días
+                                    Garantía Flash
                                 </h3>
                                 <p className="text-xs text-gray-600 leading-relaxed">
-                                    Devolución 100% sin preguntas.
+                                    Entrega protegida y soporte si algo falla.
                                 </p>
                             </div>
                             <div className="p-5 rounded-2xl bg-white border border-gray-200 hover:border-cyan-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 ease-out">
@@ -456,7 +456,7 @@ export default async function ProductDetailPage({
                                     <span className="text-[11px] font-mono tracking-[0.18em] text-cyan-600 mt-1">03</span>
                                     <p className="text-sm text-gray-700 leading-relaxed">
                                         Una vez confirmado el pago, te enviamos el ZIP del producto al email.
-                                        Empiezan a contar tus 7 días de garantía y 30 días de soporte.
+                                        Tu compra queda protegida por Garantía Flash y 30 días de soporte.
                                     </p>
                                 </li>
                             </ol>
@@ -591,9 +591,11 @@ export default async function ProductDetailPage({
                                             Servicio con garantía de entrega
                                         </p>
                                         <p className="leading-relaxed">
-                                            Confirmamos plazo antes de empezar. Si no
-                                            entregamos en el plazo acordado, devolución
-                                            del 100% sin preguntas.{" "}
+                                            Confirmamos plazo antes de empezar.
+                                            Si hay una incidencia real de entrega
+                                            o alcance, primero intentamos resolverla
+                                            y valoramos reembolso total o parcial
+                                            si no podemos.{" "}
                                             <Link
                                                 href="/legal/garantias"
                                                 className="underline font-medium hover:no-underline"
@@ -611,11 +613,12 @@ export default async function ProductDetailPage({
                                             Producto digital — descarga inmediata
                                         </p>
                                         <p className="leading-relaxed">
-                                            Una vez recibas el enlace, pierdes el
-                                            derecho de desistimiento de 14 días
-                                            (Directiva EU 2011/83/UE). Garantizamos que
-                                            funciona: si hay un fallo técnico no
-                                            resuelto en 48h, devolvemos el 100%.{" "}
+                                            Una vez empiece el acceso, descarga o
+                                            envío, pierdes el derecho de desistimiento
+                                            de 14 días (Directiva EU 2011/83/UE).
+                                            Mantienes la Garantía Flash si el
+                                            producto no llega, falla, está dañado
+                                            o no coincide con la descripción.{" "}
                                             <Link
                                                 href="/legal/garantias"
                                                 className="underline font-medium hover:no-underline"

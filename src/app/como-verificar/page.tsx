@@ -69,7 +69,7 @@ const STEPS = [
 const SUSPICIOUS_STEPS = [
     "NO lo instales. Esperamos que tu seguridad esté primero.",
     "Avísanos: iaflashelite@gmail.com. Te respondemos en <12h con explicación.",
-    "Pide devolución completa. Cumplimos garantía 7 días sin preguntas.",
+    "Aplicamos Garantía Flash si hay un fallo real del producto que no podamos resolver.",
     "Nosotros mismos investigaremos por qué la IA lo marcó. Puede ser un falso positivo (común en gestores de contraseñas por motivos legítimos) o un error real que debemos corregir.",
 ];
 
@@ -238,8 +238,8 @@ export default function ComoVerificarPage() {
                             Una capa de seguridad que NADIE más te ofrece.
                         </h2>
                         <p className="text-text-secondary max-w-xl leading-relaxed">
-                            Empieza por cualquier producto. Tienes 7 días de garantía
-                            total.
+                            Empieza por cualquier producto. Tu compra queda protegida
+                            por Garantía Flash de entrega y funcionamiento.
                         </p>
                         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                             <Button href="/productos" size="lg" variant="gradient">
