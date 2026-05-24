@@ -22,6 +22,8 @@ export const metadata: Metadata = {
 };
 
 const CONTACT_HREF = "/contacto?asunto=GestorIA%20Local";
+const SPECIFIC_SERVICE_HREF =
+    "/contacto?asunto=Servicio%20concreto%20GestorIA%20Local";
 const DEMO_CONTACT_HREF = "/contacto?asunto=Demo%20GestorIA%20Local";
 const DEMO_VIDEO_PUBLIC_PATH = "/gestoria-local/gestoria-local-demo-guiada.mp4";
 const DEMO_POSTER_PUBLIC_PATH =
@@ -180,7 +182,6 @@ export default function GestoriaLocalPage() {
             <Header />
             <main className="min-h-screen bg-onyx text-paper">
                 <HeroSection />
-                <AudioGuidesSection />
                 <AudienceSection />
                 <CapabilitiesSection />
                 <PrivacySection />
@@ -197,43 +198,48 @@ export default function GestoriaLocalPage() {
 
 function HeroSection() {
     return (
-        <section className="relative overflow-hidden px-6 pb-14 pt-24 lg:pb-20 lg:pt-28">
+        <section className="relative overflow-hidden px-6 pb-10 pt-20 lg:pb-14 lg:pt-24">
             <div className="absolute inset-0 bg-dot-grid opacity-25" aria-hidden />
             <div
                 className="absolute inset-x-0 top-0 h-[72%] bg-[radial-gradient(ellipse_at_top,rgba(0,229,255,0.14),transparent_64%)]"
                 aria-hidden
             />
-            <div className="relative mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
-                <div className="max-w-3xl">
+            <div className="relative mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-2 lg:items-center">
+                <div className="max-w-2xl">
                     <span className="inline-flex items-center gap-2 rounded-full border border-flash/25 bg-flash/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-flash">
                         <Sparkles className="h-4 w-4" />
                         GestorIA Local by IAFlashElite
                     </span>
-                    <h1 className="mt-7 text-5xl font-black leading-[0.98] text-paper sm:text-6xl lg:text-7xl">
+                    <h1 className="mt-6 text-4xl font-black leading-[1.02] text-paper sm:text-5xl lg:text-5xl xl:text-6xl">
                         Ordena tu gestoría sin migrar a otro software.
                     </h1>
-                    <p className="mt-6 max-w-2xl text-lg leading-8 text-text-secondary sm:text-xl">
+                    <p className="mt-5 max-w-xl text-base leading-7 text-text-secondary sm:text-lg">
                         Un copiloto privado para gestorías pequeñas. Organiza clientes,
                         documentos, vencimientos y revisiones en tu propio ordenador. La IA
                         propone; el profesional decide.
                     </p>
-                    <p className="mt-5 max-w-2xl text-base leading-7 text-text-secondary">
+                    <p className="mt-4 max-w-xl text-sm font-semibold leading-6 text-text-secondary">
                         No factura. No toca AEAT. No sustituye tu software fiscal.
                     </p>
-                    <p className="mt-5 max-w-2xl rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-semibold leading-6 text-paper">
-                        Piloto Founders · 490 € pago único · máximo 5 instalaciones
-                        guiadas al mes
-                    </p>
-                    <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <div className="mt-5 max-w-xl rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-semibold leading-6 text-paper">
+                        <p>Piloto Founders · 490 € pago único</p>
+                        <p className="mt-1 text-text-secondary">
+                            máximo 5 instalaciones guiadas al mes
+                        </p>
+                        <p className="mt-1 text-text-secondary">
+                            69 €/mes opcional después de 30 días
+                        </p>
+                    </div>
+                    <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                         <Button href={CONTACT_HREF} size="lg" variant="gradient">
                             Solicitar Piloto Founders <ArrowRight size={18} />
                         </Button>
                         <Button
-                            href="#audio-gestoria-local"
+                            href={SPECIFIC_SERVICE_HREF}
                             size="lg"
                             variant="secondary"
                         >
-                            Escuchar guía <Headphones size={18} />
+                            Pedir servicio concreto <ArrowRight size={18} />
                         </Button>
                     </div>
                 </div>
@@ -264,55 +270,31 @@ function HeroSection() {
                         Demo guiada de unos 3 minutos: instalación, configuración inicial,
                         Telegram y calendario con datos ficticios.
                     </p>
-                </article>
-            </div>
-        </section>
-    );
-}
-
-function AudioGuidesSection() {
-    return (
-        <section
-            id="audio-gestoria-local"
-            className="scroll-mt-24 bg-[#111111] px-6 py-16 lg:py-24"
-        >
-            <div className="mx-auto max-w-[1180px]">
-                <SectionIntro
-                    eyebrow="Audio guía"
-                    title="Escucha la guía de GestorIA Local"
-                    text="Dos audios breves para entender qué hace GestorIA Local y cómo funciona el Piloto Founders antes de solicitar una instalación guiada."
-                />
-                <div className="mt-10 grid gap-5 lg:grid-cols-2">
-                    {AUDIO_GUIDES.map((guide, index) => (
-                        <article
-                            key={guide.src}
-                            className="rounded-2xl border border-white/10 bg-onyx p-5 shadow-xl shadow-black/20"
-                        >
-                            <div className="flex items-start gap-4">
-                                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-flash/25 bg-flash/10 text-flash">
-                                    <Headphones className="h-5 w-5" />
-                                </span>
-                                <div>
-                                    <h3 className="text-xl font-bold text-paper">
+                    <div className="mt-4 grid gap-3 md:grid-cols-2">
+                        {AUDIO_GUIDES.map((guide, index) => (
+                            <div
+                                key={guide.src}
+                                className="rounded-xl border border-white/10 bg-onyx p-3"
+                            >
+                                <div className="mb-3 flex items-center gap-2">
+                                    <Headphones className="h-4 w-4 shrink-0 text-flash" />
+                                    <h3 className="text-sm font-semibold leading-5 text-paper">
                                         {index + 1}. {guide.title}
                                     </h3>
-                                    <p className="mt-2 text-sm leading-6 text-text-secondary">
-                                        {guide.description}
-                                    </p>
                                 </div>
+                                <audio
+                                    className="w-full"
+                                    controls
+                                    controlsList="nodownload"
+                                    preload="metadata"
+                                >
+                                    <source src={guide.src} type="audio/mpeg" />
+                                    Tu navegador no puede reproducir este audio.
+                                </audio>
                             </div>
-                            <audio
-                                className="mt-5 w-full"
-                                controls
-                                controlsList="nodownload"
-                                preload="metadata"
-                            >
-                                <source src={guide.src} type="audio/mpeg" />
-                                Tu navegador no puede reproducir este audio.
-                            </audio>
-                        </article>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                </article>
             </div>
         </section>
     );
