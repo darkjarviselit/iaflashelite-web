@@ -19,8 +19,26 @@ export const metadata: Metadata = {
         "Recursos privados para instalar GestorIA, descargar guías y escuchar audios del Programa Piloto Privado.",
 };
 
-const INSTALL_COMMAND =
-    "curl -fsSL https://iaflashelite-web.vercel.app/gestoria/install.sh | GESTORIA_BASE_URL=https://iaflashelite-web.vercel.app/gestoria bash";
+const INSTALL_OPTIONS = [
+    {
+        title: "macOS / Linux",
+        description: "Pega este comando en Terminal. Descarga RC9, verifica SHA e instala GestorIA con npm.",
+        command:
+            "curl -fsSL https://iaflashelite-web.vercel.app/gestoria/install.sh | GESTORIA_BASE_URL=https://iaflashelite-web.vercel.app/gestoria bash",
+    },
+    {
+        title: "Windows PowerShell",
+        description: "Abre PowerShell, pega este comando y sigue el diagnóstico inicial.",
+        command:
+            "irm https://iaflashelite-web.vercel.app/gestoria/install.ps1 | iex",
+    },
+    {
+        title: "Manual avanzado",
+        description: "Descarga el paquete .tgz e instala con npm install -g si prefieres revisar cada paso.",
+        command:
+            "npm install -g .\\gestorai-agent-0.8.0-rc9.tgz",
+    },
+] as const;
 
 const PDF_LINKS = [
     {
@@ -96,27 +114,49 @@ function InstallSection() {
                     eyebrow="Instalación"
                     icon={<Terminal className="h-4 w-4" />}
                     title="Instala GestorIA con un comando"
-                    description="Copia y pega este comando en Terminal. Está preparado para usar los recursos públicos del piloto."
+                    description="Elige tu sistema operativo. Todos los comandos usan los recursos públicos del piloto."
                 />
-                <div className="mt-8 rounded-2xl border border-white/10 bg-[#090909] p-5 shadow-2xl shadow-black/30">
-                    <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                        <div>
-                            <p className="text-sm font-semibold text-paper">
-                                Comando de instalación
-                            </p>
-                            <p className="mt-1 text-xs leading-5 text-text-secondary">
-                                Copia el comando completo; se pega en una sola línea.
-                            </p>
+                <div className="mt-8 grid gap-5 lg:grid-cols-3">
+                    {INSTALL_OPTIONS.map((option) => (
+                        <div
+                            key={option.title}
+                            className="flex min-h-72 flex-col justify-between rounded-2xl border border-white/10 bg-[#090909] p-5 shadow-2xl shadow-black/30"
+                        >
+                            <div>
+                                <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between lg:flex-col lg:items-start xl:flex-row">
+                                    <div>
+                                        <p className="text-sm font-semibold text-paper">
+                                            {option.title}
+                                        </p>
+                                        <p className="mt-1 text-xs leading-5 text-text-secondary">
+                                            {option.description}
+                                        </p>
+                                    </div>
+                                    <CopyInstallCommand command={option.command} />
+                                </div>
+                                <pre className="whitespace-pre-wrap break-all rounded-xl border border-white/10 bg-black/60 p-4 text-sm leading-6 text-cyan-100">
+                                    <code>{option.command}</code>
+                                </pre>
+                            </div>
+                            {option.title === "Manual avanzado" ? (
+                                <a
+                                    href="/gestoria/gestorai-agent-0.8.0-rc9.tgz"
+                                    className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-flash"
+                                >
+                                    <Download className="h-4 w-4" />
+                                    Descargar paquete .tgz
+                                </a>
+                            ) : (
+                                <p className="mt-4 text-sm leading-6 text-text-secondary">
+                                    Copia el comando completo; se pega en una sola línea.
+                                </p>
+                            )}
                         </div>
-                        <CopyInstallCommand command={INSTALL_COMMAND} />
-                    </div>
-                    <pre className="whitespace-pre-wrap break-all rounded-xl border border-white/10 bg-black/60 p-4 text-sm leading-6 text-cyan-100 sm:break-words">
-                        <code>{INSTALL_COMMAND}</code>
-                    </pre>
-                    <p className="mt-4 text-sm leading-6 text-text-secondary">
-                        Usa esta página solo como recurso privado del piloto.
-                    </p>
+                    ))}
                 </div>
+                <p className="mt-4 text-sm leading-6 text-text-secondary">
+                    Usa esta página solo como recurso privado del piloto.
+                </p>
             </div>
         </section>
     );
