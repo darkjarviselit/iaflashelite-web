@@ -18,15 +18,15 @@ const GUARANTEES: ReadonlyArray<{
 }> = [
     {
         icon: ShieldCheck,
-        title: "7 días devolución",
+        title: "Garantía Flash",
         description:
-            "Si no te convence, devuelvo el 100%. Sin preguntas. Sin justificaciones.",
+            "Compra protegida: entrega digital segura y soporte si algo falla.",
     },
     {
         icon: Timer,
-        title: "Plazo confirmado o devolución",
+        title: "Plazo confirmado",
         description:
-            "Antes de cobrar te confirmo el plazo exacto. Si fallo, devuelvo el dinero.",
+            "Antes de cobrar confirmamos el plazo. Si hay una incidencia real, primero la resolvemos.",
     },
     {
         icon: Wallet,
@@ -66,8 +66,9 @@ export function GuaranteesSection() {
                         Garantías reales. Sin asteriscos.
                     </h2>
                     <p className="text-base text-gray-600 leading-relaxed max-w-2xl">
-                        Estas son las garantías. Las verás repetidas en cada producto
-                        porque las cumplimos en todos.
+                        La Garantía Flash protege entrega y funcionamiento sin
+                        abrir devoluciones por cambio de opinión tras el acceso
+                        digital.
                     </p>
                 </div>
 

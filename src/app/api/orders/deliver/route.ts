@@ -2,7 +2,7 @@
 // transferencia. Autenticación Bearer simple con DELIVER_SECRET_TOKEN.
 
 import { NextResponse } from "next/server";
-import { PRODUCTS } from "@/lib/constants";
+import { GUARANTEE_POLICY_VERSION, PRODUCTS } from "@/lib/constants";
 import { getDownloadUrl, sendDeliveryEmail } from "@/lib/email";
 
 interface DeliverBody {
@@ -54,6 +54,8 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "no_download_url" }, { status: 500 });
     }
 
+    // La prueba histórica de consentimiento vive en el pedido manual reenviado a giris-agent.
+    // Este endpoint solo ejecuta la entrega tras confirmar pago fuera del checkout.
     const sent = await sendDeliveryEmail({
         to: customerEmail,
         customerName,
@@ -61,6 +63,9 @@ export async function POST(request: Request) {
         productSlug,
         downloadUrl,
         amount: String(product.price),
+        customerEmail,
+        policyVersion: GUARANTEE_POLICY_VERSION,
+        deliverySource: "manual_delivery",
     });
 
     if (!sent) {
