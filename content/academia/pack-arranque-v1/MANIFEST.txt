@@ -1,8 +1,8 @@
 Nombre: Pack Arranque IA v1
 Subtítulo: Prepara tu agente y tu flujo de trabajo
 Marca: IAFlashElite
-Versión: v1.1-fuente
-Fecha: 2026-05-24
+Versión: v1.1-review
+Fecha: 2026-05-25
 
 Posicionamiento:
 El flujo de arranque que usamos en IAFlashElite para preparar a nuevos
@@ -15,6 +15,7 @@ Archivos incluidos:
 - pdf-style.css
 - audio-guia-script.md
 - audio-guia-script-tts.md
+- 01-audio-guia.mp3 (audio final; en fuente: audio/01-audio-guia.mp3)
 - checklist-final.md
 - garantia-calidad.md
 - templates/curriculum-ia-personal.md
@@ -27,8 +28,12 @@ Archivos incluidos:
 - templates/skill-checklist-final-entrega.md
 - templates/CLAUDE.md
 
+Audio final:
+- Archivo: 01-audio-guia.mp3
+- Formato: MP3
+- Duración aproximada: 5 min 24 s
+- Uso: audio guía breve de acompañamiento para seguir el pack con más claridad.
+
 Nota:
-Contenido fuente pendiente de convertir a PDF/audio/ZIP final.
-No es todavía el producto descargable publicado.
-La carpeta dist/academia/pack-arranque* generada antes debe regenerarse antes de
-la venta.
+Contenido fuente y paquete de revisión preparados para QA editorial.
+No es todavía el producto descargable publicado ni está conectado a la web.
