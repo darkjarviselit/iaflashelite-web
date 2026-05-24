@@ -12,6 +12,7 @@ Archivos incluidos:
 - LEEME.md
 - MANIFEST.txt
 - manual-pack-arranque-ia.md
+- pdf-style.css
 - audio-guia-script.md
 - audio-guia-script-tts.md
 - checklist-final.md

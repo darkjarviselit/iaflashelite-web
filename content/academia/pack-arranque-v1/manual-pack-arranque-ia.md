@@ -1,6 +1,42 @@
+::: {.pdf-cover}
+<p class="pdf-eyebrow">IAFlashElite Academy</p>
+
 # Pack Arranque IA
 
-## Prepara tu agente y tu flujo de trabajo
+<p class="pdf-subtitle">Prepara tu agente y tu flujo de trabajo</p>
+
+<p class="pdf-cover-copy">El flujo de arranque que usamos en IAFlashElite para preparar colaboradores y agentes IA antes de tocar un proyecto real.</p>
+
+<div class="pdf-meta">
+<p><strong>Versión:</strong> v1.0</p>
+<p><strong>Formato:</strong> PDF + plantillas + audio guía breve</p>
+</div>
+:::
+
+<div class="page-break"></div>
+
+## Índice
+
+::: {.pdf-index}
+1. Qué es este pack
+2. Quiénes somos
+3. Qué vas a conseguir
+4. Cómo usar este pack
+5. Prompt 1 — Currículum IA personal
+6. Prompt 2 — Entrevista quirúrgica del proyecto
+7. Prompt 3 — Cómo quiero que trabaje mi IA
+8. Estructura recomendada de proyectos IA
+9. Las 5 skills base
+10. Plan de una tarde
+11. Checklist final
+12. Cómo usar los archivos del ZIP
+13. Garantía de calidad
+14. Próximo paso
+:::
+
+<div class="page-break"></div>
+
+## 1. Qué es este pack
 
 **Promesa del pack:** termina la tarde con tu IA preparada para entender quién
 eres, qué proyecto quieres construir y cómo debe ayudarte.
@@ -17,7 +53,7 @@ La idea es sencilla: si abres una IA en blanco y le pides algo importante, la IA
 tiene que adivinar demasiado. Si primero le das contexto, reglas y una forma de
 trabajo, empieza mucho mejor.
 
-## 1. Quiénes somos
+## 2. Quiénes somos
 
 IAFlashElite construye productos digitales, agentes IA, automatizaciones,
 herramientas internas y flujos de trabajo con IA. Trabajamos con una regla
@@ -38,7 +74,7 @@ Ese es el objetivo de este pack. No intenta convertirte en experto de golpe. Te
 da una base práctica para que tu IA deje de responder como una herramienta
 genérica y empiece a trabajar con más criterio.
 
-## 2. Qué vas a conseguir
+## 3. Qué vas a conseguir
 
 Al terminar tendrás una carpeta de arranque con:
 
@@ -52,7 +88,7 @@ Al terminar tendrás una carpeta de arranque con:
 La entrega final no es teoría. Es una base de trabajo que puedes pegar en
 ChatGPT, Claude, Gemini, Grok, Codex, Claude Code o cualquier IA de confianza.
 
-## 3. Cómo usar este pack
+## 4. Cómo usar este pack
 
 Puedes hacer el pack por texto o por voz.
 
@@ -76,7 +112,7 @@ Herramientas compatibles:
 No necesitas usar todas. Empieza con una herramienta principal. Cuando el
 proyecto crezca, podrás separar espacios.
 
-## 4. Prompt 1 — Currículum IA personal
+## 5. Prompt 1 — Currículum IA personal
 
 ### Para qué sirve
 
@@ -178,7 +214,7 @@ Voy a trabajar contigo en un proyecto. Primero lee mi Currículum IA personal y
 entendido y qué información falta para ayudarte bien.
 ```
 
-## 5. Prompt 2 — Entrevista quirúrgica del proyecto
+## 6. Prompt 2 — Entrevista quirúrgica del proyecto
 
 ### Para qué sirve
 
@@ -269,7 +305,7 @@ Lee este Contexto maestro del proyecto. Antes de proponer mejoras, dime cuáles
 son los tres riesgos más importantes y qué información falta para decidir bien.
 ```
 
-## 6. Prompt 3 — Cómo quiero que trabaje mi IA
+## 7. Prompt 3 — Cómo quiero que trabaje mi IA
 
 ### Para qué sirve
 
@@ -352,7 +388,7 @@ respuesta importante separa hechos, hipótesis, riesgos, recomendación y próxi
 paso.
 ```
 
-## 7. Estructura recomendada de proyectos IA
+## 8. Estructura recomendada de proyectos IA
 
 Cuando el proyecto crece, conviene separar espacios. No es obligatorio crear los
 tres desde el primer día, pero ayuda a evitar conversaciones mezcladas.
@@ -397,7 +433,7 @@ Si solo puedes crear un espacio, empieza con Estrategia y mejoras. Cuando notes
 que mezclas decisiones, ventas y tareas técnicas en la misma conversación,
 separa.
 
-## 8. Las 5 skills base
+## 9. Las 5 skills base
 
 En este pack llamamos skill a una plantilla de trabajo reutilizable. No todas
 las herramientas las activan automáticamente. La idea es dejarlas disponibles y
@@ -435,7 +471,7 @@ Para cerrar una tarea con revisión mínima de calidad.
 Úsala antes de dar por terminado un entregable, una landing, un documento o un
 flujo de trabajo.
 
-## 9. Plan de una tarde
+## 10. Plan de una tarde
 
 Este plan está pensado para una tarde realista. No necesitas hacerlo perfecto.
 Necesitas terminar con una base usable.
@@ -461,29 +497,45 @@ Necesitas terminar con una base usable.
 7. **10 min — checklist final.**
    Entrega: revisión rápida de qué está listo y qué falta.
 
-## 10. Checklist final
+## 11. Checklist final
 
 Marca esto antes de cerrar el pack:
 
-- [ ] Tengo mi Currículum IA personal.
-- [ ] Tengo mi Contexto maestro del proyecto.
-- [ ] Tengo mis Instrucciones de trabajo del proyecto IA.
-- [ ] Tengo al menos una IA o proyecto configurado con ese contexto.
-- [ ] Tengo las 5 skills guardadas.
-- [ ] Hice una primera prueba real.
-- [ ] Sé cuál es el siguiente paso.
+- `[ ]` Currículum IA personal creado.
+- `[ ]` Contexto maestro del proyecto creado.
+- `[ ]` Instrucciones de trabajo del proyecto IA creadas.
+- `[ ]` Al menos una IA o proyecto configurado con ese contexto.
+- `[ ]` Las 5 skills guardadas.
+- `[ ]` Primera prueba real realizada.
+- `[ ]` Siguiente paso definido.
 
 Si falta algo, no pasa nada. El objetivo no es tener un sistema perfecto. Es
 tener una base mejor que una conversación vacía.
 
-## 11. Garantía de calidad
+## 12. Cómo usar los archivos del ZIP
+
+El ZIP de revisión incluye el PDF, las plantillas y el guion del audio guía
+breve. Úsalo así:
+
+1. Lee primero este PDF para entender el flujo completo.
+2. Abre la carpeta `plantillas/`.
+3. Empieza por `curriculum-ia-personal.md`.
+4. Continúa con `contexto-maestro-proyecto.md`.
+5. Cierra la configuración con `instrucciones-trabajo-proyecto-ia.md`.
+6. Copia las skills que necesites en tu herramienta de IA.
+7. Usa `checklist-final.md` para verificar que tu arranque está listo.
+
+El archivo `01-audio-guia-script-tts.md` es el guion fuente del futuro audio
+guía breve. En esta versión de revisión no se incluye MP3 final.
+
+## 13. Garantía de calidad
 
 Garantía de calidad — 14 días. Si después de recibir el material consideras que
 no entrega lo prometido en la página de venta, se devuelve el importe. La
 garantía cubre la calidad y completitud del material descargable. No cubre
 resultados económicos ni ejecución incorrecta por parte del comprador.
 
-## 12. Próximo paso
+## 14. Próximo paso
 
 Cuando ya tienes tu IA preparada, el siguiente paso es aprender a usarla para
 ejecutar proyectos completos con auditoría, prompts controlados, revisión y
