@@ -1,0 +1,21 @@
+Nombre: Pack Arranque IA v1
+Marca: IAFlashElite
+Version: v1.0
+Fecha: 2026-05-24
+
+Archivos incluidos:
+- LEEME.md
+- MANIFEST.txt
+- manual-pack-arranque-ia.md
+- audio-guia-script.md
+- garantia-calidad.md
+- templates/curriculum-ia-personal.md
+- templates/instrucciones-base-chatgpt-claude-codex.md
+- templates/skill-planificador-diario.md
+- templates/skill-revisor-ideas.md
+- templates/skill-creador-prompts-proyectos.md
+- templates/CLAUDE.md
+
+Nota:
+Contenido fuente pendiente de convertir a PDF/audio/ZIP final.
+No es todavia el producto descargable publicado.
