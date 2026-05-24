@@ -16,7 +16,7 @@ const FULL_NAV = [
 ] as ReadonlyArray<{ label: string; href: string; highlight?: boolean }>;
 
 const SOLUTIONS_NAV = [
-    { label: "Gestorías / Contables", href: "/soluciones/gestorias" },
+    { label: "Gestorías / Contables", href: "/gestoria-local" },
     { label: "Dentistas / Clínicas", href: "/soluciones/dentistas" },
     { label: "Inmobiliarias", href: "/soluciones/inmobiliarias" },
     { label: "Marketing / Agencias", href: "/soluciones/marketing" },

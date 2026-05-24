@@ -105,7 +105,7 @@ function SolutionCard({ solution }: { solution: Solution }) {
             </ul>
 
             <Button
-                href={`/soluciones/${solution.slug}`}
+                href={solution.landingHref ?? `/soluciones/${solution.slug}`}
                 variant="gradient"
                 className="mt-auto w-full"
             >

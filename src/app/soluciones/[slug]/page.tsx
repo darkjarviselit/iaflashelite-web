@@ -10,7 +10,7 @@ import {
     TrendingUp,
     X,
 } from "lucide-react";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { Button } from "@/components/ui/button";
@@ -40,6 +40,18 @@ export async function generateMetadata({
     params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
     const { slug } = await params;
+
+    if (slug === "gestorias") {
+        return {
+            title: "GestorIA Local — iaflashelite.com",
+            description:
+                "Copiloto privado para gestorías pequeñas con vídeo demo, audios guía, Piloto Founders y revisión humana.",
+            alternates: {
+                canonical: "/gestoria-local",
+            },
+        };
+    }
+
     const solution = getSolution(slug);
 
     if (!solution) {
@@ -58,6 +70,11 @@ export default async function SolutionPage({
     params: Promise<{ slug: string }>;
 }) {
     const { slug } = await params;
+
+    if (slug === "gestorias") {
+        permanentRedirect("/gestoria-local");
+    }
+
     const solution = getSolution(slug);
 
     if (!solution) notFound();

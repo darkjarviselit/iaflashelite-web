@@ -4,12 +4,10 @@ import type { Metadata } from "next";
 import {
     ArrowRight,
     CheckCircle2,
-    ClipboardCheck,
+    Headphones,
     LockKeyhole,
     MailCheck,
-    MonitorCheck,
     PlayCircle,
-    ShieldCheck,
     Sparkles,
     XCircle,
 } from "lucide-react";
@@ -24,6 +22,8 @@ export const metadata: Metadata = {
 };
 
 const CONTACT_HREF = "/contacto?asunto=GestorIA%20Local";
+const SPECIFIC_SERVICE_HREF =
+    "/contacto?asunto=Servicio%20concreto%20GestorIA%20Local";
 const DEMO_CONTACT_HREF = "/contacto?asunto=Demo%20GestorIA%20Local";
 const DEMO_VIDEO_PUBLIC_PATH = "/gestoria-local/gestoria-local-demo-guiada.mp4";
 const DEMO_POSTER_PUBLIC_PATH =
@@ -35,6 +35,21 @@ const hasDemoVideo = existsSync(
 const hasDemoPoster = existsSync(
     join(publicDir, "gestoria-local", "gestoria-local-demo-poster.webp"),
 );
+
+const AUDIO_GUIDES = [
+    {
+        title: "Qué es GestorIA Local",
+        description:
+            "Una explicación clara del copiloto privado para gestorías pequeñas: qué hace, qué no hace y cómo encaja junto a tu software fiscal.",
+        src: "/gestoria-local/audio/gestoria-local-audio-01-que-es.mp3",
+    },
+    {
+        title: "Cómo funciona el Piloto Founders",
+        description:
+            "Instalación guiada, configuración inicial, 30 días de acompañamiento, soporte y mantenimiento opcional.",
+        src: "/gestoria-local/audio/gestoria-local-audio-02-piloto-founders.mp3",
+    },
+] as const;
 
 const FIT_ITEMS = [
     "Asesoría fiscal-laboral mixta.",
@@ -167,7 +182,6 @@ export default function GestoriaLocalPage() {
             <Header />
             <main className="min-h-screen bg-onyx text-paper">
                 <HeroSection />
-                <DemoSection />
                 <AudienceSection />
                 <CapabilitiesSection />
                 <PrivacySection />
@@ -184,85 +198,58 @@ export default function GestoriaLocalPage() {
 
 function HeroSection() {
     return (
-        <section className="relative overflow-hidden px-6 pb-16 pt-28 lg:pb-24 lg:pt-36">
+        <section className="relative overflow-hidden px-6 pb-10 pt-20 lg:pb-14 lg:pt-24">
             <div className="absolute inset-0 bg-dot-grid opacity-25" aria-hidden />
             <div
-                className="absolute inset-x-0 top-0 h-[62%] bg-[radial-gradient(ellipse_at_top,rgba(0,229,255,0.14),transparent_64%)]"
+                className="absolute inset-x-0 top-0 h-[72%] bg-[radial-gradient(ellipse_at_top,rgba(0,229,255,0.14),transparent_64%)]"
                 aria-hidden
             />
-            <div className="relative mx-auto grid max-w-[1180px] gap-12 lg:grid-cols-[1fr_0.82fr] lg:items-center">
-                <div className="max-w-3xl">
+            <div className="relative mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-2 lg:items-center">
+                <div className="max-w-2xl">
                     <span className="inline-flex items-center gap-2 rounded-full border border-flash/25 bg-flash/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-flash">
                         <Sparkles className="h-4 w-4" />
                         GestorIA Local by IAFlashElite
                     </span>
-                    <h1 className="mt-7 text-5xl font-black leading-[0.98] text-paper sm:text-6xl lg:text-7xl">
+                    <h1 className="mt-6 text-4xl font-black leading-[1.02] text-paper sm:text-5xl lg:text-5xl xl:text-6xl">
                         Ordena tu gestoría sin migrar a otro software.
                     </h1>
-                    <p className="mt-6 max-w-2xl text-lg leading-8 text-text-secondary sm:text-xl">
-                        GestorIA Local es el copiloto privado para gestorías pequeñas.
-                        Ordena clientes, documentos, vencimientos y revisiones en tu propio
-                        ordenador. La IA propone; el profesional decide.
+                    <p className="mt-5 max-w-xl text-base leading-7 text-text-secondary sm:text-lg">
+                        Un copiloto privado para gestorías pequeñas. Organiza clientes,
+                        documentos, vencimientos y revisiones en tu propio ordenador. La IA
+                        propone; el profesional decide.
                     </p>
-                    <p className="mt-5 max-w-2xl text-base leading-7 text-text-secondary">
-                        No factura, no toca AEAT y no sustituye tu software fiscal. Te ayuda
-                        a trabajar con más orden y menos ruido operativo.
+                    <p className="mt-4 max-w-xl text-sm font-semibold leading-6 text-text-secondary">
+                        No factura. No toca AEAT. No sustituye tu software fiscal.
                     </p>
-                    <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <div className="mt-5 max-w-xl rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-semibold leading-6 text-paper">
+                        <p>Piloto Founders · 490 € pago único</p>
+                        <p className="mt-1 text-text-secondary">
+                            máximo 5 instalaciones guiadas al mes
+                        </p>
+                        <p className="mt-1 text-text-secondary">
+                            69 €/mes opcional después de 30 días
+                        </p>
+                    </div>
+                    <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                         <Button href={CONTACT_HREF} size="lg" variant="gradient">
                             Solicitar Piloto Founders <ArrowRight size={18} />
                         </Button>
-                        <Button href="#demo-guiada" size="lg" variant="secondary">
-                            Ver demo guiada <PlayCircle size={18} />
+                        <Button
+                            href={SPECIFIC_SERVICE_HREF}
+                            size="lg"
+                            variant="secondary"
+                        >
+                            Pedir servicio concreto <ArrowRight size={18} />
                         </Button>
                     </div>
                 </div>
 
-                <div className="rounded-2xl border border-white/10 bg-[#111111] p-6 shadow-2xl shadow-black/30">
-                    <div className="flex items-start gap-4">
-                        <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-flash/25 bg-flash/10 text-flash">
-                            <ClipboardCheck className="h-6 w-6" />
-                        </span>
-                        <div>
-                            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-flash">
-                                Piloto guiado
-                            </p>
-                            <h2 className="mt-3 text-2xl font-bold text-paper">
-                                490 € · pago único
-                            </h2>
-                            <p className="mt-3 text-sm leading-6 text-text-secondary">
-                                Instalación asistida, configuración inicial y 30 días de
-                                seguimiento para comprobar si encaja con tu despacho.
-                            </p>
-                        </div>
+                <article className="rounded-2xl border border-white/10 bg-[#111111] p-4 shadow-2xl shadow-black/30">
+                    <div className="px-1 pb-4">
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-flash">
+                            Demo real de GestorIA Local
+                        </p>
                     </div>
-                    <div className="mt-6 grid gap-3">
-                        <ProofPill icon={<MonitorCheck className="h-4 w-4" />}>
-                            Probado en Mac y Windows.
-                        </ProofPill>
-                        <ProofPill icon={<ShieldCheck className="h-4 w-4" />}>
-                            Instalación y uso comprobados con revisión técnica externa.
-                        </ProofPill>
-                        <ProofPill icon={<CheckCircle2 className="h-4 w-4" />}>
-                            La IA propone; el profesional decide.
-                        </ProofPill>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-}
-
-function DemoSection() {
-    return (
-        <section id="demo-guiada" className="scroll-mt-24 px-6 py-16 lg:py-24">
-            <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-                <SectionIntro
-                    eyebrow="Demo guiada"
-                    title="Demo guiada real de GestorIA Local"
-                    text="Vídeo de unos 3 minutos: instalación, configuración inicial, dashboard, motor IA y un caso donde una reunión enviada por Telegram queda preparada en calendario."
-                />
-                <div className="rounded-2xl border border-white/10 bg-[#111111] p-4 shadow-2xl shadow-black/30">
                     <div className="aspect-video overflow-hidden rounded-xl border border-white/10 bg-black/60">
                         {hasDemoVideo ? (
                             <video
@@ -280,10 +267,34 @@ function DemoSection() {
                         )}
                     </div>
                     <p className="mt-4 text-sm leading-6 text-text-secondary">
-                        Los datos mostrados deben ser ficticios. El token de Telegram debe
-                        mantenerse privado.
+                        Demo guiada de unos 3 minutos: instalación, configuración inicial,
+                        Telegram y calendario con datos ficticios.
                     </p>
-                </div>
+                    <div className="mt-4 grid gap-3 md:grid-cols-2">
+                        {AUDIO_GUIDES.map((guide, index) => (
+                            <div
+                                key={guide.src}
+                                className="rounded-xl border border-white/10 bg-onyx p-3"
+                            >
+                                <div className="mb-3 flex items-center gap-2">
+                                    <Headphones className="h-4 w-4 shrink-0 text-flash" />
+                                    <h3 className="text-sm font-semibold leading-5 text-paper">
+                                        {index + 1}. {guide.title}
+                                    </h3>
+                                </div>
+                                <audio
+                                    className="w-full"
+                                    controls
+                                    controlsList="nodownload"
+                                    preload="metadata"
+                                >
+                                    <source src={guide.src} type="audio/mpeg" />
+                                    Tu navegador no puede reproducir este audio.
+                                </audio>
+                            </div>
+                        ))}
+                    </div>
+                </article>
             </div>
         </section>
     );
@@ -560,20 +571,5 @@ function ListCard({
                 ))}
             </ul>
         </article>
-    );
-}
-
-function ProofPill({
-    children,
-    icon,
-}: {
-    readonly children: React.ReactNode;
-    readonly icon: React.ReactNode;
-}) {
-    return (
-        <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm leading-6 text-paper">
-            <span className="text-flash">{icon}</span>
-            <span>{children}</span>
-        </div>
     );
 }

@@ -54,12 +54,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		priority: 0.8,
 	}));
 
-	const solutionEntries: MetadataRoute.Sitemap = solutions.map((solution) => ({
-		url: `${SITE_URL}/soluciones/${solution.slug}`,
-		lastModified,
-		changeFrequency: "monthly",
-		priority: 0.8,
-	}));
+	const solutionEntries: MetadataRoute.Sitemap = solutions
+		.filter((solution) => solution.slug !== "gestorias")
+		.map((solution) => ({
+			url: `${SITE_URL}/soluciones/${solution.slug}`,
+			lastModified,
+			changeFrequency: "monthly",
+			priority: 0.8,
+		}));
 
 	return [...staticEntries, ...productEntries, ...solutionEntries];
 }
