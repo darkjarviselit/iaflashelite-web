@@ -1,6 +1,15 @@
 import { NextResponse } from "next/server";
-import { GUARANTEE_POLICY_VERSION, PRODUCTS } from "@/lib/constants";
-import { getDownloadUrl, sendDeliveryEmail } from "@/lib/email";
+import {
+    GESTORIA_LOCAL_PRODUCT_SLUG,
+    GUARANTEE_POLICY_VERSION,
+    PRODUCTS,
+    calculateProductTotal,
+} from "@/lib/constants";
+import {
+    getDownloadUrl,
+    sendDeliveryEmail,
+    sendGestoriaLocalDeliveryEmail,
+} from "@/lib/email";
 
 const PAYPAL_API =
     (process.env.PAYPAL_API_BASE ?? "https://api-m.paypal.com").replace(/\/+$/, "");
@@ -12,11 +21,17 @@ interface CaptureBody {
     customerName?: string;
     customerEmail?: string;
     productSlug?: string;
+    addonIds?: unknown;
     consentDigital?: boolean | null;
     consentDigitalAt?: string | null;
     consentTimestamp?: string | null;
     policyVersion?: string | null;
     consentSummary?: string | null;
+}
+
+function readAddonIds(value: unknown): string[] {
+    if (!Array.isArray(value)) return [];
+    return value.filter((item): item is string => typeof item === "string");
 }
 
 async function getAccessToken(): Promise<string> {
@@ -83,6 +98,7 @@ export async function POST(request: Request) {
     const customerName = (body.customerName ?? "").trim();
     const customerEmail = (body.customerEmail ?? "").trim();
     const productSlug = (body.productSlug ?? "").trim();
+    const addonIds = readAddonIds(body.addonIds);
     const consentDigital = body.consentDigital === true;
     const consentDigitalAt = (body.consentDigitalAt ?? "").trim();
     const consentTimestamp = (body.consentTimestamp ?? consentDigitalAt).trim();
@@ -103,6 +119,10 @@ export async function POST(request: Request) {
     const product = PRODUCTS.find((p) => p.slug === productSlug);
     if (!product) {
         return NextResponse.json({ error: "product_not_found" }, { status: 404 });
+    }
+    const calculated = calculateProductTotal(product.slug, product.price, addonIds);
+    if (!calculated) {
+        return NextResponse.json({ error: "invalid_addons" }, { status: 400 });
     }
 
     let captureData: PaypalCapture;
@@ -134,6 +154,15 @@ export async function POST(request: Request) {
     const capture = captureData.purchase_units?.[0]?.payments?.captures?.[0];
     const amount = capture?.amount?.value ?? product.price.toFixed(2);
     const currency = capture?.amount?.currency_code ?? "EUR";
+    const amountNumber = Number(amount);
+    if (!Number.isFinite(amountNumber) || amountNumber !== calculated.total) {
+        console.error("[paypal] amount mismatch:", {
+            expected: calculated.total,
+            received: amount,
+            product: product.slug,
+        });
+        return NextResponse.json({ error: "amount_mismatch" }, { status: 400 });
+    }
     const paypalOrderId = captureData.id ?? orderID;
     const paypalCaptureId = capture?.id ?? null;
     const captureTime = capture?.create_time ?? new Date().toISOString();
@@ -148,7 +177,13 @@ export async function POST(request: Request) {
         product_name: product.name,
         product_type: product.type ?? "download",
         price: product.price,
-        total_price: Number(amount),
+        addons: calculated.selectedAddons.map((addon) => ({
+            id: addon.id,
+            name: addon.name,
+            price: addon.price,
+        })),
+        addons_total: calculated.addonsTotal,
+        total_price: calculated.total,
         currency,
         is_express: false,
         express_surcharge: 0,
@@ -198,15 +233,30 @@ export async function POST(request: Request) {
         }
     })();
 
-    // Entrega automática del ZIP por email — fire-and-forget.
-    if (downloadUrl) {
+    // Entrega automática por email — fire-and-forget.
+    if (product.slug === GESTORIA_LOCAL_PRODUCT_SLUG) {
+        void sendGestoriaLocalDeliveryEmail({
+            to: customerEmail,
+            customerName,
+            productName: product.name,
+            amount: String(calculated.total),
+            orderId: paypalOrderId,
+            transactionId: paypalCaptureId,
+            customerEmail,
+            policyVersion,
+            selectedAddons: calculated.selectedAddons,
+            paymentMethodLabel: "PayPal / Tarjeta",
+        }).catch((err) => {
+            console.error("[paypal capture] GestorIA delivery email error:", err);
+        });
+    } else if (downloadUrl) {
         void sendDeliveryEmail({
             to: customerEmail,
             customerName,
             productName: product.name,
             productSlug,
             downloadUrl,
-            amount: String(amount),
+            amount: String(calculated.total),
             orderId: paypalOrderId,
             transactionId: paypalCaptureId,
             customerEmail,
@@ -221,7 +271,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
         ok: true,
         paypalOrderId,
-        amount: Number(amount),
+        amount: calculated.total,
         currency,
         downloadUrl: downloadUrl ?? null,
         policyVersion,

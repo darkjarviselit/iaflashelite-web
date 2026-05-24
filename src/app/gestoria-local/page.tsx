@@ -21,7 +21,7 @@ export const metadata: Metadata = {
         "GestorIA Local ordena clientes, documentos, vencimientos y revisión humana en tu ordenador. No toca AEAT, no emite facturas oficiales y no sustituye tu software fiscal.",
 };
 
-const CONTACT_HREF = "/contacto?asunto=GestorIA%20Local";
+const BUY_HREF = "/gestoria-local/comprar";
 const SPECIFIC_SERVICE_HREF =
     "/contacto?asunto=Servicio%20concreto%20GestorIA%20Local";
 const DEMO_CONTACT_HREF = "/contacto?asunto=Demo%20GestorIA%20Local";
@@ -44,9 +44,9 @@ const AUDIO_GUIDES = [
         src: "/gestoria-local/audio/gestoria-local-audio-01-que-es.mp3",
     },
     {
-        title: "Cómo funciona el Piloto Founders",
+        title: "Compra y asistencia opcional",
         description:
-            "Instalación guiada, configuración inicial, 30 días de acompañamiento, soporte y mantenimiento opcional.",
+            "Compra directa, entrega digital, guías y asistencia opcional de instalación y configuración.",
         src: "/gestoria-local/audio/gestoria-local-audio-02-piloto-founders.mp3",
     },
 ] as const;
@@ -88,28 +88,27 @@ const DOES_NOT_ITEMS = [
     "No garantiza OCR/RAG universal.",
 ] as const;
 
-const FOUNDER_ITEMS = [
-    "Instalación remota asistida.",
-    "Configuración inicial.",
-    "30 días de seguimiento.",
-    "Hasta 3 ajustes iniciales.",
-    "Soporte por email en horario definido.",
-    "Sin permanencia.",
-    "Mantenimiento opcional después: 69 €/mes.",
+const PRODUCT_ITEMS = [
+    "Paquete instalable GestorIA Local.",
+    "Instalador macOS/Linux.",
+    "Instalador Windows PowerShell.",
+    "Guías de instalación y configuración.",
+    "Manifest de versión y verificación.",
+    "Asistencia de instalación opcional por 59 €.",
 ] as const;
 
 const STEPS = [
     {
-        title: "Solicitas el piloto",
-        text: "Nos escribes con el tamaño del despacho, sistema actual y principal bloqueo operativo.",
+        title: "Compras GestorIA Local",
+        text: "Eliges pago directo con PayPal/Tarjeta o pedido manual con Bizum/transferencia.",
     },
     {
-        title: "Revisamos si encaja",
-        text: "Te respondemos por email con una valoración honesta. Si no encaja, lo decimos antes de cobrar.",
+        title: "Recibes producto y guías",
+        text: "Te enviamos el paquete, instaladores, PDFs y guías de configuración al email de compra.",
     },
     {
-        title: "Instalación guiada",
-        text: "Configuramos GestorIA Local contigo y dejamos 30 días para seguimiento y ajustes iniciales.",
+        title: "Añades ayuda si la necesitas",
+        text: "La asistencia de instalación y configuración es opcional y se coordina por email si la compras.",
     },
 ] as const;
 
@@ -142,22 +141,17 @@ const FAQS = [
     {
         question: "¿Qué necesito para instalarlo?",
         answer:
-            "Un ordenador Mac o Windows compatible, Node.js moderno y una sesión guiada para configurar el entorno inicial.",
+            "Un ordenador Mac o Windows compatible y Node.js moderno. La página de compra incluye guías y asistencia opcional.",
     },
     {
         question: "¿Es multiusuario?",
         answer:
-            "No como ERP multiusuario robusto. El piloto está pensado para gestorías pequeñas que quieren empezar con un flujo local y guiado.",
+            "No como ERP multiusuario robusto. Está pensado para gestorías pequeñas que quieren empezar con un flujo local y controlado.",
     },
     {
         question: "¿Hay mantenimiento obligatorio?",
         answer:
-            "No. El piloto incluye 30 días de seguimiento. Después puedes contratar mantenimiento opcional por 69 €/mes.",
-    },
-    {
-        question: "¿Por qué solo 5 instalaciones guiadas al mes?",
-        answer:
-            "Porque cada instalación requiere acompañamiento real. El límite protege la calidad del seguimiento, no crea escasez artificial.",
+            "No. Esta compra no obliga a mantenimiento. Cualquier servicio recurrente se presupuestaría aparte.",
     },
     {
         question: "¿Qué pasa si uso un proveedor IA externo?",
@@ -167,12 +161,12 @@ const FAQS = [
     {
         question: "¿Qué incluye el soporte?",
         answer:
-            "Ayuda por email para instalación, configuración inicial, incidencias reproducibles y hasta 3 ajustes iniciales dentro del alcance.",
+            "Garantía Flash de entrega y funcionamiento. La asistencia de instalación y configuración se compra como extra opcional.",
     },
     {
-        question: "¿Qué ocurre si no encaja con mi despacho?",
+        question: "¿Qué ocurre si necesito algo a medida?",
         answer:
-            "Primero revisamos el caso por email. Si no encaja, no forzamos la venta. Si ya está en piloto, aplicamos el alcance pactado y Garantía Flash.",
+            "Puedes pedir un servicio concreto por contacto. Lo presupuestamos aparte sin mezclarlo con la compra directa del producto.",
     },
 ] as const;
 
@@ -186,7 +180,7 @@ export default function GestoriaLocalPage() {
                 <CapabilitiesSection />
                 <PrivacySection />
                 <ValidationSection />
-                <FoundersSection />
+                <ProductPurchaseSection />
                 <HowItWorksSection />
                 <FaqSection />
                 <FinalCtaSection />
@@ -222,17 +216,17 @@ function HeroSection() {
                         No factura. No toca AEAT. No sustituye tu software fiscal.
                     </p>
                     <div className="mt-5 max-w-xl rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-semibold leading-6 text-paper">
-                        <p>Piloto Founders · 490 € pago único</p>
+                        <p>Compra directa · 490 € pago único</p>
                         <p className="mt-1 text-text-secondary">
-                            máximo 5 instalaciones guiadas al mes
+                            entrega digital con paquete, instaladores y guías
                         </p>
                         <p className="mt-1 text-text-secondary">
-                            69 €/mes opcional después de 30 días
+                            asistencia de instalación opcional: +59 €
                         </p>
                     </div>
                     <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                        <Button href={CONTACT_HREF} size="lg" variant="gradient">
-                            Solicitar Piloto Founders <ArrowRight size={18} />
+                        <Button href={BUY_HREF} size="lg" variant="gradient">
+                            Comprar GestorIA Local — 490 € <ArrowRight size={18} />
                         </Button>
                         <Button
                             href={SPECIFIC_SERVICE_HREF}
@@ -377,9 +371,8 @@ function PrivacySection() {
                     <p className="mt-5 text-base leading-8 text-text-secondary">
                         GestorIA se instala en tu ordenador y guarda sus datos localmente
                         por defecto. Si configuras un proveedor IA, Telegram u otros
-                        servicios externos, se aplican sus condiciones. La configuración del
-                        piloto se hace de forma guiada para que sepas qué se activa y qué
-                        no.
+                        servicios externos, se aplican sus condiciones. Las guías explican
+                        qué se activa y qué no antes de configurar cada integración.
                     </p>
                 </div>
             </div>
@@ -411,26 +404,25 @@ function ValidationSection() {
     );
 }
 
-function FoundersSection() {
+function ProductPurchaseSection() {
     return (
         <section className="bg-[#111111] px-6 py-16 lg:py-24">
             <div className="mx-auto grid max-w-[1180px] gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
                 <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-flash">
-                        Piloto Founders
+                        Compra directa
                     </p>
                     <h2 className="mt-4 text-5xl font-black tracking-tight text-paper">
                         490 € · pago único
                     </h2>
                     <p className="mt-4 text-lg leading-8 text-text-secondary">
-                        Cupo máximo mensual: 5 instalaciones guiadas.
+                        Entrega digital del producto, instaladores y guías tras el pago.
                     </p>
                     <p className="mt-4 text-sm leading-6 text-text-secondary">
-                        El cupo existe para mantener calidad de instalación y seguimiento,
-                        no como escasez artificial.
+                        Puedes añadir asistencia de instalación y configuración por 59 €.
                     </p>
                 </div>
-                <ListCard title="Incluye" items={FOUNDER_ITEMS} tone="positive" />
+                <ListCard title="Incluye" items={PRODUCT_ITEMS} tone="positive" />
             </div>
         </section>
     );
@@ -442,8 +434,8 @@ function HowItWorksSection() {
             <div className="mx-auto max-w-[1180px]">
                 <SectionIntro
                     eyebrow="Cómo funciona"
-                    title="Sin llamada comercial obligatoria."
-                    text="El proceso empieza por email y solo avanza si el piloto encaja con tu despacho."
+                    title="Compra directa, sin llamada obligatoria."
+                    text="Puedes comprar el producto y añadir asistencia solo si quieres ayuda inicial de instalación y configuración."
                 />
                 <div className="mt-10 grid gap-5 lg:grid-cols-3">
                     {STEPS.map((step, index) => (
@@ -503,19 +495,19 @@ function FinalCtaSection() {
             <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
                 <MailCheck className="h-12 w-12 text-flash" />
                 <h2 className="mt-5 text-4xl font-bold tracking-tight text-paper sm:text-5xl">
-                    ¿Probamos GestorIA Local en tu despacho?
+                    ¿Quieres empezar con GestorIA Local?
                 </h2>
                 <p className="mt-5 max-w-2xl text-base leading-8 text-text-secondary">
-                    Escríbenos y revisamos por email si tu despacho encaja con el Piloto
-                    Founders antes de avanzar.
+                    Compra el producto con entrega digital o pídenos un servicio concreto
+                    si necesitas una adaptación bajo presupuesto.
                 </p>
                 <Button
-                    href={CONTACT_HREF}
+                    href={BUY_HREF}
                     size="lg"
                     variant="gradient"
                     className="mt-8"
                 >
-                    Solicitar Piloto Founders <ArrowRight size={18} />
+                    Comprar GestorIA Local — 490 € <ArrowRight size={18} />
                 </Button>
             </div>
         </section>

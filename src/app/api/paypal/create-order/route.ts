@@ -1,13 +1,18 @@
 import { NextResponse } from "next/server";
-import { PRODUCTS } from "@/lib/constants";
+import { PRODUCTS, calculateProductTotal } from "@/lib/constants";
 
 const PAYPAL_API =
     (process.env.PAYPAL_API_BASE ?? "https://api-m.paypal.com").replace(/\/+$/, "");
 
 interface CreateOrderBody {
-    amount?: number | string;
     productName?: string;
     productSlug?: string;
+    addonIds?: unknown;
+}
+
+function readAddonIds(value: unknown): string[] {
+    if (!Array.isArray(value)) return [];
+    return value.filter((item): item is string => typeof item === "string");
 }
 
 async function getAccessToken(): Promise<string> {
@@ -44,8 +49,8 @@ export async function POST(request: Request) {
 
     const productSlug = (body.productSlug ?? "").trim();
     const productName = (body.productName ?? "").trim();
-    const amountRaw = body.amount;
-    if (!productSlug || !productName || amountRaw === undefined || amountRaw === null) {
+    const addonIds = readAddonIds(body.addonIds);
+    if (!productSlug || !productName) {
         return NextResponse.json({ error: "missing_params" }, { status: 400 });
     }
 
@@ -63,7 +68,11 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "paypal_direct_only_for_downloads" }, { status: 400 });
     }
 
-    const amount = product.price.toFixed(2);
+    const calculated = calculateProductTotal(product.slug, product.price, addonIds);
+    if (!calculated) {
+        return NextResponse.json({ error: "invalid_addons" }, { status: 400 });
+    }
+    const amount = calculated.total.toFixed(2);
 
     try {
         const accessToken = await getAccessToken();
@@ -77,9 +86,36 @@ export async function POST(request: Request) {
                 intent: "CAPTURE",
                 purchase_units: [
                     {
-                        amount: { currency_code: "EUR", value: amount },
-                        description: product.name,
+                        amount: {
+                            currency_code: "EUR",
+                            value: amount,
+                            breakdown: {
+                                item_total: { currency_code: "EUR", value: amount },
+                            },
+                        },
+                        description:
+                            calculated.selectedAddons.length > 0
+                                ? `${product.name} + extras`
+                                : product.name,
                         custom_id: product.slug,
+                        items: [
+                            {
+                                name: product.name,
+                                unit_amount: {
+                                    currency_code: "EUR",
+                                    value: product.price.toFixed(2),
+                                },
+                                quantity: "1",
+                            },
+                            ...calculated.selectedAddons.map((addon) => ({
+                                name: addon.name,
+                                unit_amount: {
+                                    currency_code: "EUR",
+                                    value: addon.price.toFixed(2),
+                                },
+                                quantity: "1",
+                            })),
+                        ],
                     },
                 ],
                 application_context: {

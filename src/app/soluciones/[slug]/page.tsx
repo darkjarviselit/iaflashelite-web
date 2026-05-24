@@ -45,7 +45,7 @@ export async function generateMetadata({
         return {
             title: "GestorIA Local — iaflashelite.com",
             description:
-                "Copiloto privado para gestorías pequeñas con vídeo demo, audios guía, Piloto Founders y revisión humana.",
+                "Copiloto privado para gestorías pequeñas con vídeo demo, audios guía, compra directa y revisión humana.",
             alternates: {
                 canonical: "/gestoria-local",
             },
@@ -216,7 +216,7 @@ function PricingBlock({
                             level={level}
                             featured={
                                 level.name === "Setup asistido" ||
-                                level.name === "Piloto Founders"
+                                level.name === "GestorIA Local"
                             }
                         />
                     ))}
@@ -283,12 +283,12 @@ function FinalCtaBlock({ solution }: { solution: Solution }) {
                 </span>
                 <h2 className="mt-4 text-4xl font-bold text-paper sm:text-5xl">
                     {hasLanding
-                        ? `¿Quieres revisar el piloto para ${solution.ctaSector}?`
+                        ? `¿Quieres ver la solución para ${solution.ctaSector}?`
                         : `¿Listo para automatizar ${solution.ctaSector}?`}
                 </h2>
                 <p className="mt-5 max-w-2xl text-base leading-8 text-text-secondary">
                     {hasLanding
-                        ? "Consulta la landing del piloto guiado y escríbenos si encaja con el tamaño y forma de trabajo de tu despacho."
+                        ? "Consulta la landing comercial y decide si encaja con el tamaño y forma de trabajo de tu despacho."
                         : "Cuéntanos tu caso y te diremos qué nivel encaja mejor: Template, Setup asistido o Managed."}
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">

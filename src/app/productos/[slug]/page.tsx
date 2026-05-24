@@ -14,13 +14,17 @@ import {
     Wallet,
 } from "lucide-react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ProductAvailability } from "@/components/productos/product-availability";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CATEGORY_LABELS, PRODUCTS } from "@/lib/constants";
+import {
+    CATEGORY_LABELS,
+    GESTORIA_LOCAL_PRODUCT_SLUG,
+    PRODUCTS,
+} from "@/lib/constants";
 
 export function generateStaticParams() {
     return PRODUCTS.map((p) => ({ slug: p.slug }));
@@ -50,6 +54,7 @@ export default async function ProductDetailPage({
     const { slug } = await params;
     const product = PRODUCTS.find((p) => p.slug === slug);
     if (!product) notFound();
+    if (product.slug === GESTORIA_LOCAL_PRODUCT_SLUG) redirect("/gestoria-local");
 
     const available = product.status === "available";
     const isService = product.type === "service";
