@@ -2,11 +2,13 @@ import { NextResponse } from "next/server";
 import {
     EXPRESS_SURCHARGE,
     GUARANTEE_POLICY_VERSION,
-    PACK_ARRANQUE_PRODUCT_SLUG,
     PRODUCTS,
     calculateProductTotal,
 } from "@/lib/constants";
-import { isPackArranqueSecureDeliveryConfigured } from "@/lib/secure-downloads";
+import {
+    isSecureDeliveryConfigured,
+    isSecureDownloadProduct,
+} from "@/lib/secure-downloads";
 
 interface OrderPayload {
     productSlug?: string;
@@ -144,10 +146,7 @@ export async function POST(request: Request) {
     }
     const calculated = calculateProductTotal(product.slug, product.price, addonIds);
     if (!calculated) return bad("invalid_addons");
-    if (
-        product.slug === PACK_ARRANQUE_PRODUCT_SLUG &&
-        !isPackArranqueSecureDeliveryConfigured()
-    ) {
+    if (isSecureDownloadProduct(product.slug) && !isSecureDeliveryConfigured(product.slug)) {
         return NextResponse.json(
             { ok: false, error: "secure_delivery_not_configured" },
             { status: 503 },

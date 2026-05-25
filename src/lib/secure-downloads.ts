@@ -1,18 +1,37 @@
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
-import { existsSync } from "node:fs";
-import { join } from "node:path";
-import { PACK_ARRANQUE_PRODUCT_SLUG } from "@/lib/constants";
+import {
+    PACK_ARRANQUE_PRODUCT_SLUG,
+    SISTEMA_IA_PRO_PRODUCT_SLUG,
+} from "@/lib/constants";
 
 export const PACK_ARRANQUE_FILE_VERSION = "pack-arranque-ia-v1";
 export const PACK_ARRANQUE_ZIP_FILENAME = "pack-arranque-ia-v1.zip";
-export const PACK_ARRANQUE_ZIP_PATH = join(
-    process.cwd(),
-    "dist",
-    "academia",
-    PACK_ARRANQUE_ZIP_FILENAME,
-);
+export const SISTEMA_IA_PRO_FILE_VERSION = "sistema-ia-pro-v1";
+export const SISTEMA_IA_PRO_ZIP_FILENAME = "sistema-ia-pro-v1.zip";
 
 const DOWNLOAD_TOKEN_TTL_MS = 1000 * 60 * 60 * 72;
+
+export interface SecureDownloadProduct {
+    productSlug: string;
+    fileVersion: string;
+    zipFilename: string;
+    displayName: string;
+}
+
+export const SECURE_DOWNLOAD_PRODUCTS: Record<string, SecureDownloadProduct> = {
+    [PACK_ARRANQUE_PRODUCT_SLUG]: {
+        productSlug: PACK_ARRANQUE_PRODUCT_SLUG,
+        fileVersion: PACK_ARRANQUE_FILE_VERSION,
+        zipFilename: PACK_ARRANQUE_ZIP_FILENAME,
+        displayName: "Pack Arranque IA",
+    },
+    [SISTEMA_IA_PRO_PRODUCT_SLUG]: {
+        productSlug: SISTEMA_IA_PRO_PRODUCT_SLUG,
+        fileVersion: SISTEMA_IA_PRO_FILE_VERSION,
+        zipFilename: SISTEMA_IA_PRO_ZIP_FILENAME,
+        displayName: "Sistema IA Pro",
+    },
+};
 
 export interface DownloadTokenPayload {
     productSlug: string;
@@ -40,12 +59,59 @@ function getTokenSecret(): string | null {
     return secret.length >= 32 ? secret : null;
 }
 
+export function getSecureDownloadProduct(
+    productSlug: string,
+): SecureDownloadProduct | null {
+    return SECURE_DOWNLOAD_PRODUCTS[productSlug] ?? null;
+}
+
+export function isSecureDownloadProduct(productSlug: string): boolean {
+    return getSecureDownloadProduct(productSlug) !== null;
+}
+
+export function isSecureDeliveryConfigured(productSlug: string): boolean {
+    const product = getSecureDownloadProduct(productSlug);
+    return product !== null && getTokenSecret() !== null;
+}
+
 export function isPackArranqueSecureDeliveryConfigured(): boolean {
-    return getTokenSecret() !== null && existsSync(PACK_ARRANQUE_ZIP_PATH);
+    return isSecureDeliveryConfigured(PACK_ARRANQUE_PRODUCT_SLUG);
 }
 
 export function hashBuyerEmail(email: string): string {
     return createHash("sha256").update(email.trim().toLowerCase()).digest("hex");
+}
+
+export function createSecureDownloadUrl({
+    productSlug,
+    customerEmail,
+    orderId,
+    baseUrl,
+    now = Date.now(),
+}: {
+    productSlug: string;
+    customerEmail: string;
+    orderId: string;
+    baseUrl?: string;
+    now?: number;
+}): string {
+    const secureProduct = getSecureDownloadProduct(productSlug);
+    if (!secureProduct) {
+        throw new Error("secure_download_product_unknown");
+    }
+    const token = createDownloadToken({
+        productSlug: secureProduct.productSlug,
+        emailHash: hashBuyerEmail(customerEmail),
+        orderId,
+        fileVersion: secureProduct.fileVersion,
+        expiresAt: now + DOWNLOAD_TOKEN_TTL_MS,
+    });
+    const siteUrl = (
+        baseUrl ??
+        process.env.NEXT_PUBLIC_SITE_URL ??
+        "https://iaflashelite-web.vercel.app"
+    ).replace(/\/+$/, "");
+    return `${siteUrl}/api/downloads/${secureProduct.productSlug}?token=${encodeURIComponent(token)}`;
 }
 
 export function createPackArranqueDownloadUrl({
@@ -59,19 +125,13 @@ export function createPackArranqueDownloadUrl({
     baseUrl?: string;
     now?: number;
 }): string {
-    const token = createDownloadToken({
+    return createSecureDownloadUrl({
         productSlug: PACK_ARRANQUE_PRODUCT_SLUG,
-        emailHash: hashBuyerEmail(customerEmail),
+        customerEmail,
         orderId,
-        fileVersion: PACK_ARRANQUE_FILE_VERSION,
-        expiresAt: now + DOWNLOAD_TOKEN_TTL_MS,
+        baseUrl,
+        now,
     });
-    const siteUrl = (
-        baseUrl ??
-        process.env.NEXT_PUBLIC_SITE_URL ??
-        "https://iaflashelite-web.vercel.app"
-    ).replace(/\/+$/, "");
-    return `${siteUrl}/api/downloads/${PACK_ARRANQUE_PRODUCT_SLUG}?token=${encodeURIComponent(token)}`;
 }
 
 function createDownloadToken(payload: DownloadTokenPayload): string {

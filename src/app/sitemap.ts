@@ -25,6 +25,7 @@ const STATIC_ROUTES: ReadonlyArray<{
 	{ path: "/casos", changeFrequency: "monthly", priority: 0.6 },
 	{ path: "/academia", changeFrequency: "monthly", priority: 0.6 },
 	{ path: "/academia/pack-arranque", changeFrequency: "monthly", priority: 0.7 },
+	{ path: "/academia/sistema-ia-pro", changeFrequency: "monthly", priority: 0.7 },
 	{ path: "/sobre", changeFrequency: "yearly", priority: 0.5 },
 	{ path: "/como-trabajamos", changeFrequency: "monthly", priority: 0.5 },
 	{ path: "/como-verificar", changeFrequency: "monthly", priority: 0.5 },

@@ -4,9 +4,13 @@ import {
     GESTORIA_LOCAL_DELIVERY_LINKS,
     GESTORIA_LOCAL_PRODUCT_SLUG,
     PACK_ARRANQUE_PRODUCT_SLUG,
+    SISTEMA_IA_PRO_PRODUCT_SLUG,
     type ProductAddon,
 } from "@/lib/constants";
-import { createPackArranqueDownloadUrl } from "@/lib/secure-downloads";
+import {
+    createSecureDownloadUrl,
+    getSecureDownloadProduct,
+} from "@/lib/secure-downloads";
 
 let cachedTransporter: Transporter | null = null;
 
@@ -61,12 +65,18 @@ export interface PackArranqueDeliveryEmailParams {
     paymentMethodLabel?: string;
 }
 
+export interface SecureDownloadDeliveryEmailParams
+    extends PackArranqueDeliveryEmailParams {
+    productSlug: string;
+}
+
 // Slugs reales del catálogo (constants.ts). Las env vars siguen la convención
 // DOWNLOAD_URL_<SLUG_UPPER_SNAKE>. Las URLs se generan con scripts/upload-zips.mjs.
 const DOWNLOAD_URL_BY_SLUG: Record<string, () => string | undefined> = {
     [GESTORIA_LOCAL_PRODUCT_SLUG]: () =>
         publicUrl(GESTORIA_LOCAL_DELIVERY_LINKS.package),
     [PACK_ARRANQUE_PRODUCT_SLUG]: () => undefined,
+    [SISTEMA_IA_PRO_PRODUCT_SLUG]: () => undefined,
     "generador-contrasenas-basico": () => process.env.DOWNLOAD_URL_GENERADOR_CONTRASENAS_BASICO,
     "verificador-urls": () => process.env.DOWNLOAD_URL_VERIFICADOR_URLS,
     "anti-phishing": () => process.env.DOWNLOAD_URL_ANTI_PHISHING,
@@ -382,13 +392,14 @@ export async function sendGestoriaLocalDeliveryEmail(
     }
 }
 
-export async function sendPackArranqueDeliveryEmail(
-    params: PackArranqueDeliveryEmailParams,
+export async function sendSecureDownloadDeliveryEmail(
+    params: SecureDownloadDeliveryEmailParams,
 ): Promise<boolean> {
     const {
         to,
         customerName,
         productName,
+        productSlug,
         amount,
         customerEmail,
         orderId,
@@ -396,6 +407,12 @@ export async function sendPackArranqueDeliveryEmail(
         policyVersion,
         paymentMethodLabel,
     } = params;
+    const secureProduct = getSecureDownloadProduct(productSlug);
+    if (!secureProduct) {
+        console.error(`[email] Producto sin entrega segura: ${productSlug}`);
+        return false;
+    }
+
     const user = (process.env.GMAIL_USER ?? "").trim();
     if (!user || !(process.env.GMAIL_APP_PASSWORD ?? "").trim()) {
         console.error("[email] GMAIL_USER / GMAIL_APP_PASSWORD no configurados");
@@ -404,12 +421,13 @@ export async function sendPackArranqueDeliveryEmail(
 
     let downloadUrl: string;
     try {
-        downloadUrl = createPackArranqueDownloadUrl({
+        downloadUrl = createSecureDownloadUrl({
+            productSlug,
             customerEmail: customerEmail ?? to,
             orderId: orderId ?? transactionId ?? `manual-${Date.now()}`,
         });
     } catch (error) {
-        console.error("[email] No se pudo generar enlace seguro Pack Arranque:", error);
+        console.error("[email] No se pudo generar enlace seguro:", error);
         return false;
     }
 
@@ -436,7 +454,7 @@ export async function sendPackArranqueDeliveryEmail(
     <h1 style="color: #0891b2; font-size: 24px;">iaflashelite</h1>
   </div>
 
-  <h2 style="color: #1e293b;">Tu Pack Arranque IA está listo</h2>
+  <h2 style="color: #1e293b;">Tu ${escapeHtml(productName)} está listo</h2>
 
   <p>Hola <strong>${escapeHtml(customerName)}</strong>,</p>
 
@@ -458,7 +476,7 @@ export async function sendPackArranqueDeliveryEmail(
        style="background-color: #0891b2; color: white; padding: 16px 32px;
               text-decoration: none; border-radius: 8px; font-size: 18px;
               font-weight: bold; display: inline-block;">
-      Descargar Pack Arranque IA
+      Descargar ${escapeHtml(productName)}
     </a>
   </div>
 
@@ -486,7 +504,7 @@ export async function sendPackArranqueDeliveryEmail(
     const textLines = [
         `Hola ${customerName},`,
         ``,
-        `Tu Pack Arranque IA está listo.`,
+        `Tu ${productName} está listo.`,
         `Producto: ${productName}`,
         `Importe: ${amount}€`,
         `Email comprador: ${buyerEmail}`,
@@ -509,16 +527,25 @@ export async function sendPackArranqueDeliveryEmail(
         await getTransporter().sendMail({
             from: `"iaflashelite" <${user}>`,
             to,
-            subject: `Tu Pack Arranque IA está listo — iaflashelite`,
+            subject: `Tu ${productName} está listo — iaflashelite`,
             text: textLines.join("\n"),
             html,
         });
-        console.log(`[email] Entrega Pack Arranque IA enviada a ${to}`);
+        console.log(`[email] Entrega segura ${secureProduct.displayName} enviada a ${to}`);
         return true;
     } catch (error) {
-        console.error("[email] Error enviando Pack Arranque IA:", error);
+        console.error("[email] Error enviando entrega segura:", error);
         return false;
     }
+}
+
+export async function sendPackArranqueDeliveryEmail(
+    params: PackArranqueDeliveryEmailParams,
+): Promise<boolean> {
+    return sendSecureDownloadDeliveryEmail({
+        ...params,
+        productSlug: PACK_ARRANQUE_PRODUCT_SLUG,
+    });
 }
 
 function escapeHtml(value: string): string {
