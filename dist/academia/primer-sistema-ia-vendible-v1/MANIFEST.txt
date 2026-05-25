@@ -1,0 +1,31 @@
+Nombre: Primer Sistema IA Vendible v1
+Marca: IAFlashElite Academy
+Versión: v1.0
+Fecha: 2026-05-25
+Estado: contenido fuente revisable
+Precio futuro previsto: 49 EUR
+
+Archivos incluidos:
+- LEEME.md
+- MANIFEST.txt
+- manual-primer-sistema-ia-vendible.md
+- audio-guia-script.md
+- audio-guia-script-tts.md
+- garantia-calidad.md
+- checklist-final.md
+- templates/formulario-solicitud-cliente.md
+- templates/contexto-minimo-sistema.md
+- templates/prompt-procesador-solicitudes.md
+- templates/plantilla-respuesta-propuesta-inicial.md
+- templates/checklist-revision-humana.md
+- templates/flujo-candado-solicitudes.md
+- templates/adaptacion-agencia-web.md
+- templates/adaptacion-automatizaciones-ia.md
+- templates/adaptacion-gestoria-asesoria.md
+- templates/adaptacion-inmobiliaria.md
+- templates/adaptacion-servicios-locales.md
+- templates/demo-solicitudes-simuladas.md
+
+Nota:
+Contenido fuente pendiente de convertir a PDF, audio MP3 y ZIP final.
+No está conectado a catálogo, landing, checkout ni entrega web.
