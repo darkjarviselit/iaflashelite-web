@@ -11,6 +11,7 @@ export const GUARANTEE_POLICY_VERSION = "garantia-flash-v1-2026-05";
 export const GESTORIA_LOCAL_PRODUCT_SLUG = "gestoria-local";
 export const GESTORIA_LOCAL_ASSISTANCE_ADDON_ID =
     "gestoria-install-assistance";
+export const PACK_ARRANQUE_PRODUCT_SLUG = "pack-arranque-ia";
 
 export type ProductStatus = "available" | "coming_soon";
 
@@ -24,6 +25,7 @@ export type Subcategory =
     | "backup-recuperacion"
     | "automatizacion"
     | "auditoria"
+    | "formacion-ia"
     | "diseno-landing";
 
 export interface Product {
@@ -50,6 +52,7 @@ export interface Product {
     recommended_tools?: string[];
     // Audio de presentación opcional (URL Vercel Blob, resuelta desde env).
     audioUrl?: string;
+    academia?: boolean;
 }
 
 export interface ProductAddon {
@@ -123,6 +126,33 @@ export function calculateProductTotal(
 }
 
 export const PRODUCTS: Product[] = [
+    {
+        slug: PACK_ARRANQUE_PRODUCT_SLUG,
+        name: "Pack Arranque IA",
+        tagline:
+            "Prepara tu agente y tu flujo de trabajo antes de tocar un proyecto real.",
+        description:
+            "Producto descargable con PDF, audio guía breve, plantillas y skills base para crear contexto, instrucciones y una primera prueba real con tu IA.",
+        price: 7,
+        status: "available",
+        category: "ia",
+        audience: ["particulares", "pymes", "desarrolladores"],
+        subcategory: "formacion-ia",
+        icon: "graduation-cap",
+        estimated_install_minutes: 20,
+        includes: [
+            "PDF Pack Arranque IA",
+            "Audio guía breve de acompañamiento",
+            "Currículum IA personal",
+            "Contexto maestro del proyecto",
+            "Instrucciones de trabajo del proyecto IA",
+            "5 skills base para trabajar con método",
+            "Checklist final y garantía de calidad",
+        ],
+        guarantee_days: 14,
+        support_days: 14,
+        academia: true,
+    },
     {
         slug: GESTORIA_LOCAL_PRODUCT_SLUG,
         name: "GestorIA Local",
@@ -457,6 +487,7 @@ export const CATEGORY_LABELS: Record<string, string> = {
     "privacidad-personal": "Privacidad personal",
     "backup-recuperacion": "Backup y recuperación",
     auditoria: "Auditoría y compliance",
+    "formacion-ia": "Formación IA",
     "diseno-landing": "Diseño de landings",
 };
 
@@ -470,6 +501,7 @@ export const SUBCATEGORIES: ReadonlyArray<{
     { id: "backup-recuperacion", label: "Backup y recuperación", icon: "database" },
     { id: "automatizacion", label: "Automatización", icon: "zap" },
     { id: "auditoria", label: "Auditoría y compliance", icon: "search-check" },
+    { id: "formacion-ia", label: "Formación IA", icon: "graduation-cap" },
     { id: "diseno-landing", label: "Diseño de landings", icon: "monitor-smartphone" },
 ] as const;
 

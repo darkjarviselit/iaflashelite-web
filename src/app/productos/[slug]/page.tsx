@@ -58,11 +58,21 @@ export default async function ProductDetailPage({
 
     const available = product.status === "available";
     const isService = product.type === "service";
+    const isAcademia = product.academia === true;
 
     // Tier de material formativo según precio (PIEZA 5 W-11). Honesto, sin
     // precios inflados: solo describimos qué incluye y marcamos «Próximamente».
     const tier =
-        product.price < 20
+        isAcademia
+            ? {
+                  name: "Material incluido en el pack",
+                  items: [
+                      "PDF principal",
+                      "Audio guía breve",
+                      "Plantillas y skills descargables",
+                  ],
+              }
+            : product.price < 20
             ? {
                   name: "Mini guía",
                   items: ["1 audio (~15 min)", "1 PDF descargable (3 páginas)"],
@@ -323,19 +333,25 @@ export default async function ProductDetailPage({
                                     <Download className="w-5 h-5" />
                                 </span>
                                 <h3 className="text-sm font-semibold text-gray-900 mb-1">
-                                    {isService ? "Hecho a medida" : "Privacidad total"}
+                                    {isService
+                                        ? "Hecho a medida"
+                                        : isAcademia
+                                            ? "Material descargable"
+                                            : "Privacidad total"}
                                 </h3>
                                 <p className="text-xs text-gray-600 leading-relaxed">
                                     {isService
                                         ? "Diseño exclusivo para tu negocio. No es una plantilla."
-                                        : "Funciona en local. Tus datos nunca salen de tu equipo."}
+                                        : isAcademia
+                                            ? "PDF, audio y plantillas para trabajar en tu propio entorno."
+                                            : "Funciona en local. Tus datos nunca salen de tu equipo."}
                                 </p>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                {available && (
+                {available && !isAcademia && (
                     <section className="relative py-12 bg-white border-t border-gray-200">
                         <div className="max-w-3xl mx-auto px-6">
                             <div className="flex flex-col gap-3 p-6 rounded-2xl bg-cyan-50 border border-cyan-200">
@@ -358,7 +374,7 @@ export default async function ProductDetailPage({
                     </section>
                 )}
 
-                {available && (
+                {available && !isAcademia && (
                     <section className="relative py-12 bg-white border-t border-gray-200">
                         <div className="max-w-3xl mx-auto px-6">
                             <div className="flex flex-col gap-3 p-6 rounded-2xl bg-emerald-50 border border-emerald-200">

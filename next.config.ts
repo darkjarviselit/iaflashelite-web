@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+    outputFileTracingIncludes: {
+        "/api/downloads/pack-arranque-ia": [
+            "./dist/academia/pack-arranque-ia-v1.zip",
+        ],
+    },
 };
 
 export default nextConfig;
