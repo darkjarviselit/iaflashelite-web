@@ -1,6 +1,7 @@
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import {
     PACK_ARRANQUE_PRODUCT_SLUG,
+    PRIMER_SISTEMA_IA_VENDIBLE_PRODUCT_SLUG,
     SISTEMA_IA_PRO_PRODUCT_SLUG,
 } from "@/lib/constants";
 
@@ -8,6 +9,10 @@ export const PACK_ARRANQUE_FILE_VERSION = "pack-arranque-ia-v1";
 export const PACK_ARRANQUE_ZIP_FILENAME = "pack-arranque-ia-v1.zip";
 export const SISTEMA_IA_PRO_FILE_VERSION = "sistema-ia-pro-v1";
 export const SISTEMA_IA_PRO_ZIP_FILENAME = "sistema-ia-pro-v1.zip";
+export const PRIMER_SISTEMA_IA_VENDIBLE_FILE_VERSION =
+    "primer-sistema-ia-vendible-v1";
+export const PRIMER_SISTEMA_IA_VENDIBLE_ZIP_FILENAME =
+    "primer-sistema-ia-vendible-v1.zip";
 
 const DOWNLOAD_TOKEN_TTL_MS = 1000 * 60 * 60 * 72;
 
@@ -30,6 +35,12 @@ export const SECURE_DOWNLOAD_PRODUCTS: Record<string, SecureDownloadProduct> = {
         fileVersion: SISTEMA_IA_PRO_FILE_VERSION,
         zipFilename: SISTEMA_IA_PRO_ZIP_FILENAME,
         displayName: "Sistema IA Pro",
+    },
+    [PRIMER_SISTEMA_IA_VENDIBLE_PRODUCT_SLUG]: {
+        productSlug: PRIMER_SISTEMA_IA_VENDIBLE_PRODUCT_SLUG,
+        fileVersion: PRIMER_SISTEMA_IA_VENDIBLE_FILE_VERSION,
+        zipFilename: PRIMER_SISTEMA_IA_VENDIBLE_ZIP_FILENAME,
+        displayName: "Primer Sistema IA Vendible",
     },
 };
 

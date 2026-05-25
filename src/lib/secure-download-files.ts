@@ -1,6 +1,7 @@
 import path from "node:path";
 import {
     PACK_ARRANQUE_PRODUCT_SLUG,
+    PRIMER_SISTEMA_IA_VENDIBLE_PRODUCT_SLUG,
     SISTEMA_IA_PRO_PRODUCT_SLUG,
 } from "@/lib/constants";
 import {
@@ -31,6 +32,14 @@ const SECURE_DOWNLOAD_FILES: Record<string, SecureDownloadFileConfig> = {
             "dist",
             "academia",
             "sistema-ia-pro-v1.zip",
+        ),
+    },
+    [PRIMER_SISTEMA_IA_VENDIBLE_PRODUCT_SLUG]: {
+        zipPath: path.join(
+            /*turbopackIgnore: true*/ process.cwd(),
+            "dist",
+            "academia",
+            "primer-sistema-ia-vendible-v1.zip",
         ),
     },
 };

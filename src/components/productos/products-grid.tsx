@@ -162,6 +162,7 @@ export function ProductsGrid({ products, initialAudience, hideFilters = false }:
                                 const isService = product.type === "service";
                                 const isGestoriaLocal =
                                     product.slug === GESTORIA_LOCAL_PRODUCT_SLUG;
+                                const isAcademia = product.academia === true;
                                 const Icon =
                                     PRODUCT_ICONS[product.icon] ?? KeyRound;
                                 return (
@@ -221,7 +222,9 @@ export function ProductsGrid({ products, initialAudience, hideFilters = false }:
                                                     ? `Entrega ${product.delivery_time ?? "48h"}`
                                                     : isGestoriaLocal
                                                         ? "Entrega digital"
-                                                    : `~${product.estimated_install_minutes} min instalación`}
+                                                        : isAcademia
+                                                            ? "Material descargable"
+                                                            : `~${product.estimated_install_minutes} min instalación`}
                                             </span>
                                         </div>
 
@@ -236,6 +239,8 @@ export function ProductsGrid({ products, initialAudience, hideFilters = false }:
                                                 <span className="text-xs font-medium text-emerald-600 mt-1">
                                                     {isGestoriaLocal
                                                         ? "Guías e instaladores incluidos"
+                                                        : isAcademia
+                                                            ? "PDF, audios y plantillas"
                                                         : `🎁 + ${
                                                             product.price < 20
                                                         ? "Mini guía gratis"
