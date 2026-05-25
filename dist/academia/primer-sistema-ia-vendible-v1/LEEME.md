@@ -9,8 +9,9 @@ Nombre comercial:
 
 Precio futuro previsto: 49 €.
 
-Este paquete todavía no es un PDF final, no contiene audio MP3, no tiene ZIP
-final y no está conectado a catálogo, landing ni checkout.
+Este paquete ya tiene PDF de revisión y audios MP3 preparados para revisión
+interna. Todavía no tiene ZIP final vendible y no está conectado a catálogo,
+landing ni checkout.
 
 ## Qué incluye
 
@@ -21,7 +22,10 @@ final y no está conectado a catálogo, landing ni checkout.
 - Flujo Candado aplicado a solicitudes de clientes.
 - Adaptaciones sectoriales para cinco tipos de negocio.
 - Tres solicitudes simuladas para probar el sistema.
-- Guion para futuro audio guía breve de acompañamiento.
+- Audio guía principal.
+- Audio bonus sobre herramientas, ahorro de tokens y mentalidad antes de
+  empezar un proyecto.
+- Guion fuente del audio guía breve de acompañamiento.
 - Versión limpia del guion para TTS.
 - Checklist final.
 - Texto base de garantía de calidad.

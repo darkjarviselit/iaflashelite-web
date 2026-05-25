@@ -12,6 +12,7 @@ Archivos incluidos:
 - audio-guia-script.md
 - audio-guia-script-tts.md
 - audio/01-audio-guia.mp3
+- audio/02-audio-bonus-herramientas-tokens.mp3
 - garantia-calidad.md
 - checklist-final.md
 - templates/formulario-solicitud-cliente.md
@@ -31,8 +32,12 @@ Nota:
 Contenido fuente pendiente de convertir a ZIP final vendible.
 No está conectado a catálogo, landing, checkout ni entrega web.
 
-Audio final:
-- Archivo: 01-audio-guia.mp3
+Audios finales:
+- Archivo principal: 01-audio-guia.mp3
 - Duración aproximada: 2 min 45 s
+- Formato: MP3
+- Codec/bitrate: MPEG Layer III, mono, 44.1 kHz, ~128 kbps
+- Archivo bonus: 02-audio-bonus-herramientas-tokens.mp3
+- Duración aproximada: 3 min 08 s
 - Formato: MP3
 - Codec/bitrate: MPEG Layer III, mono, 44.1 kHz, ~128 kbps
