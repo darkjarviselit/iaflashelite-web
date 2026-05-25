@@ -15,6 +15,8 @@ export const PACK_ARRANQUE_PRODUCT_SLUG = "pack-arranque-ia";
 export const SISTEMA_IA_PRO_PRODUCT_SLUG = "sistema-ia-pro";
 export const PRIMER_SISTEMA_IA_VENDIBLE_PRODUCT_SLUG =
     "primer-sistema-ia-vendible";
+export const KENVO_MAC_ARM_PRODUCT_SLUG = "kenvo-mac-arm";
+export const KENVO_MAC_INTEL_PRODUCT_SLUG = "kenvo-mac-intel";
 
 export type ProductStatus = "available" | "coming_soon";
 
@@ -56,6 +58,10 @@ export interface Product {
     // Audio de presentación opcional (URL Vercel Blob, resuelta desde env).
     audioUrl?: string;
     academia?: boolean;
+    // Excluido del catálogo público /productos, de /productos/[slug] y del
+    // sitemap. Sigue en PRODUCTS para el cruce de precio del checkout: se vende
+    // por su propio funnel (p. ej. /kenvo/comprar).
+    hidden?: boolean;
 }
 
 export interface ProductAddon {
@@ -494,6 +500,55 @@ export const PRODUCTS: Product[] = [
             "Codex CLI (gratis)",
             "ChatGPT Plus (20€/mes)",
         ],
+    },
+    {
+        slug: KENVO_MAC_ARM_PRODUCT_SLUG,
+        hidden: true,
+        name: "Kenvo — Mac Apple Silicon",
+        tagline:
+            "Acceso fundador a Kenvo para Macs con chip Apple Silicon (M1–M4).",
+        description:
+            "Instalador de Kenvo para macOS con chip Apple Silicon (M1, M2, M3 o M4) más el manual de instalación. Pago único, descarga inmediata tras el pago, sin suscripción.",
+        price: 150,
+        status: "available",
+        category: "ia",
+        audience: ["particulares", "pymes"],
+        subcategory: "automatizacion",
+        icon: "sparkles",
+        estimated_install_minutes: 10,
+        includes: [
+            "Instalador Kenvo para Mac Apple Silicon (.dmg)",
+            "Manual de instalación",
+            "Pago único — sin suscripción",
+            "Acceso fundador con precio bloqueado",
+            "Garantía de calidad 14 días",
+        ],
+        guarantee_days: 14,
+        support_days: 30,
+    },
+    {
+        slug: KENVO_MAC_INTEL_PRODUCT_SLUG,
+        hidden: true,
+        name: "Kenvo — Mac Intel",
+        tagline: "Acceso fundador a Kenvo para Macs Intel (anteriores a 2020).",
+        description:
+            "Instalador de Kenvo para macOS con procesador Intel (Macs anteriores a 2020) más el manual de instalación. Pago único, descarga inmediata tras el pago, sin suscripción.",
+        price: 150,
+        status: "available",
+        category: "ia",
+        audience: ["particulares", "pymes"],
+        subcategory: "automatizacion",
+        icon: "sparkles",
+        estimated_install_minutes: 10,
+        includes: [
+            "Instalador Kenvo para Mac Intel (.dmg)",
+            "Manual de instalación",
+            "Pago único — sin suscripción",
+            "Acceso fundador con precio bloqueado",
+            "Garantía de calidad 14 días",
+        ],
+        guarantee_days: 14,
+        support_days: 30,
     },
 ];
 

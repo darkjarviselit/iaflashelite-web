@@ -42,6 +42,36 @@ export async function GET(
         return NextResponse.json({ error: "invalid_product" }, { status: 403 });
     }
 
+    const baseHeaders: Record<string, string> = {
+        "Content-Type": "application/zip",
+        "Content-Disposition": `attachment; filename="${secureProduct.zipFilename}"`,
+        "Cache-Control": "private, no-store, max-age=0",
+        "X-Content-Type-Options": "nosniff",
+    };
+
+    // Fuente remota (Vercel Blob): los binarios grandes no caben en el
+    // deployment, así que el ZIP se hace streaming desde Blob. La URL real de
+    // Blob nunca se expone al cliente: solo ve este endpoint protegido por token.
+    if (secureProduct.zipUrl) {
+        let upstream: Response;
+        try {
+            upstream = await fetch(secureProduct.zipUrl);
+        } catch {
+            return NextResponse.json({ error: "file_not_available" }, { status: 503 });
+        }
+        if (!upstream.ok || !upstream.body) {
+            return NextResponse.json({ error: "file_not_available" }, { status: 503 });
+        }
+        const length = upstream.headers.get("content-length");
+        if (length) baseHeaders["Content-Length"] = length;
+        return new Response(upstream.body, { headers: baseHeaders });
+    }
+
+    // Fuente local (material de academia empaquetado en el deployment).
+    if (!secureProduct.zipPath) {
+        return NextResponse.json({ error: "file_not_available" }, { status: 503 });
+    }
+
     let fileStat: Awaited<ReturnType<typeof stat>>;
     try {
         fileStat = await stat(secureProduct.zipPath);
@@ -54,11 +84,8 @@ export async function GET(
 
     return new Response(webStream, {
         headers: {
-            "Content-Type": "application/zip",
-            "Content-Disposition": `attachment; filename="${secureProduct.zipFilename}"`,
+            ...baseHeaders,
             "Content-Length": String(fileStat.size),
-            "Cache-Control": "private, no-store, max-age=0",
-            "X-Content-Type-Options": "nosniff",
         },
     });
 }

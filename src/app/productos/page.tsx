@@ -43,7 +43,7 @@ export default function ProductosPage() {
 
                 <section className="relative pb-24">
                     <div className="max-w-[1200px] mx-auto px-6">
-                        <ProductsGrid products={PRODUCTS} />
+                        <ProductsGrid products={PRODUCTS.filter((p) => !p.hidden)} />
                     </div>
                 </section>
 

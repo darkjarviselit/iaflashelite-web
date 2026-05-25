@@ -10,9 +10,11 @@ import {
 } from "@/lib/constants";
 
 export function generateStaticParams() {
-    return PRODUCTS.filter((p) => p.status === "available").map((p) => ({
-        slug: p.slug,
-    }));
+    return PRODUCTS.filter((p) => p.status === "available" && !p.hidden).map(
+        (p) => ({
+            slug: p.slug,
+        }),
+    );
 }
 
 export async function generateMetadata({
@@ -36,7 +38,7 @@ export default async function ComprarPage({
 }) {
     const { slug } = await params;
     const product = PRODUCTS.find((p) => p.slug === slug);
-    if (!product || product.status !== "available") notFound();
+    if (!product || product.status !== "available" || product.hidden) notFound();
 
     const isService = product.type === "service";
     const isGestoriaLocal = product.slug === GESTORIA_LOCAL_PRODUCT_SLUG;

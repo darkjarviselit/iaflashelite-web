@@ -21,12 +21,25 @@ const STATIC_ROUTES: ReadonlyArray<{
 	{ path: "/servicios-extra", changeFrequency: "monthly", priority: 0.6 },
 	{ path: "/soluciones", changeFrequency: "weekly", priority: 0.9 },
 	{ path: "/gestoria-local", changeFrequency: "monthly", priority: 0.8 },
+	{ path: "/kenvo", changeFrequency: "weekly", priority: 0.8 },
 	{ path: "/seguridad", changeFrequency: "monthly", priority: 0.6 },
 	{ path: "/casos", changeFrequency: "monthly", priority: 0.6 },
 	{ path: "/academia", changeFrequency: "monthly", priority: 0.6 },
-	{ path: "/academia/pack-arranque", changeFrequency: "monthly", priority: 0.7 },
-	{ path: "/academia/sistema-ia-pro", changeFrequency: "monthly", priority: 0.7 },
-	{ path: "/academia/primer-sistema-ia-vendible", changeFrequency: "monthly", priority: 0.7 },
+	{
+		path: "/academia/pack-arranque",
+		changeFrequency: "monthly",
+		priority: 0.7,
+	},
+	{
+		path: "/academia/sistema-ia-pro",
+		changeFrequency: "monthly",
+		priority: 0.7,
+	},
+	{
+		path: "/academia/primer-sistema-ia-vendible",
+		changeFrequency: "monthly",
+		priority: 0.7,
+	},
 	{ path: "/sobre", changeFrequency: "yearly", priority: 0.5 },
 	{ path: "/como-trabajamos", changeFrequency: "monthly", priority: 0.5 },
 	{ path: "/como-verificar", changeFrequency: "monthly", priority: 0.5 },
@@ -48,7 +61,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 	}));
 
 	const productEntries: MetadataRoute.Sitemap = PRODUCTS.filter(
-		(product) => product.status === "available",
+		(product) => product.status === "available" && !product.hidden,
 	).map((product) => ({
 		url: `${SITE_URL}/productos/${product.slug}`,
 		lastModified,

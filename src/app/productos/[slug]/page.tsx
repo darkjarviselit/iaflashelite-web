@@ -27,7 +27,7 @@ import {
 } from "@/lib/constants";
 
 export function generateStaticParams() {
-    return PRODUCTS.map((p) => ({ slug: p.slug }));
+    return PRODUCTS.filter((p) => !p.hidden).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -53,7 +53,7 @@ export default async function ProductDetailPage({
 }) {
     const { slug } = await params;
     const product = PRODUCTS.find((p) => p.slug === slug);
-    if (!product) notFound();
+    if (!product || product.hidden) notFound();
     if (product.slug === GESTORIA_LOCAL_PRODUCT_SLUG) redirect("/gestoria-local");
 
     const available = product.status === "available";

@@ -1,5 +1,7 @@
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import {
+    KENVO_MAC_ARM_PRODUCT_SLUG,
+    KENVO_MAC_INTEL_PRODUCT_SLUG,
     PACK_ARRANQUE_PRODUCT_SLUG,
     PRIMER_SISTEMA_IA_VENDIBLE_PRODUCT_SLUG,
     SISTEMA_IA_PRO_PRODUCT_SLUG,
@@ -13,6 +15,10 @@ export const PRIMER_SISTEMA_IA_VENDIBLE_FILE_VERSION =
     "primer-sistema-ia-vendible-v1";
 export const PRIMER_SISTEMA_IA_VENDIBLE_ZIP_FILENAME =
     "primer-sistema-ia-vendible-v1.zip";
+export const KENVO_MAC_ARM_FILE_VERSION = "kenvo-0.8.0-mac-arm64";
+export const KENVO_MAC_ARM_ZIP_FILENAME = "kenvo-0.8.0-mac-arm64.zip";
+export const KENVO_MAC_INTEL_FILE_VERSION = "kenvo-0.8.0-mac-intel";
+export const KENVO_MAC_INTEL_ZIP_FILENAME = "kenvo-0.8.0-mac-intel.zip";
 
 const DOWNLOAD_TOKEN_TTL_MS = 1000 * 60 * 60 * 72;
 
@@ -41,6 +47,18 @@ export const SECURE_DOWNLOAD_PRODUCTS: Record<string, SecureDownloadProduct> = {
         fileVersion: PRIMER_SISTEMA_IA_VENDIBLE_FILE_VERSION,
         zipFilename: PRIMER_SISTEMA_IA_VENDIBLE_ZIP_FILENAME,
         displayName: "Primer Sistema IA Vendible",
+    },
+    [KENVO_MAC_ARM_PRODUCT_SLUG]: {
+        productSlug: KENVO_MAC_ARM_PRODUCT_SLUG,
+        fileVersion: KENVO_MAC_ARM_FILE_VERSION,
+        zipFilename: KENVO_MAC_ARM_ZIP_FILENAME,
+        displayName: "Kenvo — Mac Apple Silicon",
+    },
+    [KENVO_MAC_INTEL_PRODUCT_SLUG]: {
+        productSlug: KENVO_MAC_INTEL_PRODUCT_SLUG,
+        fileVersion: KENVO_MAC_INTEL_FILE_VERSION,
+        zipFilename: KENVO_MAC_INTEL_ZIP_FILENAME,
+        displayName: "Kenvo — Mac Intel",
     },
 };
 
