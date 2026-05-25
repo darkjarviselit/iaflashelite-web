@@ -27,7 +27,6 @@ const FOOTER_NAV = {
         { label: "Sobre nosotros", href: "/sobre" },
         { label: "Cómo trabajamos", href: "/como-trabajamos" },
         { label: "Soluciones", href: "/soluciones" },
-        { label: "Mundo GiruIA", href: "/mundo-giruia" },
         { label: "Contacto", href: "/contacto" },
     ],
     seguridad: [

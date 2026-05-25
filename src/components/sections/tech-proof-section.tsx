@@ -26,8 +26,8 @@ export function TechProofSection() {
                             Tecnología propia en evolución
                         </h2>
                         <p className="mt-6 max-w-2xl text-lg leading-8 text-text-secondary">
-                            GIRU es nuestro laboratorio de agentes IA con memoria,
-                            herramientas y aprendizaje supervisado.
+                            Construimos productos IA con contexto, revisión humana,
+                            entrega verificable y límites claros antes de venderlos.
                         </p>
                     </div>
                 </div>
@@ -43,11 +43,11 @@ export function TechProofSection() {
                         <svg
                             viewBox="0 0 520 320"
                             role="img"
-                            aria-labelledby="giru-brain-title"
+                            aria-labelledby="tech-proof-title"
                             className="h-auto w-full"
                         >
-                            <title id="giru-brain-title">
-                                Cerebro estático de G.I.R.U con nodos conectados
+                            <title id="tech-proof-title">
+                                Sistema de trabajo IA con nodos conectados
                             </title>
                             <rect width="520" height="320" rx="24" fill="#0a0a0a" />
                             <g stroke="#00E5FF" strokeOpacity="0.38" strokeWidth="2">
@@ -97,7 +97,7 @@ export function TechProofSection() {
                                 fontWeight="700"
                                 textAnchor="middle"
                             >
-                                G.I.R.U
+                                IA
                             </text>
                         </svg>
                     </div>
@@ -105,8 +105,8 @@ export function TechProofSection() {
                         No vendemos humo. Nuestros productos nacen de investigación real.
                         Puedes auditarlos tú mismo con Claude o ChatGPT.
                     </p>
-                    <Button href="/mundo-giruia" variant="secondary" className="mt-8">
-                        Ver laboratorio <ArrowRight size={16} />
+                    <Button href="/como-trabajamos" variant="secondary" className="mt-8">
+                        Ver cómo trabajamos <ArrowRight size={16} />
                     </Button>
                 </motion.div>
             </div>

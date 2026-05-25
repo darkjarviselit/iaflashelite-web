@@ -31,7 +31,6 @@ const STATIC_ROUTES: ReadonlyArray<{
 	{ path: "/como-trabajamos", changeFrequency: "monthly", priority: 0.5 },
 	{ path: "/como-verificar", changeFrequency: "monthly", priority: 0.5 },
 	{ path: "/contacto", changeFrequency: "monthly", priority: 0.7 },
-	{ path: "/mundo-giruia", changeFrequency: "monthly", priority: 0.5 },
 	{ path: "/legal/aviso-legal", changeFrequency: "yearly", priority: 0.3 },
 	{ path: "/legal/privacidad", changeFrequency: "yearly", priority: 0.3 },
 	{ path: "/legal/cookies", changeFrequency: "yearly", priority: 0.3 },
