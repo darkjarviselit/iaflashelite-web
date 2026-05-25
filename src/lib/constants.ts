@@ -13,6 +13,8 @@ export const GESTORIA_LOCAL_ASSISTANCE_ADDON_ID =
     "gestoria-install-assistance";
 export const PACK_ARRANQUE_PRODUCT_SLUG = "pack-arranque-ia";
 export const SISTEMA_IA_PRO_PRODUCT_SLUG = "sistema-ia-pro";
+export const PRIMER_SISTEMA_IA_VENDIBLE_PRODUCT_SLUG =
+    "primer-sistema-ia-vendible";
 
 export type ProductStatus = "available" | "coming_soon";
 
@@ -176,6 +178,34 @@ export const PRODUCTS: Product[] = [
             "Prompt 0 para arrancar trabajo técnico",
             "Flujo Candado y checklist de revisión",
             "Plantilla de informe final",
+        ],
+        guarantee_days: 14,
+        support_days: 14,
+        academia: true,
+    },
+    {
+        slug: PRIMER_SISTEMA_IA_VENDIBLE_PRODUCT_SLUG,
+        name: "Primer Sistema IA Vendible",
+        tagline:
+            "Crea un sistema que capta solicitudes, las ordena con IA y prepara respuestas revisables.",
+        description:
+            "Construye un sistema funcional para captar solicitudes, ordenarlas con IA y preparar respuestas revisables con control humano.",
+        price: 49,
+        status: "available",
+        category: "ia",
+        audience: ["particulares", "pymes", "desarrolladores"],
+        subcategory: "formacion-ia",
+        icon: "graduation-cap",
+        estimated_install_minutes: 35,
+        includes: [
+            "PDF Primer Sistema IA Vendible",
+            "Audio guía principal",
+            "Audio bonus sobre herramientas y tokens",
+            "Formulario de solicitud de cliente",
+            "Prompt procesador de solicitudes",
+            "Plantilla de respuesta/propuesta inicial",
+            "Flujo Candado aplicado a solicitudes",
+            "5 adaptaciones sectoriales y checklist final",
         ],
         guarantee_days: 14,
         support_days: 14,
