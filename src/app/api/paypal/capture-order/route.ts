@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import {
     GESTORIA_LOCAL_PRODUCT_SLUG,
     GUARANTEE_POLICY_VERSION,
-    PACK_ARRANQUE_PRODUCT_SLUG,
     PRODUCTS,
     calculateProductTotal,
 } from "@/lib/constants";
@@ -10,9 +9,12 @@ import {
     getDownloadUrl,
     sendDeliveryEmail,
     sendGestoriaLocalDeliveryEmail,
-    sendPackArranqueDeliveryEmail,
+    sendSecureDownloadDeliveryEmail,
 } from "@/lib/email";
-import { isPackArranqueSecureDeliveryConfigured } from "@/lib/secure-downloads";
+import {
+    isSecureDeliveryConfigured,
+    isSecureDownloadProduct,
+} from "@/lib/secure-downloads";
 
 const PAYPAL_API =
     (process.env.PAYPAL_API_BASE ?? "https://api-m.paypal.com").replace(/\/+$/, "");
@@ -127,10 +129,7 @@ export async function POST(request: Request) {
     if (!calculated) {
         return NextResponse.json({ error: "invalid_addons" }, { status: 400 });
     }
-    if (
-        product.slug === PACK_ARRANQUE_PRODUCT_SLUG &&
-        !isPackArranqueSecureDeliveryConfigured()
-    ) {
+    if (isSecureDownloadProduct(product.slug) && !isSecureDeliveryConfigured(product.slug)) {
         return NextResponse.json(
             { error: "secure_delivery_not_configured" },
             { status: 503 },
@@ -179,9 +178,9 @@ export async function POST(request: Request) {
     const paypalCaptureId = capture?.id ?? null;
     const captureTime = capture?.create_time ?? new Date().toISOString();
     const payerEmail = captureData.payer?.email_address ?? null;
-    const isPackArranque = product.slug === PACK_ARRANQUE_PRODUCT_SLUG;
-    const downloadUrl = isPackArranque ? null : getDownloadUrl(productSlug);
-    const deliveryStatus = isPackArranque
+    const isSecureDownload = isSecureDownloadProduct(product.slug);
+    const downloadUrl = isSecureDownload ? null : getDownloadUrl(productSlug);
+    const deliveryStatus = isSecureDownload
         ? "secure_email_delivery_requested"
         : downloadUrl
             ? "email_delivery_requested"
@@ -251,11 +250,12 @@ export async function POST(request: Request) {
     })();
 
     // Entrega automática por email — fire-and-forget.
-    if (isPackArranque) {
-        void sendPackArranqueDeliveryEmail({
+    if (isSecureDownload) {
+        void sendSecureDownloadDeliveryEmail({
             to: customerEmail,
             customerName,
             productName: product.name,
+            productSlug: product.slug,
             amount: String(calculated.total),
             orderId: paypalOrderId,
             transactionId: paypalCaptureId,
@@ -263,7 +263,7 @@ export async function POST(request: Request) {
             policyVersion,
             paymentMethodLabel: "PayPal / Tarjeta",
         }).catch((err) => {
-            console.error("[paypal capture] Pack Arranque delivery email error:", err);
+            console.error("[paypal capture] secure delivery email error:", err);
         });
     } else if (product.slug === GESTORIA_LOCAL_PRODUCT_SLUG) {
         void sendGestoriaLocalDeliveryEmail({

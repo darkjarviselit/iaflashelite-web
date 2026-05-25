@@ -12,6 +12,7 @@ export const GESTORIA_LOCAL_PRODUCT_SLUG = "gestoria-local";
 export const GESTORIA_LOCAL_ASSISTANCE_ADDON_ID =
     "gestoria-install-assistance";
 export const PACK_ARRANQUE_PRODUCT_SLUG = "pack-arranque-ia";
+export const SISTEMA_IA_PRO_PRODUCT_SLUG = "sistema-ia-pro";
 
 export type ProductStatus = "available" | "coming_soon";
 
@@ -148,6 +149,33 @@ export const PRODUCTS: Product[] = [
             "Instrucciones de trabajo del proyecto IA",
             "5 skills base para trabajar con método",
             "Checklist final y garantía de calidad",
+        ],
+        guarantee_days: 14,
+        support_days: 14,
+        academia: true,
+    },
+    {
+        slug: SISTEMA_IA_PRO_PRODUCT_SLUG,
+        name: "Sistema IA Pro",
+        tagline: "Crea proyectos IA que trabajan contigo.",
+        description:
+            "Crea proyectos IA en ChatGPT, Claude o Gemini para investigar, planificar, dirigir Claude Code/Codex y revisar resultados con método.",
+        price: 19,
+        status: "available",
+        category: "ia",
+        audience: ["particulares", "pymes", "desarrolladores"],
+        subcategory: "formacion-ia",
+        icon: "graduation-cap",
+        estimated_install_minutes: 25,
+        includes: [
+            "PDF Sistema IA Pro",
+            "Audio guía breve de acompañamiento",
+            "Proyecto IA de estrategia y mejoras",
+            "Proyecto IA de marketing y ventas",
+            "Proyecto IA prompt builder técnico",
+            "Prompt 0 para arrancar trabajo técnico",
+            "Flujo Candado y checklist de revisión",
+            "Plantilla de informe final",
         ],
         guarantee_days: 14,
         support_days: 14,

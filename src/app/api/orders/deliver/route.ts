@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 import {
     GESTORIA_LOCAL_PRODUCT_SLUG,
     GUARANTEE_POLICY_VERSION,
-    PACK_ARRANQUE_PRODUCT_SLUG,
     PRODUCTS,
     calculateProductTotal,
 } from "@/lib/constants";
@@ -13,9 +12,12 @@ import {
     getDownloadUrl,
     sendDeliveryEmail,
     sendGestoriaLocalDeliveryEmail,
-    sendPackArranqueDeliveryEmail,
+    sendSecureDownloadDeliveryEmail,
 } from "@/lib/email";
-import { isPackArranqueSecureDeliveryConfigured } from "@/lib/secure-downloads";
+import {
+    isSecureDeliveryConfigured,
+    isSecureDownloadProduct,
+} from "@/lib/secure-downloads";
 
 interface DeliverBody {
     customerEmail?: string;
@@ -74,27 +76,28 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "invalid_addons" }, { status: 400 });
     }
 
-    const isPackArranque = product.slug === PACK_ARRANQUE_PRODUCT_SLUG;
-    if (isPackArranque && !isPackArranqueSecureDeliveryConfigured()) {
+    const isSecureDownload = isSecureDownloadProduct(product.slug);
+    if (isSecureDownload && !isSecureDeliveryConfigured(product.slug)) {
         return NextResponse.json(
             { error: "secure_delivery_not_configured" },
             { status: 503 },
         );
     }
 
-    const downloadUrl = isPackArranque ? null : getDownloadUrl(productSlug);
-    if (!isPackArranque && !downloadUrl) {
+    const downloadUrl = isSecureDownload ? null : getDownloadUrl(productSlug);
+    if (!isSecureDownload && !downloadUrl) {
         return NextResponse.json({ error: "no_download_url" }, { status: 500 });
     }
 
     // La prueba histórica de consentimiento vive en el pedido manual reenviado a giris-agent.
     // Este endpoint solo ejecuta la entrega tras confirmar pago fuera del checkout.
     let sent: boolean;
-    if (isPackArranque) {
-        sent = await sendPackArranqueDeliveryEmail({
+    if (isSecureDownload) {
+        sent = await sendSecureDownloadDeliveryEmail({
             to: customerEmail,
             customerName,
             productName: product.name,
+            productSlug: product.slug,
             amount: String(calculated.total),
             customerEmail,
             policyVersion: GUARANTEE_POLICY_VERSION,
