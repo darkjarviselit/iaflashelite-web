@@ -11,7 +11,6 @@ const FULL_NAV = [
     { label: "Servicios", href: "/servicios" },
     { label: "Precios", href: "/pricing" },
     { label: "Seguridad", href: "/seguridad", highlight: true },
-    { label: "Mundo G.I.R.U", href: "/mundo-giruia", highlight: true },
     { label: "Contacto", href: "/contacto" },
 ] as ReadonlyArray<{ label: string; href: string; highlight?: boolean }>;
 

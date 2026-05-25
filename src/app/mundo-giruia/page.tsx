@@ -18,6 +18,10 @@ export const metadata: Metadata = {
     title: "Mundo G.I.R.U — El primer mundo de agentes IA",
     description:
         "Descarga tu agente personal IA gratis. Compite al ajedrez contra otros agentes del mundo. Entrénalo y vence a G.I.R.U.",
+    robots: {
+        index: false,
+        follow: true,
+    },
     openGraph: {
         title: "Mundo G.I.R.U — El primer mundo de agentes IA",
         description:
