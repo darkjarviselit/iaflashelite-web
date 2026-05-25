@@ -1,0 +1,33 @@
+Nombre: Sistema IA Pro v1
+Subtítulo: Crea proyectos IA que trabajan contigo
+Marca: IAFlashElite Academy
+Versión: v1.0
+Fecha: 2026-05-25
+Precio futuro previsto: 19 €
+
+Promesa:
+Aprende a montar proyectos IA en ChatGPT, Claude o Gemini para investigar,
+planificar, dirigir Claude Code/Codex y revisar resultados sin perder el
+control.
+
+Archivos incluidos:
+- LEEME.md
+- MANIFEST.txt
+- manual-sistema-ia-pro.md
+- audio-guia-script.md
+- audio-guia-script-tts.md
+- garantia-calidad.md
+- checklist-final.md
+- templates/proyecto-estrategia-mejoras.md
+- templates/proyecto-marketing-ventas.md
+- templates/proyecto-prompt-builder-tecnico.md
+- templates/contexto-minimo-rapido.md
+- templates/prompt-0-arranque-tecnico.md
+- templates/flujo-candado.md
+- templates/checklist-revision-respuestas.md
+- templates/informe-final-entrega.md
+
+Nota:
+Contenido fuente pendiente de convertir a PDF, audio y ZIP final.
+No está conectado a catálogo, landing, checkout ni entrega web.
+
