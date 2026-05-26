@@ -30,6 +30,7 @@ type Plan = {
 };
 
 type MainOffer = {
+    anchor?: string;
     badge: string;
     badgeTone: string;
     cta: string;
@@ -60,8 +61,9 @@ const MAIN_OFFERS: ReadonlyArray<MainOffer> = [
         price: "490€",
         priceNote: "pago único",
         title: "Auditoría IA para tu negocio",
+        anchor: "servicio-auditoria",
         description:
-            "Estudiamos contigo qué procesos repites en tu día a día y dónde la IA te puede ahorrar tiempo y dinero. Te entregamos un informe con prioridades, presupuesto estimado y un plan claro para los siguientes pasos.",
+            "En 5 días sabes exactamente qué partes de tu negocio se pueden automatizar, cuánto tiempo ahorrarías y por dónde empezar. Sin compromiso de continuar.",
         includes: [
             "Estudio de hasta 5 procesos de tu negocio",
             "Informe en PDF con recomendaciones claras",
@@ -77,8 +79,9 @@ const MAIN_OFFERS: ReadonlyArray<MainOffer> = [
         badgeTone: "border-white/15 bg-white/[0.06] text-paper",
         price: "desde 590€",
         title: "Automatización a medida",
+        anchor: "servicio-automatizacion",
         description:
-            "Construimos la automatización que tu negocio necesita, conectada con las herramientas que ya usas. Entrega en 5-7 días hábiles, sin sorpresas de precio.",
+            "Tu proceso repetitivo deja de hacerse a mano. En 5-7 días tienes el sistema funcionando, conectado a las herramientas que ya usas y con manual claro para tu equipo.",
         includes: [
             "Estudio de tu caso sin coste ni compromiso",
             "Construcción a medida (sin plantillas)",
@@ -95,8 +98,9 @@ const MAIN_OFFERS: ReadonlyArray<MainOffer> = [
         badgeTone: "border-cyan-400 bg-cyan-400/15 text-flash",
         price: "desde 1.500€",
         title: "Agente IA privado",
+        anchor: "servicio-agente",
         description:
-            "Tu propio asistente IA, hecho a medida para tu negocio. Atiende lo que tú decidas: clientes, correos, búsquedas internas, generación de informes. Vive en tus equipos o en tu servidor, no en plataformas de terceros.",
+            "Tu negocio gana un miembro más en el equipo: un asistente IA que atiende lo que tú decidas (clientes, correos, informes, búsquedas internas). Vive en tus propios equipos. No depende de plataformas de terceros.",
         includes: [
             "Asistente que recuerda tu negocio y tu forma de trabajar",
             "Tono ajustado a tu marca y a tus clientes",
@@ -230,11 +234,13 @@ export function ServiciosV2Content() {
     return (
         <main className="min-h-screen bg-onyx text-paper">
             <HeroBlock />
+            <SelectorCaminoBlock />
             <ProblemaBlock />
+            <MainOffersBlock />
             <ProcesoBlock />
             <ParaQuienBlock />
-            <MainOffersBlock />
             <GarantiaFlashBlock />
+            <QuienHayDetrasBlock />
             <ToolsBlock />
             <FinalCtaBlock />
         </main>
@@ -315,6 +321,7 @@ function MainOffersBlock() {
                         return (
                             <motion.article
                                 key={offer.title}
+                                id={offer.anchor}
                                 initial="hidden"
                                 whileInView="visible"
                                 viewport={{ once: true, margin: "-80px" }}
@@ -326,8 +333,8 @@ function MainOffersBlock() {
                                 }}
                                 className={
                                     offer.featured
-                                        ? "flex min-h-[640px] flex-col rounded-2xl border border-flash bg-[#111111] p-6 shadow-[0_0_50px_rgba(0,229,255,0.16)]"
-                                        : "flex min-h-[640px] flex-col rounded-2xl border border-white/10 bg-[#111111] p-6"
+                                        ? "flex min-h-[640px] scroll-mt-24 flex-col rounded-2xl border border-flash bg-[#111111] p-6 shadow-[0_0_50px_rgba(0,229,255,0.16)]"
+                                        : "flex min-h-[640px] scroll-mt-24 flex-col rounded-2xl border border-white/10 bg-[#111111] p-6"
                                 }
                             >
                                 <div className="flex items-start justify-between gap-4">
@@ -758,6 +765,115 @@ function GarantiaFlashBlock() {
                 >
                     Ver política completa →
                 </a>
+            </motion.div>
+        </section>
+    );
+}
+
+function SelectorCaminoBlock() {
+    const caminos = [
+        {
+            estado: "Estoy explorando",
+            situacion:
+                "Quiero saber qué se puede automatizar en mi negocio antes de comprometerme.",
+            label: "Auditoría",
+            href: "#servicio-auditoria",
+        },
+        {
+            estado: "Sé qué automatizar",
+            situacion: "Tengo un proceso concreto que me roba horas cada semana.",
+            label: "Automatización",
+            href: "#servicio-automatizacion",
+        },
+        {
+            estado: "Necesito un asistente",
+            situacion: "Quiero una IA propia que atienda tareas en mi negocio.",
+            label: "Agente IA",
+            href: "#servicio-agente",
+        },
+    ];
+    return (
+        <section className="px-6 py-20 lg:py-24">
+            <div className="mx-auto max-w-6xl">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-80px" }}
+                    variants={fadeUp}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    className="mx-auto max-w-2xl text-center"
+                >
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
+                        ¿Por dónde empiezo?
+                    </span>
+                    <h2 className="mt-4 text-4xl font-bold tracking-tight text-paper sm:text-5xl">
+                        Elige tu situación y te llevamos a tu servicio.
+                    </h2>
+                </motion.div>
+
+                <div className="mt-12 grid gap-6 md:grid-cols-3">
+                    {caminos.map((camino, index) => (
+                        <motion.a
+                            key={camino.href}
+                            href={camino.href}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, margin: "-70px" }}
+                            variants={fadeUp}
+                            transition={{
+                                duration: 0.45,
+                                delay: index * 0.05,
+                                ease: [0.22, 1, 0.36, 1],
+                            }}
+                            className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition-all hover:-translate-y-0.5 hover:border-flash/30"
+                        >
+                            <span className="font-semibold text-paper">
+                                {camino.estado}
+                            </span>
+                            <span className="mt-2 text-sm leading-relaxed text-text-secondary">
+                                {camino.situacion}
+                            </span>
+                            <span className="mt-4 inline-flex items-center gap-2 text-sm text-flash">
+                                {camino.label}
+                                <ArrowRight size={16} />
+                            </span>
+                        </motion.a>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function QuienHayDetrasBlock() {
+    return (
+        <section className="px-6 py-20 lg:py-24">
+            <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={fadeUp}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="mx-auto max-w-3xl text-center"
+            >
+                <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
+                    Quién hay detrás
+                </span>
+                <h2 className="mt-4 text-4xl font-bold tracking-tight text-paper sm:text-5xl">
+                    8 años de ingeniería. 4 estudiando IA. 2 aplicándola a empresas
+                    reales.
+                </h2>
+                <p className="mt-6 text-base leading-relaxed text-text-secondary">
+                    Detrás de IAFlashElite hay un ingeniero de ciberseguridad con 8 años
+                    de experiencia, 4 estudiando automatización con IA y 2 trabajando en
+                    una empresa importante automatizando procesos en sectores muy
+                    distintos: retail, restauración, casas de apuestas, comercio y más.
+                </p>
+                <p className="mt-4 text-base leading-relaxed text-text-secondary">
+                    La conclusión de esos años es simple: la IA no es magia. Es saber
+                    qué automatizar y hacerlo bien. Eso es lo que aplicamos aquí, sin
+                    humo y sin promesas vacías.
+                </p>
             </motion.div>
         </section>
     );
