@@ -20,6 +20,7 @@ const FOOTER_NAV = {
     catalogo: [
         { label: "Productos", href: "/productos" },
         { label: "Noxis", href: "/noxis" },
+        { label: "Kenvo", href: "/kenvo" },
         { label: "Servicios", href: "/servicios" },
         { label: "Servicios extra", href: "/servicios-extra" },
         { label: "Casos", href: "/casos" },

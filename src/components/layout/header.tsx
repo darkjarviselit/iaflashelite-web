@@ -9,6 +9,7 @@ import { LogoFull } from "@/components/brand/logo-full";
 const FULL_NAV = [
     { label: "Productos", href: "/productos" },
     { label: "Noxis", href: "/noxis" },
+    { label: "Kenvo", href: "/kenvo" },
     { label: "Servicios", href: "/servicios" },
     { label: "Precios", href: "/pricing" },
     { label: "Seguridad", href: "/seguridad", highlight: true },
