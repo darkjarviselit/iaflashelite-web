@@ -11,6 +11,7 @@ interface EmailInterestFormProps {
 	subtext?: string;
 	submitLabel?: string;
 	successMessage?: string;
+	variant?: "light" | "dark";
 }
 
 export function EmailInterestForm({
@@ -19,7 +20,9 @@ export function EmailInterestForm({
 	subtext,
 	submitLabel = "Apuntarme",
 	successMessage = "Anotado. Te avisaremos por email.",
+	variant = "light",
 }: EmailInterestFormProps) {
+	const isDark = variant === "dark";
 	const [email, setEmail] = useState("");
 	const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
 	const [website, setWebsite] = useState("");
@@ -71,15 +74,33 @@ export function EmailInterestForm({
 				initial={{ opacity: 0, y: 8 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.25 }}
-				className="w-full max-w-md mx-auto p-8 rounded-3xl border border-emerald-200 bg-white shadow-sm flex flex-col items-center text-center gap-4"
+				className={
+					isDark
+						? "w-full max-w-md mx-auto p-8 rounded-3xl border border-emerald-500/30 bg-emerald-500/10 text-paper shadow-sm flex flex-col items-center text-center gap-4"
+						: "w-full max-w-md mx-auto p-8 rounded-3xl border border-emerald-200 bg-white shadow-sm flex flex-col items-center text-center gap-4"
+				}
 			>
 				<span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100">
 					<CheckCircle2 size={26} />
 				</span>
-				<h3 className="text-xl font-semibold text-gray-900 tracking-tight">
+				<h3
+					className={
+						isDark
+							? "text-xl font-semibold text-paper tracking-tight"
+							: "text-xl font-semibold text-gray-900 tracking-tight"
+					}
+				>
 					Anotado.
 				</h3>
-				<p className="text-gray-700 leading-relaxed">{successMessage}</p>
+				<p
+					className={
+						isDark
+							? "text-text-secondary leading-relaxed"
+							: "text-gray-700 leading-relaxed"
+					}
+				>
+					{successMessage}
+				</p>
 			</motion.div>
 		);
 	}
@@ -87,22 +108,52 @@ export function EmailInterestForm({
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="w-full max-w-md mx-auto p-8 rounded-3xl border border-gray-200 bg-white shadow-sm flex flex-col gap-5 text-left"
+			className={
+				isDark
+					? "w-full max-w-md mx-auto p-8 rounded-3xl border border-white/10 bg-white/[0.04] flex flex-col gap-5 text-left"
+					: "w-full max-w-md mx-auto p-8 rounded-3xl border border-gray-200 bg-white shadow-sm flex flex-col gap-5 text-left"
+			}
 		>
 			<header className="flex flex-col gap-2">
-				<span className="text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold">
+				<span
+					className={
+						isDark
+							? "text-[11px] tracking-[0.18em] uppercase text-flash font-semibold"
+							: "text-[11px] tracking-[0.18em] uppercase text-cyan-600 font-semibold"
+					}
+				>
 					Aviso por email
 				</span>
-				<h3 className="text-xl sm:text-2xl font-semibold text-gray-900 tracking-tight leading-tight">
+				<h3
+					className={
+						isDark
+							? "text-xl sm:text-2xl font-semibold text-paper tracking-tight leading-tight"
+							: "text-xl sm:text-2xl font-semibold text-gray-900 tracking-tight leading-tight"
+					}
+				>
 					{headline}
 				</h3>
 				{subtext && (
-					<p className="text-sm text-gray-600 leading-relaxed">{subtext}</p>
+					<p
+						className={
+							isDark
+								? "text-sm text-text-secondary leading-relaxed"
+								: "text-sm text-gray-600 leading-relaxed"
+						}
+					>
+						{subtext}
+					</p>
 				)}
 			</header>
 
 			<label className="flex flex-col gap-2">
-				<span className="text-[11px] tracking-[0.18em] uppercase text-gray-500 font-medium">
+				<span
+					className={
+						isDark
+							? "text-[11px] tracking-[0.18em] uppercase text-text-secondary font-medium"
+							: "text-[11px] tracking-[0.18em] uppercase text-gray-500 font-medium"
+					}
+				>
 					Email *
 				</span>
 				<input
@@ -112,7 +163,11 @@ export function EmailInterestForm({
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 					placeholder="tu@email.com"
-					className="w-full h-12 px-4 rounded-xl bg-white border border-gray-300 text-gray-900 placeholder:text-gray-400 text-sm focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-colors"
+					className={
+						isDark
+							? "w-full h-12 px-4 rounded-xl bg-white/[0.04] border border-white/15 text-paper placeholder:text-text-muted text-sm focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-colors"
+							: "w-full h-12 px-4 rounded-xl bg-white border border-gray-300 text-gray-900 placeholder:text-gray-400 text-sm focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-colors"
+					}
 				/>
 			</label>
 
@@ -144,7 +199,11 @@ export function EmailInterestForm({
 				/>
 				<label
 					htmlFor={`eif-privacy-${topic}`}
-					className="text-sm text-gray-700 leading-relaxed"
+					className={
+						isDark
+							? "text-sm text-text-secondary leading-relaxed"
+							: "text-sm text-gray-700 leading-relaxed"
+					}
 				>
 					Acepto la{" "}
 					<a
