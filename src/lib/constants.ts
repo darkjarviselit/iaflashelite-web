@@ -3,8 +3,14 @@ export const BRAND = {
     tagline: "IA aplicada. Resultados en 48h.",
     description:
         "Automatizamos lo que te roba tiempo. Bots, chatbots y scripts con IA, entregados en 48h.",
-    email: "hola@iaflashelite.com",
+    email: "iaflashelite@gmail.com",
     domain: "iaflashelite.com",
+    phoneDisplay: "+34 603 31 52 47",
+    phoneRaw: "+34603315247",
+    telegramUsername: "iaflashelite",
+    telegramUrl: "https://t.me/iaflashelite",
+    whatsappUrl:
+        "https://wa.me/34603315247?text=Hola%2C%20vengo%20de%20iaflashelite.com%2Fservicios%20y%20me%20gustar%C3%ADa%20comentar%3A",
 } as const;
 
 export const GUARANTEE_POLICY_VERSION = "garantia-flash-v2-2026-05";

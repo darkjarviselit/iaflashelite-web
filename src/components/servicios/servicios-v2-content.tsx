@@ -9,7 +9,9 @@ import {
     Code2,
     Hourglass,
     Mail,
+    MessageCircle,
     SearchCheck,
+    Send,
     ShieldCheck,
     TriangleAlert,
     Wrench,
@@ -57,17 +59,17 @@ const MAIN_OFFERS: ReadonlyArray<MainOffer> = [
         badgeTone: "border-cyan-400/25 bg-cyan-400/10 text-flash",
         price: "490€",
         priceNote: "pago único",
-        title: "Auditoría IA para empresas",
+        title: "Auditoría IA para tu negocio",
         description:
-            "Analizamos tus procesos e identificamos exactamente dónde la IA te ahorra tiempo y dinero. Entregamos un informe detallado con prioridades y presupuesto estimado.",
+            "Estudiamos contigo qué procesos repites en tu día a día y dónde la IA te puede ahorrar tiempo y dinero. Te entregamos un informe con prioridades, presupuesto estimado y un plan claro para los siguientes pasos.",
         includes: [
-            "Análisis de 3-5 procesos clave",
-            "Informe PDF con recomendaciones",
-            "Sesión de presentación de resultados",
-            "Hoja de ruta de implementación",
+            "Estudio de hasta 5 procesos de tu negocio",
+            "Informe en PDF con recomendaciones claras",
+            "Sesión de presentación contigo (vídeo o llamada)",
+            "Plan para los siguientes pasos",
         ],
         cta: "Solicitar auditoría",
-        asunto: "Auditoría IA para empresas",
+        asunto: "Auditoría IA para tu negocio",
         icon: SearchCheck,
     },
     {
@@ -76,13 +78,13 @@ const MAIN_OFFERS: ReadonlyArray<MainOffer> = [
         price: "desde 590€",
         title: "Automatización a medida",
         description:
-            "Diseñamos e implementamos el flujo de trabajo automatizado que necesitas. Integración con tus sistemas actuales. Entrega en 5-7 días hábiles.",
+            "Construimos la automatización que tu negocio necesita, conectada con las herramientas que ya usas. Entrega en 5-7 días hábiles, sin sorpresas de precio.",
         includes: [
-            "Análisis de requisitos sin coste",
-            "Desarrollo a medida (sin plantillas)",
-            "Integración con tus herramientas",
-            "Documentación técnica incluida",
-            "Soporte 30 días post-entrega",
+            "Estudio de tu caso sin coste ni compromiso",
+            "Construcción a medida (sin plantillas)",
+            "Conexión con las herramientas que ya usas",
+            "Manual claro para tu equipo",
+            "Soporte durante los primeros 30 días",
         ],
         cta: "Solicitar presupuesto",
         asunto: "Automatización a medida",
@@ -94,13 +96,13 @@ const MAIN_OFFERS: ReadonlyArray<MainOffer> = [
         price: "desde 1.500€",
         title: "Agente IA privado",
         description:
-            "Tu propio agente con memoria, personalidad y herramientas. Aprende de tus procesos. Desplegado en tu infraestructura, no en servidores compartidos.",
+            "Tu propio asistente IA, hecho a medida para tu negocio. Atiende lo que tú decidas: clientes, correos, búsquedas internas, generación de informes. Vive en tus equipos o en tu servidor, no en plataformas de terceros.",
         includes: [
-            "Agente con memoria persistente",
-            "Personalidad y tono ajustado a tu marca",
-            "Herramientas personalizadas (búsqueda, calendar, email)",
-            "Despliegue en tu servidor o cloud",
-            "Manual de uso incluido",
+            "Asistente que recuerda tu negocio y tu forma de trabajar",
+            "Tono ajustado a tu marca y a tus clientes",
+            "Conectado a las herramientas que necesites (correo, calendario, búsqueda de archivos, lo que pidas)",
+            "Funciona en tus propios equipos o servidor",
+            "Manual claro para que tu equipo lo use desde el día 1",
         ],
         cta: "Solicitar agente",
         asunto: "Agente IA privado",
@@ -108,12 +110,12 @@ const MAIN_OFFERS: ReadonlyArray<MainOffer> = [
         featured: true,
     },
     {
-        badge: "INGRESOS RECURRENTES",
+        badge: "SIN PREOCUPARTE DE NADA",
         badgeTone: "border-purple-400/25 bg-purple-400/10 text-purple-200",
         price: "99€/mes o 199€/mes",
-        title: "Mantenimiento de agente",
+        title: "Mantenimiento de tu agente",
         description:
-            "Mantenemos tu agente actualizado, monitorizado y funcionando. Sin sorpresas, sin coste oculto.",
+            "Una vez tu agente esté funcionando, lo mantenemos vivo: vigilamos que vaya bien, lo actualizamos cuando hace falta y te avisamos si algo no funciona. Tú te dedicas a tu negocio.",
         plans: [
             {
                 name: "Basic",
@@ -138,7 +140,7 @@ const MAIN_OFFERS: ReadonlyArray<MainOffer> = [
             },
         ],
         cta: "Solicitar mantenimiento",
-        asunto: "Mantenimiento de agente",
+        asunto: "Mantenimiento de tu agente",
         icon: Wrench,
     },
 ];
@@ -176,25 +178,25 @@ const PROBLEMS: ReadonlyArray<{
 }> = [
     {
         icon: Hourglass,
-        title: "Tu equipo invierte horas en tareas repetitivas.",
-        text: "Mover datos, copiar listas, responder correos predecibles. Tiempo que tu negocio paga en sueldos y que no genera valor.",
+        title: "Tu equipo pierde horas haciendo cosas a mano.",
+        text: "Pasar datos de un sitio a otro, contestar el mismo email diez veces, generar siempre los mismos informes. Tareas que no aportan valor pero que alguien tiene que hacer.",
     },
     {
         icon: Bot,
-        title: "Has probado herramientas de IA genéricas y no encajan.",
-        text: "ChatGPT y plantillas estándar no entienden tu negocio, tus clientes ni tus procesos. Acaban arrinconadas.",
+        title: "Las herramientas genéricas no encajan con tu negocio.",
+        text: "ChatGPT, plantillas y SaaS estándar no entienden cómo trabajas, cómo hablas a tus clientes ni cómo son tus procesos. Acaban arrinconadas porque no resuelven lo tuyo.",
     },
     {
         icon: TriangleAlert,
-        title: "Te asusta perder el control de tus datos.",
-        text: "No quieres que tu información de clientes acabe entrenando modelos ajenos. Quieres soluciones que vivan donde tú decidas.",
+        title: "No quieres que tus datos acaben en manos de otros.",
+        text: "Información de clientes, contratos, conversaciones privadas. Lo que pasa por tu negocio se queda en tu negocio. Sin servidores ajenos, sin telemetría, sin sorpresas.",
     },
 ];
 
 const STEPS: ReadonlyArray<{ title: string; text: string }> = [
     {
         title: "Auditoría",
-        text: "Analizamos tu negocio y te entregamos un plan con qué automatizar, en qué orden y cuánto cuesta.",
+        text: "Estudiamos contigo qué procesos repites cada día, cada semana y cada mes. Te entregamos un plan con qué se puede automatizar, en qué orden y cuánto cuesta.",
     },
     {
         title: "Propuesta cerrada",
@@ -202,26 +204,26 @@ const STEPS: ReadonlyArray<{ title: string; text: string }> = [
     },
     {
         title: "Construcción",
-        text: "Construimos el sistema en 5-15 días. Te enseñamos cómo funciona con una demo grabada con tus datos.",
+        text: "Construimos el sistema en 5-15 días. Te enseñamos cómo funciona con una demo personalizada antes de entregarlo.",
     },
     {
         title: "Mantenimiento",
-        text: "Lo dejamos vivo con un plan mensual, o te entregamos el código y tú lo mantienes. Tú decides.",
+        text: "Lo dejamos vivo con un plan mensual o te lo entregamos con manual claro para que tu equipo lo use sin depender de nadie. Tú decides.",
     },
 ];
 
 const FOR_YES: ReadonlyArray<string> = [
-    "Tienes una PYME entre 5 y 100 empleados.",
-    "Pierdes horas reales en tareas que sabes que son automatizables.",
-    "Quieres control de tus datos y entender qué hace el sistema.",
-    "Aceptas pagar por valor entregado, no por horas vagas.",
+    "Tienes un negocio con procesos que se repiten cada semana o cada mes.",
+    "Sabes que pierdes horas en tareas manuales que se podrían automatizar.",
+    "Te importa que tus datos no acaben en servidores de otros.",
+    "Prefieres una propuesta clara por escrito antes que una presentación de PowerPoint.",
 ];
 
 const FOR_NO: ReadonlyArray<string> = [
-    "Buscas un SaaS genérico tipo Zapier o un wrapper de ChatGPT.",
-    "Esperas resultados sin involucrarte en la auditoría inicial.",
-    "Necesitas un cumplimiento legal complejo (LOPDGDD avanzado) sin equipo legal propio.",
-    "Quieres decidir hoy sin ver primero la propuesta cerrada.",
+    "Buscas una suscripción mensual genérica que sirva para todo.",
+    "Quieres una solución sin estudiar antes qué procesos tienes y cómo los haces.",
+    "Necesitas que alguien gestione el cumplimiento legal de tu empresa (eso lo hace tu asesoría).",
+    "Quieres decidir hoy sin ver primero qué te proponemos, cuánto cuesta y en cuánto tiempo.",
 ];
 
 export function ServiciosV2Content() {
@@ -255,15 +257,30 @@ function HeroBlock() {
                 className="relative mx-auto flex max-w-4xl flex-col gap-6 text-center"
             >
                 <span className="mx-auto w-fit text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
-                    Servicios B2B
+                    Automatización y seguridad con IA
                 </span>
                 <h1 className="text-5xl font-black leading-[0.98] tracking-tight text-paper sm:text-6xl lg:text-7xl">
-                    Servicios de IA para empresas
+                    Aplicamos IA a tu negocio. Sin humo, sin plantillas, sin perder el
+                    control de tus datos.
                 </h1>
                 <p className="mx-auto max-w-3xl text-lg leading-8 text-text-secondary sm:text-xl">
-                    Agentes inteligentes, automatizaciones y herramientas de
-                    ciberseguridad. Sin humo, sin plantillas, sin dependencias ocultas.
+                    Automatizamos procesos repetitivos, construimos agentes a tu medida
+                    y protegemos tu información con herramientas de ciberseguridad.
+                    Estudio del caso, propuesta cerrada por escrito y entrega con manual
+                    claro para tu equipo.
                 </p>
+                <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+                    <Button href="#servicios-principales" size="lg" variant="gradient">
+                        Ver servicios <ArrowRight size={16} />
+                    </Button>
+                    <Button
+                        href={`/contacto?asunto=${encodeURIComponent("Auditoría IA para tu negocio")}`}
+                        size="lg"
+                        variant="secondary"
+                    >
+                        Solicitar auditoría
+                    </Button>
+                </div>
             </motion.div>
         </section>
     );
@@ -271,7 +288,7 @@ function HeroBlock() {
 
 function MainOffersBlock() {
     return (
-        <section className="px-6 py-20 lg:py-24">
+        <section id="servicios-principales" className="px-6 py-20 lg:py-24">
             <div className="mx-auto max-w-[1400px]">
                 <motion.div
                     initial="hidden"
@@ -491,20 +508,36 @@ function FinalCtaBlock() {
                     ¿No sabes por dónde empezar?
                 </h2>
                 <p className="mt-5 max-w-2xl text-base leading-8 text-text-secondary sm:text-lg">
-                    Cuéntanos tu situación y te decimos qué encaja mejor. Sin compromiso,
-                    respuesta en menos de 24h.
+                    Cuéntanos qué procesos pierdes a mano cada semana o qué te preocupa
+                    de la seguridad de tus datos. Te decimos qué encaja mejor en menos
+                    de 24 horas. Sin compromiso, sin venta insistente.
                 </p>
-                <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row">
-                    <Button href="/contacto" size="lg" variant="gradient">
-                        Hablar con el equipo <ArrowRight size={16} />
+                <div className="mt-8 flex flex-col items-center gap-5">
+                    <Button href={BRAND.whatsappUrl} size="lg" variant="gradient">
+                        <MessageCircle size={18} />
+                        WhatsApp {BRAND.phoneDisplay}
                     </Button>
-                    <a
-                        href={`mailto:${BRAND.email}`}
-                        className="inline-flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-flash"
-                    >
-                        <Mail size={16} />
-                        {BRAND.email}
-                    </a>
+                    <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm text-text-secondary">
+                        <a
+                            href={`mailto:${BRAND.email}`}
+                            className="inline-flex items-center gap-2 transition-colors hover:text-flash"
+                        >
+                            <Mail size={16} />
+                            {BRAND.email}
+                        </a>
+                        <span className="text-text-muted" aria-hidden>
+                            ·
+                        </span>
+                        <a
+                            href={BRAND.telegramUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 transition-colors hover:text-flash"
+                        >
+                            <Send size={16} />
+                            @iaflashelite en Telegram
+                        </a>
+                    </div>
                 </div>
             </motion.div>
         </section>
@@ -715,9 +748,9 @@ function GarantiaFlashBlock() {
                 </h2>
                 <p className="mt-5 text-base leading-relaxed text-text-secondary">
                     Trabajamos siempre sobre un alcance, precio y plazo cerrados por
-                    escrito antes de empezar. Si lo que entregamos no cumple lo
-                    acordado, lo corregimos sin coste. Si tras la revisión no logramos
-                    resolverlo, valoramos un reembolso total o parcial.
+                    escrito antes de pagar nada. Si lo que entregamos no cumple lo
+                    acordado, lo corregimos sin coste. Y si no logramos resolverlo,
+                    buscamos una solución justa contigo.
                 </p>
                 <a
                     href="/legal/garantias"
