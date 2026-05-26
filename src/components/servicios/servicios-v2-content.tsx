@@ -5,11 +5,15 @@ import {
     ArrowRight,
     Bot,
     Check,
+    CheckCircle2,
     Code2,
+    Hourglass,
     Mail,
     SearchCheck,
     ShieldCheck,
+    TriangleAlert,
     Wrench,
+    X,
     Zap,
 } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
@@ -165,10 +169,68 @@ const fadeUp = {
     visible: { opacity: 1, y: 0 },
 };
 
+const PROBLEMS: ReadonlyArray<{
+    icon: ComponentType<SVGProps<SVGSVGElement>>;
+    title: string;
+    text: string;
+}> = [
+    {
+        icon: Hourglass,
+        title: "Tu equipo invierte horas en tareas repetitivas.",
+        text: "Mover datos, copiar listas, responder correos predecibles. Tiempo que tu negocio paga en sueldos y que no genera valor.",
+    },
+    {
+        icon: Bot,
+        title: "Has probado herramientas de IA genéricas y no encajan.",
+        text: "ChatGPT y plantillas estándar no entienden tu negocio, tus clientes ni tus procesos. Acaban arrinconadas.",
+    },
+    {
+        icon: TriangleAlert,
+        title: "Te asusta perder el control de tus datos.",
+        text: "No quieres que tu información de clientes acabe entrenando modelos ajenos. Quieres soluciones que vivan donde tú decidas.",
+    },
+];
+
+const STEPS: ReadonlyArray<{ title: string; text: string }> = [
+    {
+        title: "Auditoría",
+        text: "Analizamos tu negocio y te entregamos un plan con qué automatizar, en qué orden y cuánto cuesta.",
+    },
+    {
+        title: "Propuesta cerrada",
+        text: "Recibes alcance, precio y tiempo por escrito antes de pagar nada. Si no encaja, no hay compromiso.",
+    },
+    {
+        title: "Construcción",
+        text: "Construimos el sistema en 5-15 días. Te enseñamos cómo funciona con una demo grabada con tus datos.",
+    },
+    {
+        title: "Mantenimiento",
+        text: "Lo dejamos vivo con un plan mensual, o te entregamos el código y tú lo mantienes. Tú decides.",
+    },
+];
+
+const FOR_YES: ReadonlyArray<string> = [
+    "Tienes una PYME entre 5 y 100 empleados.",
+    "Pierdes horas reales en tareas que sabes que son automatizables.",
+    "Quieres control de tus datos y entender qué hace el sistema.",
+    "Aceptas pagar por valor entregado, no por horas vagas.",
+];
+
+const FOR_NO: ReadonlyArray<string> = [
+    "Buscas un SaaS genérico tipo Zapier o un wrapper de ChatGPT.",
+    "Esperas resultados sin involucrarte en la auditoría inicial.",
+    "Necesitas un cumplimiento legal complejo (LOPDGDD avanzado) sin equipo legal propio.",
+    "Quieres decidir hoy sin ver primero la propuesta cerrada.",
+];
+
 export function ServiciosV2Content() {
     return (
         <main className="min-h-screen bg-onyx text-paper">
             <HeroBlock />
+            <ProblemaBlock />
+            <ProcesoBlock />
+            <ParaQuienBlock />
             <MainOffersBlock />
             <ToolsBlock />
             <FinalCtaBlock />
@@ -425,6 +487,188 @@ function FinalCtaBlock() {
                     </a>
                 </div>
             </motion.div>
+        </section>
+    );
+}
+
+function ProblemaBlock() {
+    return (
+        <section className="px-6 py-20 lg:py-24">
+            <div className="mx-auto max-w-6xl">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-80px" }}
+                    variants={fadeUp}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    className="mx-auto max-w-2xl text-center"
+                >
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
+                        El problema
+                    </span>
+                    <h2 className="mt-4 text-4xl font-bold tracking-tight text-paper sm:text-5xl">
+                        Esto es lo que te cuesta no automatizar.
+                    </h2>
+                </motion.div>
+
+                <div className="mt-12 grid gap-5 md:grid-cols-3">
+                    {PROBLEMS.map((item, index) => {
+                        const Icon = item.icon;
+                        return (
+                            <motion.article
+                                key={item.title}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, margin: "-70px" }}
+                                variants={fadeUp}
+                                transition={{
+                                    duration: 0.45,
+                                    delay: index * 0.05,
+                                    ease: [0.22, 1, 0.36, 1],
+                                }}
+                                className="rounded-2xl border border-white/10 bg-white/[0.04] p-6"
+                            >
+                                <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-flash/20 bg-flash/10 text-flash">
+                                    <Icon className="h-5 w-5" />
+                                </span>
+                                <h3 className="mb-2 text-base font-semibold text-paper">
+                                    {item.title}
+                                </h3>
+                                <p className="text-sm leading-relaxed text-text-secondary">
+                                    {item.text}
+                                </p>
+                            </motion.article>
+                        );
+                    })}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function ProcesoBlock() {
+    return (
+        <section className="px-6 py-20 lg:py-24">
+            <div className="mx-auto max-w-6xl">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-80px" }}
+                    variants={fadeUp}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    className="mx-auto max-w-2xl text-center"
+                >
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
+                        Cómo trabajamos
+                    </span>
+                    <h2 className="mt-4 text-4xl font-bold tracking-tight text-paper sm:text-5xl">
+                        De idea a sistema funcionando, en 4 pasos.
+                    </h2>
+                    <p className="mt-4 text-sm leading-7 text-text-secondary">
+                        Sin reuniones eternas. Sin sorpresas de precio.
+                    </p>
+                </motion.div>
+
+                <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+                    {STEPS.map((step, index) => (
+                        <motion.article
+                            key={step.title}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, margin: "-70px" }}
+                            variants={fadeUp}
+                            transition={{
+                                duration: 0.45,
+                                delay: index * 0.05,
+                                ease: [0.22, 1, 0.36, 1],
+                            }}
+                            className="rounded-2xl border border-white/10 bg-white/[0.04] p-6"
+                        >
+                            <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-flash/20 bg-flash/10 text-sm font-bold text-flash">
+                                {index + 1}
+                            </span>
+                            <h3 className="mb-2 text-base font-semibold text-paper">
+                                {step.title}
+                            </h3>
+                            <p className="text-sm leading-relaxed text-text-secondary">
+                                {step.text}
+                            </p>
+                        </motion.article>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function ParaQuienBlock() {
+    return (
+        <section className="px-6 py-20 lg:py-24">
+            <div className="mx-auto max-w-6xl">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-80px" }}
+                    variants={fadeUp}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    className="mx-auto max-w-2xl text-center"
+                >
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
+                        ¿Es para ti?
+                    </span>
+                    <h2 className="mt-4 text-4xl font-bold tracking-tight text-paper sm:text-5xl">
+                        Honestidad antes que humo.
+                    </h2>
+                </motion.div>
+
+                <div className="mt-12 grid gap-6 lg:grid-cols-2">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-70px" }}
+                        variants={fadeUp}
+                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                        className="rounded-3xl border border-white/10 bg-white/[0.04] p-8"
+                    >
+                        <h3 className="mb-4 text-lg font-semibold text-paper">
+                            Encaja contigo si…
+                        </h3>
+                        <ul className="space-y-3">
+                            {FOR_YES.map((item) => (
+                                <li key={item} className="flex items-start gap-3">
+                                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-flash" />
+                                    <span className="text-sm leading-relaxed text-text-secondary">
+                                        {item}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                    </motion.div>
+
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-70px" }}
+                        variants={fadeUp}
+                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                        className="rounded-3xl border border-white/10 bg-white/[0.04] p-8"
+                    >
+                        <h3 className="mb-4 text-lg font-semibold text-paper">
+                            No es para ti si…
+                        </h3>
+                        <ul className="space-y-3">
+                            {FOR_NO.map((item) => (
+                                <li key={item} className="flex items-start gap-3">
+                                    <X className="mt-0.5 h-5 w-5 shrink-0 text-red-400" />
+                                    <span className="text-sm leading-relaxed text-text-secondary">
+                                        {item}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                    </motion.div>
+                </div>
+            </div>
         </section>
     );
 }
