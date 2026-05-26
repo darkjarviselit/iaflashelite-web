@@ -232,6 +232,7 @@ export function ServiciosV2Content() {
             <ProcesoBlock />
             <ParaQuienBlock />
             <MainOffersBlock />
+            <GarantiaFlashBlock />
             <ToolsBlock />
             <FinalCtaBlock />
         </main>
@@ -272,6 +273,25 @@ function MainOffersBlock() {
     return (
         <section className="px-6 py-20 lg:py-24">
             <div className="mx-auto max-w-[1400px]">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-80px" }}
+                    variants={fadeUp}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    className="mx-auto mb-12 max-w-2xl text-center"
+                >
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
+                        Servicios principales
+                    </span>
+                    <h2 className="mt-4 text-4xl font-bold tracking-tight text-paper sm:text-5xl">
+                        Cuatro maneras de empezar.
+                    </h2>
+                    <p className="mt-4 text-base leading-7 text-text-secondary">
+                        Desde una auditoría inicial hasta un agente IA completo con
+                        mantenimiento. Sin compromisos largos, sin sorpresas.
+                    </p>
+                </motion.div>
                 <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                     {MAIN_OFFERS.map((offer, index) => {
                         const Icon = offer.icon;
@@ -669,6 +689,43 @@ function ParaQuienBlock() {
                     </motion.div>
                 </div>
             </div>
+        </section>
+    );
+}
+
+function GarantiaFlashBlock() {
+    return (
+        <section className="px-6 py-20 lg:py-24">
+            <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                variants={fadeUp}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="mx-auto flex max-w-3xl flex-col items-center text-center"
+            >
+                <span className="inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-flash/20 bg-flash/10 text-flash">
+                    <ShieldCheck className="h-12 w-12" />
+                </span>
+                <span className="mt-6 text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
+                    Garantía Flash
+                </span>
+                <h2 className="mt-4 text-3xl font-bold tracking-tight text-paper sm:text-4xl">
+                    Alcance cerrado. Si no lo cumplimos, lo corregimos.
+                </h2>
+                <p className="mt-5 text-base leading-relaxed text-text-secondary">
+                    Trabajamos siempre sobre un alcance, precio y plazo cerrados por
+                    escrito antes de empezar. Si lo que entregamos no cumple lo
+                    acordado, lo corregimos sin coste. Si tras la revisión no logramos
+                    resolverlo, valoramos un reembolso total o parcial.
+                </p>
+                <a
+                    href="/legal/garantias"
+                    className="mt-6 text-sm text-flash hover:underline"
+                >
+                    Ver política completa →
+                </a>
+            </motion.div>
         </section>
     );
 }
