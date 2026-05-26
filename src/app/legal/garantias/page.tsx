@@ -111,13 +111,109 @@ export default function GarantiasPage() {
             </section>
 
             <section className="mt-10 p-6 rounded-2xl bg-white border border-gray-200">
-                <h2 className="!mt-0">Suscripciones y mantenimiento</h2>
+                <h2 className="!mt-0">Cómo recibes tu Auditoría IA</h2>
                 <p>
-                    Si en el futuro se venden suscripciones, mantenimiento o
-                    soporte recurrente, sus condiciones específicas se mostrarán
-                    antes de contratar. Mientras no exista una suscripción activa
-                    contratada, los productos y servicios se rigen por esta
-                    política y por las condiciones indicadas en cada ficha.
+                    Trabajamos en dos pasos pensados para que valides el resultado
+                    antes de cerrar la entrega:
+                </p>
+                <ol className="list-decimal pl-5 space-y-1.5 text-gray-700 leading-relaxed">
+                    <li>
+                        Sesión de presentación. Te entregamos un vídeo grabado (vía
+                        Loom o similar) recorriendo los hallazgos, las conclusiones y
+                        la propuesta de implementación. Lo ves en tu tiempo, sin
+                        reuniones obligatorias.
+                    </li>
+                    <li>
+                        Informe PDF. Después de la sesión recibes el PDF completo, con
+                        tu nombre, fecha y código de licencia única.
+                    </li>
+                </ol>
+                <p>
+                    <strong>
+                        Tienes 7 días desde la entrega del PDF para revisarlo a fondo.
+                    </strong>{" "}
+                    Si algo no encaja con lo que pactamos en el briefing inicial, nos
+                    lo dices y lo corregimos sin coste adicional. Después de esos 7
+                    días, entendemos que la auditoría está aceptada.
+                </p>
+                <p>
+                    El PDF es para uso interno de tu organización. Cualquier
+                    reutilización fuera de ella la pactamos por escrito antes.
+                </p>
+            </section>
+
+            <section className="mt-10 p-6 rounded-2xl bg-white border border-gray-200">
+                <h2 className="!mt-0">
+                    Cómo pagas la Automatización a medida y el Agente IA privado
+                </h2>
+                <p>
+                    Trabajamos por hitos para que{" "}
+                    <strong>veas resultados antes de pagar el siguiente paso</strong>.
+                    Nada de pagar todo por adelantado y cruzar los dedos:
+                </p>
+                <ul>
+                    <li>
+                        <strong>
+                            Empezamos con un 30% al firmar la propuesta cerrada.
+                        </strong>{" "}
+                        Recibes alcance, precio y plazo por escrito antes de pagar
+                        nada.
+                    </li>
+                    <li>
+                        <strong>
+                            Avanzamos con un 40% cuando vemos juntos la versión
+                            funcional.
+                        </strong>{" "}
+                        La probamos en un entorno de prueba que montamos nosotros —
+                        pruebas con tus datos reales, validamos que va bien, y entonces
+                        pagas.
+                    </li>
+                    <li>
+                        <strong>
+                            Cerramos con el 30% final cuando superamos las pruebas de
+                            aceptación que firmamos en la propuesta.
+                        </strong>{" "}
+                        En ese momento desplegamos en tu infraestructura para que el
+                        sistema sea totalmente tuyo.
+                    </li>
+                </ul>
+                <p>
+                    <strong>
+                        Tienes 14 días desde la entrega final para reportar cualquier
+                        fallo del alcance pactado
+                    </strong>{" "}
+                    y lo corregimos sin coste. Las peticiones nuevas que surjan más
+                    adelante se tratan como ampliación y las presupuestamos aparte.
+                </p>
+                <p>
+                    Si en cualquier hito decides no continuar, no pasa nada. Conservas
+                    todo lo que ya hayamos entregado. Los hitos pagados corresponden a
+                    trabajo completado.
+                </p>
+            </section>
+
+            <section className="mt-10 p-6 rounded-2xl bg-white border border-gray-200">
+                <h2 className="!mt-0">Cómo funciona el Mantenimiento de agente</h2>
+                <p>
+                    Los planes Basic (99€/mes) y Pro (199€/mes) se cobran mes a mes
+                    por adelantado.{" "}
+                    <strong>Sin contratos largos ni penalizaciones.</strong>
+                </p>
+                <p>
+                    <strong>Cancelas cuando quieras</strong> avisando con 30 días para
+                    que ajustemos tu siguiente facturación. El mes en curso, ya pagado,
+                    lo sigues disfrutando hasta el final.
+                </p>
+                <p>
+                    Si prefieres comprometerte un año, hay{" "}
+                    <strong>opción anual con descuento</strong>: pagas 10 meses y
+                    disfrutas 12. La contratación anual no se reembolsa parcialmente,
+                    pero conservas el servicio hasta el final del periodo contratado.
+                </p>
+                <p>
+                    El Mantenimiento cubre lo que figura en cada plan (soporte,
+                    monitorización, actualizaciones). Las funcionalidades nuevas no
+                    incluidas se trabajan aparte como una ampliación.
                 </p>
             </section>
 

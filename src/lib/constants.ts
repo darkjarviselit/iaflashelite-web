@@ -7,7 +7,7 @@ export const BRAND = {
     domain: "iaflashelite.com",
 } as const;
 
-export const GUARANTEE_POLICY_VERSION = "garantia-flash-v1-2026-05";
+export const GUARANTEE_POLICY_VERSION = "garantia-flash-v2-2026-05";
 export const GESTORIA_LOCAL_PRODUCT_SLUG = "gestoria-local";
 export const GESTORIA_LOCAL_ASSISTANCE_ADDON_ID =
     "gestoria-install-assistance";
