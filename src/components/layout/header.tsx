@@ -10,6 +10,7 @@ const FULL_NAV = [
     { label: "Productos", href: "/productos" },
     { label: "Noxis", href: "/noxis" },
     { label: "Kenvo", href: "/kenvo" },
+    { label: "Aprende", href: "/aprende" },
     { label: "Servicios", href: "/servicios" },
     { label: "Precios", href: "/pricing" },
     { label: "Seguridad", href: "/seguridad", highlight: true },
@@ -53,7 +54,7 @@ export function Header() {
             <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
                 <LogoFull size="md" />
 
-                <nav className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+                <nav className="hidden xl:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
                     {FULL_NAV.map((item) => {
                         const active = isActive(item.href);
                         const base = "px-3 py-2 text-sm transition-colors duration-200 lg:px-4";
@@ -108,7 +109,7 @@ export function Header() {
                     type="button"
                     aria-label="Abrir menú"
                     onClick={() => setOpen(true)}
-                    className="md:hidden w-9 h-9 inline-flex items-center justify-center rounded-full border border-border-dark text-paper"
+                    className="xl:hidden w-9 h-9 inline-flex items-center justify-center rounded-full border border-border-dark text-paper"
                 >
                     <Menu size={16} />
                 </button>
@@ -121,7 +122,7 @@ export function Header() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.18 }}
-                        className="md:hidden fixed inset-0 z-50 bg-onyx flex flex-col"
+                        className="xl:hidden fixed inset-0 z-50 h-screen w-screen overflow-y-auto bg-onyx flex flex-col"
                     >
                         <div className="h-16 flex items-center justify-between px-6 border-b border-border-dark">
                             <LogoFull size="md" />

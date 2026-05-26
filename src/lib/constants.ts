@@ -68,6 +68,12 @@ export interface Product {
     // sitemap. Sigue en PRODUCTS para el cruce de precio del checkout: se vende
     // por su propio funnel (p. ej. /kenvo/comprar).
     hidden?: boolean;
+    // Bundle de varios cursos vendido como pack único (p. ej. Ruta Academy).
+    bundle?: boolean;
+    // Sesión/curso en directo (no descargable): se reserva, no se entrega ZIP.
+    live?: boolean;
+    // Producto estrella destacado dentro de su funnel (uso comercial/visual).
+    featured?: boolean;
 }
 
 export interface ProductAddon {
@@ -148,7 +154,7 @@ export const PRODUCTS: Product[] = [
             "Prepara tu agente y tu flujo de trabajo antes de tocar un proyecto real.",
         description:
             "Producto descargable con PDF, audio guía breve, plantillas y skills base para crear contexto, instrucciones y una primera prueba real con tu IA.",
-        price: 7,
+        price: 9,
         status: "available",
         category: "ia",
         audience: ["particulares", "pymes", "desarrolladores"],
@@ -552,6 +558,122 @@ export const PRODUCTS: Product[] = [
             "Pago único — sin suscripción",
             "Acceso fundador con precio bloqueado",
             "Garantía de calidad 14 días",
+        ],
+        guarantee_days: 14,
+        support_days: 30,
+    },
+    // Funnel /aprende. hidden: true → fuera de /productos y sitemap; viven en
+    // PRODUCTS para el futuro cruce de precio del checkout. Checkout directo
+    // pendiente (backlog): hoy se venden por WhatsApp desde /aprende.
+    {
+        slug: "ruta-academy-bundle-v1",
+        hidden: true,
+        bundle: true,
+        academia: true,
+        name: "Ruta Academy completa",
+        tagline:
+            "Los 3 cursos juntos: Pack Arranque + Sistema IA Pro + Primer Sistema Vendible.",
+        description:
+            "Bundle de los 3 cursos grabados de la Ruta Academy. Empiezas configurando tu IA desde cero, aprendes a dirigirla con método y la conviertes en un servicio vendible. Los 3 manuales se referencian entre sí.",
+        price: 59,
+        status: "available",
+        category: "ia",
+        audience: ["particulares", "pymes", "desarrolladores"],
+        subcategory: "formacion-ia",
+        icon: "graduation-cap",
+        estimated_install_minutes: 30,
+        includes: [
+            "3 manuales completos (14 + 16 + 19 secciones)",
+            "4 audios guía (~16 min en total)",
+            "29 plantillas listas para copiar y adaptar",
+            "3 checklists finales",
+            "Audio bonus: herramientas, ahorro de tokens y mentalidad",
+            "Garantía de calidad 14 días",
+        ],
+        guarantee_days: 14,
+        support_days: 14,
+    },
+    {
+        slug: "sesion-fundador-v1",
+        hidden: true,
+        live: true,
+        academia: true,
+        type: "service",
+        name: "Sesión Fundador",
+        tagline:
+            "1 hora en directo conmigo. Sales con tu primer harness IA configurado.",
+        description:
+            "Curso en directo de 1 hora con 1-3 alumnos. Te dirijo en tiempo real para que salgas con tu primer harness IA configurado y una plantilla del catálogo Academy lista para usar. Oferta de lanzamiento limitada a 10 alumnos fundadores.",
+        price: 49,
+        status: "available",
+        category: "ia",
+        audience: ["particulares", "pymes", "desarrolladores"],
+        subcategory: "formacion-ia",
+        icon: "graduation-cap",
+        estimated_install_minutes: 60,
+        includes: [
+            "1 hora en directo conmigo",
+            "1 plantilla Academy a tu elección",
+            "Grabación de la sesión (opcional)",
+            "Acceso al canal de seguimiento 7 días",
+        ],
+        guarantee_days: 14,
+        support_days: 7,
+    },
+    {
+        slug: "sesion-practica-v1",
+        hidden: true,
+        live: true,
+        academia: true,
+        type: "service",
+        name: "Sesión Práctica",
+        tagline:
+            "2 horas en directo. Sales con tu primer sistema IA vendible montado.",
+        description:
+            "Curso en directo de 2 horas con 1-3 alumnos, tema fijo. Te dirijo en tiempo real para que salgas de la sesión con tu primer sistema IA vendible montado y las plantillas Academy aplicadas. Precio por alumno.",
+        price: 149,
+        status: "available",
+        category: "ia",
+        audience: ["particulares", "pymes", "desarrolladores"],
+        subcategory: "formacion-ia",
+        icon: "graduation-cap",
+        estimated_install_minutes: 120,
+        includes: [
+            "2 horas en directo conmigo dirigiendo",
+            "Tema fijo: monta tu sistema vendible",
+            "Plantillas Academy aplicadas",
+            "Grabación + canal de seguimiento 14 días",
+            "Tu producto montado al terminar",
+        ],
+        guarantee_days: 14,
+        support_days: 14,
+    },
+    {
+        slug: "sesion-privada-vip-v1",
+        hidden: true,
+        live: true,
+        featured: true,
+        academia: true,
+        type: "service",
+        name: "Sesión Privada VIP",
+        tagline:
+            "2 horas 1-a-1, 100% personalizado. Tú decides qué construimos juntos.",
+        description:
+            "Sesión privada 1-a-1 de 2 horas, tema 100% personalizado. Incluye pre-call gratuito de 15 min para acordar objetivo. Trabajo solo contigo, dirigiendo y revisando en vivo, hasta dejar montado tu producto, sistema o flujo concreto.",
+        price: 390,
+        status: "available",
+        category: "ia",
+        audience: ["particulares", "pymes", "desarrolladores"],
+        subcategory: "formacion-ia",
+        icon: "graduation-cap",
+        estimated_install_minutes: 120,
+        includes: [
+            "Pre-call gratuito de 15 min para acordar tema y objetivo",
+            "2 horas en directo conmigo, 1-a-1",
+            "Tema y entregable 100% personalizado a tu negocio",
+            "Plantillas Academy adaptadas a tu caso",
+            "Grabación + transcripción + canal de seguimiento 30 días",
+            "Sesión de seguimiento opcional 30 días después (50% descuento)",
         ],
         guarantee_days: 14,
         support_days: 30,
