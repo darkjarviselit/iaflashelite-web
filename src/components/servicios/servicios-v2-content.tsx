@@ -6,6 +6,7 @@ import {
     Bot,
     Check,
     CheckCircle2,
+    ChevronDown,
     Code2,
     Hourglass,
     Mail,
@@ -175,6 +176,33 @@ const fadeUp = {
     visible: { opacity: 1, y: 0 },
 };
 
+function Eyebrow({
+    children,
+    className,
+}: {
+    children: React.ReactNode;
+    className?: string;
+}) {
+    return (
+        <span
+            className={`inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-flash${
+                className ? ` ${className}` : ""
+            }`}
+        >
+            <span className="h-1.5 w-1.5 rounded-full bg-flash shadow-[0_0_8px_rgba(56,189,248,0.6)]" />
+            {children}
+        </span>
+    );
+}
+
+function ServiciosDivider() {
+    return (
+        <div className="mx-auto max-w-7xl px-6">
+            <div className="h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
+        </div>
+    );
+}
+
 const PROBLEMS: ReadonlyArray<{
     icon: ComponentType<SVGProps<SVGSVGElement>>;
     title: string;
@@ -232,17 +260,32 @@ const FOR_NO: ReadonlyArray<string> = [
 
 export function ServiciosV2Content() {
     return (
-        <main className="min-h-screen bg-onyx text-paper">
-            <HeroBlock />
-            <SelectorCaminoBlock />
-            <ProblemaBlock />
-            <MainOffersBlock />
-            <ProcesoBlock />
-            <ParaQuienBlock />
-            <GarantiaFlashBlock />
-            <QuienHayDetrasBlock />
-            <ToolsBlock />
-            <FinalCtaBlock />
+        <main className="relative min-h-screen overflow-hidden bg-onyx text-paper">
+            <div
+                className="pointer-events-none fixed left-0 top-1/4 z-0 h-[600px] w-[600px] rounded-full bg-flash/[0.05] blur-[120px]"
+                aria-hidden
+            />
+            <div
+                className="pointer-events-none fixed right-0 top-3/4 z-0 h-[500px] w-[500px] rounded-full bg-purple-400/[0.04] blur-[100px]"
+                aria-hidden
+            />
+            <div className="relative z-10">
+                <HeroBlock />
+                <SelectorCaminoBlock />
+                <ServiciosDivider />
+                <ProblemaBlock />
+                <ServiciosDivider />
+                <MainOffersBlock />
+                <ProcesoBlock />
+                <ServiciosDivider />
+                <ParaQuienBlock />
+                <GarantiaFlashBlock />
+                <ServiciosDivider />
+                <QuienHayDetrasBlock />
+                <ToolsBlock />
+                <ServiciosDivider />
+                <FinalCtaBlock />
+            </div>
         </main>
     );
 }
@@ -255,16 +298,32 @@ function HeroBlock() {
                 className="absolute inset-x-0 top-0 h-[65%] bg-[radial-gradient(ellipse_at_top,rgba(0,229,255,0.12),transparent_64%)]"
                 aria-hidden
             />
+            <div
+                className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.15),transparent_60%)]"
+                aria-hidden
+            />
+            <div
+                className="absolute left-0 top-0 z-0 h-80 w-80 bg-[radial-gradient(circle,rgba(168,85,247,0.08),transparent_70%)]"
+                aria-hidden
+            />
+            <div
+                className="absolute inset-0 z-0 opacity-[0.02] mix-blend-overlay"
+                style={{
+                    backgroundImage:
+                        "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+                }}
+                aria-hidden
+            />
             <motion.div
                 initial="hidden"
                 animate="visible"
                 variants={fadeUp}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="relative mx-auto flex max-w-4xl flex-col gap-6 text-center"
+                className="relative z-10 mx-auto flex max-w-4xl flex-col gap-6 text-center"
             >
-                <span className="mx-auto w-fit text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
+                <Eyebrow className="mx-auto w-fit">
                     Automatización y seguridad con IA
-                </span>
+                </Eyebrow>
                 <h1 className="text-5xl font-black leading-[0.98] tracking-tight text-paper sm:text-6xl lg:text-7xl">
                     Aplicamos IA a tu negocio. Sin humo, sin plantillas, sin perder el
                     control de tus datos.
@@ -287,6 +346,10 @@ function HeroBlock() {
                         Solicitar auditoría
                     </Button>
                 </div>
+                <div className="mt-20 hidden flex-col items-center gap-2 text-text-secondary/50 md:flex">
+                    <span className="text-xs">Desplázate</span>
+                    <ChevronDown className="h-4 w-4 animate-bounce" />
+                </div>
             </motion.div>
         </section>
     );
@@ -294,7 +357,7 @@ function HeroBlock() {
 
 function MainOffersBlock() {
     return (
-        <section id="servicios-principales" className="px-6 py-20 lg:py-24">
+        <section id="servicios-principales" className="px-6 py-16 lg:py-20">
             <div className="mx-auto max-w-[1400px]">
                 <motion.div
                     initial="hidden"
@@ -304,9 +367,7 @@ function MainOffersBlock() {
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                     className="mx-auto mb-12 max-w-2xl text-center"
                 >
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
-                        Servicios principales
-                    </span>
+                    <Eyebrow>Servicios principales</Eyebrow>
                     <h2 className="mt-4 text-4xl font-bold tracking-tight text-paper sm:text-5xl">
                         Cuatro maneras de empezar.
                     </h2>
@@ -334,7 +395,7 @@ function MainOffersBlock() {
                                 className={
                                     offer.featured
                                         ? "flex min-h-[640px] scroll-mt-24 flex-col rounded-2xl border border-flash bg-[#111111] p-6 shadow-[0_0_50px_rgba(0,229,255,0.16)]"
-                                        : "flex min-h-[640px] scroll-mt-24 flex-col rounded-2xl border border-white/10 bg-[#111111] p-6"
+                                        : "flex min-h-[640px] scroll-mt-24 flex-col rounded-2xl border border-white/10 bg-[#111111] p-6 transition-all duration-300 hover:-translate-y-[3px] hover:border-flash/30 hover:shadow-[0_0_30px_rgba(56,189,248,0.12)]"
                                 }
                             >
                                 <div className="flex items-start justify-between gap-4">
@@ -436,7 +497,7 @@ function MainOffersBlock() {
 
 function ToolsBlock() {
     return (
-        <section className="bg-[#111111] px-6 py-20 lg:py-24">
+        <section className="bg-[#111111] px-6 py-16 lg:py-20">
             <div className="mx-auto max-w-[1200px]">
                 <motion.div
                     initial="hidden"
@@ -446,9 +507,7 @@ function ToolsBlock() {
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                     className="mb-12 max-w-2xl"
                 >
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
-                        También disponible
-                    </span>
+                    <Eyebrow>También disponible</Eyebrow>
                     <h2 className="mt-4 text-4xl font-bold tracking-tight text-paper sm:text-5xl">
                         Herramientas listas para usar.
                     </h2>
@@ -502,7 +561,7 @@ function ToolsBlock() {
 
 function FinalCtaBlock() {
     return (
-        <section className="px-6 py-24">
+        <section className="px-6 py-16 lg:py-20">
             <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -553,7 +612,7 @@ function FinalCtaBlock() {
 
 function ProblemaBlock() {
     return (
-        <section className="px-6 py-20 lg:py-24">
+        <section className="px-6 py-16 lg:py-20">
             <div className="mx-auto max-w-6xl">
                 <motion.div
                     initial="hidden"
@@ -563,9 +622,7 @@ function ProblemaBlock() {
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                     className="mx-auto max-w-2xl text-center"
                 >
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
-                        El problema
-                    </span>
+                    <Eyebrow>El problema</Eyebrow>
                     <h2 className="mt-4 text-4xl font-bold tracking-tight text-paper sm:text-5xl">
                         Esto es lo que te cuesta no automatizar.
                     </h2>
@@ -586,7 +643,7 @@ function ProblemaBlock() {
                                     delay: index * 0.05,
                                     ease: [0.22, 1, 0.36, 1],
                                 }}
-                                className="rounded-2xl border border-white/10 bg-white/[0.04] p-6"
+                                className="rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-[2px] hover:border-flash/30 hover:shadow-[0_0_30px_rgba(56,189,248,0.1)]"
                             >
                                 <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-flash/20 bg-flash/10 text-flash">
                                     <Icon className="h-5 w-5" />
@@ -608,7 +665,7 @@ function ProblemaBlock() {
 
 function ProcesoBlock() {
     return (
-        <section className="px-6 py-20 lg:py-24">
+        <section className="px-6 py-16 lg:py-20">
             <div className="mx-auto max-w-6xl">
                 <motion.div
                     initial="hidden"
@@ -618,9 +675,7 @@ function ProcesoBlock() {
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                     className="mx-auto max-w-2xl text-center"
                 >
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
-                        Cómo trabajamos
-                    </span>
+                    <Eyebrow>Cómo trabajamos</Eyebrow>
                     <h2 className="mt-4 text-4xl font-bold tracking-tight text-paper sm:text-5xl">
                         De idea a sistema funcionando, en 4 pasos.
                     </h2>
@@ -642,9 +697,9 @@ function ProcesoBlock() {
                                 delay: index * 0.05,
                                 ease: [0.22, 1, 0.36, 1],
                             }}
-                            className="rounded-2xl border border-white/10 bg-white/[0.04] p-6"
+                            className="relative rounded-2xl border border-white/10 bg-white/[0.04] p-6"
                         >
-                            <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-flash/20 bg-flash/10 text-sm font-bold text-flash">
+                            <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-flash/40 bg-gradient-to-br from-flash/30 to-purple-400/20 text-xl font-bold text-flash shadow-[0_0_20px_rgba(56,189,248,0.25)]">
                                 {index + 1}
                             </span>
                             <h3 className="mb-2 text-base font-semibold text-paper">
@@ -653,6 +708,12 @@ function ProcesoBlock() {
                             <p className="text-sm leading-relaxed text-text-secondary">
                                 {step.text}
                             </p>
+                            {index < STEPS.length - 1 ? (
+                                <span
+                                    className="absolute -right-[10px] top-9 hidden h-px w-5 bg-gradient-to-r from-flash/40 to-transparent lg:block"
+                                    aria-hidden
+                                />
+                            ) : null}
                         </motion.article>
                     ))}
                 </div>
@@ -663,7 +724,7 @@ function ProcesoBlock() {
 
 function ParaQuienBlock() {
     return (
-        <section className="px-6 py-20 lg:py-24">
+        <section className="px-6 py-16 lg:py-20">
             <div className="mx-auto max-w-6xl">
                 <motion.div
                     initial="hidden"
@@ -673,9 +734,7 @@ function ParaQuienBlock() {
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                     className="mx-auto max-w-2xl text-center"
                 >
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
-                        ¿Es para ti?
-                    </span>
+                    <Eyebrow>¿Es para ti?</Eyebrow>
                     <h2 className="mt-4 text-4xl font-bold tracking-tight text-paper sm:text-5xl">
                         Honestidad antes que humo.
                     </h2>
@@ -735,7 +794,7 @@ function ParaQuienBlock() {
 
 function GarantiaFlashBlock() {
     return (
-        <section className="px-6 py-20 lg:py-24">
+        <section className="px-6 py-16 lg:py-20">
             <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -747,9 +806,7 @@ function GarantiaFlashBlock() {
                 <span className="inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-flash/20 bg-flash/10 text-flash">
                     <ShieldCheck className="h-12 w-12" />
                 </span>
-                <span className="mt-6 text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
-                    Garantía Flash
-                </span>
+                <Eyebrow className="mt-6">Garantía Flash</Eyebrow>
                 <h2 className="mt-4 text-3xl font-bold tracking-tight text-paper sm:text-4xl">
                     Alcance cerrado. Si no lo cumplimos, lo corregimos.
                 </h2>
@@ -793,7 +850,7 @@ function SelectorCaminoBlock() {
         },
     ];
     return (
-        <section className="px-6 py-20 lg:py-24">
+        <section className="px-6 py-16 lg:py-20">
             <div className="mx-auto max-w-6xl">
                 <motion.div
                     initial="hidden"
@@ -803,9 +860,7 @@ function SelectorCaminoBlock() {
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                     className="mx-auto max-w-2xl text-center"
                 >
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
-                        ¿Por dónde empiezo?
-                    </span>
+                    <Eyebrow>¿Por dónde empiezo?</Eyebrow>
                     <h2 className="mt-4 text-4xl font-bold tracking-tight text-paper sm:text-5xl">
                         Elige tu situación y te llevamos a tu servicio.
                     </h2>
@@ -825,7 +880,7 @@ function SelectorCaminoBlock() {
                                 delay: index * 0.05,
                                 ease: [0.22, 1, 0.36, 1],
                             }}
-                            className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition-all hover:-translate-y-0.5 hover:border-flash/30"
+                            className="group flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition-all duration-300 hover:-translate-y-[3px] hover:border-flash/40 hover:shadow-[0_0_25px_rgba(56,189,248,0.12)]"
                         >
                             <span className="font-semibold text-paper">
                                 {camino.estado}
@@ -835,7 +890,10 @@ function SelectorCaminoBlock() {
                             </span>
                             <span className="mt-4 inline-flex items-center gap-2 text-sm text-flash">
                                 {camino.label}
-                                <ArrowRight size={16} />
+                                <ArrowRight
+                                    size={16}
+                                    className="transition-transform group-hover:translate-x-1"
+                                />
                             </span>
                         </motion.a>
                     ))}
@@ -847,7 +905,7 @@ function SelectorCaminoBlock() {
 
 function QuienHayDetrasBlock() {
     return (
-        <section className="px-6 py-20 lg:py-24">
+        <section className="px-6 py-16 lg:py-20">
             <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -856,9 +914,7 @@ function QuienHayDetrasBlock() {
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 className="mx-auto max-w-3xl text-center"
             >
-                <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
-                    Quién hay detrás
-                </span>
+                <Eyebrow>Quién hay detrás</Eyebrow>
                 <h2 className="mt-4 text-4xl font-bold tracking-tight text-paper sm:text-5xl">
                     8 años de ingeniería. 4 estudiando IA. 2 aplicándola a empresas
                     reales.
