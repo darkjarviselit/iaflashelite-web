@@ -13,7 +13,7 @@ export const BRAND = {
         "https://wa.me/34603315247?text=Hola%2C%20vengo%20de%20iaflashelite.com%2Fservicios%20y%20me%20gustar%C3%ADa%20comentar%3A",
 } as const;
 
-export const GUARANTEE_POLICY_VERSION = "garantia-flash-v2-2026-05";
+export const GUARANTEE_POLICY_VERSION = "garantia-flash-v3-2026-05";
 export const GESTORIA_LOCAL_PRODUCT_SLUG = "gestoria-local";
 export const GESTORIA_LOCAL_ASSISTANCE_ADDON_ID =
     "gestoria-install-assistance";

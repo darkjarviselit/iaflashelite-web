@@ -118,27 +118,26 @@ export default function GarantiasPage() {
                 </p>
                 <ol className="list-decimal pl-5 space-y-1.5 text-gray-700 leading-relaxed">
                     <li>
-                        Sesión de presentación. Te entregamos un vídeo grabado (vía
-                        Loom o similar) recorriendo los hallazgos, las conclusiones y
-                        la propuesta de implementación. Lo ves en tu tiempo, sin
-                        reuniones obligatorias.
+                        <strong>Sesión de presentación contigo.</strong> Te entregamos
+                        un vídeo donde te explicamos los hallazgos, las conclusiones y
+                        qué pasos te proponemos. Lo ves en tu tiempo, sin reuniones
+                        obligatorias. Si prefieres una llamada, también.
                     </li>
                     <li>
-                        Informe PDF. Después de la sesión recibes el PDF completo, con
-                        tu nombre, fecha y código de licencia única.
+                        <strong>Informe en PDF.</strong> Después de la sesión recibes el
+                        informe completo en PDF, con tu nombre, fecha y un código único
+                        que identifica tu copia.
                     </li>
                 </ol>
                 <p>
-                    <strong>
-                        Tienes 7 días desde la entrega del PDF para revisarlo a fondo.
-                    </strong>{" "}
-                    Si algo no encaja con lo que pactamos en el briefing inicial, nos
-                    lo dices y lo corregimos sin coste adicional. Después de esos 7
+                    Tienes <strong>7 días</strong> desde que recibes el PDF para
+                    revisarlo a fondo. Si algo no encaja con lo que acordamos al
+                    principio, nos lo dices y lo corregimos sin coste. Pasados esos 7
                     días, entendemos que la auditoría está aceptada.
                 </p>
                 <p>
-                    El PDF es para uso interno de tu organización. Cualquier
-                    reutilización fuera de ella la pactamos por escrito antes.
+                    El informe es para uso interno de tu empresa. Si quieres
+                    compartirlo o usarlo fuera de ella, lo acordamos antes por escrito.
                 </p>
             </section>
 
@@ -147,73 +146,63 @@ export default function GarantiasPage() {
                     Cómo pagas la Automatización a medida y el Agente IA privado
                 </h2>
                 <p>
-                    Trabajamos por hitos para que{" "}
-                    <strong>veas resultados antes de pagar el siguiente paso</strong>.
-                    Nada de pagar todo por adelantado y cruzar los dedos:
+                    Trabajamos por partes para que veas resultados antes de pagar el
+                    siguiente paso. Nada de pagar todo por adelantado y cruzar los
+                    dedos:
                 </p>
                 <ul>
                     <li>
-                        <strong>
-                            Empezamos con un 30% al firmar la propuesta cerrada.
-                        </strong>{" "}
-                        Recibes alcance, precio y plazo por escrito antes de pagar
-                        nada.
+                        <strong>30% al empezar.</strong> Al firmar la propuesta cerrada
+                        recibes alcance, precio y plazo por escrito. Entonces pagas el
+                        primer 30%.
                     </li>
                     <li>
-                        <strong>
-                            Avanzamos con un 40% cuando vemos juntos la versión
-                            funcional.
-                        </strong>{" "}
-                        La probamos en un entorno de prueba que montamos nosotros —
-                        pruebas con tus datos reales, validamos que va bien, y entonces
-                        pagas.
+                        <strong>40% cuando lo veas funcionando.</strong> Cuando tu
+                        sistema esté listo, te lo enseñamos en un entorno de prueba que
+                        montamos nosotros. Lo probamos juntos con tus datos reales. Si
+                        va bien, pagas el 40%.
                     </li>
                     <li>
-                        <strong>
-                            Cerramos con el 30% final cuando superamos las pruebas de
-                            aceptación que firmamos en la propuesta.
-                        </strong>{" "}
-                        En ese momento desplegamos en tu infraestructura para que el
-                        sistema sea totalmente tuyo.
+                        <strong>30% al entregarlo.</strong> Cuando el sistema pasa las
+                        pruebas que acordamos en la propuesta, lo dejamos instalado en
+                        tus equipos o servidor para que sea totalmente tuyo. Ahí pagas
+                        el 30% restante.
                     </li>
                 </ul>
                 <p>
-                    <strong>
-                        Tienes 14 días desde la entrega final para reportar cualquier
-                        fallo del alcance pactado
-                    </strong>{" "}
-                    y lo corregimos sin coste. Las peticiones nuevas que surjan más
-                    adelante se tratan como ampliación y las presupuestamos aparte.
+                    Tienes <strong>14 días</strong> desde la entrega final para
+                    reportar cualquier fallo de lo que acordamos y lo corregimos sin
+                    coste. Cualquier petición nueva que aparezca después se trata como
+                    ampliación: te la presupuestamos aparte y decides.
                 </p>
                 <p>
-                    Si en cualquier hito decides no continuar, no pasa nada. Conservas
-                    todo lo que ya hayamos entregado. Los hitos pagados corresponden a
-                    trabajo completado.
+                    Si en cualquier paso decides no continuar, no pasa nada. Conservas
+                    todo lo que ya hayamos entregado. Lo que has pagado corresponde al
+                    trabajo ya hecho.
                 </p>
             </section>
 
             <section className="mt-10 p-6 rounded-2xl bg-white border border-gray-200">
                 <h2 className="!mt-0">Cómo funciona el Mantenimiento de agente</h2>
                 <p>
-                    Los planes Basic (99€/mes) y Pro (199€/mes) se cobran mes a mes
-                    por adelantado.{" "}
-                    <strong>Sin contratos largos ni penalizaciones.</strong>
+                    Los planes Basic (99€/mes) y Pro (199€/mes) se pagan mes a mes por
+                    adelantado. Sin contratos largos ni penalizaciones.
                 </p>
                 <p>
-                    <strong>Cancelas cuando quieras</strong> avisando con 30 días para
-                    que ajustemos tu siguiente facturación. El mes en curso, ya pagado,
-                    lo sigues disfrutando hasta el final.
+                    Puedes cancelar cuando quieras avisándonos con{" "}
+                    <strong>30 días</strong> para que ajustemos tu siguiente factura. El
+                    mes que ya tengas pagado lo sigues disfrutando hasta el final.
                 </p>
                 <p>
-                    Si prefieres comprometerte un año, hay{" "}
-                    <strong>opción anual con descuento</strong>: pagas 10 meses y
-                    disfrutas 12. La contratación anual no se reembolsa parcialmente,
-                    pero conservas el servicio hasta el final del periodo contratado.
+                    Si prefieres comprometerte un año entero, hay opción anual con
+                    descuento: <strong>pagas 10 meses y disfrutas 12</strong>. La opción
+                    anual no se devuelve parcialmente, pero conservas el servicio hasta
+                    que se cumpla el año.
                 </p>
                 <p>
                     El Mantenimiento cubre lo que figura en cada plan (soporte,
-                    monitorización, actualizaciones). Las funcionalidades nuevas no
-                    incluidas se trabajan aparte como una ampliación.
+                    vigilancia y actualizaciones). Las funcionalidades nuevas que no
+                    estén incluidas se trabajan aparte como ampliación.
                 </p>
             </section>
 
