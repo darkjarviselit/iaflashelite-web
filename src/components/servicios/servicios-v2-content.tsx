@@ -16,14 +16,23 @@ import type { ComponentType, SVGProps } from "react";
 import { Button } from "@/components/ui/button";
 import { BRAND } from "@/lib/constants";
 
+type Plan = {
+    name: string;
+    price: string;
+    forWho: string;
+    bullets: ReadonlyArray<string>;
+};
+
 type MainOffer = {
     badge: string;
     badgeTone: string;
     cta: string;
+    asunto: string;
     description: string;
     featured?: boolean;
     icon: ComponentType<SVGProps<SVGSVGElement>>;
-    includes: ReadonlyArray<string>;
+    includes?: ReadonlyArray<string>;
+    plans?: ReadonlyArray<Plan>;
     price: string;
     priceNote?: string;
     title: string;
@@ -54,6 +63,7 @@ const MAIN_OFFERS: ReadonlyArray<MainOffer> = [
             "Hoja de ruta de implementación",
         ],
         cta: "Solicitar auditoría",
+        asunto: "Auditoría IA para empresas",
         icon: SearchCheck,
     },
     {
@@ -71,6 +81,7 @@ const MAIN_OFFERS: ReadonlyArray<MainOffer> = [
             "Soporte 30 días post-entrega",
         ],
         cta: "Solicitar presupuesto",
+        asunto: "Automatización a medida",
         icon: Zap,
     },
     {
@@ -88,6 +99,7 @@ const MAIN_OFFERS: ReadonlyArray<MainOffer> = [
             "Manual de uso incluido",
         ],
         cta: "Solicitar agente",
+        asunto: "Agente IA privado",
         icon: Bot,
         featured: true,
     },
@@ -98,15 +110,31 @@ const MAIN_OFFERS: ReadonlyArray<MainOffer> = [
         title: "Mantenimiento de agente",
         description:
             "Mantenemos tu agente actualizado, monitorizado y funcionando. Sin sorpresas, sin coste oculto.",
-        includes: [
-            "Basic 99€/mes: actualizaciones mensuales",
-            "Basic 99€/mes: monitorización básica",
-            "Basic 99€/mes: soporte por email",
-            "Pro 199€/mes: actualizaciones semanales",
-            "Pro 199€/mes: monitorización 24/7",
-            "Pro 199€/mes: soporte prioritario y mejoras menores incluidas",
+        plans: [
+            {
+                name: "Basic",
+                price: "99€/mes",
+                forWho: "Una automatización activa",
+                bullets: [
+                    "Soporte por email (48h)",
+                    "Actualizaciones críticas",
+                    "Reporte mensual automático",
+                ],
+            },
+            {
+                name: "Pro",
+                price: "199€/mes",
+                forWho: "Agente completo o varios procesos",
+                bullets: [
+                    "Soporte prioritario (24h) + 1 llamada/mes",
+                    "Actualizaciones críticas + mejoras",
+                    "Monitorización continua",
+                    "Reporte mensual + revisión con Oscar",
+                ],
+            },
         ],
-        cta: "Ver planes",
+        cta: "Solicitar mantenimiento",
+        asunto: "Mantenimiento de agente",
         icon: Wrench,
     },
 ];
@@ -234,23 +262,61 @@ function MainOffersBlock() {
                                 </div>
 
                                 <div className="mt-7 border-t border-white/10 pt-6">
-                                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-text-muted">
-                                        Incluye
-                                    </span>
-                                    <ul className="mt-4 flex flex-col gap-3">
-                                        {offer.includes.map((item) => (
-                                            <li
-                                                key={item}
-                                                className="flex items-start gap-3 text-sm leading-6 text-text-secondary"
-                                            >
-                                                <Check className="mt-1 h-4 w-4 shrink-0 text-flash" />
-                                                <span>{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    {offer.plans ? (
+                                        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                                            {offer.plans.map((plan) => (
+                                                <div
+                                                    key={plan.name}
+                                                    className="flex flex-col rounded-xl border border-white/10 bg-white/[0.03] p-4"
+                                                >
+                                                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
+                                                        {plan.name}
+                                                    </span>
+                                                    <span className="mt-2 text-xl font-bold tracking-tight text-paper">
+                                                        {plan.price}
+                                                    </span>
+                                                    <span className="mt-1 text-xs leading-5 text-text-muted">
+                                                        {plan.forWho}
+                                                    </span>
+                                                    <ul className="mt-3 flex flex-col gap-2">
+                                                        {plan.bullets.map((item) => (
+                                                            <li
+                                                                key={item}
+                                                                className="flex items-start gap-2 text-xs leading-5 text-text-secondary"
+                                                            >
+                                                                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-flash" />
+                                                                <span>{item}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-text-muted">
+                                                Incluye
+                                            </span>
+                                            <ul className="mt-4 flex flex-col gap-3">
+                                                {offer.includes?.map((item) => (
+                                                    <li
+                                                        key={item}
+                                                        className="flex items-start gap-3 text-sm leading-6 text-text-secondary"
+                                                    >
+                                                        <Check className="mt-1 h-4 w-4 shrink-0 text-flash" />
+                                                        <span>{item}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </>
+                                    )}
                                 </div>
 
-                                <Button href="/contacto" variant="gradient" className="mt-auto w-full">
+                                <Button
+                                    href={`/contacto?asunto=${encodeURIComponent(offer.asunto)}`}
+                                    variant="gradient"
+                                    className="mt-auto w-full"
+                                >
                                     {offer.cta} <ArrowRight size={16} />
                                 </Button>
                             </motion.article>

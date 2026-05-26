@@ -7,6 +7,12 @@ export const metadata: Metadata = {
     title: "Servicios de IA para empresas — iaflashelite.com",
     description:
         "Agentes inteligentes, automatizaciones y herramientas de ciberseguridad para empresas. Pricing visible y propuestas B2B sin humo.",
+    openGraph: {
+        title: "Servicios de IA para empresas",
+        description:
+            "Agentes inteligentes, automatizaciones y herramientas de ciberseguridad para empresas. Pricing visible y propuestas B2B sin humo.",
+        type: "website",
+    },
 };
 
 export default function ServiciosPage() {
