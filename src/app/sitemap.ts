@@ -22,6 +22,7 @@ const STATIC_ROUTES: ReadonlyArray<{
 	{ path: "/soluciones", changeFrequency: "weekly", priority: 0.9 },
 	{ path: "/gestoria-local", changeFrequency: "monthly", priority: 0.8 },
 	{ path: "/kenvo", changeFrequency: "weekly", priority: 0.8 },
+	{ path: "/noxis", changeFrequency: "monthly", priority: 0.7 },
 	{ path: "/seguridad", changeFrequency: "monthly", priority: 0.6 },
 	{ path: "/casos", changeFrequency: "monthly", priority: 0.6 },
 	{ path: "/academia", changeFrequency: "monthly", priority: 0.6 },

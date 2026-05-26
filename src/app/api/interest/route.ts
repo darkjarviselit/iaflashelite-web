@@ -53,7 +53,13 @@ function bad(reason: string, status = 400) {
 	return NextResponse.json({ ok: false, error: reason }, { status });
 }
 
-const VALID_TOPICS = new Set(["casos", "academia", "builder-pass", "kenvo"]);
+const VALID_TOPICS = new Set([
+	"casos",
+	"academia",
+	"builder-pass",
+	"kenvo",
+	"noxis",
+]);
 
 export async function POST(request: Request) {
 	const ip = getClientIp(request);
