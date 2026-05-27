@@ -19,6 +19,7 @@ import {
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { Button } from "@/components/ui/button";
+import { PRODUCTS } from "@/lib/constants";
 
 export const metadata: Metadata = {
     title: "Seguridad por diseño — iaflashelite.com",
@@ -136,32 +137,37 @@ const COMPARISON_ROWS: ReadonlyArray<ComparisonRow> = [
     },
 ];
 
+function securityPriceLabel(slug: string): string {
+    const product = PRODUCTS.find((item) => item.slug === slug);
+    return product ? `desde ${product.price}€` : "Consultar";
+}
+
 const SECURITY_PRODUCTS: ReadonlyArray<SecurityProduct> = [
     {
         icon: ScanSearch,
         title: "Auditor Web Rápido",
-        price: "desde 19€",
+        price: securityPriceLabel("auditor-web"),
         description:
             "Analiza tu web en busca de vulnerabilidades comunes. Sin instalar nada, sin datos en la nube.",
     },
     {
         icon: MailWarning,
         title: "Anti-Phishing Emails",
-        price: "desde 19€",
+        price: securityPriceLabel("anti-phishing"),
         description:
             "Detecta emails de phishing antes de que afecten a tu equipo. Código auditable incluido.",
     },
     {
         icon: Link2,
         title: "Verificador de URLs",
-        price: "desde 9€",
+        price: securityPriceLabel("verificador-urls"),
         description:
             "Comprueba si una URL es segura antes de compartirla o hacer clic.",
     },
     {
         icon: DatabaseBackup,
         title: "Backup Cifrado Mac",
-        price: "desde 49€",
+        price: securityPriceLabel("backup-cifrado"),
         description:
             "Sistema de backup cifrado para Mac. Tus datos protegidos sin depender de iCloud.",
     },
