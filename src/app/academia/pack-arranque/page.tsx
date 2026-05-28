@@ -99,7 +99,7 @@ export default function PackArranquePage() {
                                     variant="gradient"
                                     className="w-full whitespace-nowrap sm:w-auto"
                                 >
-                                    Comprar Pack Arranque IA — 7 €
+                                    Comprar Pack Arranque IA — 9 €
                                     <ArrowRight className="h-4 w-4" />
                                 </Button>
                                 <Button
@@ -241,7 +241,7 @@ export default function PackArranquePage() {
                             variant="gradient"
                             className="whitespace-nowrap"
                         >
-                            Comprar Pack Arranque IA — 7 €
+                            Comprar Pack Arranque IA — 9 €
                             <ArrowRight className="h-4 w-4" />
                         </Button>
                     </div>
