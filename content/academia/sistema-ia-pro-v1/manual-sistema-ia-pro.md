@@ -95,7 +95,7 @@ Puedes usar este pack sin haber hecho Pack Arranque IA.
 Pero no empieces con una conversación vacía. Antes de crear los proyectos,
 rellena la plantilla:
 
-`templates/contexto-minimo-rapido.md`
+`plantillas/contexto-minimo-rapido.md`
 
 Ese contexto mínimo debe responder:
 
@@ -681,14 +681,13 @@ resultados económicos ni la ejecución incorrecta por parte del comprador.
 ## 16. Próximo paso
 
 Cuando ya sabes montar proyectos IA y dirigir el flujo candado, el siguiente
-paso es construir algo funcional: un bot o agente básico que puedas adaptar.
+paso es construir un sistema funcional que recibe solicitudes de cliente, las
+ordena con IA y prepara respuestas revisables con control humano.
 
-Ese será el Pack 3:
-
-> Tu primer bot/agente funcional
+Eso es **Primer Sistema IA Vendible**.
 
 Sin humo: no será "la IA lo hace todo". Será un primer sistema pequeño,
-entendible y revisable.
+entendible y revisable, pensado para ofrecerlo como servicio.
 
 Antes de construirlo, deja bien cerrado este pack:
 

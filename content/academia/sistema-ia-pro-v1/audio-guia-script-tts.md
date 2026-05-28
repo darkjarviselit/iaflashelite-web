@@ -158,11 +158,9 @@ Sistema IA Pro no promete que la IA lo haga todo.
 Te enseña a dirigirla mejor.
 
 Cuando ya tengas tus proyectos IA, tu Prompt 0 y tu flujo candado, el siguiente
-paso será construir algo funcional.
+paso será construir un sistema funcional con revisión humana.
 
-Ese será el Pack 3:
-
-Tu primer bot o agente funcional.
+Eso es Primer Sistema IA Vendible.
 
 Pausa final.
 

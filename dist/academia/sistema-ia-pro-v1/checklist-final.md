@@ -36,6 +36,7 @@ debe quedar claro que tienes una estructura de trabajo real.
 
 ## Siguiente paso
 
-- [ ] Sé qué bot, agente o automatización pequeña podría construir después.
-- [ ] Tengo claro que el Pack 3 será para crear un primer bot/agente funcional,
-      no para prometer automatización sin revisión.
+- [ ] Sé qué sistema o servicio podría construir después con esta base.
+- [ ] Tengo claro que **Primer Sistema IA Vendible** es el siguiente paso para
+      crear un sistema funcional con revisión humana, no para prometer
+      automatización sin control.

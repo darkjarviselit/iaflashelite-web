@@ -1,35 +1,54 @@
-# Sistema IA Pro v1
+# Sistema IA Pro — Bienvenida
 
-Contenido fuente del segundo producto de IAFlashElite Academy.
-
-Nombre comercial:
-
-> Sistema IA Pro — crea proyectos IA que trabajan contigo
+Gracias por comprar el **Sistema IA Pro** de IAFlashElite Academy.
 
 Este pack enseña a montar proyectos IA profesionales en ChatGPT, Claude,
-Gemini o la IA de confianza del comprador, y a usarlos como centro de mando
-para investigar, planificar, crear prompts técnicos para Claude Code/Codex y
+Gemini o la IA de tu confianza, y a usarlos como centro de mando para
+investigar, planificar, crear prompts técnicos para Claude Code/Codex y
 revisar resultados con método.
 
-Precio futuro previsto: 19 €.
+Promesa:
 
-Este paquete todavía no es un PDF final, no contiene audio MP3, no tiene ZIP
-final y no está conectado a catálogo, landing ni checkout.
+> Pasa de "chats sueltos a la IA" a un sistema de trabajo con
+> investigación, plan, ejecución técnica, revisión y cierre.
 
-## Qué incluye
+## Qué hay dentro
 
-- Manual principal en Markdown.
-- Plantillas para crear tres proyectos IA profesionales.
-- Versión rápida de contexto mínimo para quien no hizo Pack Arranque IA.
-- Prompt 0 para arrancar trabajos técnicos con control.
-- Flujo candado para trabajar con Claude Code/Codex sin perder supervisión.
-- Checklist de revisión de respuestas.
-- Plantilla de informe final de entrega.
-- Guion para futuro audio guía breve de acompañamiento.
-- Versión limpia del guion para TTS.
-- Checklist final.
-- Texto base de garantía de calidad.
-- Manifiesto de versión y control interno.
+- `00-sistema-ia-pro.pdf` — manual principal (16 secciones).
+- `01-audio-guia.mp3` — audio guía breve de acompañamiento (~5 min).
+- `plantillas/` — los 8 documentos copiables del pack:
+  - `proyecto-estrategia-mejoras.md`
+  - `proyecto-marketing-ventas.md`
+  - `proyecto-prompt-builder-tecnico.md`
+  - `contexto-minimo-rapido.md` — atajo si no hiciste Pack Arranque IA.
+  - `prompt-0-arranque-tecnico.md`
+  - `flujo-candado.md`
+  - `checklist-revision-respuestas.md`
+  - `informe-final-entrega.md`
+- `checklist-final.md` — revisión de cierre del pack.
+- `garantia-calidad.md` — garantía de 14 días.
+- `MANIFEST.txt` — versión y manifiesto del paquete.
+
+## Por dónde empezar
+
+1. Abre `00-sistema-ia-pro.pdf` y léelo de principio a fin.
+2. Escucha `01-audio-guia.mp3` mientras trabajas o de fondo.
+3. Decide tu camino:
+   - **Si vienes de Pack Arranque IA**: usa tu `Currículum IA personal`, tu
+     `Contexto maestro del proyecto` y tus `Instrucciones de trabajo` como
+     contexto base.
+   - **Si empiezas directamente aquí**: rellena
+     `plantillas/contexto-minimo-rapido.md` antes de crear los proyectos.
+4. Crea los tres proyectos IA con las plantillas:
+   1. `plantillas/proyecto-estrategia-mejoras.md`
+   2. `plantillas/proyecto-marketing-ventas.md`
+   3. `plantillas/proyecto-prompt-builder-tecnico.md`
+5. Guarda `plantillas/prompt-0-arranque-tecnico.md` para arrancar trabajos
+   técnicos con alcance.
+6. Practica el `plantillas/flujo-candado.md` con una tarea pequeña real.
+7. Revisa la respuesta con `plantillas/checklist-revision-respuestas.md`.
+8. Cierra con `plantillas/informe-final-entrega.md`.
+9. Marca `checklist-final.md`.
 
 ## Para quién es
 
@@ -61,38 +80,12 @@ mínimo para dirigir proyectos IA con más claridad y menos improvisación.
 
 ## Diferencia con Pack Arranque IA
 
-Pack Arranque IA prepara la base:
-
-- quién eres;
-- qué proyecto quieres construir;
-- cómo debe ayudarte la IA;
-- tus primeras skills de trabajo.
+Pack Arranque IA prepara la base: quién eres, qué proyecto quieres construir,
+cómo debe ayudarte la IA y tus primeras skills de trabajo.
 
 Sistema IA Pro usa esa base para montar proyectos IA profesionales y dirigir
 trabajos completos con investigación, planificación, prompts técnicos,
 revisión y cierre.
-
-Si ya hiciste Pack Arranque IA, usa aquí tu `Currículum IA personal`, tu
-`Contexto maestro del proyecto` y tus `Instrucciones de trabajo`.
-
-Si no lo hiciste, no pasa nada. Este pack incluye una versión rápida para crear
-contexto mínimo. Aun así, si quieres trabajar de forma más profesional,
-recomendamos empezar por Pack Arranque IA.
-
-## Orden recomendado de uso
-
-1. Lee este LEEME.
-2. Lee el manual principal `manual-sistema-ia-pro.md`.
-3. Si vienes de Pack Arranque IA, localiza tus tres documentos base.
-4. Si empiezas directamente, completa `templates/contexto-minimo-rapido.md`.
-5. Crea el proyecto `Estrategia y mejoras`.
-6. Crea el proyecto `Marketing y ventas`.
-7. Crea el proyecto `Prompt Builder técnico`.
-8. Guarda `templates/prompt-0-arranque-tecnico.md`.
-9. Practica el flujo candado con una tarea pequeña.
-10. Revisa la respuesta con `templates/checklist-revision-respuestas.md`.
-11. Cierra con `templates/informe-final-entrega.md`.
-12. Marca `checklist-final.md`.
 
 ## Qué NO promete
 
@@ -107,21 +100,23 @@ recomendamos empezar por Pack Arranque IA.
 ## Garantía de calidad
 
 Garantía de calidad — 14 días. Si después de recibir el material consideras que
-no entrega lo prometido en la página de venta, te devolvemos el 100% del importe
-en los 14 días siguientes a la compra. La garantía cubre la calidad y
-completitud del material descargable. No cubre resultados económicos ni la
-ejecución incorrecta por parte del comprador.
+no entrega lo prometido en la página de venta, se devuelve el importe. La
+garantía cubre la calidad y completitud del material descargable. No cubre
+resultados económicos ni la ejecución incorrecta por parte del comprador.
 
 El texto completo está en `garantia-calidad.md`.
 
-## Siguiente paso
+## Siguiente paso recomendado
 
 Cuando ya sabes montar proyectos IA y dirigir el flujo candado, el siguiente
-paso es construir algo funcional: un bot o agente básico que puedas adaptar.
+paso es construir un sistema funcional que captura solicitudes de cliente,
+las ordena con IA y prepara respuestas revisables. Eso es **Primer Sistema
+IA Vendible**.
 
-Ese será el Pack 3:
+No necesitas saltar ahí todavía. Primero deja bien montado tu sistema:
+proyectos IA, Prompt 0, flujo candado, revisión y cierre profesional.
 
-> Tu primer bot/agente funcional
+## Soporte
 
-No necesitas saltar ahí todavía. Primero deja bien montado tu sistema: proyectos
-IA, Prompt 0, flujo candado, revisión y cierre profesional.
+Si algo no se entiende, no abre o no llega como esperabas, escríbenos a
+`iaflashelite@gmail.com` y lo resolvemos.
