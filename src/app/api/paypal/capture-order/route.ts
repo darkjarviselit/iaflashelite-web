@@ -4,6 +4,7 @@ import {
     GUARANTEE_POLICY_VERSION,
     PACK_ARRANQUE_PRODUCT_SLUG,
     PRODUCTS,
+    SISTEMA_IA_PRO_PRODUCT_SLUG,
     calculateProductTotal,
 } from "@/lib/constants";
 import {
@@ -12,6 +13,7 @@ import {
     sendGestoriaLocalDeliveryEmail,
     sendPackArranqueDeliveryEmail,
     sendSecureDownloadDeliveryEmail,
+    sendSistemaIaProDeliveryEmail,
 } from "@/lib/email";
 import {
     isSecureDeliveryConfigured,
@@ -266,6 +268,23 @@ export async function POST(request: Request) {
         }).catch((err) => {
             console.error(
                 "[paypal capture] Pack Arranque delivery email error:",
+                err,
+            );
+        });
+    } else if (isSecureDownload && product.slug === SISTEMA_IA_PRO_PRODUCT_SLUG) {
+        void sendSistemaIaProDeliveryEmail({
+            to: customerEmail,
+            customerName,
+            productName: product.name,
+            amount: String(calculated.total),
+            orderId: paypalOrderId,
+            transactionId: paypalCaptureId,
+            customerEmail,
+            policyVersion,
+            paymentMethodLabel: "PayPal / Tarjeta",
+        }).catch((err) => {
+            console.error(
+                "[paypal capture] Sistema IA Pro delivery email error:",
                 err,
             );
         });

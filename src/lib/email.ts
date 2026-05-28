@@ -794,6 +794,280 @@ export async function sendPackArranqueDeliveryEmail(
     }
 }
 
+export interface SistemaIaProDeliveryEmailParams {
+    to: string;
+    customerName: string;
+    productName: string;
+    amount: string;
+    customerEmail?: string;
+    orderId?: string | null;
+    transactionId?: string | null;
+    policyVersion?: string;
+    paymentMethodLabel?: string;
+}
+
+// Builder puro (sin side-effects) del email de Sistema IA Pro. Mismo patrón
+// que buildPackArranqueDeliveryEmail: separado del envío para poder
+// renderizarlo a archivo en revisión visual sin invocar nodemailer.
+export interface BuildSistemaIaProDeliveryEmailInput {
+    customerName: string;
+    customerEmail?: string;
+    productName: string;
+    amount: string;
+    downloadUrl: string;
+    deliveredAt: string;
+    orderId?: string | null;
+    transactionId?: string | null;
+    policyVersion?: string;
+    paymentMethodLabel?: string;
+}
+
+export function buildSistemaIaProDeliveryEmail(
+    input: BuildSistemaIaProDeliveryEmailInput,
+): BuiltDeliveryEmail {
+    const {
+        customerName,
+        customerEmail,
+        productName,
+        amount,
+        downloadUrl,
+        deliveredAt,
+        orderId,
+        transactionId,
+        policyVersion,
+        paymentMethodLabel,
+    } = input;
+
+    const buyerEmail = customerEmail ?? "";
+    const orderLine = orderId
+        ? `<p style="margin: 4px 0; color: #475569;"><strong>Pedido:</strong> ${escapeHtml(orderId)}</p>`
+        : "";
+    const transactionLine = transactionId
+        ? `<p style="margin: 4px 0; color: #475569;"><strong>Transacción:</strong> ${escapeHtml(transactionId)}</p>`
+        : "";
+    const paymentLine = paymentMethodLabel
+        ? `<p style="margin: 4px 0; color: #475569;"><strong>Método de pago:</strong> ${escapeHtml(paymentMethodLabel)}</p>`
+        : "";
+    const policyLine = policyVersion
+        ? `<p style="margin: 4px 0; color: #475569;"><strong>Política aplicada:</strong> ${escapeHtml(policyVersion)}</p>`
+        : "";
+
+    const subject = `Ya tienes tu ${productName} — empieza por aquí`;
+
+    const html = `<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"></head>
+<body style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 20px; color: #333;">
+  <div style="text-align: center; margin-bottom: 30px;">
+    <h1 style="color: #0891b2; font-size: 24px; margin: 0;">iaflashelite</h1>
+  </div>
+
+  <h2 style="color: #1e293b;">Tu ${escapeHtml(productName)} está listo</h2>
+
+  <p>Hola <strong>${escapeHtml(customerName)}</strong>,</p>
+
+  <p>Gracias por confiar en este segundo escalón. Aquí tienes tu copia de
+  <strong>${escapeHtml(productName)}</strong> por
+  <strong>${escapeHtml(amount)}€</strong>. El enlace de descarga es temporal
+  para proteger el material.</p>
+
+  <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; margin: 20px 0;">
+    <p style="margin: 4px 0; color: #475569;"><strong>Email comprador:</strong> ${escapeHtml(buyerEmail)}</p>
+    <p style="margin: 4px 0; color: #475569;"><strong>Fecha de entrega:</strong> ${escapeHtml(deliveredAt)}</p>
+    ${paymentLine}
+    ${orderLine}
+    ${transactionLine}
+    ${policyLine}
+  </div>
+
+  <div style="text-align: center; margin: 30px 0;">
+    <a href="${downloadUrl}"
+       style="background-color: #0891b2; color: white; padding: 16px 32px;
+              text-decoration: none; border-radius: 8px; font-size: 18px;
+              font-weight: bold; display: inline-block;">
+      Descargar ${escapeHtml(productName)}
+    </a>
+  </div>
+
+  <div style="background: #ecfeff; border: 1px solid #a5f3fc; border-radius: 8px; padding: 18px; margin: 28px 0;">
+    <h3 style="color: #0e7490; font-size: 16px; margin: 0 0 12px 0;">Por dónde empezar</h3>
+    <p style="margin: 0 0 12px 0; color: #164e63;">
+      Reserva un par de horas, no necesitas montar todo de golpe. Sigue este
+      orden:
+    </p>
+    <ol style="margin: 0 0 12px 20px; padding: 0; color: #164e63;">
+      <li style="margin-bottom: 6px;">Abre <strong>00-sistema-ia-pro.pdf</strong> y léelo de principio a fin.</li>
+      <li style="margin-bottom: 6px;">Escucha <strong>01-audio-guia.mp3</strong> mientras trabajas o de fondo.</li>
+      <li style="margin-bottom: 6px;">
+        Si vienes de <strong>Pack Arranque IA</strong>, reutiliza tu Currículum
+        IA personal, Contexto maestro del proyecto e Instrucciones de trabajo
+        como contexto base. Si empiezas directamente, rellena
+        <strong>plantillas/contexto-minimo-rapido.md</strong> antes de crear los proyectos.
+      </li>
+      <li style="margin-bottom: 6px;">
+        Empieza por <strong>una sola tarea pequeña real</strong>: crea el primer
+        proyecto con <strong>plantillas/proyecto-estrategia-mejoras.md</strong>,
+        prueba el <strong>Prompt 0</strong> y el <strong>Flujo Candado</strong>
+        con ella. Los otros dos proyectos pueden esperar a otra sesión.
+      </li>
+    </ol>
+    <p style="margin: 0; color: #164e63; font-size: 14px;">
+      No intentes montar los tres proyectos a la vez. El propio manual lo dice:
+      mejor una pieza terminada que tres a medias.
+    </p>
+  </div>
+
+  <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 16px; margin: 20px 0;">
+    <p style="margin: 0; color: #166534;">
+      <strong>Garantía de calidad — 14 días:</strong> cubre la calidad y
+      completitud del material descargable. No cubre resultados económicos ni
+      ejecución incorrecta por parte del comprador.
+    </p>
+  </div>
+
+  <p style="font-size: 13px; color: #64748b; line-height: 1.6;">
+    Al haberse iniciado la entrega digital solicitada, el derecho de
+    desistimiento de 14 días deja de aplicarse cuando empieza el acceso,
+    descarga o envío. Mantienes tus derechos si hay un problema real de
+    entrega, archivo, descripción o funcionamiento.
+  </p>
+
+  <p>Si necesitas reenvío del enlace, responde a este email o escribe a
+    <a href="mailto:iaflashelite@gmail.com" style="color: #0891b2;">iaflashelite@gmail.com</a>.
+  </p>
+
+  <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 32px 0 20px 0;" />
+
+  <div style="margin: 0 0 8px 0;">
+    <h3 style="color: #1e293b; font-size: 15px; margin: 0 0 8px 0;">Tu siguiente paso, cuando estés listo</h3>
+    <p style="margin: 0 0 8px 0; color: #475569; font-size: 14px; line-height: 1.6;">
+      Sin prisa: primero deja bien montados tus proyectos IA y practica el
+      flujo candado con una tarea real. Cuando lo domines, el siguiente paso
+      natural es construir un sistema funcional que reciba solicitudes de
+      cliente, las ordene con IA y prepare respuestas revisables con control
+      humano. Eso es <strong>Primer Sistema IA Vendible</strong>.
+    </p>
+    <p style="margin: 0; color: #64748b; font-size: 13px;">
+      Más info en <a href="https://iaflashelite.com/academia/primer-sistema-ia-vendible" style="color: #0891b2;">iaflashelite.com/academia/primer-sistema-ia-vendible</a>.
+    </p>
+  </div>
+</body>
+</html>`;
+
+    const textLines = [
+        `Hola ${customerName},`,
+        ``,
+        `Gracias por confiar en este segundo escalón. Aquí tienes tu ${productName}.`,
+        ``,
+        `Producto: ${productName}`,
+        `Importe: ${amount}€`,
+        buyerEmail ? `Email comprador: ${buyerEmail}` : ``,
+        `Fecha de entrega: ${deliveredAt}`,
+        paymentMethodLabel ? `Método de pago: ${paymentMethodLabel}` : ``,
+        orderId ? `Pedido: ${orderId}` : ``,
+        transactionId ? `Transacción: ${transactionId}` : ``,
+        policyVersion ? `Política aplicada: ${policyVersion}` : ``,
+        ``,
+        `Descarga temporal:`,
+        downloadUrl,
+        ``,
+        `POR DÓNDE EMPEZAR`,
+        `Reserva un par de horas, no necesitas montar todo de golpe. Sigue este orden:`,
+        `1. Abre 00-sistema-ia-pro.pdf y léelo de principio a fin.`,
+        `2. Escucha 01-audio-guia.mp3 mientras trabajas o de fondo.`,
+        `3. Si vienes de Pack Arranque IA, reutiliza tu Currículum IA personal, Contexto maestro del proyecto e Instrucciones de trabajo como contexto base. Si empiezas directamente, rellena plantillas/contexto-minimo-rapido.md antes de crear los proyectos.`,
+        `4. Empieza por una sola tarea pequeña real: crea el primer proyecto con plantillas/proyecto-estrategia-mejoras.md, prueba el Prompt 0 y el Flujo Candado con ella. Los otros dos proyectos pueden esperar a otra sesión.`,
+        ``,
+        `No intentes montar los tres proyectos a la vez. El propio manual lo dice: mejor una pieza terminada que tres a medias.`,
+        ``,
+        `Garantía de calidad — 14 días: cubre la calidad y completitud del material descargable. No cubre resultados económicos ni ejecución incorrecta por parte del comprador.`,
+        ``,
+        `Si necesitas reenvío del enlace, responde a este email o escribe a iaflashelite@gmail.com.`,
+        ``,
+        `---`,
+        ``,
+        `TU SIGUIENTE PASO, CUANDO ESTÉS LISTO`,
+        `Sin prisa: primero deja bien montados tus proyectos IA y practica el flujo candado con una tarea real. Cuando lo domines, el siguiente paso natural es construir un sistema funcional que reciba solicitudes de cliente, las ordene con IA y prepare respuestas revisables con control humano. Eso es Primer Sistema IA Vendible.`,
+        `Más info en https://iaflashelite.com/academia/primer-sistema-ia-vendible`,
+        ``,
+        `iaflashelite`,
+    ].filter((line) => line.length > 0);
+
+    return { subject, html, text: textLines.join("\n") };
+}
+
+export async function sendSistemaIaProDeliveryEmail(
+    params: SistemaIaProDeliveryEmailParams,
+): Promise<boolean> {
+    const {
+        to,
+        customerName,
+        productName,
+        amount,
+        customerEmail,
+        orderId,
+        transactionId,
+        policyVersion,
+        paymentMethodLabel,
+    } = params;
+
+    const secureProduct = getSecureDownloadProduct(SISTEMA_IA_PRO_PRODUCT_SLUG);
+    if (!secureProduct) {
+        console.error(
+            `[email] Producto sin entrega segura: ${SISTEMA_IA_PRO_PRODUCT_SLUG}`,
+        );
+        return false;
+    }
+
+    const user = (process.env.GMAIL_USER ?? "").trim();
+    if (!user || !(process.env.GMAIL_APP_PASSWORD ?? "").trim()) {
+        console.error("[email] GMAIL_USER / GMAIL_APP_PASSWORD no configurados");
+        return false;
+    }
+
+    let downloadUrl: string;
+    try {
+        downloadUrl = createSecureDownloadUrl({
+            productSlug: SISTEMA_IA_PRO_PRODUCT_SLUG,
+            customerEmail: customerEmail ?? to,
+            orderId: orderId ?? transactionId ?? `manual-${Date.now()}`,
+        });
+    } catch (error) {
+        console.error("[email] No se pudo generar enlace seguro:", error);
+        return false;
+    }
+
+    const { subject, html, text } = buildSistemaIaProDeliveryEmail({
+        customerName,
+        customerEmail: customerEmail ?? to,
+        productName,
+        amount,
+        downloadUrl,
+        deliveredAt: new Date().toISOString(),
+        orderId,
+        transactionId,
+        policyVersion,
+        paymentMethodLabel,
+    });
+
+    try {
+        await getTransporter().sendMail({
+            from: `"iaflashelite" <${user}>`,
+            to,
+            subject,
+            text,
+            html,
+        });
+        console.log(
+            `[email] Entrega segura ${secureProduct.displayName} enviada a ${to}`,
+        );
+        return true;
+    } catch (error) {
+        console.error("[email] Error enviando entrega segura:", error);
+        return false;
+    }
+}
+
 function escapeHtml(value: string): string {
     return value
         .replace(/&/g, "&amp;")

@@ -7,6 +7,7 @@ import {
     GUARANTEE_POLICY_VERSION,
     PACK_ARRANQUE_PRODUCT_SLUG,
     PRODUCTS,
+    SISTEMA_IA_PRO_PRODUCT_SLUG,
     calculateProductTotal,
 } from "@/lib/constants";
 import {
@@ -15,6 +16,7 @@ import {
     sendGestoriaLocalDeliveryEmail,
     sendPackArranqueDeliveryEmail,
     sendSecureDownloadDeliveryEmail,
+    sendSistemaIaProDeliveryEmail,
 } from "@/lib/email";
 import {
     isSecureDeliveryConfigured,
@@ -96,6 +98,16 @@ export async function POST(request: Request) {
     let sent: boolean;
     if (isSecureDownload && product.slug === PACK_ARRANQUE_PRODUCT_SLUG) {
         sent = await sendPackArranqueDeliveryEmail({
+            to: customerEmail,
+            customerName,
+            productName: product.name,
+            amount: String(calculated.total),
+            customerEmail,
+            policyVersion: GUARANTEE_POLICY_VERSION,
+            paymentMethodLabel: paymentMethodLabel || "Pago manual confirmado",
+        });
+    } else if (isSecureDownload && product.slug === SISTEMA_IA_PRO_PRODUCT_SLUG) {
+        sent = await sendSistemaIaProDeliveryEmail({
             to: customerEmail,
             customerName,
             productName: product.name,
