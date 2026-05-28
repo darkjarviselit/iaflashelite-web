@@ -63,23 +63,6 @@ const ONE_TIME_PLANS: ReadonlyArray<PricingCard> = [
         icon: Code2,
     },
     {
-        badge: "POPULAR",
-        title: "Pack Seguridad PYME",
-        price: "79€",
-        description:
-            "Herramientas esenciales de ciberseguridad para proteger tu negocio digital.",
-        includes: [
-            "5 herramientas de seguridad",
-            "Manual de uso completo",
-            "Guía no-técnicos incluida",
-            "Soporte 30 días",
-            "Garantía Flash",
-        ],
-        cta: "Solicitar pack",
-        href: "/contacto",
-        icon: ShieldCheck,
-    },
-    {
         badge: "RECOMENDADO",
         title: "Auditoría IA",
         price: "490€",

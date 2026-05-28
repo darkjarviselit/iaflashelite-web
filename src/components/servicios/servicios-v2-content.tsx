@@ -152,15 +152,6 @@ const MAIN_OFFERS: ReadonlyArray<MainOffer> = [
 
 const SECONDARY_OFFERS: ReadonlyArray<SecondaryOffer> = [
     {
-        title: "Pack Seguridad PYME",
-        price: "79€",
-        description:
-            "Herramientas esenciales de ciberseguridad para proteger tu negocio digital.",
-        cta: "Ver pack",
-        href: "/productos",
-        icon: ShieldCheck,
-    },
-    {
         title: "Herramientas descargables",
         price: "desde 9€",
         description:
