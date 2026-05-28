@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import {
     GESTORIA_LOCAL_PRODUCT_SLUG,
     GUARANTEE_POLICY_VERSION,
+    PACK_ARRANQUE_PRODUCT_SLUG,
     PRODUCTS,
     calculateProductTotal,
 } from "@/lib/constants";
@@ -9,6 +10,7 @@ import {
     getDownloadUrl,
     sendDeliveryEmail,
     sendGestoriaLocalDeliveryEmail,
+    sendPackArranqueDeliveryEmail,
     sendSecureDownloadDeliveryEmail,
 } from "@/lib/email";
 import {
@@ -250,7 +252,24 @@ export async function POST(request: Request) {
     })();
 
     // Entrega automática por email — fire-and-forget.
-    if (isSecureDownload) {
+    if (isSecureDownload && product.slug === PACK_ARRANQUE_PRODUCT_SLUG) {
+        void sendPackArranqueDeliveryEmail({
+            to: customerEmail,
+            customerName,
+            productName: product.name,
+            amount: String(calculated.total),
+            orderId: paypalOrderId,
+            transactionId: paypalCaptureId,
+            customerEmail,
+            policyVersion,
+            paymentMethodLabel: "PayPal / Tarjeta",
+        }).catch((err) => {
+            console.error(
+                "[paypal capture] Pack Arranque delivery email error:",
+                err,
+            );
+        });
+    } else if (isSecureDownload) {
         void sendSecureDownloadDeliveryEmail({
             to: customerEmail,
             customerName,

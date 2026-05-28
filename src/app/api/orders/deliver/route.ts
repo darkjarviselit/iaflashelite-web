@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import {
     GESTORIA_LOCAL_PRODUCT_SLUG,
     GUARANTEE_POLICY_VERSION,
+    PACK_ARRANQUE_PRODUCT_SLUG,
     PRODUCTS,
     calculateProductTotal,
 } from "@/lib/constants";
@@ -12,6 +13,7 @@ import {
     getDownloadUrl,
     sendDeliveryEmail,
     sendGestoriaLocalDeliveryEmail,
+    sendPackArranqueDeliveryEmail,
     sendSecureDownloadDeliveryEmail,
 } from "@/lib/email";
 import {
@@ -92,7 +94,17 @@ export async function POST(request: Request) {
     // La prueba histórica de consentimiento vive en el pedido manual reenviado a giris-agent.
     // Este endpoint solo ejecuta la entrega tras confirmar pago fuera del checkout.
     let sent: boolean;
-    if (isSecureDownload) {
+    if (isSecureDownload && product.slug === PACK_ARRANQUE_PRODUCT_SLUG) {
+        sent = await sendPackArranqueDeliveryEmail({
+            to: customerEmail,
+            customerName,
+            productName: product.name,
+            amount: String(calculated.total),
+            customerEmail,
+            policyVersion: GUARANTEE_POLICY_VERSION,
+            paymentMethodLabel: paymentMethodLabel || "Pago manual confirmado",
+        });
+    } else if (isSecureDownload) {
         sent = await sendSecureDownloadDeliveryEmail({
             to: customerEmail,
             customerName,
