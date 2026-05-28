@@ -1,80 +1,77 @@
-# Pack Arranque IA v1
+# Pack Arranque IA — Bienvenida
 
-Contenido fuente del primer producto de academia de IAFlashElite.
+Gracias por comprar el **Pack Arranque IA** de IAFlashElite Academy.
 
-Este pack recoge el flujo de arranque que usamos en IAFlashElite para preparar a
-nuevos colaboradores y agentes IA antes de tocar un proyecto real.
-
-Antes de construir un agente, bot o automatización, en IAFlashElite preparamos
-siempre lo mismo: contexto, instrucciones, skills, reglas y método. Este pack te
-entrega esa base para aplicarla en tu propio proyecto.
+Este pack recoge el flujo de arranque que usamos en IAFlashElite para preparar
+nuevos colaboradores y agentes IA antes de tocar un proyecto real. Antes de
+construir un agente, bot o automatización, preparamos siempre lo mismo:
+contexto, instrucciones, skills, reglas y método. Este pack te entrega esa base
+para aplicarla en tu propio proyecto.
 
 Promesa:
 
 > Termina la tarde con tu IA preparada para entender quién eres, qué proyecto
 > quieres construir y cómo debe ayudarte.
 
-Este paquete está pensado para convertirse más adelante en un producto
-descargable con PDF, audio guía, plantillas y prompts. En esta fase no es
-todavía el ZIP final, no es una landing y no está conectado a checkout.
+## Qué hay dentro
 
-## Qué incluye
+- `00-pack-arranque-ia.pdf` — manual principal (14 secciones).
+- `01-audio-guia.mp3` — audio guía breve de acompañamiento (~5 min).
+- `plantillas/` — los 9 documentos copiables del pack:
+  - `curriculum-ia-personal.md`
+  - `contexto-maestro-proyecto.md`
+  - `instrucciones-trabajo-proyecto-ia.md`
+  - `CLAUDE.md` — base para Claude Code, Codex o proyectos con contexto largo.
+  - `skill-planificador-diario.md`
+  - `skill-auditoria-quirurgica.md`
+  - `skill-revisor-ideas.md`
+  - `skill-creador-prompts-tecnicos.md`
+  - `skill-checklist-final-entrega.md`
+- `checklist-final.md` — revisión de cierre del pack.
+- `garantia-calidad.md` — garantía de 14 días.
+- `MANIFEST.txt` — versión y manifiesto del paquete.
 
-- Manual principal en Markdown.
-- Tres prompts principales para preparar persona, proyecto e instrucciones.
-- Guion para futuro audio guía breve de acompañamiento.
-- Versión limpia del guion para locución TTS.
-- Plantillas listas para copiar, pegar y adaptar.
-- Cinco skills base de trabajo.
-- Un `CLAUDE.md` base para proyectos con IA.
-- Checklist final imprimible.
-- Texto base de garantía de calidad.
-- Manifiesto de versión y control interno.
+## Por dónde empezar
 
-## Orden recomendado de uso
-
-1. Lee este LEEME para entender el flujo completo.
-2. Lee el manual principal.
-3. Completa `templates/curriculum-ia-personal.md`.
-4. Completa `templates/contexto-maestro-proyecto.md`.
-5. Completa `templates/instrucciones-trabajo-proyecto-ia.md`.
-6. Copia y adapta las cinco skills base:
-   - `templates/skill-planificador-diario.md`
-   - `templates/skill-auditoria-quirurgica.md`
-   - `templates/skill-revisor-ideas.md`
-   - `templates/skill-creador-prompts-tecnicos.md`
-   - `templates/skill-checklist-final-entrega.md`
-7. Crea `templates/CLAUDE.md` si usas Claude Code, Codex o proyectos con
-   contexto largo.
-8. Haz una primera prueba real con un proyecto pequeño.
-9. Cierra con `checklist-final.md`.
+1. Abre `00-pack-arranque-ia.pdf` y léelo de principio a fin.
+2. Escucha `01-audio-guia.mp3` mientras trabajas o de fondo.
+3. Trabaja las tres plantillas base en este orden:
+   1. `plantillas/curriculum-ia-personal.md`
+   2. `plantillas/contexto-maestro-proyecto.md`
+   3. `plantillas/instrucciones-trabajo-proyecto-ia.md`
+4. Copia las 5 skills (`plantillas/skill-*.md`) que necesites en tu herramienta
+   de IA.
+5. Crea tu `CLAUDE.md` a partir de `plantillas/CLAUDE.md` si usas Claude Code,
+   Codex o proyectos con contexto largo.
+6. Haz una primera prueba real con un proyecto pequeño.
+7. Cierra con `checklist-final.md`.
 
 ## Plan de una tarde
 
 Este pack está pensado para completarse en una tarde realista, no en una sesión
-perfecta. La entrega final no es teoría: es una carpeta de trabajo con contexto,
-instrucciones, skills y una prueba real.
+perfecta. La entrega final no es teoría: es una carpeta de trabajo con
+contexto, instrucciones, skills y una prueba real.
 
-1. 15 min — prepara la carpeta y lee el manual.
+1. **15 min** — prepara tu carpeta y lee el manual.
    Entrega: una carpeta base creada y los archivos localizados.
-2. 35 min — crea tu Currículum IA personal.
+2. **35 min** — crea tu Currículum IA personal.
    Entrega: un documento de contexto personal listo para pegar en una IA.
-3. 40 min — crea el Contexto maestro del proyecto.
-   Entrega: una explicación clara de qué quieres construir, para quién y con qué
-   límites.
-4. 35 min — crea las Instrucciones de trabajo del proyecto IA.
+3. **40 min** — crea el Contexto maestro del proyecto.
+   Entrega: una explicación clara de qué quieres construir, para quién y con
+   qué límites.
+4. **35 min** — crea las Instrucciones de trabajo del proyecto IA.
    Entrega: reglas claras sobre cómo debe ayudarte la IA.
-5. 45 min — prepara las cinco skills base.
+5. **45 min** — prepara las cinco skills base.
    Entrega: plantillas guardadas y adaptadas para tareas frecuentes.
-6. 30 min — prueba el sistema con una tarea real de tu trabajo, estudio o
+6. **30 min** — prueba el sistema con una tarea real de tu trabajo, estudio o
    proyecto.
    Entrega: una respuesta útil generada con tus nuevos documentos.
-7. 10 min — marca la checklist final.
+7. **10 min** — marca la checklist final.
    Entrega: una lista clara de lo que ya funciona y lo que ajustarás después.
 
-## A quién va dirigido
+## Para quién es
 
-- Personas que ya usan ChatGPT, Claude, Gemini, Grok, Codex o Claude Code, pero
+- Personas que ya usan ChatGPT, Claude, Gemini, Grok, Codex o Claude Code pero
   sienten que cada conversación empieza de cero.
 - Profesionales, estudiantes o creadores que quieren ordenar mejor su trabajo
   con IA sin montar un sistema complejo.
@@ -91,15 +88,6 @@ instrucciones, skills y una prueba real.
 - No es una fórmula universal.
 - No te convierte en experto por leerlo una tarde.
 
-## Garantía de calidad
-
-Garantía de calidad — 14 días. Si después de recibir el material consideras que
-no entrega lo prometido en la página de venta, se devuelve el importe. La
-garantía cubre la calidad y completitud del material descargable. No cubre
-resultados económicos ni ejecución incorrecta por parte del comprador.
-
-El texto completo está en `garantia-calidad.md`.
-
 ## Cómo usar las plantillas
 
 Cada plantilla está escrita para copiarse en una herramienta de IA y adaptarse.
@@ -109,17 +97,25 @@ restricciones.
 La regla simple: si una plantilla no describe tu realidad, no puede ayudarte
 bien. Dedica tiempo a personalizarla antes de pedir resultados.
 
+## Garantía de calidad
+
+Garantía de calidad — 14 días. Si después de recibir el material consideras que
+no entrega lo prometido en la página de venta, se devuelve el importe. La
+garantía cubre la calidad y completitud del material descargable. No cubre
+resultados económicos ni ejecución incorrecta por parte del comprador.
+
+El texto completo está en `garantia-calidad.md`.
+
 ## Siguiente paso recomendado
 
 Cuando ya tienes tu IA preparada, el siguiente paso es aprender a usarla para
 ejecutar proyectos completos con auditoría, prompts controlados, revisión y
-entrega. Eso será `Sistema IA Pro`.
+entrega. Eso es **Sistema IA Pro**.
 
 No necesitas saltar ahí hoy. Primero deja bien hecho el arranque: contexto,
 proyecto, instrucciones, skills y una prueba real.
 
-## Nota de producción
+## Soporte
 
-La versión generada anteriormente en `dist/academia/pack-arranque*` queda
-obsoleta tras esta reestructura. Antes de vender el pack habrá que regenerar
-PDF, audio y ZIP final desde este contenido fuente.
+Si algo no se entiende, no abre o no llega como esperabas, escríbenos a
+`iaflashelite@gmail.com` y lo resolvemos.

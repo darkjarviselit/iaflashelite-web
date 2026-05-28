@@ -514,19 +514,18 @@ tener una base mejor que una conversación vacía.
 
 ## 12. Cómo usar los archivos del ZIP
 
-El ZIP de revisión incluye el PDF, las plantillas y el guion del audio guía
-breve. Úsalo así:
+El ZIP incluye este PDF, el audio guía y la carpeta de plantillas. Úsalo así:
 
 1. Lee primero este PDF para entender el flujo completo.
-2. Abre la carpeta `plantillas/`.
-3. Empieza por `curriculum-ia-personal.md`.
-4. Continúa con `contexto-maestro-proyecto.md`.
-5. Cierra la configuración con `instrucciones-trabajo-proyecto-ia.md`.
-6. Copia las skills que necesites en tu herramienta de IA.
-7. Usa `checklist-final.md` para verificar que tu arranque está listo.
-
-El archivo `01-audio-guia-script-tts.md` es el guion fuente del futuro audio
-guía breve. En esta versión de revisión no se incluye MP3 final.
+2. Escucha `01-audio-guia.mp3` mientras trabajas o de fondo (~5 min).
+3. Abre la carpeta `plantillas/`.
+4. Empieza por `curriculum-ia-personal.md`.
+5. Continúa con `contexto-maestro-proyecto.md`.
+6. Cierra la configuración con `instrucciones-trabajo-proyecto-ia.md`.
+7. Copia las skills que necesites en tu herramienta de IA.
+8. Crea tu `CLAUDE.md` a partir de `plantillas/CLAUDE.md` si usas Claude Code,
+   Codex o proyectos con contexto largo.
+9. Usa `checklist-final.md` para verificar que tu arranque está listo.
 
 ## 13. Garantía de calidad
 

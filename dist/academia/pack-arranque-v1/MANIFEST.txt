@@ -1,39 +1,39 @@
-Nombre: Pack Arranque IA v1
+Nombre: Pack Arranque IA
 Subtítulo: Prepara tu agente y tu flujo de trabajo
-Marca: IAFlashElite
-Versión: v1.1-review
-Fecha: 2026-05-25
+Marca: IAFlashElite Academy
+Versión: v1.0.0
+Fecha: 2026-05-28
 
 Posicionamiento:
 El flujo de arranque que usamos en IAFlashElite para preparar a nuevos
 colaboradores y agentes IA antes de tocar un proyecto real.
 
-Archivos incluidos:
+Archivos incluidos en este paquete:
 - LEEME.md
 - MANIFEST.txt
-- manual-pack-arranque-ia.md
-- pdf-style.css
-- audio-guia-script.md
-- audio-guia-script-tts.md
-- 01-audio-guia.mp3 (audio final; en fuente: audio/01-audio-guia.mp3)
+- 00-pack-arranque-ia.pdf
+- 01-audio-guia.mp3
 - checklist-final.md
 - garantia-calidad.md
-- templates/curriculum-ia-personal.md
-- templates/contexto-maestro-proyecto.md
-- templates/instrucciones-trabajo-proyecto-ia.md
-- templates/skill-planificador-diario.md
-- templates/skill-auditoria-quirurgica.md
-- templates/skill-revisor-ideas.md
-- templates/skill-creador-prompts-tecnicos.md
-- templates/skill-checklist-final-entrega.md
-- templates/CLAUDE.md
+- plantillas/curriculum-ia-personal.md
+- plantillas/contexto-maestro-proyecto.md
+- plantillas/instrucciones-trabajo-proyecto-ia.md
+- plantillas/CLAUDE.md
+- plantillas/skill-planificador-diario.md
+- plantillas/skill-auditoria-quirurgica.md
+- plantillas/skill-revisor-ideas.md
+- plantillas/skill-creador-prompts-tecnicos.md
+- plantillas/skill-checklist-final-entrega.md
 
-Audio final:
+Audio guía:
 - Archivo: 01-audio-guia.mp3
 - Formato: MP3
 - Duración aproximada: 5 min 24 s
-- Uso: audio guía breve de acompañamiento para seguir el pack con más claridad.
+- Uso: acompañamiento para seguir el pack con más claridad.
 
-Nota:
-Contenido fuente y paquete de revisión preparados para QA editorial.
-No es todavía el producto descargable publicado ni está conectado a la web.
+Garantía:
+- 14 días sobre la calidad y completitud del material descargable.
+- Texto completo en garantia-calidad.md.
+
+Soporte:
+- iaflashelite@gmail.com
