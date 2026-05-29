@@ -3,8 +3,8 @@ import {
 	Brain,
 	CheckCircle2,
 	FileText,
+	Lock,
 	type LucideIcon,
-	Plug,
 	ScrollText,
 	Shield,
 	ShieldCheck,
@@ -13,6 +13,9 @@ import {
 	X,
 } from "lucide-react";
 import type { Metadata } from "next";
+import { ComparisonTable } from "@/components/kenvo/comparison-table";
+import { KenvoFaq } from "@/components/kenvo/faq";
+import { MacFirstRun } from "@/components/kenvo/mac-first-run";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { Button } from "@/components/ui/button";
@@ -20,11 +23,11 @@ import { Button } from "@/components/ui/button";
 export const metadata: Metadata = {
 	title: "Kenvo — Workspace IA privado para profesionales",
 	description:
-		"Tu asistente IA que corre en tu ordenador. Sin nube, sin suscripción. Tus datos, solo tuyos. Pago único.",
+		"Workspace de IA que corre en tu ordenador, sin servidores intermediarios. Multi-agente, memoria persistente y tus datos cifrados en disco. Pago único.",
 	openGraph: {
-		title: "Kenvo — Workspace IA privado",
+		title: "Kenvo — Workspace IA privado y local",
 		description:
-			"Workspace completo de IA que corre en tu ordenador. Sin datos en la nube.",
+			"Tu IA privada y local. Sin servidores intermediarios. Pago único, mejoras de por vida.",
 		type: "website",
 	},
 };
@@ -32,11 +35,11 @@ export const metadata: Metadata = {
 const PROBLEMS = [
 	{
 		title: "Tus conversaciones en servidores ajenos",
-		text: "Cada mensaje que mandas a ChatGPT o Claude web queda en servidores de empresas americanas. Sin control real sobre qué hacen con ellos.",
+		text: "Cada mensaje que mandas a un chat de IA en su web queda en servidores de empresas de fuera de la UE. Sin control real sobre qué hacen con ellos.",
 	},
 	{
 		title: "RGPD y el AI Act aprietan en 2026",
-		text: "La regulación europea exige saber dónde están tus datos. La nube no te lo puede garantizar con la misma certeza que tu propio ordenador.",
+		text: "La regulación europea exige saber dónde están tus datos. La nube no te lo garantiza con la misma certeza que tu propio ordenador.",
 	},
 	{
 		title: "El contexto que pierdes cada sesión",
@@ -52,7 +55,7 @@ const FEATURES: ReadonlyArray<{
 	{
 		icon: Shield,
 		title: "Privado por arquitectura",
-		text: "Corre en 127.0.0.1. Cero telemetría. Código auditable. RGPD por diseño.",
+		text: "Corre en 127.0.0.1, sin telemetría y con código auditable. Con Ollama en local es modo privacidad total: nada sale de tu equipo.",
 	},
 	{
 		icon: Brain,
@@ -67,36 +70,36 @@ const FEATURES: ReadonlyArray<{
 	{
 		icon: FileText,
 		title: "RAG sobre tus documentos",
-		text: "Sube PDFs y el agente los lee y responde. Sin subir nada a ningún servidor.",
+		text: "Arrastra tus PDFs y el agente los lee y responde. La indexación ocurre en tu ordenador.",
 	},
 	{
-		icon: Plug,
-		title: "Conecta tus herramientas",
-		text: "MCP integrado: GitHub, Notion, Drive, Slack. Sin intermediarios.",
+		icon: Lock,
+		title: "Tus datos, cifrados en disco",
+		text: "Conversaciones, memoria y documentos se cifran en reposo (AES-256). Si te roban el equipo, no leen nada.",
 	},
 	{
 		icon: ScrollText,
 		title: "Audit log RGPD-completo",
-		text: "Ve exactamente qué hizo la IA, cuándo y por qué. Sin secretos.",
+		text: "Ve qué hizo la IA, cuándo y por qué. Y borra todos tus datos cuando quieras, de verdad.",
 	},
 ];
 
 const STEPS = [
 	{
 		title: "Descarga e instala",
-		text: "Un comando en terminal o instalador .dmg/.exe. Node.js es el único requisito.",
+		text: "Descarga el instalador .dmg y arrastra Kenvo a Aplicaciones. Sin Node.js, sin terminal.",
 	},
 	{
-		title: "Configura tu workspace",
-		text: "kenvo setup te guía por terminal. Nombre, tipo de workspace, API key de tu proveedor IA favorito.",
+		title: "Ábrelo y conéctalo",
+		text: "Un asistente visual te guía: elige tu motor de IA (Ollama local o tu clave cloud) y verifica la conexión. Dos minutos.",
 	},
 	{
 		title: "Añade tu contexto",
-		text: "Pon tus documentos en ~/.kenvo/documents/ y tus notas en ~/.kenvo/knowledge/. El agente los indexa automáticamente.",
+		text: "Arrastra tus documentos desde la app. Kenvo los indexa en local para responder sobre ellos.",
 	},
 	{
 		title: "Empieza a trabajar",
-		text: "Abre Kenvo, elige tu agente y empieza. La IA recuerda y aprende con cada sesión.",
+		text: "Elige tu agente y trabaja. Kenvo recuerda y aprende con cada sesión.",
 	},
 ] as const;
 
@@ -110,7 +113,7 @@ const FOR_YES = [
 
 const FOR_NO = [
 	"Quienes buscan un chatbot genérico de nube",
-	"Quienes no quieren configurar nada técnico",
+	"Quienes quieren una IA que actúe sola sin supervisión",
 	"Quienes necesitan IA en todos sus dispositivos a la vez",
 	"Quienes prefieren pago mensual a pago único",
 ] as const;
@@ -119,20 +122,23 @@ const NOT_PROMISED = [
 	"No gestiona tus impuestos ni emite facturas",
 	"No garantiza cumplimiento legal automático",
 	"No actúa de forma autónoma sin tu aprobación",
-	"No funciona sin conexión a internet para el LLM (a menos que uses Ollama local)",
+	"No conecta (todavía) con herramientas externas vía MCP — está en el roadmap",
+	"No funciona sin internet para el LLM, salvo que uses Ollama en local",
 	"No sustituye el criterio profesional del usuario",
 ] as const;
 
 const INCLUDED = [
-	"Workspace IA privado y local (Mac + Windows)",
+	"Workspace IA privado y local (Mac · Windows pronto)",
 	"Multi-agente: asistente, analista, redactor",
 	"Memoria semántica persistente local",
 	"RAG sobre tus documentos sin subir nada",
-	"MCP: conecta tus herramientas existentes",
-	"Audit log RGPD-completo",
+	"Tus datos cifrados en disco (AES-256)",
+	"Audit log RGPD y borrado total de datos",
+	"Onboarding visual sin terminal",
 	"Pago único — tuyo para siempre",
-	"Acceso prioritario a la beta privada",
+	"Mejoras de por vida incluidas",
 	"Canal directo con el fundador",
+	"14 días de garantía de devolución",
 	"Precio bloqueado para los fundadores",
 ] as const;
 
@@ -168,9 +174,14 @@ export default function KenvoPage() {
 									privado y local
 								</h1>
 								<p className="max-w-2xl text-xl font-semibold leading-8 text-paper sm:text-2xl">
-									No es un chatbot. No es SaaS. Es un workspace completo que
-									corre en tu ordenador. Tus datos no salen de tu máquina.
-									Nunca.
+									No es un chatbot. No es SaaS. Es un workspace de IA que corre
+									en tu ordenador, sin servidores intermediarios.
+								</p>
+								<p className="max-w-2xl text-sm leading-7 text-text-secondary">
+									Kenvo no almacena tus datos en ningún servidor. Con Ollama
+									(recomendado) nada sale de tu ordenador. Con un proveedor
+									cloud, sale lo mismo que cuando usas su web oficial — ni más,
+									ni menos.
 								</p>
 							</div>
 
@@ -221,14 +232,14 @@ export default function KenvoPage() {
 								Lo esencial
 							</p>
 							<h2 className="mt-4 text-2xl font-bold tracking-tight text-paper">
-								IA seria sin entregar tus datos a nadie.
+								IA seria, sin servidores intermediarios.
 							</h2>
 							<ul className="mt-6 flex flex-col gap-3">
 								{[
-									"Corre en tu Mac o Windows",
-									"Tus datos nunca salen de tu ordenador",
-									"Pago único, tuyo para siempre",
-									"Precio bloqueado para los fundadores",
+									"Corre en tu Mac (Windows pronto)",
+									"Con Ollama, nada sale de tu equipo",
+									"Tus datos cifrados en disco",
+									"Pago único, mejoras de por vida",
 								].map((item) => (
 									<li
 										key={item}
@@ -239,6 +250,9 @@ export default function KenvoPage() {
 									</li>
 								))}
 							</ul>
+							<div className="mt-6 flex items-center justify-center rounded-2xl border border-dashed border-white/15 bg-white/[0.02] px-4 py-6 text-center text-xs text-text-muted">
+								▸ Vídeo demo en camino
+							</div>
 						</aside>
 					</div>
 				</section>
@@ -251,7 +265,7 @@ export default function KenvoPage() {
 								El problema
 							</span>
 							<h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-								La IA que usas hoy envía tus datos a servidores de EEUU.
+								La IA que usas hoy envía tus datos fuera de la UE.
 							</h2>
 							<p className="mt-4 text-sm leading-7 text-gray-600">
 								Para un profesional europeo con datos sensibles, eso es un
@@ -292,8 +306,8 @@ export default function KenvoPage() {
 								Un workspace completo en tu ordenador.
 							</h2>
 							<p className="mt-4 text-sm leading-7 text-text-secondary">
-								Todo lo que necesitas para trabajar con IA, sin enviar nada a
-								internet.
+								Todo lo que necesitas para trabajar con IA, sin servidores
+								intermediarios.
 							</p>
 						</div>
 
@@ -321,6 +335,9 @@ export default function KenvoPage() {
 					</div>
 				</section>
 
+				{/* ─── IA gratis vs Kenvo ───────────────────────────── */}
+				<ComparisonTable />
+
 				{/* ─── Cómo funciona ────────────────────────────────── */}
 				<section id="como-funciona" className="bg-white py-24 text-gray-900">
 					<div className="mx-auto max-w-6xl px-6 lg:px-8">
@@ -329,7 +346,7 @@ export default function KenvoPage() {
 								Cómo funciona
 							</span>
 							<h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-								En marcha en menos de 10 minutos.
+								En marcha en menos de 5 minutos.
 							</h2>
 						</div>
 
@@ -354,48 +371,47 @@ export default function KenvoPage() {
 					</div>
 				</section>
 
+				{/* ─── Primer arranque en Mac ───────────────────────── */}
+				<MacFirstRun />
+
 				{/* ─── Para quién es ────────────────────────────────── */}
-				<section className="relative border-y border-border-dark bg-onyx py-24">
-					<div
-						className="absolute inset-0 bg-dot-grid opacity-25"
-						aria-hidden
-					/>
-					<div className="relative mx-auto max-w-6xl px-6 lg:px-8">
+				<section className="bg-white py-24 text-gray-900">
+					<div className="mx-auto max-w-6xl px-6 lg:px-8">
 						<div className="max-w-2xl">
-							<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
+							<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-600">
 								Para quién es
 							</span>
-							<h2 className="mt-4 text-3xl font-bold tracking-tight text-paper sm:text-4xl">
+							<h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
 								Para profesionales con datos que proteger.
 							</h2>
 						</div>
 
 						<div className="mt-10 grid gap-6 lg:grid-cols-2">
-							<div className="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
-								<h3 className="text-lg font-semibold tracking-tight text-paper">
+							<div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
+								<h3 className="text-lg font-semibold tracking-tight">
 									Encaja contigo si eres…
 								</h3>
 								<ul className="mt-5 flex flex-col gap-3">
 									{FOR_YES.map((item) => (
 										<li
 											key={item}
-											className="flex items-start gap-3 text-sm leading-6 text-text-secondary"
+											className="flex items-start gap-3 text-sm leading-6 text-gray-600"
 										>
-											<CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-flash" />
+											<CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-600" />
 											<span>{item}</span>
 										</li>
 									))}
 								</ul>
 							</div>
-							<div className="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
-								<h3 className="text-lg font-semibold tracking-tight text-paper">
+							<div className="rounded-3xl border border-gray-200 bg-gray-50 p-8">
+								<h3 className="text-lg font-semibold tracking-tight">
 									No es para ti si…
 								</h3>
 								<ul className="mt-5 flex flex-col gap-3">
 									{FOR_NO.map((item) => (
 										<li
 											key={item}
-											className="flex items-start gap-3 text-sm leading-6 text-text-secondary"
+											className="flex items-start gap-3 text-sm leading-6 text-gray-600"
 										>
 											<X className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
 											<span>{item}</span>
@@ -408,29 +424,36 @@ export default function KenvoPage() {
 				</section>
 
 				{/* ─── Qué NO promete ───────────────────────────────── */}
-				<section className="bg-white py-24 text-gray-900">
-					<div className="mx-auto max-w-3xl px-6 lg:px-8">
+				<section className="relative border-y border-border-dark bg-onyx py-24">
+					<div
+						className="absolute inset-0 bg-dot-grid opacity-25"
+						aria-hidden
+					/>
+					<div className="relative mx-auto max-w-3xl px-6 lg:px-8">
 						<div className="max-w-2xl">
-							<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-600">
+							<span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
 								Sin humo
 							</span>
-							<h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+							<h2 className="mt-4 text-3xl font-bold tracking-tight text-paper sm:text-4xl">
 								Lo que Kenvo NO hace.
 							</h2>
 						</div>
-						<ul className="mt-8 flex flex-col gap-3 rounded-3xl border border-gray-200 bg-gray-50 p-8">
+						<ul className="mt-8 flex flex-col gap-3 rounded-3xl border border-white/10 bg-white/[0.04] p-8">
 							{NOT_PROMISED.map((item) => (
 								<li
 									key={item}
-									className="flex items-start gap-3 text-sm leading-6 text-gray-700"
+									className="flex items-start gap-3 text-sm leading-6 text-text-secondary"
 								>
-									<ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-gray-500" />
+									<ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-text-muted" />
 									<span>{item}</span>
 								</li>
 							))}
 						</ul>
 					</div>
 				</section>
+
+				{/* ─── FAQ ──────────────────────────────────────────── */}
+				<KenvoFaq />
 
 				{/* ─── Garantía ─────────────────────────────────────── */}
 				<section className="relative border-t border-border-dark bg-onyx py-24">
@@ -443,15 +466,14 @@ export default function KenvoPage() {
 							<Shield className="h-5 w-5" />
 						</span>
 						<span className="inline-flex w-fit rounded-full border border-flash/20 bg-flash/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-flash">
-							Garantía 4 meses
+							Garantía 14 días
 						</span>
 						<h2 className="text-3xl font-bold tracking-tight text-paper sm:text-4xl">
-							Garantía de entrega.
+							Pruébalo sin riesgo.
 						</h2>
 						<p className="max-w-xl text-base leading-7 text-text-secondary">
-							Si no entrego la versión completa de Kenvo en los próximos 4
-							meses, te devuelvo el dinero completo sin preguntas. El riesgo es
-							mío, no tuyo.
+							Te devuelvo el dinero en 14 días si Kenvo no es lo que esperabas.
+							Sin preguntas y sin letra pequeña. El riesgo es mío, no tuyo.
 						</p>
 					</div>
 				</section>
@@ -513,8 +535,8 @@ export default function KenvoPage() {
 									<ArrowRight className="h-4 w-4" />
 								</Button>
 								<p className="text-center text-xs leading-6 text-text-muted">
-									Pago único · Reservas tu plaza y te envío el enlace de pago y
-									los siguientes pasos · Garantía 4 meses
+									Pago único · Descarga inmediata tras el pago · 14 días de
+									garantía
 								</p>
 							</div>
 						</div>
