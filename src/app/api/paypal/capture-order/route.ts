@@ -1,351 +1,392 @@
 import { NextResponse } from "next/server";
 import {
-    GESTORIA_LOCAL_PRODUCT_SLUG,
-    GUARANTEE_POLICY_VERSION,
-    PACK_ARRANQUE_PRODUCT_SLUG,
-    PRODUCTS,
-    SISTEMA_IA_PRO_PRODUCT_SLUG,
-    calculateProductTotal,
+	calculateProductTotal,
+	GESTORIA_LOCAL_PRODUCT_SLUG,
+	GUARANTEE_POLICY_VERSION,
+	KENVO_MAC_ARM_PRODUCT_SLUG,
+	KENVO_MAC_INTEL_PRODUCT_SLUG,
+	PACK_ARRANQUE_PRODUCT_SLUG,
+	PRODUCTS,
+	SISTEMA_IA_PRO_PRODUCT_SLUG,
 } from "@/lib/constants";
 import {
-    getDownloadUrl,
-    sendDeliveryEmail,
-    sendGestoriaLocalDeliveryEmail,
-    sendPackArranqueDeliveryEmail,
-    sendSecureDownloadDeliveryEmail,
-    sendSistemaIaProDeliveryEmail,
+	getDownloadUrl,
+	sendDeliveryEmail,
+	sendGestoriaLocalDeliveryEmail,
+	sendKenvoDeliveryEmail,
+	sendPackArranqueDeliveryEmail,
+	sendSecureDownloadDeliveryEmail,
+	sendSistemaIaProDeliveryEmail,
 } from "@/lib/email";
 import {
-    isSecureDeliveryConfigured,
-    isSecureDownloadProduct,
+	isSecureDeliveryConfigured,
+	isSecureDownloadProduct,
 } from "@/lib/secure-downloads";
 
-const PAYPAL_API =
-    (process.env.PAYPAL_API_BASE ?? "https://api-m.paypal.com").replace(/\/+$/, "");
+const PAYPAL_API = (
+	process.env.PAYPAL_API_BASE ?? "https://api-m.paypal.com"
+).replace(/\/+$/, "");
 const GIRIS_URL = process.env.GIRIS_AGENT_URL ?? "http://localhost:5318";
 const GIRIS_TIMEOUT_MS = 5000;
 
 interface CaptureBody {
-    orderID?: string;
-    customerName?: string;
-    customerEmail?: string;
-    productSlug?: string;
-    addonIds?: unknown;
-    consentDigital?: boolean | null;
-    consentDigitalAt?: string | null;
-    consentTimestamp?: string | null;
-    policyVersion?: string | null;
-    consentSummary?: string | null;
+	orderID?: string;
+	customerName?: string;
+	customerEmail?: string;
+	productSlug?: string;
+	addonIds?: unknown;
+	consentDigital?: boolean | null;
+	consentDigitalAt?: string | null;
+	consentTimestamp?: string | null;
+	policyVersion?: string | null;
+	consentSummary?: string | null;
 }
 
 function readAddonIds(value: unknown): string[] {
-    if (!Array.isArray(value)) return [];
-    return value.filter((item): item is string => typeof item === "string");
+	if (!Array.isArray(value)) return [];
+	return value.filter((item): item is string => typeof item === "string");
 }
 
 async function getAccessToken(): Promise<string> {
-    const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ?? "";
-    const secret = process.env.PAYPAL_SECRET ?? "";
-    if (!clientId || !secret) throw new Error("paypal_credentials_missing");
-    const auth = Buffer.from(`${clientId}:${secret}`).toString("base64");
-    const res = await fetch(`${PAYPAL_API}/v1/oauth2/token`, {
-        method: "POST",
-        headers: {
-            Authorization: `Basic ${auth}`,
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: "grant_type=client_credentials",
-    });
-    if (!res.ok) {
-        const txt = await res.text().catch(() => "");
-        throw new Error(`paypal_token_${res.status}:${txt.slice(0, 200)}`);
-    }
-    const data = (await res.json()) as { access_token?: string };
-    if (!data.access_token) throw new Error("paypal_token_missing");
-    return data.access_token;
+	const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ?? "";
+	const secret = process.env.PAYPAL_SECRET ?? "";
+	if (!clientId || !secret) throw new Error("paypal_credentials_missing");
+	const auth = Buffer.from(`${clientId}:${secret}`).toString("base64");
+	const res = await fetch(`${PAYPAL_API}/v1/oauth2/token`, {
+		method: "POST",
+		headers: {
+			Authorization: `Basic ${auth}`,
+			"Content-Type": "application/x-www-form-urlencoded",
+		},
+		body: "grant_type=client_credentials",
+	});
+	if (!res.ok) {
+		const txt = await res.text().catch(() => "");
+		throw new Error(`paypal_token_${res.status}:${txt.slice(0, 200)}`);
+	}
+	const data = (await res.json()) as { access_token?: string };
+	if (!data.access_token) throw new Error("paypal_token_missing");
+	return data.access_token;
 }
 
 function getClientIp(request: Request): string {
-    const forwarded = request.headers.get("x-forwarded-for");
-    if (forwarded) {
-        const first = forwarded.split(",")[0]?.trim();
-        if (first) return first;
-    }
-    return request.headers.get("x-real-ip")?.trim() ?? "unknown";
+	const forwarded = request.headers.get("x-forwarded-for");
+	if (forwarded) {
+		const first = forwarded.split(",")[0]?.trim();
+		if (first) return first;
+	}
+	return request.headers.get("x-real-ip")?.trim() ?? "unknown";
 }
 
 interface PaypalCapture {
-    id?: string;
-    status?: string;
-    purchase_units?: Array<{
-        payments?: {
-            captures?: Array<{
-                amount?: { value?: string; currency_code?: string };
-                id?: string;
-                create_time?: string;
-            }>;
-        };
-    }>;
-    payer?: {
-        email_address?: string;
-    };
+	id?: string;
+	status?: string;
+	purchase_units?: Array<{
+		payments?: {
+			captures?: Array<{
+				amount?: { value?: string; currency_code?: string };
+				id?: string;
+				create_time?: string;
+			}>;
+		};
+	}>;
+	payer?: {
+		email_address?: string;
+	};
 }
 
 export async function POST(request: Request) {
-    let body: CaptureBody;
-    try {
-        body = (await request.json()) as CaptureBody;
-    } catch {
-        return NextResponse.json({ error: "invalid_json" }, { status: 400 });
-    }
+	let body: CaptureBody;
+	try {
+		body = (await request.json()) as CaptureBody;
+	} catch {
+		return NextResponse.json({ error: "invalid_json" }, { status: 400 });
+	}
 
-    const orderID = (body.orderID ?? "").trim();
-    if (!orderID) {
-        return NextResponse.json({ error: "missing_order_id" }, { status: 400 });
-    }
+	const orderID = (body.orderID ?? "").trim();
+	if (!orderID) {
+		return NextResponse.json({ error: "missing_order_id" }, { status: 400 });
+	}
 
-    const customerName = (body.customerName ?? "").trim();
-    const customerEmail = (body.customerEmail ?? "").trim();
-    const productSlug = (body.productSlug ?? "").trim();
-    const addonIds = readAddonIds(body.addonIds);
-    const consentDigital = body.consentDigital === true;
-    const consentDigitalAt = (body.consentDigitalAt ?? "").trim();
-    const consentTimestamp = (body.consentTimestamp ?? consentDigitalAt).trim();
-    const policyVersion =
-        (body.policyVersion ?? "").trim() || GUARANTEE_POLICY_VERSION;
-    const consentSummary = (body.consentSummary ?? "").trim();
+	const customerName = (body.customerName ?? "").trim();
+	const customerEmail = (body.customerEmail ?? "").trim();
+	const productSlug = (body.productSlug ?? "").trim();
+	const addonIds = readAddonIds(body.addonIds);
+	const consentDigital = body.consentDigital === true;
+	const consentDigitalAt = (body.consentDigitalAt ?? "").trim();
+	const consentTimestamp = (body.consentTimestamp ?? consentDigitalAt).trim();
+	const policyVersion =
+		(body.policyVersion ?? "").trim() || GUARANTEE_POLICY_VERSION;
+	const consentSummary = (body.consentSummary ?? "").trim();
 
-    if (!customerName || !customerEmail || !productSlug) {
-        return NextResponse.json({ error: "missing_customer_or_product" }, { status: 400 });
-    }
-    if (!/.+@.+\..+/.test(customerEmail)) {
-        return NextResponse.json({ error: "invalid_email" }, { status: 400 });
-    }
-    if (!consentDigital || !consentTimestamp) {
-        return NextResponse.json({ error: "missing_digital_consent" }, { status: 400 });
-    }
+	if (!customerName || !customerEmail || !productSlug) {
+		return NextResponse.json(
+			{ error: "missing_customer_or_product" },
+			{ status: 400 },
+		);
+	}
+	if (!/.+@.+\..+/.test(customerEmail)) {
+		return NextResponse.json({ error: "invalid_email" }, { status: 400 });
+	}
+	if (!consentDigital || !consentTimestamp) {
+		return NextResponse.json(
+			{ error: "missing_digital_consent" },
+			{ status: 400 },
+		);
+	}
 
-    const product = PRODUCTS.find((p) => p.slug === productSlug);
-    if (!product) {
-        return NextResponse.json({ error: "product_not_found" }, { status: 404 });
-    }
-    const calculated = calculateProductTotal(product.slug, product.price, addonIds);
-    if (!calculated) {
-        return NextResponse.json({ error: "invalid_addons" }, { status: 400 });
-    }
-    if (isSecureDownloadProduct(product.slug) && !isSecureDeliveryConfigured(product.slug)) {
-        return NextResponse.json(
-            { error: "secure_delivery_not_configured" },
-            { status: 503 },
-        );
-    }
+	const product = PRODUCTS.find((p) => p.slug === productSlug);
+	if (!product) {
+		return NextResponse.json({ error: "product_not_found" }, { status: 404 });
+	}
+	const calculated = calculateProductTotal(
+		product.slug,
+		product.price,
+		addonIds,
+	);
+	if (!calculated) {
+		return NextResponse.json({ error: "invalid_addons" }, { status: 400 });
+	}
+	if (
+		isSecureDownloadProduct(product.slug) &&
+		!isSecureDeliveryConfigured(product.slug)
+	) {
+		return NextResponse.json(
+			{ error: "secure_delivery_not_configured" },
+			{ status: 503 },
+		);
+	}
 
-    let captureData: PaypalCapture;
-    try {
-        const accessToken = await getAccessToken();
-        const captureRes = await fetch(
-            `${PAYPAL_API}/v2/checkout/orders/${encodeURIComponent(orderID)}/capture`,
-            {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                    "Content-Type": "application/json",
-                },
-            },
-        );
-        captureData = (await captureRes.json()) as PaypalCapture;
-        if (!captureRes.ok || captureData.status !== "COMPLETED") {
-            console.error("[paypal] capture failed:", captureRes.status, captureData);
-            return NextResponse.json(
-                { error: "capture_failed", status: captureData.status ?? null },
-                { status: 400 },
-            );
-        }
-    } catch (err) {
-        console.error("[paypal] capture exception:", err);
-        return NextResponse.json({ error: "capture_error" }, { status: 500 });
-    }
+	let captureData: PaypalCapture;
+	try {
+		const accessToken = await getAccessToken();
+		const captureRes = await fetch(
+			`${PAYPAL_API}/v2/checkout/orders/${encodeURIComponent(orderID)}/capture`,
+			{
+				method: "POST",
+				headers: {
+					Authorization: `Bearer ${accessToken}`,
+					"Content-Type": "application/json",
+				},
+			},
+		);
+		captureData = (await captureRes.json()) as PaypalCapture;
+		if (!captureRes.ok || captureData.status !== "COMPLETED") {
+			console.error("[paypal] capture failed:", captureRes.status, captureData);
+			return NextResponse.json(
+				{ error: "capture_failed", status: captureData.status ?? null },
+				{ status: 400 },
+			);
+		}
+	} catch (err) {
+		console.error("[paypal] capture exception:", err);
+		return NextResponse.json({ error: "capture_error" }, { status: 500 });
+	}
 
-    const capture = captureData.purchase_units?.[0]?.payments?.captures?.[0];
-    const amount = capture?.amount?.value ?? product.price.toFixed(2);
-    const currency = capture?.amount?.currency_code ?? "EUR";
-    const amountNumber = Number(amount);
-    if (!Number.isFinite(amountNumber) || amountNumber !== calculated.total) {
-        console.error("[paypal] amount mismatch:", {
-            expected: calculated.total,
-            received: amount,
-            product: product.slug,
-        });
-        return NextResponse.json({ error: "amount_mismatch" }, { status: 400 });
-    }
-    const paypalOrderId = captureData.id ?? orderID;
-    const paypalCaptureId = capture?.id ?? null;
-    const captureTime = capture?.create_time ?? new Date().toISOString();
-    const payerEmail = captureData.payer?.email_address ?? null;
-    const isSecureDownload = isSecureDownloadProduct(product.slug);
-    const downloadUrl = isSecureDownload ? null : getDownloadUrl(productSlug);
-    const deliveryStatus = isSecureDownload
-        ? "secure_email_delivery_requested"
-        : downloadUrl
-            ? "email_delivery_requested"
-            : "download_url_missing";
+	const capture = captureData.purchase_units?.[0]?.payments?.captures?.[0];
+	const amount = capture?.amount?.value ?? product.price.toFixed(2);
+	const currency = capture?.amount?.currency_code ?? "EUR";
+	const amountNumber = Number(amount);
+	if (!Number.isFinite(amountNumber) || amountNumber !== calculated.total) {
+		console.error("[paypal] amount mismatch:", {
+			expected: calculated.total,
+			received: amount,
+			product: product.slug,
+		});
+		return NextResponse.json({ error: "amount_mismatch" }, { status: 400 });
+	}
+	const paypalOrderId = captureData.id ?? orderID;
+	const paypalCaptureId = capture?.id ?? null;
+	const captureTime = capture?.create_time ?? new Date().toISOString();
+	const payerEmail = captureData.payer?.email_address ?? null;
+	const isSecureDownload = isSecureDownloadProduct(product.slug);
+	const downloadUrl = isSecureDownload ? null : getDownloadUrl(productSlug);
+	const deliveryStatus = isSecureDownload
+		? "secure_email_delivery_requested"
+		: downloadUrl
+			? "email_delivery_requested"
+			: "download_url_missing";
 
-    // Forward a giris-agent — fire-and-forget, no rompemos respuesta al cliente.
-    const forwardPayload = {
-        type: "order",
-        product: product.slug,
-        product_name: product.name,
-        product_type: product.type ?? "download",
-        price: product.price,
-        addons: calculated.selectedAddons.map((addon) => ({
-            id: addon.id,
-            name: addon.name,
-            price: addon.price,
-        })),
-        addons_total: calculated.addonsTotal,
-        total_price: calculated.total,
-        currency,
-        is_express: false,
-        express_surcharge: 0,
-        customer: { name: customerName, email: customerEmail },
-        payment_method: "paypal_direct",
-        payment_method_label: "PayPal (pago directo)",
-        paypal_order_id: paypalOrderId,
-        paypal_capture_id: paypalCaptureId,
-        paypal_payer_email: payerEmail,
-        paypal_capture_time: captureTime,
-        comments: "",
-        accepted_privacy: true,
-        accepted_at: new Date().toISOString(),
-        consent_digital: true,
-        consent_digital_at: consentTimestamp,
-        consent_timestamp: consentTimestamp,
-        consent_summary: consentSummary || null,
-        policy_version: policyVersion,
-        delivery_status: deliveryStatus,
-        ip: getClientIp(request),
-        user_agent: request.headers.get("user-agent") ?? "",
-    };
+	// Forward a giris-agent — fire-and-forget, no rompemos respuesta al cliente.
+	const forwardPayload = {
+		type: "order",
+		product: product.slug,
+		product_name: product.name,
+		product_type: product.type ?? "download",
+		price: product.price,
+		addons: calculated.selectedAddons.map((addon) => ({
+			id: addon.id,
+			name: addon.name,
+			price: addon.price,
+		})),
+		addons_total: calculated.addonsTotal,
+		total_price: calculated.total,
+		currency,
+		is_express: false,
+		express_surcharge: 0,
+		customer: { name: customerName, email: customerEmail },
+		payment_method: "paypal_direct",
+		payment_method_label: "PayPal (pago directo)",
+		paypal_order_id: paypalOrderId,
+		paypal_capture_id: paypalCaptureId,
+		paypal_payer_email: payerEmail,
+		paypal_capture_time: captureTime,
+		comments: "",
+		accepted_privacy: true,
+		accepted_at: new Date().toISOString(),
+		consent_digital: true,
+		consent_digital_at: consentTimestamp,
+		consent_timestamp: consentTimestamp,
+		consent_summary: consentSummary || null,
+		policy_version: policyVersion,
+		delivery_status: deliveryStatus,
+		ip: getClientIp(request),
+		user_agent: request.headers.get("user-agent") ?? "",
+	};
 
-    console.log(
-        `[PAYPAL_DOWNLOAD_ORDER] captured ${paypalOrderId}:`,
-        JSON.stringify(forwardPayload),
-    );
+	console.log(
+		`[PAYPAL_DOWNLOAD_ORDER] captured ${paypalOrderId}:`,
+		JSON.stringify(forwardPayload),
+	);
 
-    void (async () => {
-        const ctrl = new AbortController();
-        const timer = setTimeout(() => ctrl.abort(), GIRIS_TIMEOUT_MS);
-        try {
-            const res = await fetch(`${GIRIS_URL}/orders`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(forwardPayload),
-                signal: ctrl.signal,
-            });
-            if (!res.ok) {
-                console.error("[paypal capture] giris-agent respondió", res.status);
-            }
-        } catch (err) {
-            console.error("[paypal capture] giris forward error:", err);
-            console.error("[paypal capture] PAYLOAD (fallback):", JSON.stringify(forwardPayload));
-        } finally {
-            clearTimeout(timer);
-        }
-    })();
+	void (async () => {
+		const ctrl = new AbortController();
+		const timer = setTimeout(() => ctrl.abort(), GIRIS_TIMEOUT_MS);
+		try {
+			const res = await fetch(`${GIRIS_URL}/orders`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(forwardPayload),
+				signal: ctrl.signal,
+			});
+			if (!res.ok) {
+				console.error("[paypal capture] giris-agent respondió", res.status);
+			}
+		} catch (err) {
+			console.error("[paypal capture] giris forward error:", err);
+			console.error(
+				"[paypal capture] PAYLOAD (fallback):",
+				JSON.stringify(forwardPayload),
+			);
+		} finally {
+			clearTimeout(timer);
+		}
+	})();
 
-    // Entrega automática por email — fire-and-forget.
-    if (isSecureDownload && product.slug === PACK_ARRANQUE_PRODUCT_SLUG) {
-        void sendPackArranqueDeliveryEmail({
-            to: customerEmail,
-            customerName,
-            productName: product.name,
-            amount: String(calculated.total),
-            orderId: paypalOrderId,
-            transactionId: paypalCaptureId,
-            customerEmail,
-            policyVersion,
-            paymentMethodLabel: "PayPal / Tarjeta",
-        }).catch((err) => {
-            console.error(
-                "[paypal capture] Pack Arranque delivery email error:",
-                err,
-            );
-        });
-    } else if (isSecureDownload && product.slug === SISTEMA_IA_PRO_PRODUCT_SLUG) {
-        void sendSistemaIaProDeliveryEmail({
-            to: customerEmail,
-            customerName,
-            productName: product.name,
-            amount: String(calculated.total),
-            orderId: paypalOrderId,
-            transactionId: paypalCaptureId,
-            customerEmail,
-            policyVersion,
-            paymentMethodLabel: "PayPal / Tarjeta",
-        }).catch((err) => {
-            console.error(
-                "[paypal capture] Sistema IA Pro delivery email error:",
-                err,
-            );
-        });
-    } else if (isSecureDownload) {
-        void sendSecureDownloadDeliveryEmail({
-            to: customerEmail,
-            customerName,
-            productName: product.name,
-            productSlug: product.slug,
-            amount: String(calculated.total),
-            orderId: paypalOrderId,
-            transactionId: paypalCaptureId,
-            customerEmail,
-            policyVersion,
-            paymentMethodLabel: "PayPal / Tarjeta",
-        }).catch((err) => {
-            console.error("[paypal capture] secure delivery email error:", err);
-        });
-    } else if (product.slug === GESTORIA_LOCAL_PRODUCT_SLUG) {
-        void sendGestoriaLocalDeliveryEmail({
-            to: customerEmail,
-            customerName,
-            productName: product.name,
-            amount: String(calculated.total),
-            orderId: paypalOrderId,
-            transactionId: paypalCaptureId,
-            customerEmail,
-            policyVersion,
-            selectedAddons: calculated.selectedAddons,
-            paymentMethodLabel: "PayPal / Tarjeta",
-        }).catch((err) => {
-            console.error("[paypal capture] GestorIA delivery email error:", err);
-        });
-    } else if (downloadUrl) {
-        void sendDeliveryEmail({
-            to: customerEmail,
-            customerName,
-            productName: product.name,
-            productSlug,
-            downloadUrl,
-            amount: String(calculated.total),
-            orderId: paypalOrderId,
-            transactionId: paypalCaptureId,
-            customerEmail,
-            policyVersion,
-        }).catch((err) => {
-            console.error("[paypal capture] delivery email error:", err);
-        });
-    } else {
-        console.error(`[paypal capture] sin URL de descarga para slug: ${productSlug}`);
-    }
+	// Entrega automática por email — fire-and-forget.
+	if (isSecureDownload && product.slug === PACK_ARRANQUE_PRODUCT_SLUG) {
+		void sendPackArranqueDeliveryEmail({
+			to: customerEmail,
+			customerName,
+			productName: product.name,
+			amount: String(calculated.total),
+			orderId: paypalOrderId,
+			transactionId: paypalCaptureId,
+			customerEmail,
+			policyVersion,
+			paymentMethodLabel: "PayPal / Tarjeta",
+		}).catch((err) => {
+			console.error(
+				"[paypal capture] Pack Arranque delivery email error:",
+				err,
+			);
+		});
+	} else if (isSecureDownload && product.slug === SISTEMA_IA_PRO_PRODUCT_SLUG) {
+		void sendSistemaIaProDeliveryEmail({
+			to: customerEmail,
+			customerName,
+			productName: product.name,
+			amount: String(calculated.total),
+			orderId: paypalOrderId,
+			transactionId: paypalCaptureId,
+			customerEmail,
+			policyVersion,
+			paymentMethodLabel: "PayPal / Tarjeta",
+		}).catch((err) => {
+			console.error(
+				"[paypal capture] Sistema IA Pro delivery email error:",
+				err,
+			);
+		});
+	} else if (
+		isSecureDownload &&
+		(product.slug === KENVO_MAC_ARM_PRODUCT_SLUG ||
+			product.slug === KENVO_MAC_INTEL_PRODUCT_SLUG)
+	) {
+		void sendKenvoDeliveryEmail({
+			to: customerEmail,
+			customerName,
+			productName: product.name,
+			productSlug: product.slug,
+			amount: String(calculated.total),
+			orderId: paypalOrderId,
+			transactionId: paypalCaptureId,
+			customerEmail,
+			policyVersion,
+			paymentMethodLabel: "PayPal / Tarjeta",
+		}).catch((err) => {
+			console.error("[paypal capture] Kenvo delivery email error:", err);
+		});
+	} else if (isSecureDownload) {
+		void sendSecureDownloadDeliveryEmail({
+			to: customerEmail,
+			customerName,
+			productName: product.name,
+			productSlug: product.slug,
+			amount: String(calculated.total),
+			orderId: paypalOrderId,
+			transactionId: paypalCaptureId,
+			customerEmail,
+			policyVersion,
+			paymentMethodLabel: "PayPal / Tarjeta",
+		}).catch((err) => {
+			console.error("[paypal capture] secure delivery email error:", err);
+		});
+	} else if (product.slug === GESTORIA_LOCAL_PRODUCT_SLUG) {
+		void sendGestoriaLocalDeliveryEmail({
+			to: customerEmail,
+			customerName,
+			productName: product.name,
+			amount: String(calculated.total),
+			orderId: paypalOrderId,
+			transactionId: paypalCaptureId,
+			customerEmail,
+			policyVersion,
+			selectedAddons: calculated.selectedAddons,
+			paymentMethodLabel: "PayPal / Tarjeta",
+		}).catch((err) => {
+			console.error("[paypal capture] GestorIA delivery email error:", err);
+		});
+	} else if (downloadUrl) {
+		void sendDeliveryEmail({
+			to: customerEmail,
+			customerName,
+			productName: product.name,
+			productSlug,
+			downloadUrl,
+			amount: String(calculated.total),
+			orderId: paypalOrderId,
+			transactionId: paypalCaptureId,
+			customerEmail,
+			policyVersion,
+		}).catch((err) => {
+			console.error("[paypal capture] delivery email error:", err);
+		});
+	} else {
+		console.error(
+			`[paypal capture] sin URL de descarga para slug: ${productSlug}`,
+		);
+	}
 
-    return NextResponse.json({
-        ok: true,
-        paypalOrderId,
-        amount: calculated.total,
-        currency,
-        downloadUrl: downloadUrl ?? null,
-        policyVersion,
-        deliveryStatus,
-    });
+	return NextResponse.json({
+		ok: true,
+		paypalOrderId,
+		amount: calculated.total,
+		currency,
+		downloadUrl: downloadUrl ?? null,
+		policyVersion,
+		deliveryStatus,
+	});
 }
 
 export const runtime = "nodejs";

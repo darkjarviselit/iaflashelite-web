@@ -1,133 +1,138 @@
 import nodemailer, { type Transporter } from "nodemailer";
+import { renderKenvoDeliveryEmail } from "@/components/emails/kenvo-delivery";
 import {
-    GESTORIA_LOCAL_ASSISTANCE_ADDON_ID,
-    GESTORIA_LOCAL_DELIVERY_LINKS,
-    GESTORIA_LOCAL_PRODUCT_SLUG,
-    PACK_ARRANQUE_PRODUCT_SLUG,
-    SISTEMA_IA_PRO_PRODUCT_SLUG,
-    type ProductAddon,
+	GESTORIA_LOCAL_ASSISTANCE_ADDON_ID,
+	GESTORIA_LOCAL_DELIVERY_LINKS,
+	GESTORIA_LOCAL_PRODUCT_SLUG,
+	KENVO_MAC_ARM_PRODUCT_SLUG,
+	PACK_ARRANQUE_PRODUCT_SLUG,
+	type ProductAddon,
+	SISTEMA_IA_PRO_PRODUCT_SLUG,
 } from "@/lib/constants";
 import {
-    createSecureDownloadUrl,
-    getSecureDownloadProduct,
+	createSecureDownloadUrl,
+	getSecureDownloadProduct,
 } from "@/lib/secure-downloads";
 
 let cachedTransporter: Transporter | null = null;
 
 function getTransporter(): Transporter {
-    if (cachedTransporter) return cachedTransporter;
-    cachedTransporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: process.env.GMAIL_USER,
-            pass: process.env.GMAIL_APP_PASSWORD,
-        },
-    });
-    return cachedTransporter;
+	if (cachedTransporter) return cachedTransporter;
+	cachedTransporter = nodemailer.createTransport({
+		service: "gmail",
+		auth: {
+			user: process.env.GMAIL_USER,
+			pass: process.env.GMAIL_APP_PASSWORD,
+		},
+	});
+	return cachedTransporter;
 }
 
 export interface DeliveryEmailParams {
-    to: string;
-    customerName: string;
-    productName: string;
-    productSlug: string;
-    downloadUrl: string;
-    amount: string;
-    customerEmail?: string;
-    orderId?: string | null;
-    transactionId?: string | null;
-    policyVersion?: string;
-    deliverySource?: "paypal_direct" | "manual_delivery";
+	to: string;
+	customerName: string;
+	productName: string;
+	productSlug: string;
+	downloadUrl: string;
+	amount: string;
+	customerEmail?: string;
+	orderId?: string | null;
+	transactionId?: string | null;
+	policyVersion?: string;
+	deliverySource?: "paypal_direct" | "manual_delivery";
 }
 
 export interface GestoriaLocalDeliveryEmailParams {
-    to: string;
-    customerName: string;
-    productName: string;
-    amount: string;
-    customerEmail?: string;
-    orderId?: string | null;
-    transactionId?: string | null;
-    policyVersion?: string;
-    selectedAddons?: readonly ProductAddon[];
-    paymentMethodLabel?: string;
+	to: string;
+	customerName: string;
+	productName: string;
+	amount: string;
+	customerEmail?: string;
+	orderId?: string | null;
+	transactionId?: string | null;
+	policyVersion?: string;
+	selectedAddons?: readonly ProductAddon[];
+	paymentMethodLabel?: string;
 }
 
 export interface PackArranqueDeliveryEmailParams {
-    to: string;
-    customerName: string;
-    productName: string;
-    amount: string;
-    customerEmail?: string;
-    orderId?: string | null;
-    transactionId?: string | null;
-    policyVersion?: string;
-    paymentMethodLabel?: string;
+	to: string;
+	customerName: string;
+	productName: string;
+	amount: string;
+	customerEmail?: string;
+	orderId?: string | null;
+	transactionId?: string | null;
+	policyVersion?: string;
+	paymentMethodLabel?: string;
 }
 
 export interface SecureDownloadDeliveryEmailParams
-    extends PackArranqueDeliveryEmailParams {
-    productSlug: string;
+	extends PackArranqueDeliveryEmailParams {
+	productSlug: string;
 }
 
 // Slugs reales del catálogo (constants.ts). Las env vars siguen la convención
 // DOWNLOAD_URL_<SLUG_UPPER_SNAKE>. Las URLs se generan con scripts/upload-zips.mjs.
 const DOWNLOAD_URL_BY_SLUG: Record<string, () => string | undefined> = {
-    [GESTORIA_LOCAL_PRODUCT_SLUG]: () =>
-        publicUrl(GESTORIA_LOCAL_DELIVERY_LINKS.package),
-    [PACK_ARRANQUE_PRODUCT_SLUG]: () => undefined,
-    [SISTEMA_IA_PRO_PRODUCT_SLUG]: () => undefined,
-    "generador-contrasenas-basico": () => process.env.DOWNLOAD_URL_GENERADOR_CONTRASENAS_BASICO,
-    "verificador-urls": () => process.env.DOWNLOAD_URL_VERIFICADOR_URLS,
-    "anti-phishing": () => process.env.DOWNLOAD_URL_ANTI_PHISHING,
-    "auditor-web": () => process.env.DOWNLOAD_URL_AUDITOR_WEB,
-    "backup-cifrado": () => process.env.DOWNLOAD_URL_BACKUP_CIFRADO,
+	[GESTORIA_LOCAL_PRODUCT_SLUG]: () =>
+		publicUrl(GESTORIA_LOCAL_DELIVERY_LINKS.package),
+	[PACK_ARRANQUE_PRODUCT_SLUG]: () => undefined,
+	[SISTEMA_IA_PRO_PRODUCT_SLUG]: () => undefined,
+	"generador-contrasenas-basico": () =>
+		process.env.DOWNLOAD_URL_GENERADOR_CONTRASENAS_BASICO,
+	"verificador-urls": () => process.env.DOWNLOAD_URL_VERIFICADOR_URLS,
+	"anti-phishing": () => process.env.DOWNLOAD_URL_ANTI_PHISHING,
+	"auditor-web": () => process.env.DOWNLOAD_URL_AUDITOR_WEB,
+	"backup-cifrado": () => process.env.DOWNLOAD_URL_BACKUP_CIFRADO,
 };
 
 function publicUrl(path: string): string {
-    const siteUrl = (
-        process.env.NEXT_PUBLIC_SITE_URL ?? "https://iaflashelite-web.vercel.app"
-    ).replace(/\/+$/, "");
-    return `${siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
+	const siteUrl = (
+		process.env.NEXT_PUBLIC_SITE_URL ?? "https://iaflashelite-web.vercel.app"
+	).replace(/\/+$/, "");
+	return `${siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
 export function getDownloadUrl(productSlug: string): string | null {
-    const resolver = DOWNLOAD_URL_BY_SLUG[productSlug];
-    if (!resolver) return null;
-    const url = resolver();
-    return url && url.trim() ? url.trim() : null;
+	const resolver = DOWNLOAD_URL_BY_SLUG[productSlug];
+	if (!resolver) return null;
+	const url = resolver();
+	return url && url.trim() ? url.trim() : null;
 }
 
-export async function sendDeliveryEmail(params: DeliveryEmailParams): Promise<boolean> {
-    const {
-        to,
-        customerName,
-        productName,
-        downloadUrl,
-        amount,
-        customerEmail,
-        orderId,
-        transactionId,
-        policyVersion,
-    } = params;
-    const user = (process.env.GMAIL_USER ?? "").trim();
-    if (!user || !(process.env.GMAIL_APP_PASSWORD ?? "").trim()) {
-        console.error("[email] GMAIL_USER / GMAIL_APP_PASSWORD no configurados");
-        return false;
-    }
-    const deliveredAt = new Date().toISOString();
-    const buyerEmail = customerEmail ?? to;
-    const orderLine = orderId
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Pedido PayPal:</strong> ${escapeHtml(orderId)}</p>`
-        : "";
-    const transactionLine = transactionId
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Transacción:</strong> ${escapeHtml(transactionId)}</p>`
-        : "";
-    const policyLine = policyVersion
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Política aplicada:</strong> ${escapeHtml(policyVersion)}</p>`
-        : "";
+export async function sendDeliveryEmail(
+	params: DeliveryEmailParams,
+): Promise<boolean> {
+	const {
+		to,
+		customerName,
+		productName,
+		downloadUrl,
+		amount,
+		customerEmail,
+		orderId,
+		transactionId,
+		policyVersion,
+	} = params;
+	const user = (process.env.GMAIL_USER ?? "").trim();
+	if (!user || !(process.env.GMAIL_APP_PASSWORD ?? "").trim()) {
+		console.error("[email] GMAIL_USER / GMAIL_APP_PASSWORD no configurados");
+		return false;
+	}
+	const deliveredAt = new Date().toISOString();
+	const buyerEmail = customerEmail ?? to;
+	const orderLine = orderId
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Pedido PayPal:</strong> ${escapeHtml(orderId)}</p>`
+		: "";
+	const transactionLine = transactionId
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Transacción:</strong> ${escapeHtml(transactionId)}</p>`
+		: "";
+	const policyLine = policyVersion
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Política aplicada:</strong> ${escapeHtml(policyVersion)}</p>`
+		: "";
 
-    const html = `<!DOCTYPE html>
+	const html = `<!DOCTYPE html>
 <html lang="es">
 <head><meta charset="UTF-8"></head>
 <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
@@ -187,99 +192,99 @@ export async function sendDeliveryEmail(params: DeliveryEmailParams): Promise<bo
 </body>
 </html>`;
 
-    const text = [
-        `Hola ${customerName},`,
-        ``,
-        `Tu pedido está listo. Hemos iniciado la entrega digital solicitada de ${productName} por ${amount}€.`,
-        `Email comprador: ${buyerEmail}`,
-        `Fecha de entrega: ${deliveredAt}`,
-        orderId ? `Pedido PayPal: ${orderId}` : ``,
-        transactionId ? `Transacción: ${transactionId}` : ``,
-        policyVersion ? `Política aplicada: ${policyVersion}` : ``,
-        ``,
-        `Descarga tu ${productName} aquí:`,
-        ``,
-        downloadUrl,
-        ``,
-        `Garantía Flash: si el enlace falla, el archivo está dañado o el producto no funciona según lo descrito, responde a este email y lo revisamos contigo.`,
-        `Al haberse iniciado la entrega digital solicitada, el derecho de desistimiento de 14 días deja de aplicarse cuando empieza el acceso, descarga o envío.`,
-        `Cualquier duda: iaflashelite@gmail.com`,
-        ``,
-        `— iaflashelite`,
-    ].join("\n");
+	const text = [
+		`Hola ${customerName},`,
+		``,
+		`Tu pedido está listo. Hemos iniciado la entrega digital solicitada de ${productName} por ${amount}€.`,
+		`Email comprador: ${buyerEmail}`,
+		`Fecha de entrega: ${deliveredAt}`,
+		orderId ? `Pedido PayPal: ${orderId}` : ``,
+		transactionId ? `Transacción: ${transactionId}` : ``,
+		policyVersion ? `Política aplicada: ${policyVersion}` : ``,
+		``,
+		`Descarga tu ${productName} aquí:`,
+		``,
+		downloadUrl,
+		``,
+		`Garantía Flash: si el enlace falla, el archivo está dañado o el producto no funciona según lo descrito, responde a este email y lo revisamos contigo.`,
+		`Al haberse iniciado la entrega digital solicitada, el derecho de desistimiento de 14 días deja de aplicarse cuando empieza el acceso, descarga o envío.`,
+		`Cualquier duda: iaflashelite@gmail.com`,
+		``,
+		`— iaflashelite`,
+	].join("\n");
 
-    try {
-        await getTransporter().sendMail({
-            from: `"iaflashelite" <${user}>`,
-            to,
-            subject: `✅ Tu descarga: ${productName} — iaflashelite`,
-            text,
-            html,
-        });
-        console.log(`[email] Entrega enviada a ${to} para ${productName}`);
-        return true;
-    } catch (error) {
-        console.error("[email] Error enviando entrega:", error);
-        return false;
-    }
+	try {
+		await getTransporter().sendMail({
+			from: `"iaflashelite" <${user}>`,
+			to,
+			subject: `✅ Tu descarga: ${productName} — iaflashelite`,
+			text,
+			html,
+		});
+		console.log(`[email] Entrega enviada a ${to} para ${productName}`);
+		return true;
+	} catch (error) {
+		console.error("[email] Error enviando entrega:", error);
+		return false;
+	}
 }
 
 export async function sendGestoriaLocalDeliveryEmail(
-    params: GestoriaLocalDeliveryEmailParams,
+	params: GestoriaLocalDeliveryEmailParams,
 ): Promise<boolean> {
-    const {
-        to,
-        customerName,
-        productName,
-        amount,
-        customerEmail,
-        orderId,
-        transactionId,
-        policyVersion,
-        selectedAddons = [],
-        paymentMethodLabel,
-    } = params;
-    const user = (process.env.GMAIL_USER ?? "").trim();
-    if (!user || !(process.env.GMAIL_APP_PASSWORD ?? "").trim()) {
-        console.error("[email] GMAIL_USER / GMAIL_APP_PASSWORD no configurados");
-        return false;
-    }
+	const {
+		to,
+		customerName,
+		productName,
+		amount,
+		customerEmail,
+		orderId,
+		transactionId,
+		policyVersion,
+		selectedAddons = [],
+		paymentMethodLabel,
+	} = params;
+	const user = (process.env.GMAIL_USER ?? "").trim();
+	if (!user || !(process.env.GMAIL_APP_PASSWORD ?? "").trim()) {
+		console.error("[email] GMAIL_USER / GMAIL_APP_PASSWORD no configurados");
+		return false;
+	}
 
-    const deliveredAt = new Date().toISOString();
-    const buyerEmail = customerEmail ?? to;
-    const hasAssistance = selectedAddons.some(
-        (addon) => addon.id === GESTORIA_LOCAL_ASSISTANCE_ADDON_ID,
-    );
-    const packageUrl = publicUrl(GESTORIA_LOCAL_DELIVERY_LINKS.package);
-    const macInstallerUrl = publicUrl(GESTORIA_LOCAL_DELIVERY_LINKS.macInstaller);
-    const windowsInstallerUrl = publicUrl(
-        GESTORIA_LOCAL_DELIVERY_LINKS.windowsInstaller,
-    );
-    const startGuideUrl = publicUrl(GESTORIA_LOCAL_DELIVERY_LINKS.startGuide);
-    const aiGuideUrl = publicUrl(GESTORIA_LOCAL_DELIVERY_LINKS.aiGuide);
-    const manifestUrl = publicUrl(GESTORIA_LOCAL_DELIVERY_LINKS.manifest);
-    const orderLine = orderId
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Pedido PayPal:</strong> ${escapeHtml(orderId)}</p>`
-        : "";
-    const transactionLine = transactionId
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Transacción:</strong> ${escapeHtml(transactionId)}</p>`
-        : "";
-    const paymentLine = paymentMethodLabel
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Método de pago:</strong> ${escapeHtml(paymentMethodLabel)}</p>`
-        : "";
-    const policyLine = policyVersion
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Política aplicada:</strong> ${escapeHtml(policyVersion)}</p>`
-        : "";
-    const assistanceHtml = hasAssistance
-        ? `<div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin: 20px 0;">
+	const deliveredAt = new Date().toISOString();
+	const buyerEmail = customerEmail ?? to;
+	const hasAssistance = selectedAddons.some(
+		(addon) => addon.id === GESTORIA_LOCAL_ASSISTANCE_ADDON_ID,
+	);
+	const packageUrl = publicUrl(GESTORIA_LOCAL_DELIVERY_LINKS.package);
+	const macInstallerUrl = publicUrl(GESTORIA_LOCAL_DELIVERY_LINKS.macInstaller);
+	const windowsInstallerUrl = publicUrl(
+		GESTORIA_LOCAL_DELIVERY_LINKS.windowsInstaller,
+	);
+	const startGuideUrl = publicUrl(GESTORIA_LOCAL_DELIVERY_LINKS.startGuide);
+	const aiGuideUrl = publicUrl(GESTORIA_LOCAL_DELIVERY_LINKS.aiGuide);
+	const manifestUrl = publicUrl(GESTORIA_LOCAL_DELIVERY_LINKS.manifest);
+	const orderLine = orderId
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Pedido PayPal:</strong> ${escapeHtml(orderId)}</p>`
+		: "";
+	const transactionLine = transactionId
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Transacción:</strong> ${escapeHtml(transactionId)}</p>`
+		: "";
+	const paymentLine = paymentMethodLabel
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Método de pago:</strong> ${escapeHtml(paymentMethodLabel)}</p>`
+		: "";
+	const policyLine = policyVersion
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Política aplicada:</strong> ${escapeHtml(policyVersion)}</p>`
+		: "";
+	const assistanceHtml = hasAssistance
+		? `<div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin: 20px 0;">
     <p style="margin: 0; color: #1e40af;">
       <strong>Asistencia añadida:</strong> Has añadido asistencia de instalación y configuración.
       Te indicaremos por email cómo coordinar la ayuda inicial.
     </p>
   </div>`
-        : "";
+		: "";
 
-    const html = `<!DOCTYPE html>
+	const html = `<!DOCTYPE html>
 <html lang="es">
 <head><meta charset="UTF-8"></head>
 <body style="font-family: Arial, sans-serif; max-width: 640px; margin: 0 auto; padding: 20px; color: #333;">
@@ -346,107 +351,107 @@ export async function sendGestoriaLocalDeliveryEmail(
 </body>
 </html>`;
 
-    const textLines = [
-        `Hola ${customerName},`,
-        ``,
-        `Tu compra de ${productName} por ${amount}€ está registrada.`,
-        `Email comprador: ${buyerEmail}`,
-        `Fecha de entrega: ${deliveredAt}`,
-        paymentMethodLabel ? `Método de pago: ${paymentMethodLabel}` : ``,
-        orderId ? `Pedido PayPal: ${orderId}` : ``,
-        transactionId ? `Transacción: ${transactionId}` : ``,
-        policyVersion ? `Política aplicada: ${policyVersion}` : ``,
-        ``,
-        `Descargas principales:`,
-        `Paquete GestorIA Local (.tgz): ${packageUrl}`,
-        `Instalador macOS/Linux: ${macInstallerUrl}`,
-        `Instalador Windows PowerShell: ${windowsInstallerUrl}`,
-        `Guía de inicio e instalación: ${startGuideUrl}`,
-        `Guía de configuración de motores IA: ${aiGuideUrl}`,
-        `Manifest de versión y verificación: ${manifestUrl}`,
-        ``,
-        hasAssistance
-            ? `Has añadido asistencia de instalación y configuración. Te indicaremos por email cómo coordinar la ayuda inicial.`
-            : ``,
-        `GestorIA Local no toca AEAT, no es VeriFactu, no emite facturas oficiales y no sustituye tu software fiscal ni el criterio profesional.`,
-        `Garantía Flash: si el enlace falla, el archivo está dañado o el producto no funciona según lo descrito, responde a este email y lo revisamos contigo.`,
-        `Al haberse iniciado la entrega digital solicitada, el derecho de desistimiento de 14 días deja de aplicarse cuando empieza el acceso, descarga o envío.`,
-        `Cualquier duda: iaflashelite@gmail.com`,
-        ``,
-        `iaflashelite`,
-    ].filter((line) => line.length > 0);
+	const textLines = [
+		`Hola ${customerName},`,
+		``,
+		`Tu compra de ${productName} por ${amount}€ está registrada.`,
+		`Email comprador: ${buyerEmail}`,
+		`Fecha de entrega: ${deliveredAt}`,
+		paymentMethodLabel ? `Método de pago: ${paymentMethodLabel}` : ``,
+		orderId ? `Pedido PayPal: ${orderId}` : ``,
+		transactionId ? `Transacción: ${transactionId}` : ``,
+		policyVersion ? `Política aplicada: ${policyVersion}` : ``,
+		``,
+		`Descargas principales:`,
+		`Paquete GestorIA Local (.tgz): ${packageUrl}`,
+		`Instalador macOS/Linux: ${macInstallerUrl}`,
+		`Instalador Windows PowerShell: ${windowsInstallerUrl}`,
+		`Guía de inicio e instalación: ${startGuideUrl}`,
+		`Guía de configuración de motores IA: ${aiGuideUrl}`,
+		`Manifest de versión y verificación: ${manifestUrl}`,
+		``,
+		hasAssistance
+			? `Has añadido asistencia de instalación y configuración. Te indicaremos por email cómo coordinar la ayuda inicial.`
+			: ``,
+		`GestorIA Local no toca AEAT, no es VeriFactu, no emite facturas oficiales y no sustituye tu software fiscal ni el criterio profesional.`,
+		`Garantía Flash: si el enlace falla, el archivo está dañado o el producto no funciona según lo descrito, responde a este email y lo revisamos contigo.`,
+		`Al haberse iniciado la entrega digital solicitada, el derecho de desistimiento de 14 días deja de aplicarse cuando empieza el acceso, descarga o envío.`,
+		`Cualquier duda: iaflashelite@gmail.com`,
+		``,
+		`iaflashelite`,
+	].filter((line) => line.length > 0);
 
-    try {
-        await getTransporter().sendMail({
-            from: `"iaflashelite" <${user}>`,
-            to,
-            subject: `Tu acceso a GestorIA Local — iaflashelite`,
-            text: textLines.join("\n"),
-            html,
-        });
-        console.log(`[email] Entrega GestorIA Local enviada a ${to}`);
-        return true;
-    } catch (error) {
-        console.error("[email] Error enviando GestorIA Local:", error);
-        return false;
-    }
+	try {
+		await getTransporter().sendMail({
+			from: `"iaflashelite" <${user}>`,
+			to,
+			subject: `Tu acceso a GestorIA Local — iaflashelite`,
+			text: textLines.join("\n"),
+			html,
+		});
+		console.log(`[email] Entrega GestorIA Local enviada a ${to}`);
+		return true;
+	} catch (error) {
+		console.error("[email] Error enviando GestorIA Local:", error);
+		return false;
+	}
 }
 
 export async function sendSecureDownloadDeliveryEmail(
-    params: SecureDownloadDeliveryEmailParams,
+	params: SecureDownloadDeliveryEmailParams,
 ): Promise<boolean> {
-    const {
-        to,
-        customerName,
-        productName,
-        productSlug,
-        amount,
-        customerEmail,
-        orderId,
-        transactionId,
-        policyVersion,
-        paymentMethodLabel,
-    } = params;
-    const secureProduct = getSecureDownloadProduct(productSlug);
-    if (!secureProduct) {
-        console.error(`[email] Producto sin entrega segura: ${productSlug}`);
-        return false;
-    }
+	const {
+		to,
+		customerName,
+		productName,
+		productSlug,
+		amount,
+		customerEmail,
+		orderId,
+		transactionId,
+		policyVersion,
+		paymentMethodLabel,
+	} = params;
+	const secureProduct = getSecureDownloadProduct(productSlug);
+	if (!secureProduct) {
+		console.error(`[email] Producto sin entrega segura: ${productSlug}`);
+		return false;
+	}
 
-    const user = (process.env.GMAIL_USER ?? "").trim();
-    if (!user || !(process.env.GMAIL_APP_PASSWORD ?? "").trim()) {
-        console.error("[email] GMAIL_USER / GMAIL_APP_PASSWORD no configurados");
-        return false;
-    }
+	const user = (process.env.GMAIL_USER ?? "").trim();
+	if (!user || !(process.env.GMAIL_APP_PASSWORD ?? "").trim()) {
+		console.error("[email] GMAIL_USER / GMAIL_APP_PASSWORD no configurados");
+		return false;
+	}
 
-    let downloadUrl: string;
-    try {
-        downloadUrl = createSecureDownloadUrl({
-            productSlug,
-            customerEmail: customerEmail ?? to,
-            orderId: orderId ?? transactionId ?? `manual-${Date.now()}`,
-        });
-    } catch (error) {
-        console.error("[email] No se pudo generar enlace seguro:", error);
-        return false;
-    }
+	let downloadUrl: string;
+	try {
+		downloadUrl = createSecureDownloadUrl({
+			productSlug,
+			customerEmail: customerEmail ?? to,
+			orderId: orderId ?? transactionId ?? `manual-${Date.now()}`,
+		});
+	} catch (error) {
+		console.error("[email] No se pudo generar enlace seguro:", error);
+		return false;
+	}
 
-    const deliveredAt = new Date().toISOString();
-    const buyerEmail = customerEmail ?? to;
-    const orderLine = orderId
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Pedido:</strong> ${escapeHtml(orderId)}</p>`
-        : "";
-    const transactionLine = transactionId
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Transacción:</strong> ${escapeHtml(transactionId)}</p>`
-        : "";
-    const paymentLine = paymentMethodLabel
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Método de pago:</strong> ${escapeHtml(paymentMethodLabel)}</p>`
-        : "";
-    const policyLine = policyVersion
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Política aplicada:</strong> ${escapeHtml(policyVersion)}</p>`
-        : "";
+	const deliveredAt = new Date().toISOString();
+	const buyerEmail = customerEmail ?? to;
+	const orderLine = orderId
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Pedido:</strong> ${escapeHtml(orderId)}</p>`
+		: "";
+	const transactionLine = transactionId
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Transacción:</strong> ${escapeHtml(transactionId)}</p>`
+		: "";
+	const paymentLine = paymentMethodLabel
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Método de pago:</strong> ${escapeHtml(paymentMethodLabel)}</p>`
+		: "";
+	const policyLine = policyVersion
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Política aplicada:</strong> ${escapeHtml(policyVersion)}</p>`
+		: "";
 
-    const html = `<!DOCTYPE html>
+	const html = `<!DOCTYPE html>
 <html lang="es">
 <head><meta charset="UTF-8"></head>
 <body style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 20px; color: #333;">
@@ -501,42 +506,132 @@ export async function sendSecureDownloadDeliveryEmail(
 </body>
 </html>`;
 
-    const textLines = [
-        `Hola ${customerName},`,
-        ``,
-        `Tu ${productName} está listo.`,
-        `Producto: ${productName}`,
-        `Importe: ${amount}€`,
-        `Email comprador: ${buyerEmail}`,
-        `Fecha de entrega: ${deliveredAt}`,
-        paymentMethodLabel ? `Método de pago: ${paymentMethodLabel}` : ``,
-        orderId ? `Pedido: ${orderId}` : ``,
-        transactionId ? `Transacción: ${transactionId}` : ``,
-        policyVersion ? `Política aplicada: ${policyVersion}` : ``,
-        ``,
-        `Descarga temporal:`,
-        downloadUrl,
-        ``,
-        `Garantía de calidad — 14 días: cubre la calidad y completitud del material descargable. No cubre resultados económicos ni ejecución incorrecta por parte del comprador.`,
-        `Si necesitas reenvío del enlace, responde a este email.`,
-        ``,
-        `iaflashelite`,
-    ].filter((line) => line.length > 0);
+	const textLines = [
+		`Hola ${customerName},`,
+		``,
+		`Tu ${productName} está listo.`,
+		`Producto: ${productName}`,
+		`Importe: ${amount}€`,
+		`Email comprador: ${buyerEmail}`,
+		`Fecha de entrega: ${deliveredAt}`,
+		paymentMethodLabel ? `Método de pago: ${paymentMethodLabel}` : ``,
+		orderId ? `Pedido: ${orderId}` : ``,
+		transactionId ? `Transacción: ${transactionId}` : ``,
+		policyVersion ? `Política aplicada: ${policyVersion}` : ``,
+		``,
+		`Descarga temporal:`,
+		downloadUrl,
+		``,
+		`Garantía de calidad — 14 días: cubre la calidad y completitud del material descargable. No cubre resultados económicos ni ejecución incorrecta por parte del comprador.`,
+		`Si necesitas reenvío del enlace, responde a este email.`,
+		``,
+		`iaflashelite`,
+	].filter((line) => line.length > 0);
 
-    try {
-        await getTransporter().sendMail({
-            from: `"iaflashelite" <${user}>`,
-            to,
-            subject: `Tu ${productName} está listo — iaflashelite`,
-            text: textLines.join("\n"),
-            html,
-        });
-        console.log(`[email] Entrega segura ${secureProduct.displayName} enviada a ${to}`);
-        return true;
-    } catch (error) {
-        console.error("[email] Error enviando entrega segura:", error);
-        return false;
-    }
+	try {
+		await getTransporter().sendMail({
+			from: `"iaflashelite" <${user}>`,
+			to,
+			subject: `Tu ${productName} está listo — iaflashelite`,
+			text: textLines.join("\n"),
+			html,
+		});
+		console.log(
+			`[email] Entrega segura ${secureProduct.displayName} enviada a ${to}`,
+		);
+		return true;
+	} catch (error) {
+		console.error("[email] Error enviando entrega segura:", error);
+		return false;
+	}
+}
+
+export async function sendKenvoDeliveryEmail(
+	params: SecureDownloadDeliveryEmailParams,
+): Promise<boolean> {
+	const {
+		to,
+		customerName,
+		productName,
+		productSlug,
+		amount,
+		customerEmail,
+		orderId,
+		transactionId,
+		policyVersion,
+		paymentMethodLabel,
+	} = params;
+	const secureProduct = getSecureDownloadProduct(productSlug);
+	if (!secureProduct) {
+		console.error(`[email] Kenvo: producto sin entrega segura: ${productSlug}`);
+		return false;
+	}
+
+	const user = (process.env.GMAIL_USER ?? "").trim();
+	if (!user || !(process.env.GMAIL_APP_PASSWORD ?? "").trim()) {
+		console.error("[email] GMAIL_USER / GMAIL_APP_PASSWORD no configurados");
+		return false;
+	}
+
+	let downloadUrl: string;
+	try {
+		downloadUrl = createSecureDownloadUrl({
+			productSlug,
+			customerEmail: customerEmail ?? to,
+			orderId: orderId ?? transactionId ?? `manual-${Date.now()}`,
+		});
+	} catch (error) {
+		console.error("[email] Kenvo: no se pudo generar enlace seguro:", error);
+		return false;
+	}
+
+	const platformLabel =
+		productSlug === KENVO_MAC_ARM_PRODUCT_SLUG ? "Apple Silicon" : "Intel";
+	const html = renderKenvoDeliveryEmail({
+		customerName,
+		productName,
+		platformLabel,
+		downloadUrl,
+		firstRunUrl: publicUrl("/kenvo/primera-vez"),
+		amount,
+		buyerEmail: customerEmail ?? to,
+		deliveredAt: new Date().toISOString(),
+		orderId,
+		transactionId,
+		paymentMethodLabel,
+		policyVersion,
+	});
+
+	const text = [
+		`Hola ${customerName},`,
+		``,
+		`Tu acceso fundador a Kenvo (${platformLabel}) está listo.`,
+		``,
+		`Descarga (enlace personal, 72 h): ${downloadUrl}`,
+		`Guía de primer arranque en Mac: ${publicUrl("/kenvo/primera-vez")}`,
+		``,
+		`Importe: ${amount} €`,
+		orderId ? `Pedido: ${orderId}` : ``,
+		transactionId ? `Transacción: ${transactionId}` : ``,
+		``,
+		`Garantía 14 días. ¿Dudas? Responde a este email.`,
+		`iaflashelite`,
+	].filter((line) => line.length > 0);
+
+	try {
+		await getTransporter().sendMail({
+			from: `"iaflashelite" <${user}>`,
+			to,
+			subject: "Tu acceso fundador a Kenvo está listo",
+			text: text.join("\n"),
+			html,
+		});
+		console.log(`[email] Entrega Kenvo (${platformLabel}) enviada a ${to}`);
+		return true;
+	} catch (error) {
+		console.error("[email] Error enviando entrega Kenvo:", error);
+		return false;
+	}
 }
 
 // Builder puro (sin side-effects) del email del Pack Arranque IA. Lo separamos
@@ -544,57 +639,57 @@ export async function sendSecureDownloadDeliveryEmail(
 // invocar nodemailer. La función no toca el transporter ni firma tokens —
 // recibe ya la downloadUrl firmada.
 export interface BuildPackArranqueDeliveryEmailInput {
-    customerName: string;
-    customerEmail?: string;
-    productName: string;
-    amount: string;
-    downloadUrl: string;
-    deliveredAt: string;
-    orderId?: string | null;
-    transactionId?: string | null;
-    policyVersion?: string;
-    paymentMethodLabel?: string;
+	customerName: string;
+	customerEmail?: string;
+	productName: string;
+	amount: string;
+	downloadUrl: string;
+	deliveredAt: string;
+	orderId?: string | null;
+	transactionId?: string | null;
+	policyVersion?: string;
+	paymentMethodLabel?: string;
 }
 
 export interface BuiltDeliveryEmail {
-    subject: string;
-    html: string;
-    text: string;
+	subject: string;
+	html: string;
+	text: string;
 }
 
 export function buildPackArranqueDeliveryEmail(
-    input: BuildPackArranqueDeliveryEmailInput,
+	input: BuildPackArranqueDeliveryEmailInput,
 ): BuiltDeliveryEmail {
-    const {
-        customerName,
-        customerEmail,
-        productName,
-        amount,
-        downloadUrl,
-        deliveredAt,
-        orderId,
-        transactionId,
-        policyVersion,
-        paymentMethodLabel,
-    } = input;
+	const {
+		customerName,
+		customerEmail,
+		productName,
+		amount,
+		downloadUrl,
+		deliveredAt,
+		orderId,
+		transactionId,
+		policyVersion,
+		paymentMethodLabel,
+	} = input;
 
-    const buyerEmail = customerEmail ?? "";
-    const orderLine = orderId
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Pedido:</strong> ${escapeHtml(orderId)}</p>`
-        : "";
-    const transactionLine = transactionId
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Transacción:</strong> ${escapeHtml(transactionId)}</p>`
-        : "";
-    const paymentLine = paymentMethodLabel
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Método de pago:</strong> ${escapeHtml(paymentMethodLabel)}</p>`
-        : "";
-    const policyLine = policyVersion
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Política aplicada:</strong> ${escapeHtml(policyVersion)}</p>`
-        : "";
+	const buyerEmail = customerEmail ?? "";
+	const orderLine = orderId
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Pedido:</strong> ${escapeHtml(orderId)}</p>`
+		: "";
+	const transactionLine = transactionId
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Transacción:</strong> ${escapeHtml(transactionId)}</p>`
+		: "";
+	const paymentLine = paymentMethodLabel
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Método de pago:</strong> ${escapeHtml(paymentMethodLabel)}</p>`
+		: "";
+	const policyLine = policyVersion
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Política aplicada:</strong> ${escapeHtml(policyVersion)}</p>`
+		: "";
 
-    const subject = `Ya tienes tu ${productName} — empieza por aquí`;
+	const subject = `Ya tienes tu ${productName} — empieza por aquí`;
 
-    const html = `<!DOCTYPE html>
+	const html = `<!DOCTYPE html>
 <html lang="es">
 <head><meta charset="UTF-8"></head>
 <body style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 20px; color: #333;">
@@ -681,180 +776,180 @@ export function buildPackArranqueDeliveryEmail(
 </body>
 </html>`;
 
-    const textLines = [
-        `Hola ${customerName},`,
-        ``,
-        `Gracias por confiar en este primer pack. Aquí tienes tu ${productName}.`,
-        ``,
-        `Producto: ${productName}`,
-        `Importe: ${amount}€`,
-        buyerEmail ? `Email comprador: ${buyerEmail}` : ``,
-        `Fecha de entrega: ${deliveredAt}`,
-        paymentMethodLabel ? `Método de pago: ${paymentMethodLabel}` : ``,
-        orderId ? `Pedido: ${orderId}` : ``,
-        transactionId ? `Transacción: ${transactionId}` : ``,
-        policyVersion ? `Política aplicada: ${policyVersion}` : ``,
-        ``,
-        `Descarga temporal:`,
-        downloadUrl,
-        ``,
-        `POR DÓNDE EMPEZAR`,
-        `Reserva una tarde de unas 3 horas y media. No abras los 15 archivos a la vez — se siguen en orden:`,
-        `1. Abre 00-pack-arranque-ia.pdf y léelo de principio a fin.`,
-        `2. Escucha 01-audio-guia.mp3 mientras trabajas o de fondo.`,
-        `3. Empieza por plantillas/curriculum-ia-personal.md; el PDF te guía paso a paso desde ahí.`,
-        ``,
-        `Si solo tienes una hora hoy, haz el paso 3. El resto puede esperar a otra sesión.`,
-        ``,
-        `Garantía de calidad — 14 días: cubre la calidad y completitud del material descargable. No cubre resultados económicos ni ejecución incorrecta por parte del comprador.`,
-        ``,
-        `Si necesitas reenvío del enlace, responde a este email o escribe a iaflashelite@gmail.com.`,
-        ``,
-        `---`,
-        ``,
-        `TU SIGUIENTE PASO, CUANDO ESTÉS LISTO`,
-        `Sin prisa: primero saca partido de este pack. Cuando termines el arranque y quieras aprender a usar tu IA para ejecutar proyectos completos con auditoría, prompts controlados y revisión, el siguiente paso natural es Sistema IA Pro.`,
-        `Más info en https://iaflashelite.com/academia/sistema-ia-pro`,
-        ``,
-        `iaflashelite`,
-    ].filter((line) => line.length > 0);
+	const textLines = [
+		`Hola ${customerName},`,
+		``,
+		`Gracias por confiar en este primer pack. Aquí tienes tu ${productName}.`,
+		``,
+		`Producto: ${productName}`,
+		`Importe: ${amount}€`,
+		buyerEmail ? `Email comprador: ${buyerEmail}` : ``,
+		`Fecha de entrega: ${deliveredAt}`,
+		paymentMethodLabel ? `Método de pago: ${paymentMethodLabel}` : ``,
+		orderId ? `Pedido: ${orderId}` : ``,
+		transactionId ? `Transacción: ${transactionId}` : ``,
+		policyVersion ? `Política aplicada: ${policyVersion}` : ``,
+		``,
+		`Descarga temporal:`,
+		downloadUrl,
+		``,
+		`POR DÓNDE EMPEZAR`,
+		`Reserva una tarde de unas 3 horas y media. No abras los 15 archivos a la vez — se siguen en orden:`,
+		`1. Abre 00-pack-arranque-ia.pdf y léelo de principio a fin.`,
+		`2. Escucha 01-audio-guia.mp3 mientras trabajas o de fondo.`,
+		`3. Empieza por plantillas/curriculum-ia-personal.md; el PDF te guía paso a paso desde ahí.`,
+		``,
+		`Si solo tienes una hora hoy, haz el paso 3. El resto puede esperar a otra sesión.`,
+		``,
+		`Garantía de calidad — 14 días: cubre la calidad y completitud del material descargable. No cubre resultados económicos ni ejecución incorrecta por parte del comprador.`,
+		``,
+		`Si necesitas reenvío del enlace, responde a este email o escribe a iaflashelite@gmail.com.`,
+		``,
+		`---`,
+		``,
+		`TU SIGUIENTE PASO, CUANDO ESTÉS LISTO`,
+		`Sin prisa: primero saca partido de este pack. Cuando termines el arranque y quieras aprender a usar tu IA para ejecutar proyectos completos con auditoría, prompts controlados y revisión, el siguiente paso natural es Sistema IA Pro.`,
+		`Más info en https://iaflashelite.com/academia/sistema-ia-pro`,
+		``,
+		`iaflashelite`,
+	].filter((line) => line.length > 0);
 
-    return { subject, html, text: textLines.join("\n") };
+	return { subject, html, text: textLines.join("\n") };
 }
 
 export async function sendPackArranqueDeliveryEmail(
-    params: PackArranqueDeliveryEmailParams,
+	params: PackArranqueDeliveryEmailParams,
 ): Promise<boolean> {
-    const {
-        to,
-        customerName,
-        productName,
-        amount,
-        customerEmail,
-        orderId,
-        transactionId,
-        policyVersion,
-        paymentMethodLabel,
-    } = params;
+	const {
+		to,
+		customerName,
+		productName,
+		amount,
+		customerEmail,
+		orderId,
+		transactionId,
+		policyVersion,
+		paymentMethodLabel,
+	} = params;
 
-    const secureProduct = getSecureDownloadProduct(PACK_ARRANQUE_PRODUCT_SLUG);
-    if (!secureProduct) {
-        console.error(
-            `[email] Producto sin entrega segura: ${PACK_ARRANQUE_PRODUCT_SLUG}`,
-        );
-        return false;
-    }
+	const secureProduct = getSecureDownloadProduct(PACK_ARRANQUE_PRODUCT_SLUG);
+	if (!secureProduct) {
+		console.error(
+			`[email] Producto sin entrega segura: ${PACK_ARRANQUE_PRODUCT_SLUG}`,
+		);
+		return false;
+	}
 
-    const user = (process.env.GMAIL_USER ?? "").trim();
-    if (!user || !(process.env.GMAIL_APP_PASSWORD ?? "").trim()) {
-        console.error("[email] GMAIL_USER / GMAIL_APP_PASSWORD no configurados");
-        return false;
-    }
+	const user = (process.env.GMAIL_USER ?? "").trim();
+	if (!user || !(process.env.GMAIL_APP_PASSWORD ?? "").trim()) {
+		console.error("[email] GMAIL_USER / GMAIL_APP_PASSWORD no configurados");
+		return false;
+	}
 
-    let downloadUrl: string;
-    try {
-        downloadUrl = createSecureDownloadUrl({
-            productSlug: PACK_ARRANQUE_PRODUCT_SLUG,
-            customerEmail: customerEmail ?? to,
-            orderId: orderId ?? transactionId ?? `manual-${Date.now()}`,
-        });
-    } catch (error) {
-        console.error("[email] No se pudo generar enlace seguro:", error);
-        return false;
-    }
+	let downloadUrl: string;
+	try {
+		downloadUrl = createSecureDownloadUrl({
+			productSlug: PACK_ARRANQUE_PRODUCT_SLUG,
+			customerEmail: customerEmail ?? to,
+			orderId: orderId ?? transactionId ?? `manual-${Date.now()}`,
+		});
+	} catch (error) {
+		console.error("[email] No se pudo generar enlace seguro:", error);
+		return false;
+	}
 
-    const { subject, html, text } = buildPackArranqueDeliveryEmail({
-        customerName,
-        customerEmail: customerEmail ?? to,
-        productName,
-        amount,
-        downloadUrl,
-        deliveredAt: new Date().toISOString(),
-        orderId,
-        transactionId,
-        policyVersion,
-        paymentMethodLabel,
-    });
+	const { subject, html, text } = buildPackArranqueDeliveryEmail({
+		customerName,
+		customerEmail: customerEmail ?? to,
+		productName,
+		amount,
+		downloadUrl,
+		deliveredAt: new Date().toISOString(),
+		orderId,
+		transactionId,
+		policyVersion,
+		paymentMethodLabel,
+	});
 
-    try {
-        await getTransporter().sendMail({
-            from: `"iaflashelite" <${user}>`,
-            to,
-            subject,
-            text,
-            html,
-        });
-        console.log(
-            `[email] Entrega segura ${secureProduct.displayName} enviada a ${to}`,
-        );
-        return true;
-    } catch (error) {
-        console.error("[email] Error enviando entrega segura:", error);
-        return false;
-    }
+	try {
+		await getTransporter().sendMail({
+			from: `"iaflashelite" <${user}>`,
+			to,
+			subject,
+			text,
+			html,
+		});
+		console.log(
+			`[email] Entrega segura ${secureProduct.displayName} enviada a ${to}`,
+		);
+		return true;
+	} catch (error) {
+		console.error("[email] Error enviando entrega segura:", error);
+		return false;
+	}
 }
 
 export interface SistemaIaProDeliveryEmailParams {
-    to: string;
-    customerName: string;
-    productName: string;
-    amount: string;
-    customerEmail?: string;
-    orderId?: string | null;
-    transactionId?: string | null;
-    policyVersion?: string;
-    paymentMethodLabel?: string;
+	to: string;
+	customerName: string;
+	productName: string;
+	amount: string;
+	customerEmail?: string;
+	orderId?: string | null;
+	transactionId?: string | null;
+	policyVersion?: string;
+	paymentMethodLabel?: string;
 }
 
 // Builder puro (sin side-effects) del email de Sistema IA Pro. Mismo patrón
 // que buildPackArranqueDeliveryEmail: separado del envío para poder
 // renderizarlo a archivo en revisión visual sin invocar nodemailer.
 export interface BuildSistemaIaProDeliveryEmailInput {
-    customerName: string;
-    customerEmail?: string;
-    productName: string;
-    amount: string;
-    downloadUrl: string;
-    deliveredAt: string;
-    orderId?: string | null;
-    transactionId?: string | null;
-    policyVersion?: string;
-    paymentMethodLabel?: string;
+	customerName: string;
+	customerEmail?: string;
+	productName: string;
+	amount: string;
+	downloadUrl: string;
+	deliveredAt: string;
+	orderId?: string | null;
+	transactionId?: string | null;
+	policyVersion?: string;
+	paymentMethodLabel?: string;
 }
 
 export function buildSistemaIaProDeliveryEmail(
-    input: BuildSistemaIaProDeliveryEmailInput,
+	input: BuildSistemaIaProDeliveryEmailInput,
 ): BuiltDeliveryEmail {
-    const {
-        customerName,
-        customerEmail,
-        productName,
-        amount,
-        downloadUrl,
-        deliveredAt,
-        orderId,
-        transactionId,
-        policyVersion,
-        paymentMethodLabel,
-    } = input;
+	const {
+		customerName,
+		customerEmail,
+		productName,
+		amount,
+		downloadUrl,
+		deliveredAt,
+		orderId,
+		transactionId,
+		policyVersion,
+		paymentMethodLabel,
+	} = input;
 
-    const buyerEmail = customerEmail ?? "";
-    const orderLine = orderId
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Pedido:</strong> ${escapeHtml(orderId)}</p>`
-        : "";
-    const transactionLine = transactionId
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Transacción:</strong> ${escapeHtml(transactionId)}</p>`
-        : "";
-    const paymentLine = paymentMethodLabel
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Método de pago:</strong> ${escapeHtml(paymentMethodLabel)}</p>`
-        : "";
-    const policyLine = policyVersion
-        ? `<p style="margin: 4px 0; color: #475569;"><strong>Política aplicada:</strong> ${escapeHtml(policyVersion)}</p>`
-        : "";
+	const buyerEmail = customerEmail ?? "";
+	const orderLine = orderId
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Pedido:</strong> ${escapeHtml(orderId)}</p>`
+		: "";
+	const transactionLine = transactionId
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Transacción:</strong> ${escapeHtml(transactionId)}</p>`
+		: "";
+	const paymentLine = paymentMethodLabel
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Método de pago:</strong> ${escapeHtml(paymentMethodLabel)}</p>`
+		: "";
+	const policyLine = policyVersion
+		? `<p style="margin: 4px 0; color: #475569;"><strong>Política aplicada:</strong> ${escapeHtml(policyVersion)}</p>`
+		: "";
 
-    const subject = `Ya tienes tu ${productName} — empieza por aquí`;
+	const subject = `Ya tienes tu ${productName} — empieza por aquí`;
 
-    const html = `<!DOCTYPE html>
+	const html = `<!DOCTYPE html>
 <html lang="es">
 <head><meta charset="UTF-8"></head>
 <body style="font-family: Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 20px; color: #333;">
@@ -954,125 +1049,125 @@ export function buildSistemaIaProDeliveryEmail(
 </body>
 </html>`;
 
-    const textLines = [
-        `Hola ${customerName},`,
-        ``,
-        `Gracias por confiar en este segundo escalón. Aquí tienes tu ${productName}.`,
-        ``,
-        `Producto: ${productName}`,
-        `Importe: ${amount}€`,
-        buyerEmail ? `Email comprador: ${buyerEmail}` : ``,
-        `Fecha de entrega: ${deliveredAt}`,
-        paymentMethodLabel ? `Método de pago: ${paymentMethodLabel}` : ``,
-        orderId ? `Pedido: ${orderId}` : ``,
-        transactionId ? `Transacción: ${transactionId}` : ``,
-        policyVersion ? `Política aplicada: ${policyVersion}` : ``,
-        ``,
-        `Descarga temporal:`,
-        downloadUrl,
-        ``,
-        `POR DÓNDE EMPEZAR`,
-        `Reserva un par de horas, no necesitas montar todo de golpe. Sigue este orden:`,
-        `1. Abre 00-sistema-ia-pro.pdf y léelo de principio a fin.`,
-        `2. Escucha 01-audio-guia.mp3 mientras trabajas o de fondo.`,
-        `3. Si vienes de Pack Arranque IA, reutiliza tu Currículum IA personal, Contexto maestro del proyecto e Instrucciones de trabajo como contexto base. Si empiezas directamente, rellena plantillas/contexto-minimo-rapido.md antes de crear los proyectos.`,
-        `4. Empieza por una sola tarea pequeña real: crea el primer proyecto con plantillas/proyecto-estrategia-mejoras.md, prueba el Prompt 0 y el Flujo Candado con ella. Los otros dos proyectos pueden esperar a otra sesión.`,
-        ``,
-        `No intentes montar los tres proyectos a la vez. El propio manual lo dice: mejor una pieza terminada que tres a medias.`,
-        ``,
-        `Garantía de calidad — 14 días: cubre la calidad y completitud del material descargable. No cubre resultados económicos ni ejecución incorrecta por parte del comprador.`,
-        ``,
-        `Si necesitas reenvío del enlace, responde a este email o escribe a iaflashelite@gmail.com.`,
-        ``,
-        `---`,
-        ``,
-        `TU SIGUIENTE PASO, CUANDO ESTÉS LISTO`,
-        `Sin prisa: primero deja bien montados tus proyectos IA y practica el flujo candado con una tarea real. Cuando lo domines, el siguiente paso natural es construir un sistema funcional que reciba solicitudes de cliente, las ordene con IA y prepare respuestas revisables con control humano. Eso es Primer Sistema IA Vendible.`,
-        `Más info en https://iaflashelite.com/academia/primer-sistema-ia-vendible`,
-        ``,
-        `iaflashelite`,
-    ].filter((line) => line.length > 0);
+	const textLines = [
+		`Hola ${customerName},`,
+		``,
+		`Gracias por confiar en este segundo escalón. Aquí tienes tu ${productName}.`,
+		``,
+		`Producto: ${productName}`,
+		`Importe: ${amount}€`,
+		buyerEmail ? `Email comprador: ${buyerEmail}` : ``,
+		`Fecha de entrega: ${deliveredAt}`,
+		paymentMethodLabel ? `Método de pago: ${paymentMethodLabel}` : ``,
+		orderId ? `Pedido: ${orderId}` : ``,
+		transactionId ? `Transacción: ${transactionId}` : ``,
+		policyVersion ? `Política aplicada: ${policyVersion}` : ``,
+		``,
+		`Descarga temporal:`,
+		downloadUrl,
+		``,
+		`POR DÓNDE EMPEZAR`,
+		`Reserva un par de horas, no necesitas montar todo de golpe. Sigue este orden:`,
+		`1. Abre 00-sistema-ia-pro.pdf y léelo de principio a fin.`,
+		`2. Escucha 01-audio-guia.mp3 mientras trabajas o de fondo.`,
+		`3. Si vienes de Pack Arranque IA, reutiliza tu Currículum IA personal, Contexto maestro del proyecto e Instrucciones de trabajo como contexto base. Si empiezas directamente, rellena plantillas/contexto-minimo-rapido.md antes de crear los proyectos.`,
+		`4. Empieza por una sola tarea pequeña real: crea el primer proyecto con plantillas/proyecto-estrategia-mejoras.md, prueba el Prompt 0 y el Flujo Candado con ella. Los otros dos proyectos pueden esperar a otra sesión.`,
+		``,
+		`No intentes montar los tres proyectos a la vez. El propio manual lo dice: mejor una pieza terminada que tres a medias.`,
+		``,
+		`Garantía de calidad — 14 días: cubre la calidad y completitud del material descargable. No cubre resultados económicos ni ejecución incorrecta por parte del comprador.`,
+		``,
+		`Si necesitas reenvío del enlace, responde a este email o escribe a iaflashelite@gmail.com.`,
+		``,
+		`---`,
+		``,
+		`TU SIGUIENTE PASO, CUANDO ESTÉS LISTO`,
+		`Sin prisa: primero deja bien montados tus proyectos IA y practica el flujo candado con una tarea real. Cuando lo domines, el siguiente paso natural es construir un sistema funcional que reciba solicitudes de cliente, las ordene con IA y prepare respuestas revisables con control humano. Eso es Primer Sistema IA Vendible.`,
+		`Más info en https://iaflashelite.com/academia/primer-sistema-ia-vendible`,
+		``,
+		`iaflashelite`,
+	].filter((line) => line.length > 0);
 
-    return { subject, html, text: textLines.join("\n") };
+	return { subject, html, text: textLines.join("\n") };
 }
 
 export async function sendSistemaIaProDeliveryEmail(
-    params: SistemaIaProDeliveryEmailParams,
+	params: SistemaIaProDeliveryEmailParams,
 ): Promise<boolean> {
-    const {
-        to,
-        customerName,
-        productName,
-        amount,
-        customerEmail,
-        orderId,
-        transactionId,
-        policyVersion,
-        paymentMethodLabel,
-    } = params;
+	const {
+		to,
+		customerName,
+		productName,
+		amount,
+		customerEmail,
+		orderId,
+		transactionId,
+		policyVersion,
+		paymentMethodLabel,
+	} = params;
 
-    const secureProduct = getSecureDownloadProduct(SISTEMA_IA_PRO_PRODUCT_SLUG);
-    if (!secureProduct) {
-        console.error(
-            `[email] Producto sin entrega segura: ${SISTEMA_IA_PRO_PRODUCT_SLUG}`,
-        );
-        return false;
-    }
+	const secureProduct = getSecureDownloadProduct(SISTEMA_IA_PRO_PRODUCT_SLUG);
+	if (!secureProduct) {
+		console.error(
+			`[email] Producto sin entrega segura: ${SISTEMA_IA_PRO_PRODUCT_SLUG}`,
+		);
+		return false;
+	}
 
-    const user = (process.env.GMAIL_USER ?? "").trim();
-    if (!user || !(process.env.GMAIL_APP_PASSWORD ?? "").trim()) {
-        console.error("[email] GMAIL_USER / GMAIL_APP_PASSWORD no configurados");
-        return false;
-    }
+	const user = (process.env.GMAIL_USER ?? "").trim();
+	if (!user || !(process.env.GMAIL_APP_PASSWORD ?? "").trim()) {
+		console.error("[email] GMAIL_USER / GMAIL_APP_PASSWORD no configurados");
+		return false;
+	}
 
-    let downloadUrl: string;
-    try {
-        downloadUrl = createSecureDownloadUrl({
-            productSlug: SISTEMA_IA_PRO_PRODUCT_SLUG,
-            customerEmail: customerEmail ?? to,
-            orderId: orderId ?? transactionId ?? `manual-${Date.now()}`,
-        });
-    } catch (error) {
-        console.error("[email] No se pudo generar enlace seguro:", error);
-        return false;
-    }
+	let downloadUrl: string;
+	try {
+		downloadUrl = createSecureDownloadUrl({
+			productSlug: SISTEMA_IA_PRO_PRODUCT_SLUG,
+			customerEmail: customerEmail ?? to,
+			orderId: orderId ?? transactionId ?? `manual-${Date.now()}`,
+		});
+	} catch (error) {
+		console.error("[email] No se pudo generar enlace seguro:", error);
+		return false;
+	}
 
-    const { subject, html, text } = buildSistemaIaProDeliveryEmail({
-        customerName,
-        customerEmail: customerEmail ?? to,
-        productName,
-        amount,
-        downloadUrl,
-        deliveredAt: new Date().toISOString(),
-        orderId,
-        transactionId,
-        policyVersion,
-        paymentMethodLabel,
-    });
+	const { subject, html, text } = buildSistemaIaProDeliveryEmail({
+		customerName,
+		customerEmail: customerEmail ?? to,
+		productName,
+		amount,
+		downloadUrl,
+		deliveredAt: new Date().toISOString(),
+		orderId,
+		transactionId,
+		policyVersion,
+		paymentMethodLabel,
+	});
 
-    try {
-        await getTransporter().sendMail({
-            from: `"iaflashelite" <${user}>`,
-            to,
-            subject,
-            text,
-            html,
-        });
-        console.log(
-            `[email] Entrega segura ${secureProduct.displayName} enviada a ${to}`,
-        );
-        return true;
-    } catch (error) {
-        console.error("[email] Error enviando entrega segura:", error);
-        return false;
-    }
+	try {
+		await getTransporter().sendMail({
+			from: `"iaflashelite" <${user}>`,
+			to,
+			subject,
+			text,
+			html,
+		});
+		console.log(
+			`[email] Entrega segura ${secureProduct.displayName} enviada a ${to}`,
+		);
+		return true;
+	} catch (error) {
+		console.error("[email] Error enviando entrega segura:", error);
+		return false;
+	}
 }
 
 function escapeHtml(value: string): string {
-    return value
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
+	return value
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&#39;");
 }
