@@ -28,6 +28,35 @@ function getTransporter(): Transporter {
 	return cachedTransporter;
 }
 
+// Envío genérico reutilizable (lo usa Kenvo Cloud para el magic link). Reusa el
+// mismo transporter Gmail y el mismo "from" que el resto de emails. Additivo: no
+// modifica ninguna de las funciones de entrega existentes.
+export async function sendEmail(params: {
+	to: string;
+	subject: string;
+	html: string;
+	text?: string;
+}): Promise<boolean> {
+	const user = (process.env.GMAIL_USER ?? "").trim();
+	if (!user || !(process.env.GMAIL_APP_PASSWORD ?? "").trim()) {
+		console.error("[email] GMAIL_USER / GMAIL_APP_PASSWORD no configurados");
+		return false;
+	}
+	try {
+		await getTransporter().sendMail({
+			from: `"iaflashelite" <${user}>`,
+			to: params.to,
+			subject: params.subject,
+			text: params.text,
+			html: params.html,
+		});
+		return true;
+	} catch (error) {
+		console.error("[email] Error enviando email:", error);
+		return false;
+	}
+}
+
 export interface DeliveryEmailParams {
 	to: string;
 	customerName: string;
