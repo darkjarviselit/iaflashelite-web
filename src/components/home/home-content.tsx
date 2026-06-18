@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
     Boxes,
     Check,
@@ -23,6 +23,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import type { ComponentType, ReactNode, SVGProps } from "react";
+import { FadeInUp } from "@/components/home/fade-in-up";
+import { HeroChatDemo } from "@/components/home/hero-chat-demo";
+import { MarqueeStrip } from "@/components/home/marquee-strip";
+import { SpotlightCard } from "@/components/home/spotlight-card";
 
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -36,13 +40,7 @@ const MAILTO =
     "mailto:iaflashelite@gmail.com?subject=Vengo%20desde%20iaflashelite.com";
 const TELEGRAM = "https://t.me/iaflashelite";
 
-const fadeUp = {
-    hidden: { opacity: 0, y: 18 },
-    visible: { opacity: 1, y: 0 },
-};
-
-const viewportOnce = { once: true, margin: "-80px" };
-const ease = [0.22, 1, 0.36, 1] as const;
+const ORBIT_SCALE = [1, 1.15, 1];
 
 function Eyebrow({ children }: { children: ReactNode }) {
     return (
@@ -83,20 +81,45 @@ function Section({
 }
 
 export default function HomeContent() {
+    const reduce = useReducedMotion();
+
     return (
         <main className="relative overflow-hidden">
             {/* Ambient global: el body ya aporta el fondo #0a0a0a fijo; los orbs
-                viven detrás del contenido translúcido (glassmorphism). */}
-            <div
+                viven detrás del contenido translúcido (glassmorphism). Pulso muy
+                sutil en loop; desactivado con prefers-reduced-motion. */}
+            <motion.div
                 aria-hidden
+                animate={reduce ? undefined : { scale: ORBIT_SCALE }}
+                transition={
+                    reduce
+                        ? undefined
+                        : {
+                              duration: 8,
+                              ease: "easeInOut",
+                              repeat: Number.POSITIVE_INFINITY,
+                          }
+                }
                 className="pointer-events-none fixed right-0 top-0 -z-10 h-[600px] w-[600px] rounded-full bg-cyan-500/20 blur-[120px]"
             />
-            <div
+            <motion.div
                 aria-hidden
+                animate={reduce ? undefined : { scale: ORBIT_SCALE }}
+                transition={
+                    reduce
+                        ? undefined
+                        : {
+                              duration: 8,
+                              ease: "easeInOut",
+                              repeat: Number.POSITIVE_INFINITY,
+                              delay: 4,
+                          }
+                }
                 className="pointer-events-none fixed bottom-0 left-0 -z-10 h-[500px] w-[500px] rounded-full bg-purple-500/15 blur-[120px]"
             />
 
             <HeroBlock />
+            <MarqueeStrip />
             <CredibilidadBlock />
             <HomeDivider />
             <SelectorBlock />
@@ -206,42 +229,42 @@ function HeroBlock() {
                         "radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent 75%)",
                 }}
             />
-            <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={fadeUp}
-                transition={{ duration: 0.5, ease }}
-                className="mx-auto flex max-w-4xl flex-col items-center gap-6 text-center"
-            >
-                <Eyebrow>IAFlashElite · Ecosistema premium</Eyebrow>
-                <h1 className="text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-                    Automatiza lo que te quita tiempo.
-                    <br />
-                    <span className="text-cyan-400/70">
-                        Conserva lo que importa.
-                    </span>
-                </h1>
-                <p className="mx-auto max-w-2xl text-base text-white/60 sm:text-lg">
-                    Productos, servicios a medida y formación para empresas que quieren
-                    centrarse en lo único que no se delega.
-                </p>
-                <div className="mt-4 flex flex-wrap items-center justify-center gap-4">
-                    <a
-                        href="#productos"
-                        className="rounded-full bg-cyan-500 px-6 py-3 font-medium text-black transition-colors hover:bg-cyan-400"
-                    >
-                        Explora nuestros sistemas →
-                    </a>
-                    <a
-                        href={WHATSAPP_HOME}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="rounded-full border border-white/20 px-6 py-3 font-medium text-white transition-colors hover:border-cyan-500/50"
-                    >
-                        Habla con el equipo
-                    </a>
-                </div>
-            </motion.div>
+            <div className="mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-[55fr_45fr]">
+                <FadeInUp className="flex flex-col items-center gap-6 text-center md:items-start md:text-left">
+                    <Eyebrow>IAFlashElite · Ecosistema premium</Eyebrow>
+                    <h1 className="text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+                        Automatiza lo que te quita tiempo.
+                        <br />
+                        <span className="text-cyan-400/70">
+                            Conserva lo que importa.
+                        </span>
+                    </h1>
+                    <p className="mx-auto max-w-2xl text-base text-white/60 sm:text-lg md:mx-0">
+                        Productos, servicios a medida y formación para empresas que
+                        quieren centrarse en lo único que no se delega.
+                    </p>
+                    <div className="mt-4 flex flex-wrap items-center justify-center gap-4 md:justify-start">
+                        <a
+                            href="#productos"
+                            className="rounded-full bg-cyan-500 px-6 py-3 font-medium text-black transition-colors hover:bg-cyan-400"
+                        >
+                            Explora nuestros sistemas →
+                        </a>
+                        <a
+                            href={WHATSAPP_HOME}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="rounded-full border border-white/20 px-6 py-3 font-medium text-white transition-colors hover:border-cyan-500/50"
+                        >
+                            Habla con el equipo
+                        </a>
+                    </div>
+                </FadeInUp>
+
+                <FadeInUp delay={0.15} className="w-full md:-translate-y-2">
+                    <HeroChatDemo />
+                </FadeInUp>
+            </div>
             <div className="mt-20 hidden flex-col items-center gap-2 text-white/50 md:flex">
                 <span className="text-xs uppercase tracking-widest">Desplázate</span>
                 <ChevronDown className="h-4 w-4 animate-bounce" />
@@ -262,14 +285,7 @@ const CREDS: ReadonlyArray<{ value: string; desc: string }> = [
 function CredibilidadBlock() {
     return (
         <Section>
-            <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportOnce}
-                variants={fadeUp}
-                transition={{ duration: 0.45, ease }}
-                className="flex flex-col items-center gap-12"
-            >
+            <FadeInUp className="flex flex-col items-center gap-12">
                 <Eyebrow>Probado en el terreno</Eyebrow>
                 <div className="grid w-full gap-10 md:grid-cols-3">
                     {CREDS.map((cred) => (
@@ -281,7 +297,7 @@ function CredibilidadBlock() {
                         </div>
                     ))}
                 </div>
-            </motion.div>
+            </FadeInUp>
         </Section>
     );
 }
@@ -331,14 +347,7 @@ const SELECTOR: ReadonlyArray<{
 function SelectorBlock() {
     return (
         <Section id="productos">
-            <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportOnce}
-                variants={fadeUp}
-                transition={{ duration: 0.45, ease }}
-                className="mx-auto max-w-2xl text-center"
-            >
+            <FadeInUp className="mx-auto max-w-2xl text-center">
                 <Eyebrow>El ecosistema</Eyebrow>
                 <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
                     Cuatro formas de trabajar con IAFlashElite
@@ -347,21 +356,16 @@ function SelectorBlock() {
                     Cada uno con un propósito distinto. Elige por dónde te interesa
                     empezar.
                 </p>
-            </motion.div>
+            </FadeInUp>
 
             <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
                 {SELECTOR.map((item, index) => {
                     const ItemIcon = item.icon;
                     return (
-                        <motion.a
+                        <SpotlightCard
                             key={item.name}
                             href={item.href}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={viewportOnce}
-                            variants={fadeUp}
-                            transition={{ duration: 0.45, delay: index * 0.05, ease }}
-                            className="group flex flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-500/40"
+                            delay={index * 0.1}
                         >
                             <div className="flex items-center justify-between">
                                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-cyan-400">
@@ -379,7 +383,7 @@ function SelectorBlock() {
                             <span className="mt-2 text-sm leading-relaxed text-white/60">
                                 {item.desc}
                             </span>
-                        </motion.a>
+                        </SpotlightCard>
                     );
                 })}
             </div>
@@ -413,14 +417,7 @@ function ProductBlock({
     return (
         <Section id={id}>
             <div className="grid items-center gap-12 lg:grid-cols-2">
-                <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={viewportOnce}
-                    variants={fadeUp}
-                    transition={{ duration: 0.45, ease }}
-                    className={reverse ? "lg:order-2" : "lg:order-1"}
-                >
+                <FadeInUp className={reverse ? "lg:order-2" : "lg:order-1"}>
                     <span className="inline-flex items-center gap-1.5 font-mono text-sm text-cyan-400">
                         {number} {name}
                         <ChevronRight className="h-4 w-4" />
@@ -447,18 +444,14 @@ function ProductBlock({
                     >
                         {ctaLabel}
                     </Link>
-                </motion.div>
+                </FadeInUp>
 
-                <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={viewportOnce}
-                    variants={fadeUp}
-                    transition={{ duration: 0.45, delay: 0.08, ease }}
+                <FadeInUp
+                    delay={0.08}
                     className={reverse ? "lg:order-1" : "lg:order-2"}
                 >
                     {visual}
-                </motion.div>
+                </FadeInUp>
             </div>
         </Section>
     );
@@ -549,41 +542,32 @@ const PILARES: ReadonlyArray<{ icon: Icon; title: string; text: string }> = [
 function WhyBlock() {
     return (
         <Section>
-            <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportOnce}
-                variants={fadeUp}
-                transition={{ duration: 0.45, ease }}
-                className="mx-auto max-w-2xl text-center"
-            >
+            <FadeInUp className="mx-auto max-w-2xl text-center">
                 <Eyebrow>Por qué elegir IAFlashElite</Eyebrow>
                 <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
                     Tres reglas que no rompemos.
                 </h2>
-            </motion.div>
+            </FadeInUp>
 
             <div className="mt-12 grid gap-5 md:grid-cols-3">
                 {PILARES.map((pilar, index) => {
                     const PilarIcon = pilar.icon;
                     return (
-                        <motion.article
+                        <FadeInUp
                             key={pilar.title}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={viewportOnce}
-                            variants={fadeUp}
-                            transition={{ duration: 0.45, delay: index * 0.05, ease }}
-                            className="rounded-2xl border border-white/10 bg-white/[0.02] p-6"
+                            delay={index * 0.1}
+                            className="h-full"
                         >
-                            <PilarIcon className="h-10 w-10 text-cyan-400" />
-                            <h3 className="mt-5 text-xl font-semibold text-white">
-                                {pilar.title}
-                            </h3>
-                            <p className="mt-3 text-sm leading-relaxed text-white/70">
-                                {pilar.text}
-                            </p>
-                        </motion.article>
+                            <article className="h-full rounded-2xl border border-white/10 bg-white/[0.02] p-6">
+                                <PilarIcon className="h-10 w-10 text-cyan-400" />
+                                <h3 className="mt-5 text-xl font-semibold text-white">
+                                    {pilar.title}
+                                </h3>
+                                <p className="mt-3 text-sm leading-relaxed text-white/70">
+                                    {pilar.text}
+                                </p>
+                            </article>
+                        </FadeInUp>
                     );
                 })}
             </div>
@@ -594,14 +578,7 @@ function WhyBlock() {
 function FounderBlock() {
     return (
         <Section>
-            <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportOnce}
-                variants={fadeUp}
-                transition={{ duration: 0.45, ease }}
-                className="mx-auto max-w-3xl text-center"
-            >
+            <FadeInUp className="mx-auto max-w-3xl text-center">
                 <Eyebrow>Quién hay detrás</Eyebrow>
                 <h2 className="mt-4 text-4xl font-bold tracking-tight md:text-6xl">
                     El equipo detrás
@@ -625,7 +602,7 @@ function FounderBlock() {
                 >
                     Hablamos →
                 </a>
-            </motion.div>
+            </FadeInUp>
         </Section>
     );
 }
@@ -663,14 +640,7 @@ const CONTACTS: ReadonlyArray<{
 function FinalCtaBlock() {
     return (
         <Section>
-            <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportOnce}
-                variants={fadeUp}
-                transition={{ duration: 0.45, ease }}
-                className="mx-auto max-w-2xl text-center"
-            >
+            <FadeInUp className="mx-auto max-w-2xl text-center">
                 <Eyebrow>Empecemos</Eyebrow>
                 <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
                     ¿Tienes 10 minutos?
@@ -679,30 +649,34 @@ function FinalCtaBlock() {
                     Cuéntanos qué te quita tiempo. Te respondemos si podemos ayudarte o
                     no. Sin presión.
                 </p>
-            </motion.div>
+            </FadeInUp>
 
             <div className="mx-auto mt-12 grid max-w-4xl gap-5 md:grid-cols-3">
                 {CONTACTS.map((contact, index) => {
                     const ContactIcon = contact.icon;
                     return (
-                        <motion.a
+                        <FadeInUp
                             key={contact.label}
-                            href={contact.href}
-                            target={contact.external ? "_blank" : undefined}
-                            rel={contact.external ? "noopener noreferrer" : undefined}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={viewportOnce}
-                            variants={fadeUp}
-                            transition={{ duration: 0.45, delay: index * 0.05, ease }}
-                            className="flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center transition-colors hover:border-cyan-500/50"
+                            delay={index * 0.1}
+                            className="h-full"
                         >
-                            <ContactIcon className="h-8 w-8 text-cyan-400" />
-                            <span className="text-sm font-semibold text-white">
-                                {contact.label}
-                            </span>
-                            <span className="text-sm text-white/60">{contact.value}</span>
-                        </motion.a>
+                            <a
+                                href={contact.href}
+                                target={contact.external ? "_blank" : undefined}
+                                rel={
+                                    contact.external ? "noopener noreferrer" : undefined
+                                }
+                                className="flex h-full flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center transition-colors hover:border-cyan-500/50"
+                            >
+                                <ContactIcon className="h-8 w-8 text-cyan-400" />
+                                <span className="text-sm font-semibold text-white">
+                                    {contact.label}
+                                </span>
+                                <span className="text-sm text-white/60">
+                                    {contact.value}
+                                </span>
+                            </a>
+                        </FadeInUp>
                     );
                 })}
             </div>
